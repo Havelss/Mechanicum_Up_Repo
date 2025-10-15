@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
         if(camTransform == null ) camTransform = Camera.main.transform;
-        playerRB.freezeRotation = true; //Congelamos la rotaciondel rigibody
+        playerRB.freezeRotation = true; //Congelamos la rotacion del rigibody
     }
 
     // Update is called once per frame
@@ -53,8 +53,8 @@ public class PlayerController : MonoBehaviour
         //Anular la orientacion en y antes del calculo de la orientacion de la camara aplicada al movimiento
         cameraForward.y = 0;
         cameraRight.y = 0;
-        cameraForward.Normalize();//El calor del float es maximo 1, por lo que no afecta a la multriplicacion de velocidad
-        cameraRight.Normalize();//El calor del float es maximo 1, por lo que no afecta a la multriplicacion de velocidad
+        cameraForward.Normalize();//El valor del float es maximo 1, por lo que no afecta a la multriplicacion de velocidad
+        cameraRight.Normalize();//El valor del float es maximo 1, por lo que no afecta a la multriplicacion de velocidad
 
         //Se calcula y almacena la direccion x/z teniendo en cuenta la camara por el input
 
