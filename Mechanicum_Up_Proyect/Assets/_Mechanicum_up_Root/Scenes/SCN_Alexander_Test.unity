@@ -1681,11 +1681,11 @@ GameObject:
   - component: {fileID: 1524007167}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: PantallaTerminal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1524007167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1856,6 +1856,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 801542410941786834, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 215140215}
     - target: {fileID: 2353574874320066098, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: m_Camera
       value: 
