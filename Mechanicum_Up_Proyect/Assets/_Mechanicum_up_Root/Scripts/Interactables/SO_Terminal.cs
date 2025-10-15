@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class Terminal : MonoBehaviour
+public class SO_Terminal : MonoBehaviour, IInteractable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private string prompt;
+    public string InteractionPrompt => prompt;
+    public bool Interact(Interactor interactor)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Abre Terminal");
+        return true;
     }
 }
