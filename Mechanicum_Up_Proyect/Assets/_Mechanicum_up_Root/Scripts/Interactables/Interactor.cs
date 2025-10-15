@@ -9,9 +9,13 @@ public class Interactor : MonoBehaviour
     [SerializeField] private Transform interactionPoint;
     [SerializeField] private float interactionPointRadius = 0.5f;
     [SerializeField] private LayerMask interactable;
+    [SerializeField] private InteractionPromptUI _interactionPrompUI;
 
     private readonly Collider[] colliders = new Collider[3];
     [SerializeField] private int numFound;
+
+    private IInteractable _interactable;
+
     void Update()
     {
         
@@ -19,12 +23,20 @@ public class Interactor : MonoBehaviour
 
         if (numFound > 0)
         {
-            var interactable = colliders[0].GetComponent<IInteractable>();
+            _interactable = colliders[0].GetComponent<IInteractable>();
 
-            if (interactable != null && Keyboard.current.eKey.wasPressedThisFrame)
+            if (_interactable != null)
             {
-                interactable.Interact(this);
+                if (!_interactionPrompUI.IsDisplayed) _interactionPrompUI.SetUp(_interactable.InteractionPrompt);
+
+                if (Keyboard.current.eKey.wasPressedThisFrame) _interactable.Interact(this);
             }
+           
+        }
+        else
+        {
+            if (_interactable != null) _interactable = null;
+            if(_interactionPrompUI.IsDisplayed) _interactionPrompUI.Close();
         }
 
     }
