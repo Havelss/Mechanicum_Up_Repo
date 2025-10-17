@@ -2,6 +2,88 @@
 
 public class SO_Terminal : MonoBehaviour, IInteractable
 
+{
+    [SerializeField] private string prompt = "Usar terminal";
+    private GameObject terminalCanvas;
+    private bool isActive = false;
+
+    private PlayerController playerController;
+
+    public string InteractionPrompt => prompt;
+
+    private void Awake()
+    {
+        
+        foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>()) // Buscar el Canvas incluso si está inactivo
+        {
+            if (obj.CompareTag("PantallaTerminal"))
+            {
+                terminalCanvas = obj;
+                break;
+            }
+        }
+
+        if (terminalCanvas == null)
+            Debug.LogError("No se encontró Canvas con el tag 'PantallaTerminal'");
+        else
+            terminalCanvas.SetActive(false);
+
+        
+        playerController = FindFirstObjectByType<PlayerController>();  //Buscar automáticamente al jugador 
+        if (playerController == null)
+            Debug.LogWarning("No se encontró Player.");
+    }
+
+    #region Abrir y cerrar
+
+    public bool Interact(Interactor interactor)
+    {
+        if (terminalCanvas == null) return false;
+
+        // Solo abrir (no alternar)
+        OpenTerminal();
+        return true;
+    }
+
+    public void OpenTerminal()
+    {
+        isActive = true;
+        terminalCanvas.SetActive(true);
+
+        if (playerController != null)
+            playerController.enabled = false;
+
+        
+        Cursor.lockState = CursorLockMode.None; // Con este comando muestro y desbloquear el cursor
+        Cursor.visible = true;
+
+        Debug.Log("Terminal abierta");
+    }
+
+    public void CloseTerminal()
+    {
+        if (terminalCanvas == null || !isActive) return;
+
+        isActive = false;
+        terminalCanvas.SetActive(false);
+
+        if (playerController != null)
+            playerController.enabled = true;
+
+        
+        Cursor.lockState = CursorLockMode.Locked;   // Con este comando dejo de mostrar y bloqueo el cursor
+        Cursor.visible = false;
+
+        Debug.Log("Terminal cerrada");
+    }
+
+    #endregion
+}
+
+
+
+//Mantener por si acaso
+
 /*
 {
     [SerializeField] private string prompt;
@@ -13,7 +95,7 @@ public class SO_Terminal : MonoBehaviour, IInteractable
     }
 }
 
-*/
+*/ //1º codigo
 
 /*
 
@@ -72,79 +154,4 @@ public void CloseTerminal()
 }
 }
 
-*/
-
-{
-    [SerializeField] private string prompt = "Usar terminal";
-    private GameObject terminalCanvas;
-    private bool isActive = false;
-
-    private PlayerController playerController;
-
-    public string InteractionPrompt => prompt;
-
-    private void Awake()
-    {
-        // Buscar el Canvas incluso si está inactivo
-        foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>())
-        {
-            if (obj.CompareTag("PantallaTerminal"))
-            {
-                terminalCanvas = obj;
-                break;
-            }
-        }
-
-        if (terminalCanvas == null)
-            Debug.LogError("No se encontró Canvas con el tag 'PantallaTerminal'");
-        else
-            terminalCanvas.SetActive(false);
-
-        // ✅ Buscar automáticamente al jugador con el nuevo método
-        playerController = FindFirstObjectByType<PlayerController>();
-        if (playerController == null)
-            Debug.LogWarning("No se encontró Player.");
-    }
-
-    public bool Interact(Interactor interactor)
-    {
-        if (terminalCanvas == null) return false;
-
-        // Solo abrir (no alternar)
-        OpenTerminal();
-        return true;
-    }
-
-    public void OpenTerminal()
-    {
-        isActive = true;
-        terminalCanvas.SetActive(true);
-
-        if (playerController != null)
-            playerController.enabled = false;
-
-        
-        Cursor.lockState = CursorLockMode.None; // Con este comando muestro y desbloquear el cursor
-        Cursor.visible = true;
-
-        Debug.Log("Terminal abierta");
-    }
-
-    public void CloseTerminal()
-    {
-        if (terminalCanvas == null || !isActive) return;
-
-        isActive = false;
-        terminalCanvas.SetActive(false);
-
-        if (playerController != null)
-            playerController.enabled = true;
-
-        
-        Cursor.lockState = CursorLockMode.Locked;   // Con este comando dejo de mostrar y bloqueo el cursor
-        Cursor.visible = false;
-
-        Debug.Log("Terminal cerrada");
-    }
-}
-
+*/ //2º codigo

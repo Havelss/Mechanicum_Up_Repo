@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
     }
 
+
+    #region Movimiento
     private void FixedUpdate()
     {
         HandleMovement();
@@ -111,6 +113,8 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
+
+    #endregion
 
     #region Input Methods
     public void OnMove(InputAction.CallbackContext context)
