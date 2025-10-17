@@ -39,6 +39,13 @@ public class SymbolManager : MonoBehaviour
         if (symbol != null)
         {
             symbol.button.interactable = true;
+
+            // Cuando se pulse el botón, añadimos el símbolo a la secuencia
+            symbol.button.onClick.AddListener(() =>
+            {
+                SymbolTerminalController.Instance.AddSymbol(id);
+            });
+
             if (symbol.symbolImage && symbol.unlockedSprite)
                 symbol.symbolImage.sprite = symbol.unlockedSprite;
 
@@ -52,4 +59,6 @@ public class SymbolManager : MonoBehaviour
         if (s.symbolImage && s.lockedSprite)
             s.symbolImage.sprite = s.lockedSprite;
     }
+
+
 }
