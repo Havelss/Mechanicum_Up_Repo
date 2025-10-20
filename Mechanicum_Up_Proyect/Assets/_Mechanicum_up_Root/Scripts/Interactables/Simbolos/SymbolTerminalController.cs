@@ -4,18 +4,11 @@ using UnityEngine.UI;
 
 public class SymbolTerminalController : MonoBehaviour
 {
-    public static SymbolTerminalController Instance;
-
-    [Header("Referencias")]
-    public Text displayText; // Texto donde se muestra la secuencia escrita
-    public Button executeButton; // Botón para ejecutar la combinación
+    [Header("Referencias UI")]
+    public Text displayText;
+    public Button executeButton;
 
     private List<string> currentSequence = new List<string>();
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {
@@ -27,7 +20,6 @@ public class SymbolTerminalController : MonoBehaviour
 
     public void AddSymbol(string symbolID)
     {
-        // Añadimos el símbolo a la secuencia
         currentSequence.Add(symbolID);
         UpdateDisplay();
     }
@@ -48,12 +40,13 @@ public class SymbolTerminalController : MonoBehaviour
     {
         if (currentSequence.Count == 0) return;
 
-        string command = string.Join(",", currentSequence);
-
+        string command = string.Join(",", currentSequence).Trim().ToLower();
         Debug.Log($"Ejecutando comando: {command}");
 
-        // Aquí puedes manejar qué pasa con cada combinación
-        TerminalCommandHandler.Instance.ProcessCommand(command);
+        if (TerminalCommandHandler.Instance != null)
+            TerminalCommandHandler.Instance.ProcessCommand(command);
+        else
+            Debug.LogError("No hay TerminalCommandHandler en la escena.");
 
         ClearSequence();
     }

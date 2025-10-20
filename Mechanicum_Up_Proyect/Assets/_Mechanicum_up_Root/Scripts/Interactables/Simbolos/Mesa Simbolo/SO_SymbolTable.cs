@@ -3,7 +3,8 @@
 public class SO_SymbolTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string prompt = "Examinar mesa";
-    [SerializeField] private string symbolID; 
+    [SerializeField] private string symbolID;
+
     private bool collected = false;
 
     public string InteractionPrompt => prompt;
@@ -12,15 +13,13 @@ public class SO_SymbolTable : MonoBehaviour, IInteractable
     {
         if (collected) return false;
 
-        // Desbloquear símbolo
         if (SymbolManager.Instance != null)
         {
             SymbolManager.Instance.UnlockSymbol(symbolID);
-            collected = true; // evita desbloquear varias veces
-            Debug.Log($"Símbolo obtenido: {symbolID}");
+            collected = true;
+            Debug.Log($"Símbolo recogido: {symbolID}");
         }
 
         return true;
     }
 }
-

@@ -89,7 +89,8 @@ public class PlayerController : MonoBehaviour
 
     void CheckIfGrounded()
     {
-        if (isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer));
+        /* if (isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer)); */
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
         //elemento de visualizacion en editor OPCIONAL
     }

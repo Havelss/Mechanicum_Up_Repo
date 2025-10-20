@@ -9,9 +9,12 @@ public class SymbolPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (SymbolManager.Instance != null)
+            {
                 SymbolManager.Instance.UnlockSymbol(symbolID);
+                Debug.Log($"Símbolo recogido por trigger: {symbolID}");
+            }
 
-            Destroy(gameObject);
+            
         }
     }
 }

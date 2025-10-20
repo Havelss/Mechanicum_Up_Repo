@@ -1,22 +1,21 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class SymbolButton
+{
+    public string id;
+    public Button button;
+    public Image symbolImage;
+    public Sprite lockedSprite;
+    public Sprite unlockedSprite;
+}
+
 public class SymbolManager : MonoBehaviour
 {
-    public static SymbolManager Instance;
+    public static SymbolManager Instance { get; private set; }
 
-    [System.Serializable]
-    public class SymbolButton
-    {
-        public string id;
-        public Button button;
-        public Image symbolImage;   // opcional, por si quieres cambiar el sprite
-        public Sprite lockedSprite;
-        public Sprite unlockedSprite;
-    }
-
-    [Header("Lista de símbolos en la terminal")]
     public List<SymbolButton> symbols = new List<SymbolButton>();
 
     private void Awake()
@@ -26,30 +25,32 @@ public class SymbolManager : MonoBehaviour
 
     private void Start()
     {
-        // Inicialmente todos bloqueados
         foreach (var s in symbols)
-        {
             LockSymbol(s);
-        }
     }
 
-    public void UnlockSymbol(string id)
+    public void SetupTerminalButtons(SymbolTerminalController terminal)
     {
-        var symbol = symbols.Find(s => s.id == id);
-        if (symbol != null)
+        if (terminal == null)
         {
-            symbol.button.interactable = true;
+            Debug.LogError("TerminalController es null al configurar botones");
+            return;
+        }
 
-            // Cuando se pulse el botón, añadimos el símbolo a la secuencia
-            symbol.button.onClick.AddListener(() =>
+        foreach (var s in symbols)
+        {
+            if (s.button == null)
             {
-                SymbolTerminalController.Instance.AddSymbol(id);
-            });
+                Debug.LogWarning($"SÃ­mbolo {s.id} no tiene botÃ³n asignado");
+                continue;
+            }
 
-            if (symbol.symbolImage && symbol.unlockedSprite)
-                symbol.symbolImage.sprite = symbol.unlockedSprite;
+            s.button.onClick.RemoveAllListeners();
+            s.button.interactable = true;
+            s.button.onClick.AddListener(() => terminal.AddSymbol(s.id));
 
-            Debug.Log($"Símbolo desbloqueado: {id}");
+            if (s.symbolImage != null && s.unlockedSprite != null)
+                s.symbolImage.sprite = s.unlockedSprite;
         }
     }
 
@@ -60,5 +61,16 @@ public class SymbolManager : MonoBehaviour
             s.symbolImage.sprite = s.lockedSprite;
     }
 
-
+    public void UnlockSymbol(string id)
+{
+    var symbol = symbols.Find(s => s.id == id);
+    if (symbol != null)
+    {
+        symbol.button.interactable = true;
+        if (symbol.symbolImage && symbol.unlockedSprite)
+            symbol.symbolImage.sprite = symbol.unlockedSprite;
+        
+        Debug.Log($"SÃ­mbolo desbloqueado: {id}");
+    }
+}
 }

@@ -713,7 +713,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178616746}
   m_CullTransparentMesh: 1
---- !u!1 &180534546
+--- !u!1 &185152211
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -721,30 +721,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 180534547}
-  m_Layer: 0
-  m_Name: //Manager Simbolo//
+  - component: {fileID: 185152212}
+  - component: {fileID: 185152213}
+  m_Layer: 6
+  m_Name: SymbolTerminalController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &180534547
+--- !u!4 &185152212
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180534546}
+  m_GameObject: {fileID: 185152211}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1176, y: 0.19800001, z: 1.5999999}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 744919579}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 1319830831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &185152213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185152211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85ee1592f1e27142a3d9de4759de023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 507657152}
+  executeButton: {fileID: 714063456}
 --- !u!1 &197272040
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,6 +898,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 434769722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &239854442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239854443}
+  - component: {fileID: 239854444}
+  m_Layer: 6
+  m_Name: TerminalCommandHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239854443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239854442}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1319830831}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &239854444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239854442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf47e72b05d66e4ca28f5b57b0eda64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &246290979
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +956,7 @@ GameObject:
   - component: {fileID: 246290981}
   - component: {fileID: 246290980}
   m_Layer: 6
-  m_Name: SIM_NO
+  m_Name: SIM_No
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,7 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prompt: Examinar mesa
-  symbolID: NO
+  symbolID: No
 --- !u!65 &246290981
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1685,7 +1743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.0845937, g: 1, b: 0.0047169924, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1836,7 +1894,7 @@ GameObject:
   - component: {fileID: 515686654}
   - component: {fileID: 515686658}
   m_Layer: 6
-  m_Name: SIM_UP
+  m_Name: SIM_Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1944,7 +2002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prompt: Examinar mesa
-  symbolID: UP
+  symbolID: Up
 --- !u!1 &636401505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,7 +2429,6 @@ GameObject:
   m_Component:
   - component: {fileID: 744919579}
   - component: {fileID: 744919580}
-  - component: {fileID: 744919581}
   m_Layer: 5
   m_Name: SymbolManager
   m_TagString: Untagged
@@ -2387,15 +2444,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744919578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.5999999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 180534547}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 139.78564, y: 99.03519}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 185.054, y: 61.298}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &744919580
@@ -2413,33 +2470,14 @@ MonoBehaviour:
   symbols:
   - id: Up
     button: {fileID: 982867798}
-    symbolImage: {fileID: 982867799}
-    lockedSprite: {fileID: 0}
-    unlockedSprite: {fileID: 0}
+    symbolImage: {fileID: 714063457}
+    lockedSprite: {fileID: 21300000, guid: 92b2ecf8d7d12aa4f92f6c678108cc12, type: 3}
+    unlockedSprite: {fileID: 21300000, guid: 1bc93fc5925aad24094be6f2c5fc3bbf, type: 3}
   - id: No
     button: {fileID: 507552839}
     symbolImage: {fileID: 507552840}
-    lockedSprite: {fileID: 0}
-    unlockedSprite: {fileID: 0}
-  - id: Left
-    button: {fileID: 2053530343}
-    symbolImage: {fileID: 0}
-    lockedSprite: {fileID: 0}
-    unlockedSprite: {fileID: 0}
---- !u!114 &744919581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744919578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d85ee1592f1e27142a3d9de4759de023, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayText: {fileID: 507657152}
-  executeButton: {fileID: 714063456}
+    lockedSprite: {fileID: 21300000, guid: 92b2ecf8d7d12aa4f92f6c678108cc12, type: 3}
+    unlockedSprite: {fileID: 21300000, guid: 1bc93fc5925aad24094be6f2c5fc3bbf, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,7 +3155,7 @@ Transform:
   m_GameObject: {fileID: 1160028584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.45, z: 0}
+  m_LocalPosition: {x: 0, y: -2.265, z: 0}
   m_LocalScale: {x: 0.71859956, y: 0.14564368, z: 0.27521998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3336,7 +3374,10 @@ Transform:
   m_LocalPosition: {x: 3, y: 0.75, z: 1}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 239854443}
+  - {fileID: 185152212}
+  - {fileID: 1524007170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1319830832
@@ -3352,6 +3393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prompt: E
+  terminalCanvas: {fileID: 1524007166}
+  terminalController: {fileID: 185152213}
 --- !u!1 &1403045634
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,7 +3549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1524007167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3584,7 +3627,7 @@ RectTransform:
   m_Children:
   - {fileID: 981725251}
   - {fileID: 917100204}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1319830831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4119,8 +4162,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 658815877}
   - {fileID: 854354416}
+  - {fileID: 744919579}
   - {fileID: 1319830831}
-  - {fileID: 1524007170}
   - {fileID: 434769722}
   - {fileID: 1259846551}
-  - {fileID: 180534547}
