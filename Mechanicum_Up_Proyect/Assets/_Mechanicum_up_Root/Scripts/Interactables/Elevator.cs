@@ -22,6 +22,8 @@ public class Elevator : MonoBehaviour
         }
     }
 
+    #region Limites arriba/abajo
+
     public void MoveUp()
     {
         Debug.Log("Ascensor subiendo...");
@@ -33,4 +35,6 @@ public class Elevator : MonoBehaviour
         Debug.Log("Ascensor bajando...");
         target = groundPosition;
     }
+
+    #endregion
 }

@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
     }
 
-
     #region Movimiento
     private void FixedUpdate()
     {

@@ -5,6 +5,7 @@ public class SO_Terminal : MonoBehaviour, IInteractable
     [SerializeField] private string prompt = "Usar terminal";
     [SerializeField] private GameObject terminalCanvas;
     [SerializeField] private SymbolTerminalController terminalController;
+    [SerializeField] private MonoBehaviour controlledObject;
 
     private bool isActive = false;
     private PlayerController playerController;
@@ -18,13 +19,15 @@ public class SO_Terminal : MonoBehaviour, IInteractable
             Debug.LogWarning("No se encontró Player.");
     }
 
+    #region Abrir y cerrar
+
     public bool Interact(Interactor interactor)
     {
         OpenTerminal();
         return true;
     }
 
-
+    
 
     public void OpenTerminal()
     {
@@ -61,5 +64,6 @@ public class SO_Terminal : MonoBehaviour, IInteractable
         Cursor.visible = false;
     }
 
+    #endregion
 
 }
