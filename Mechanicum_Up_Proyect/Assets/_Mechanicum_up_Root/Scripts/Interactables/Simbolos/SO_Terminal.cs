@@ -27,7 +27,7 @@ public class SO_Terminal : MonoBehaviour, IInteractable
         return true;
     }
 
-    
+
 
     public void OpenTerminal()
     {
@@ -40,6 +40,9 @@ public class SO_Terminal : MonoBehaviour, IInteractable
         isActive = true;
         terminalCanvas.SetActive(true);
 
+        // Pausar el tiempo del juego
+        Time.timeScale = 0f;
+
         if (playerController != null)
             playerController.enabled = false;
 
@@ -48,6 +51,8 @@ public class SO_Terminal : MonoBehaviour, IInteractable
 
         // Configura los botones de la terminal
         SymbolManager.Instance.SetupTerminalButtons(terminalController);
+
+        Debug.Log("Terminal abierta (tiempo pausado)");
     }
 
     public void CloseTerminal()
@@ -57,11 +62,16 @@ public class SO_Terminal : MonoBehaviour, IInteractable
         isActive = false;
         terminalCanvas.SetActive(false);
 
+        // Reanudar el tiempo del juego
+        Time.timeScale = 1f;
+
         if (playerController != null)
             playerController.enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        Debug.Log("Terminal cerrada (tiempo reanudado)");
     }
 
     #endregion
