@@ -90,7 +90,7 @@ public class SO_Terminal : MonoBehaviour, IInteractable
     [SerializeField] private string prompt = "Usar terminal";
     [SerializeField] private GameObject terminalCanvas; // Canvas de esta terminal
     [SerializeField] private SymbolTerminalController terminalController; // Referencia a su controlador
-    [SerializeField] private MonoBehaviour controlledObject;
+    [SerializeField] public MonoBehaviour controlledObject;
     public MonoBehaviour ControlledObject => controlledObject; // Ascensor u otro objeto que controla
 
     private bool isActive = false;
@@ -154,5 +154,6 @@ public class SO_Terminal : MonoBehaviour, IInteractable
         Cursor.visible = false;
     }
 }
+
 
 
