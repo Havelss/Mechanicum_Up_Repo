@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5748b1655bfe56e41a7414d1ed5db70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topPosition: {fileID: 0}
-  groundPosition: {fileID: 0}
+  bottomPoint: {fileID: 0}
+  topPoint: {fileID: 0}
   speed: 2
+  startAtTop: 0

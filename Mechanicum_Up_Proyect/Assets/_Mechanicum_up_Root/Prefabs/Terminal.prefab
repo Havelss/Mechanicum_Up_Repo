@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 8628379524770930103}
   executeButton: {fileID: 2523269744871219244}
+  currentTerminal: {fileID: 0}
 --- !u!1 &520902393907295522
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +80,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3494158450918621598}
   - {fileID: 4781136258048650222}
   - {fileID: 6834353284801044365}
   m_Father: {fileID: 0}
@@ -173,6 +173,7 @@ MonoBehaviour:
   prompt: E
   terminalCanvas: {fileID: 8536462886868810623}
   terminalController: {fileID: 4094781622940798875}
+  controlledObject: {fileID: 0}
 --- !u!1 &1095060650164585311
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,50 +310,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &2052580234131293198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3494158450918621598}
-  - component: {fileID: 6501048627412607029}
-  m_Layer: 6
-  m_Name: TerminalCommandHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3494158450918621598
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052580234131293198}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5983583514387470086}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6501048627412607029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052580234131293198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf47e72b05d66e4ca28f5b57b0eda64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2814705180757622680
 GameObject:
   m_ObjectHideFlags: 0
