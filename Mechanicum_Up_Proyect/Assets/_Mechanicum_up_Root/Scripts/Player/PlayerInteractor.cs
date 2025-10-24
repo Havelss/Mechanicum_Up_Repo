@@ -6,6 +6,7 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] Transform respawnPoint; //Posicion del respawn
     [SerializeField] float respawnFallLimit; // Limite en -y que de ser alcanzado, respawnea
     Rigidbody playerRB;
+   
 
     private void Awake()
     {

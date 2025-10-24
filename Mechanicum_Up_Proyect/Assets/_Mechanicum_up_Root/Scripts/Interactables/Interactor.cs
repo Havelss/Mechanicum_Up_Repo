@@ -1,107 +1,78 @@
 using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
 public class Interactor : MonoBehaviour
-
 {
+    [Header("Detección")]
     [SerializeField] private Transform interactionPoint;
-    [SerializeField] private float interactionPointRadius = 0.5f;
-    [SerializeField] private LayerMask interactable;
-    [SerializeField] private InteractionPromptUI _interactionPrompUI;
+    [SerializeField] private float interactionRadius = 1f;
+    [Tooltip("Selecciona aquí los layers: Terminal y Interactable")]
+    [SerializeField] private LayerMask interactableLayers;
 
-    private readonly Collider[] colliders = new Collider[3];
-    [SerializeField] private int numFound;
+    [Header("UI")]
+    [SerializeField] private InteractionPromptUI promptUI;
 
-    private IInteractable _interactable;
+    private readonly Collider[] results = new Collider[5];
+    private IInteractable currentInteractable;
 
-    void Update()
+    private void Update()
     {
-        numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, colliders, interactable);
+        DetectInteractables();
+        HandleInput();
+    }
+
+    private void DetectInteractables()
+    {
+        int numFound = Physics.OverlapSphereNonAlloc(
+            interactionPoint.position,
+            interactionRadius,
+            results,
+            interactableLayers
+        );
 
         if (numFound > 0)
         {
-            _interactable = colliders[0].GetComponent<IInteractable>();
+            IInteractable interactable = results[0].GetComponent<IInteractable>();
 
-            if (_interactable != null)
+            if (interactable != null)
             {
-                if (!_interactionPrompUI.IsDisplayed)
-                    _interactionPrompUI.SetUp(_interactable.InteractionPrompt);
+                currentInteractable = interactable;
 
-                if (Keyboard.current.eKey.wasPressedThisFrame)
-                    _interactable.Interact(this);
+                // Mostrar prompt si no está visible
+                if (!promptUI.IsDisplayed)
+                    promptUI.SetUp(interactable.InteractionPrompt);
+                return;
             }
         }
-        else
+
+        // Si no hay nada cerca, limpia referencias
+        if (currentInteractable != null)
         {
-            if (_interactable != null)
-            {
-                if (_interactable is SO_Terminal terminal)
-                {
-                    terminal.CloseTerminal();
-                }
+            if (currentInteractable is SO_Terminal terminal)
+                terminal.CloseTerminal();
 
-                _interactable = null;
-            }
+            currentInteractable = null;
+        }
 
-            if (_interactionPrompUI.IsDisplayed)
-                _interactionPrompUI.Close();
+        if (promptUI.IsDisplayed)
+            promptUI.Close();
+    }
+
+    private void HandleInput()
+    {
+        if (currentInteractable == null) return;
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            currentInteractable.Interact(this);
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(interactionPoint.position, interactionPointRadius);
+        if (interactionPoint == null) return;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(interactionPoint.position, interactionRadius);
     }
 }
-
-
-//mantener por si acaso
-
-/*
-{
-    [SerializeField] private Transform interactionPoint;
-    [SerializeField] private float interactionPointRadius = 0.5f;
-    [SerializeField] private LayerMask interactable;
-    [SerializeField] private InteractionPromptUI _interactionPrompUI;
-
-    private readonly Collider[] colliders = new Collider[3];
-    [SerializeField] private int numFound;
-
-    private IInteractable _interactable;
-
-    void Update()
-    {
-        
-        numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, colliders, interactable);
-
-        if (numFound > 0)
-        {
-            _interactable = colliders[0].GetComponent<IInteractable>();
-
-            if (_interactable != null)
-            {
-                if (!_interactionPrompUI.IsDisplayed) _interactionPrompUI.SetUp(_interactable.InteractionPrompt);
-
-                if (Keyboard.current.eKey.wasPressedThisFrame) _interactable.Interact(this);
-            }
-           
-        }
-        else
-        {
-            if (_interactable != null) _interactable = null;
-            if(_interactionPrompUI.IsDisplayed) _interactionPrompUI.Close();
-        }
-
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(interactionPoint.position, interactionPointRadius);
-    }
-}
-*/

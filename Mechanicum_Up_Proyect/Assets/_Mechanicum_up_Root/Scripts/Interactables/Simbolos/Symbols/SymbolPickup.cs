@@ -1,11 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-
+/*
 public class SymbolPickup : MonoBehaviour
 {
     [SerializeField] private string symbolID;
-    [SerializeField] private SymbolManager targetManager; // referencia explícita
+    [SerializeField] private SymbolManager targetManager; // referencia explÃ­cita
 
+    
+
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -13,12 +16,30 @@ public class SymbolPickup : MonoBehaviour
             if (targetManager != null)
             {
                 targetManager.UnlockSymbol(symbolID);
-                Debug.Log($"Símbolo {symbolID} desbloqueado en {targetManager.name}");
+                Debug.Log($"SÃ­mbolo {symbolID} desbloqueado en {targetManager.name}");
+                
             }
             else
             {
-                Debug.LogWarning("No se asignó ningún SymbolManager en el SymbolPickup.");
+                Debug.LogWarning("No se asignÃ³ ningÃºn SymbolManager en el SymbolPickup.");
             }
+        }
+    }
+}
+*/ // tocado por profe 2
+
+
+public class SymbolPickup : MonoBehaviour
+{
+    [SerializeField] private string symbolID;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && SymbolManager.Instance != null)
+        {
+            SymbolManager.Instance.UnlockSymbol(symbolID);
+            Debug.Log($"SÃ­mbolo recogido: {symbolID}");
+            Destroy(gameObject);
         }
     }
 }
