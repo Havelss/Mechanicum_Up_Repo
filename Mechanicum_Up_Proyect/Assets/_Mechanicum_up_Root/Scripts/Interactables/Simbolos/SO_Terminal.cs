@@ -1,82 +1,57 @@
 ﻿using UnityEngine;
 
-public class SO_Terminal : MonoBehaviour, IInteractable
+public class SO_Terminal : MonoBehaviour
 {
-    [Header("Terminal Setup")]
-    [SerializeField] private string prompt = "Usar terminal";
-    [SerializeField] private GameObject terminalCanvas;            // Canvas de esta terminal
-    [SerializeField] private SymbolTerminalController terminalController; // Controller de esta terminal
-    [SerializeField] private MonoBehaviour controlledObject;      // Objeto que controla la terminal (Ej: Elevator)
+    [Header("Referencias")]
+    [SerializeField] private GameObject terminalCanvas;              // Canvas de la terminal
+    [SerializeField] private SymbolTerminalController terminalController; // Controlador de símbolos
+    [SerializeField] private MonoBehaviour controlledObject;          // Objeto que controla (ej: ascensor)
 
-    private bool isActive = false;
-    private PlayerController playerController;
+    private bool isOpen = false;
 
-    public string InteractionPrompt => prompt;
-
-    private void Awake()
+    private void Start()
     {
-        playerController = FindFirstObjectByType<PlayerController>();
-        if (playerController == null)
-            Debug.LogWarning("No se encontró PlayerController en la escena.");
-
         if (terminalCanvas != null)
-            terminalCanvas.SetActive(false); // ocultar al inicio
-    }
-
-    public void Interact(Interactor interactor)
-    {
-        OpenTerminal();
-    }
-
-    public void SetControlledObject(MonoBehaviour obj)
-    {
-        controlledObject = obj;
-    }
-
-    public MonoBehaviour GetControlledObject()
-    {
-        return controlledObject;
+            terminalCanvas.SetActive(false);
     }
 
     public void OpenTerminal()
     {
+        if (isOpen) return;
+        isOpen = true;
+
         if (terminalCanvas == null || terminalController == null)
         {
-            Debug.LogError("Asigna terminalCanvas y terminalController en SO_Terminal");
+            Debug.LogError($"Faltan referencias en {name}: asigna Canvas y Controller.");
             return;
         }
 
-        // Limpiar la secuencia anterior
-        terminalController.ClearSequence();
-
-        isActive = true;
+        // Mostrar el canvas
         terminalCanvas.SetActive(true);
 
-        // Pausar el tiempo
-        Time.timeScale = 0f;
-        if (playerController != null)
-            playerController.enabled = false;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        // Configurar botones de la terminal actual
+        // Configurar botones y limpiar secuencia
         if (SymbolManager.Instance != null)
             SymbolManager.Instance.SetupTerminalButtons(terminalController);
+
+        terminalController.controlledObject = controlledObject;
+        terminalController.ClearSequence();
+
+        // Pausar el juego y desbloquear cursor
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void CloseTerminal()
     {
-        if (!isActive) return;
+        if (!isOpen) return;
+        isOpen = false;
 
-        isActive = false;
-        terminalCanvas.SetActive(false);
+        if (terminalCanvas != null)
+            terminalCanvas.SetActive(false);
 
-        // Reanudar tiempo
+        // Reanudar juego y bloquear cursor
         Time.timeScale = 1f;
-        if (playerController != null)
-            playerController.enabled = true;
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

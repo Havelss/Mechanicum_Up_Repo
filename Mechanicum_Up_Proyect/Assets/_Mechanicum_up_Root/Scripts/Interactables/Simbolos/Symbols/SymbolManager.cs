@@ -3,22 +3,42 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class SymbolButton
+public class SymbolData
 {
     public string id;
-    public Button button;
-    public Image symbolImage;
     public Sprite lockedSprite;
     public Sprite unlockedSprite;
-    [HideInInspector] public bool isUnlocked = false; // indica si el símbolo está desbloqueado
+    public bool isUnlocked = false;
 }
 
 public class SymbolManager : MonoBehaviour
 {
     public static SymbolManager Instance { get; private set; }
 
-    [Header("Símbolos disponibles")]
-    public List<SymbolButton> symbols = new List<SymbolButton>();
+    public List<SymbolData> symbols = new List<SymbolData>();
+    public List<Button> symbolButtons = new List<Button>();
+
+
+    private void Start()
+    {
+        foreach (Button button in symbolButtons)
+        {
+            if (button == null) continue;
+
+            string symbolId = button.name.ToLower();
+            SymbolData data = symbols.Find(s => s.id.ToLower() == symbolId);
+            bool unlocked = data != null && data.isUnlocked;
+
+            button.interactable = unlocked;
+
+            Image img = button.GetComponent<Image>();
+            if (img != null && data != null)
+            {
+                img.sprite = unlocked ? data.unlockedSprite : data.lockedSprite;
+                img.color = unlocked ? Color.white : new Color(1, 1, 1, 0.3f);
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -28,64 +48,45 @@ public class SymbolManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
 
-        // Inicialmente bloqueamos todos los símbolos
-        foreach (var s in symbols)
-            LockSymbol(s);
+    public void SetupTerminalButtons(SymbolTerminalController terminal)
+    {
+        foreach (Button button in symbolButtons)
+        {
+            if (button == null) continue;
+
+            string symbolId = button.name.ToLower();
+            SymbolData data = symbols.Find(s => s.id.ToLower() == symbolId);
+            bool unlocked = data != null && data.isUnlocked;
+
+            // 🔹 Cambiar sprite según estado
+            Image img = button.GetComponent<Image>();
+            if (img != null)
+            {
+                img.sprite = unlocked ? data.unlockedSprite : data.lockedSprite;
+                img.color = unlocked ? Color.white : new Color(1, 1, 1, 0.3f);
+            }
+
+            // 🔹 Desactivar si no está desbloqueado
+            button.interactable = unlocked;
+            button.onClick.RemoveAllListeners();
+
+            // 🔹 Solo añadir evento si está desbloqueado
+            if (unlocked)
+            {
+                button.onClick.AddListener(() =>
+                {
+                    terminal.AddSymbol(symbolId);
+                });
+            }
+        }
     }
 
     public void UnlockSymbol(string id)
     {
-        var symbol = symbols.Find(s => s.id == id);
+        SymbolData symbol = symbols.Find(s => s.id.ToLower() == id.ToLower());
         if (symbol != null)
-        {
             symbol.isUnlocked = true;
-            if (symbol.symbolImage != null && symbol.unlockedSprite != null)
-                symbol.symbolImage.sprite = symbol.unlockedSprite;
-
-            if (symbol.button != null)
-                symbol.button.interactable = true;
-
-            Debug.Log($"Símbolo desbloqueado: {id}");
-        }
-    }
-
-    private void LockSymbol(SymbolButton s)
-    {
-        s.isUnlocked = false;
-        if (s.symbolImage != null && s.lockedSprite != null)
-            s.symbolImage.sprite = s.lockedSprite;
-
-        if (s.button != null)
-            s.button.interactable = false;
-    }
-
-    // Configura los botones de la terminal (terminal global)
-    public void SetupTerminalButtons(SymbolTerminalController terminal)
-    {
-        if (terminal == null)
-            return;
-
-        foreach (var s in symbols)
-        {
-            if (s.button == null) continue;
-
-            s.button.onClick.RemoveAllListeners();
-
-            // Desbloquea según el estado global
-            s.button.interactable = s.isUnlocked;
-
-            // Añade listener para **esta terminal**
-            s.button.onClick.AddListener(() => terminal.AddSymbol(s.id));
-
-            // Cambia sprite según desbloqueo
-            if (s.symbolImage != null)
-                s.symbolImage.sprite = s.isUnlocked && s.unlockedSprite != null
-                    ? s.unlockedSprite
-                    : s.lockedSprite;
-        }
     }
 }
-
-
-
