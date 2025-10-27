@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5869359688095719203}
   - component: {fileID: 2254059454156155177}
   - component: {fileID: 8876181066699753383}
+  - component: {fileID: 3407310931451218689}
   m_Layer: 6
   m_Name: Terminal
   m_TagString: Untagged
@@ -108,3 +109,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3407310931451218689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520902393907295522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b3e770912d18649ba1762343891d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlledObject: {fileID: 0}
+  prompt: E

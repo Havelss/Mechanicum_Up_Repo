@@ -110,6 +110,8 @@ public class TerminalCommandHandler : MonoBehaviour
 
 */ // tocado por profe 2
 
+
+
 public class TerminalCommandHandler : MonoBehaviour
 {
     public static TerminalCommandHandler Instance { get; private set; }
@@ -124,44 +126,57 @@ public class TerminalCommandHandler : MonoBehaviour
         Instance = this;
     }
 
-    public void ProcessCommand(string command, SymbolTerminalController terminal)
+    // Procesa comandos del jugador (ej: "up" o "no,up")
+    public void ProcessCommand(string command)
     {
         command = command.Trim().ToLower();
         Debug.Log($"Comando recibido: {command}");
 
         bool validCommand = false;
-        var soTerminal = FindFirstObjectByType<SO_Terminal>();
-        if (soTerminal == null)
-        {
-            Debug.LogError("No hay SO_Terminal activo.");
-            return;
-        }
-
-        MonoBehaviour controlled = soTerminal.GetControlledObject();
 
         switch (command)
         {
+            // 🔹 Combinaciones válidas
             case "up":
-                if (controlled is Elevator e)
-                    e.MoveUp();
-                validCommand = true;
+                var elevator1 = FindFirstObjectByType<Elevator>();
+                if (elevator1 != null)
+                {
+                    elevator1.MoveUp();
+                    validCommand = true;
+                }
                 break;
 
             case "no,up":
-                if (controlled is Elevator e2)
-                    e2.MoveDown();
-                validCommand = true;
+                var elevator2 = FindFirstObjectByType<Elevator>();
+                if (elevator2 != null)
+                {
+                    elevator2.MoveDown();
+                    validCommand = true;
+                }
                 break;
 
+            // 🔹 Aquí puedes agregar más combinaciones:
+            // case "left,right": ...
+            // case "power,on": ...
+
             default:
-                Debug.LogWarning($"Comando desconocido: {command}");
+                Debug.LogWarning($"Comando desconocido o combinación inválida: {command}");
                 break;
         }
 
+        // Si la combinación es correcta, cierra la terminal
         if (validCommand)
         {
-            Debug.Log("Comando correcto — cerrando terminal automáticamente.");
-            soTerminal.CloseTerminal();
+            var playerTerminal = FindFirstObjectByType<SO_Terminal>();
+            if (playerTerminal != null)
+            {
+                Debug.Log("✅ Comando correcto — cerrando terminal automáticamente.");
+                playerTerminal.CloseTerminal();
+            }
+        }
+        else
+        {
+            Debug.Log("❌ Comando incorrecto — permanece en la terminal.");
         }
     }
 }

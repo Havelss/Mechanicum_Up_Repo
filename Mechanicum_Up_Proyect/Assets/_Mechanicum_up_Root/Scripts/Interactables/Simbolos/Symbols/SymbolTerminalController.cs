@@ -160,7 +160,8 @@ public class SymbolTerminalController : MonoBehaviour
         if (TerminalCommandHandler.Instance != null)
         {
             // Pasa esta terminal al handler para que sepa qué objeto controla
-            TerminalCommandHandler.Instance.ProcessCommand(command, this);
+            TerminalCommandHandler.Instance.ProcessCommand(command);
+
         }
         else
         {

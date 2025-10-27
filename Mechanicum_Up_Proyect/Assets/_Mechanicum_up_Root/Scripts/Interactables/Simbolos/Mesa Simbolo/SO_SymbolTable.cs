@@ -31,28 +31,23 @@ public class SO_SymbolTable : MonoBehaviour, IInteractable
 
 public class SO_SymbolTable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private string prompt = "Examinar mesa"; // Texto que aparece al mirar el objeto
-    [SerializeField] private string symbolID; // ID del símbolo que desbloquea este objeto
-    private bool collected = false; // Para evitar desbloquear varias veces
+    [SerializeField] private string interactionPrompt = "E";
+    [SerializeField] private string symbolID;
 
-    public string InteractionPrompt => prompt;
+    public string InteractionPrompt => interactionPrompt;
 
-    public bool Interact(Interactor interactor)
+    public void Interact(Interactor interactor)
     {
-        if (collected) return false; // Ya recogido, no hace nada
-
-        // Desbloquear símbolo en el SymbolManager global
         if (SymbolManager.Instance != null)
         {
             SymbolManager.Instance.UnlockSymbol(symbolID);
-            collected = true; // Marcamos como recogido
-            Debug.Log($"Símbolo desbloqueado desde SO_SymbolTable: {symbolID}");
+            Debug.Log($"Símbolo recogido: {symbolID}");
+            gameObject.SetActive(false);
         }
         else
         {
-            Debug.LogWarning("No hay SymbolManager en la escena.");
+            Debug.LogWarning("SymbolManager.Instance no está asignado en la escena.");
         }
-
-        return true;
     }
 }
+
