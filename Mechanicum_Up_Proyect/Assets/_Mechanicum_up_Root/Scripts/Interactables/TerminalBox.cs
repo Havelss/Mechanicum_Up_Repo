@@ -1,18 +1,10 @@
 using UnityEngine;
 
-[DisallowMultipleComponent]
 public class TerminalBox : MonoBehaviour
 {
-    [Header("El objeto que controla esta caja")]
-    [Tooltip("El objeto recibirá los comandos")]
-    public MonoBehaviour controlledObject;
+    [SerializeField] private MonoBehaviour controlledObject; // el ascensor u otro objeto
 
-    [Header("Prompt (opcional override)")]
-    public string prompt = "E";
-
-    // Método auxiliar para obtener prompt desde Interactor
-    public string GetPrompt() => prompt;
-
-    // Devuelve el objeto asignado (puede ser null)
     public MonoBehaviour GetControlledObject() => controlledObject;
+
+    public string GetPrompt() => "E";
 }

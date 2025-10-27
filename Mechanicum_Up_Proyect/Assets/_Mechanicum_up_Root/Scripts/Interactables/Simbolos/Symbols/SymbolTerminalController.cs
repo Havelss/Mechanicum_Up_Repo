@@ -2,134 +2,32 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/*
 public class SymbolTerminalController : MonoBehaviour
 {
-    [Header("Referencias UI")]
-    public Text displayText;
-    public Button executeButton;
-
-    private List<string> currentSequence = new List<string>();
-
-    private void Start()
-    {
-        if (executeButton != null)
-            executeButton.onClick.AddListener(ExecuteSequence);
-
-        UpdateDisplay();
-    }
-
-    public void AddSymbol(string symbolID)
-    {
-        currentSequence.Add(symbolID);
-        UpdateDisplay();
-    }
-
-    public void ClearSequence()
-    {
-        currentSequence.Clear();
-        UpdateDisplay();
-    }
-
-    private void UpdateDisplay()
-    {
-        if (displayText != null)
-            displayText.text = string.Join(",", currentSequence);
-    }
-
-    public void ExecuteSequence()
-    {
-        if (currentSequence.Count == 0) return;
-
-        string command = string.Join(",", currentSequence).Trim().ToLower();
-        Debug.Log($"Ejecutando comando: {command}");
-
-        if (TerminalCommandHandler.Instance != null)
-            TerminalCommandHandler.Instance.ProcessCommand(command);
-        else
-            Debug.LogError("No hay TerminalCommandHandler en la escena.");
-
-        ClearSequence();
-    }
-}
-*/
-
-
-/*
-public class SymbolTerminalController : MonoBehaviour
-{
-    [Header("Referencias UI")]
-    public Text displayText;
-    public Button executeButton;
-
-    public List<string> currentSequence ;
-
-    private void Start()
-    {
-        currentSequence = new List<string>();
-        if (executeButton != null)
-            executeButton.onClick.AddListener(ExecuteSequence);
-
-        UpdateDisplay();
-    }
-
-    public void AddSymbol(string symbolID)
-    {
-        currentSequence.Add(symbolID);
-        UpdateDisplay();
-    }
-
-    public void ClearSequence()
-    {
-        currentSequence.Clear();
-        UpdateDisplay();
-    }
-
-    private void UpdateDisplay()
-    {
-        if (displayText != null)
-            displayText.text = string.Join(",", currentSequence);
-    }
-
-    public void ExecuteSequence()
-    {
-        if (currentSequence.Count == 0) return;
-
-        string command = string.Join(",", currentSequence).Trim().ToLower();
-        Debug.Log($"Ejecutando comando: {command}");
-
-        if (TerminalCommandHandler.Instance != null)
-        {
-            // Pasamos el objeto que controla esta terminal
-            //TerminalCommandHandler.Instance.ProcessCommand(command, this);
-        }
-        else
-        {
-            Debug.LogError("No hay TerminalCommandHandler en la escena.");
-        }
-
-        ClearSequence();
-    }
-}
-*/  // tocado por profe 2
-
-
-public class SymbolTerminalController : MonoBehaviour
-{
-    [Header("Referencias UI")]
-    public Text displayText;
-    public Button executeButton;
+    [Header("UI References")]
+    public Text displayText;              // Texto que muestra los símbolos
+    public Button executeButton;          // Botón Enter
+    public Button exitButton;             // Botón Exit
 
     private List<string> currentSequence;
+    public MonoBehaviour controlledObject; // Asignado desde SO_Terminal
 
-    private void Start()
+    private void Awake()
     {
         currentSequence = new List<string>();
+        UpdateDisplay();
 
         if (executeButton != null)
-            executeButton.onClick.AddListener(ExecuteSequence);
+            executeButton.onClick.AddListener(() => ExecuteSequence(controlledObject));
 
-        UpdateDisplay();
+        if (exitButton != null)
+            exitButton.onClick.AddListener(() =>
+            {
+                // Cerrar la terminal que contiene este controller
+                var terminal = GetComponentInParent<SO_Terminal>();
+                if (terminal != null)
+                    terminal.CloseTerminal();
+            });
     }
 
     public void AddSymbol(string symbolID)
@@ -150,25 +48,32 @@ public class SymbolTerminalController : MonoBehaviour
             displayText.text = string.Join(",", currentSequence);
     }
 
-    public void ExecuteSequence()
+    public void ExecuteSequence(MonoBehaviour target)
     {
-        if (currentSequence.Count == 0) return;
+        if (currentSequence.Count == 0 || target == null) return;
 
         string command = string.Join(",", currentSequence).Trim().ToLower();
         Debug.Log($"Ejecutando comando: {command}");
 
-        if (TerminalCommandHandler.Instance != null)
+        // Ejemplo con Elevator, puedes añadir más tipos si quieres
+        if (target is Elevator elevator)
         {
-            // Pasa esta terminal al handler para que sepa qué objeto controla
-            TerminalCommandHandler.Instance.ProcessCommand(command);
-
+            switch (command)
+            {
+                case "up":
+                    elevator.MoveUp();
+                    break;
+                case "down":
+                case "no,up":
+                    elevator.MoveDown();
+                    break;
+                default:
+                    Debug.LogWarning($"Comando desconocido: {command}");
+                    break;
+            }
         }
-        else
-        {
-            Debug.LogError("No hay TerminalCommandHandler en la escena.");
-        }
 
+        // Limpiar secuencia tras ejecutar
         ClearSequence();
     }
 }
-
