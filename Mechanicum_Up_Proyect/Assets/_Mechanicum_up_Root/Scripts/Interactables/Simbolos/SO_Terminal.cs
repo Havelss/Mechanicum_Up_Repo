@@ -3,9 +3,8 @@
 public class SO_Terminal : MonoBehaviour
 {
     [Header("Referencias")]
-    [SerializeField] private GameObject terminalCanvas;              // Canvas de la terminal
-    [SerializeField] private SymbolTerminalController terminalController; // Controlador de símbolos
-    [SerializeField] private MonoBehaviour controlledObject;          // Objeto que controla (ej: ascensor)
+    public GameObject terminalCanvas;
+    public SymbolTerminalController terminalController;
 
     private bool isOpen = false;
 
@@ -15,31 +14,27 @@ public class SO_Terminal : MonoBehaviour
             terminalCanvas.SetActive(false);
     }
 
-    public void OpenTerminal()
+    // 🔹 Ahora recibe el objeto controlado dinámicamente
+    public void OpenTerminal(MonoBehaviour controlledObject)
     {
         if (isOpen) return;
         isOpen = true;
 
-        if (terminalCanvas == null || terminalController == null)
-        {
-            Debug.LogError($"Faltan referencias en {name}: asigna Canvas y Controller.");
-            return;
-        }
+        if (terminalCanvas != null)
+            terminalCanvas.SetActive(true);
 
-        // Mostrar el canvas
-        terminalCanvas.SetActive(true);
-
-        // Configurar botones y limpiar secuencia
-        if (SymbolManager.Instance != null)
+        if (SymbolManager.Instance != null && terminalController != null)
             SymbolManager.Instance.SetupTerminalButtons(terminalController);
 
-        terminalController.controlledObject = controlledObject;
-        terminalController.ClearSequence();
-
-        // Pausar el juego y desbloquear cursor
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (terminalController != null)
+        {
+            terminalController.ControlledObject = controlledObject; // Usar la propiedad pública
+            terminalController.ClearSequence();
+        }
+        else
+        {
+            Debug.LogWarning($"La terminal {name} no tiene asignado un SymbolTerminalController.");
+        }
     }
 
     public void CloseTerminal()
@@ -49,10 +44,5 @@ public class SO_Terminal : MonoBehaviour
 
         if (terminalCanvas != null)
             terminalCanvas.SetActive(false);
-
-        // Reanudar juego y bloquear cursor
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 }

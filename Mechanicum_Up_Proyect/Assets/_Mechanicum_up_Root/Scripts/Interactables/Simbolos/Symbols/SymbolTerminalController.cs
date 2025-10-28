@@ -4,42 +4,36 @@ using UnityEngine.UI;
 
 public class SymbolTerminalController : MonoBehaviour
 {
-    [Header("UI References")]
-    public Text displayText;              // Texto que muestra los símbolos
-    public Button executeButton;          // Botón Enter
-    public Button exitButton;             // Botón Exit
+    [Header("UI")]
+    public Text displayText;
+    public Button executeButton;
+    public Button exitButton;
+    public List<Button> symbolButtons = new List<Button>(); // Solo botones de esta terminal
 
-    [HideInInspector] public MonoBehaviour controlledObject; // Asignado desde SO_Terminal
+    [HideInInspector] private MonoBehaviour controlledObject;
 
-    private List<string> currentSequence = new List<string>();
+    public MonoBehaviour ControlledObject
+    {
+        get => controlledObject;
+        set => controlledObject = value;
+    }
+
+    private List<string> currentSequence;
 
     private void Awake()
     {
-        UpdateDisplay();
+        currentSequence = new List<string>();
 
         if (executeButton != null)
-            executeButton.onClick.AddListener(OnExecutePressed);
+            executeButton.onClick.AddListener(() => ExecuteSequence(controlledObject));
 
         if (exitButton != null)
-            exitButton.onClick.AddListener(OnExitPressed);
-    }
-
-    private void OnExecutePressed()
-    {
-        ExecuteSequence(controlledObject);
-
-        // Al ejecutar correctamente, cerramos la terminal
-        var terminal = GetComponentInParent<SO_Terminal>();
-        if (terminal != null)
-            terminal.CloseTerminal();
-    }
-
-    private void OnExitPressed()
-    {
-        // Solo cerrar la terminal sin ejecutar nada
-        var terminal = GetComponentInParent<SO_Terminal>();
-        if (terminal != null)
-            terminal.CloseTerminal();
+            exitButton.onClick.AddListener(() =>
+            {
+                var terminal = GetComponentInParent<SO_Terminal>();
+                if (terminal != null)
+                    terminal.CloseTerminal();
+            });
     }
 
     public void AddSymbol(string symbolID)
@@ -62,33 +56,28 @@ public class SymbolTerminalController : MonoBehaviour
 
     public void ExecuteSequence(MonoBehaviour target)
     {
-        if (currentSequence.Count == 0 || target == null)
-        {
-            Debug.LogWarning("No hay comando o el objeto controlado es nulo.");
-            return;
-        }
+        if (currentSequence.Count == 0 || target == null) return;
 
         string command = string.Join(",", currentSequence).Trim().ToLower();
         Debug.Log($"Ejecutando comando: {command}");
 
         if (target is Elevator elevator)
         {
-            switch (command)
+            if (command == "up")
             {
-                case "up":
-                    elevator.MoveUp();
-                    break;
-                case "down":
-                case "no,up":
-                    elevator.MoveDown();
-                    break;
-                default:
-                    Debug.LogWarning($"Comando desconocido: {command}");
-                    break;
+                elevator.MoveUp();
+            }
+            else if (command == "no,up")
+            {
+                elevator.MoveDown();
+            }
+            else
+            {
+                Debug.LogWarning($"Comando desconocido: {command}");
             }
         }
 
-        // Limpiar secuencia tras ejecutar
         ClearSequence();
     }
+
 }

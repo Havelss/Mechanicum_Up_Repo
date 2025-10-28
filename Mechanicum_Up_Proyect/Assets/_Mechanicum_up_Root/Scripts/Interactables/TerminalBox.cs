@@ -16,8 +16,7 @@ public class TerminalBox : MonoBehaviour
         }
 
         // Asigna el objeto que controla y abre la terminal correspondiente
-        linkedTerminal.SendMessage("SetControlledObjectInternal", controlledObject, SendMessageOptions.DontRequireReceiver);
-        linkedTerminal.OpenTerminal();
+        linkedTerminal.OpenTerminal(controlledObject);
     }
 
     // Este método interno lo usa el Interactor para pasar el objeto controlado sin necesitar una interfaz global
