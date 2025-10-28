@@ -54,7 +54,7 @@ public class SymbolManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"[SymbolManager] Configurando botones para terminal: {terminal.name}");
+        Debug.Log($"Configurando botones terminal: {terminal.name}");
     }
 
     // Desbloquea un símbolo global
@@ -64,7 +64,7 @@ public class SymbolManager : MonoBehaviour
         if (symbol != null)
         {
             symbol.isUnlocked = true;
-            Debug.Log($"[SymbolManager] 🔓 Símbolo '{symbol.id}' desbloqueado correctamente.");
+            
         }
     }
 }
