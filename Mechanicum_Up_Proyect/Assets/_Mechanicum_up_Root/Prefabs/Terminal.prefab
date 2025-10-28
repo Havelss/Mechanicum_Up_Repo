@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b3e770912d18649ba1762343891d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linkedTerminal: {fileID: 0}
   controlledObject: {fileID: 0}
 --- !u!114 &7695855294526650235
 MonoBehaviour:
@@ -136,10 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345dd00b94f956848b3f0a6841d0c03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prompt: E
   terminalCanvas: {fileID: 520902393907295522}
   terminalController: {fileID: 3792306370086975346}
-  controlledObject: {fileID: 0}
 --- !u!1001 &1999839816599134671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -230,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9158170310382911761, guid: ad6e4a63ee57bc249933fdf5dfecc9a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
