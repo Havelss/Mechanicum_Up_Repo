@@ -2,6 +2,9 @@ using UnityEngine;
 
 public interface I_Electrifiable
 {
-    bool IsPowered { get; }
-    void PowerOn();
+    // Método que activa el objeto con electricidad
+    void ReceiveElectricity(float amount);
+
+    // Método para consultar si está activo
+    bool IsElectrified();
 }

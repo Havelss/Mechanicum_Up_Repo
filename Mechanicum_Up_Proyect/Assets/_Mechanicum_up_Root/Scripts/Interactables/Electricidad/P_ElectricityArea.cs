@@ -1,72 +1,47 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class P_ElectricityArea : MonoBehaviour
 {
-    [Header("Electricidad")]
-    public float maxCharge = 10f;         // Duración máxima de la carga
-    public float currentCharge = 0f;
-    public float rechargeRate = 2f;       // Velocidad de recarga
-    public bool hasElectricity => currentCharge > 0f;
+    [Header("Configuración")]
+    public float electricityRadius = 3f;     // Radio de efecto
+    public float electricityConsumption = 5f; // Cuánto gasta al activar
+    public LayerMask electrifiableLayer;     // Layer de objetos que pueden recibir electricidad
 
-    [Header("Área de efecto")]
-    public float pulseRadius = 5f;        // Radio de energía
-    public LayerMask electrifiableLayer;  // Capa de objetos que pueden recibir energía
-    public float pulseCooldown = 2f;      // Tiempo entre pulsos automáticos
-
-    private bool isRecharging = false;
-    private bool canPulse = true;
+    [HideInInspector] public float currentEnergy = 100f;  // Energía del jugador
+    public float maxEnergy = 100f;
+    public float rechargeRate = 10f;         // Recarga por segundo
 
     private void Update()
     {
-        if (hasElectricity)
-        {
-            currentCharge -= Time.deltaTime;
-            if (currentCharge <= 0f)
-                currentCharge = 0f;
+        // Recargar energía pasiva
+        if (currentEnergy < maxEnergy)
+            currentEnergy += rechargeRate * Time.deltaTime;
 
-            if (canPulse)
-                StartCoroutine(ElectricPulse());
+        // Activar electricidad con tecla (por ejemplo, E)
+        if (Input.GetKey(KeyCode.E) && currentEnergy > 0f)
+        {
+            currentEnergy -= electricityConsumption * Time.deltaTime;
+            SendElectricity();
         }
     }
 
-    public void Recharge()
+    private void SendElectricity()
     {
-        if (isRecharging) return;
-        StartCoroutine(RechargeCoroutine());
-    }
+        Collider[] hits = Physics.OverlapSphere(transform.position, electricityRadius, electrifiableLayer);
 
-    private IEnumerator RechargeCoroutine()
-    {
-        isRecharging = true;
-        while (currentCharge < maxCharge)
+        foreach (Collider col in hits)
         {
-            currentCharge += rechargeRate * Time.deltaTime;
-            yield return null;
-        }
-        currentCharge = maxCharge;
-        isRecharging = false;
-    }
-
-    private IEnumerator ElectricPulse()
-    {
-        canPulse = false;
-
-        // Buscar todos los colliders cercanos en el radio definido
-        Collider[] hits = Physics.OverlapSphere(transform.position, pulseRadius, electrifiableLayer);
-
-        foreach (Collider hit in hits)
-        {
-            I_Electrifiable electrifiable = hit.GetComponent<I_Electrifiable>();
-            if (electrifiable != null && !electrifiable.IsPowered)
+            I_Electrifiable electrifiable = col.GetComponent<I_Electrifiable>();
+            if (electrifiable != null)
             {
-                electrifiable.PowerOn();
-                Debug.Log($"⚡ {hit.name} energizado por el pulso eléctrico.");
+                electrifiable.ReceiveElectricity(Time.deltaTime); // Cantidad de energía por frame
             }
         }
+    }
 
-        yield return new WaitForSeconds(pulseCooldown);
-        canPulse = true;
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, electricityRadius);
     }
 }

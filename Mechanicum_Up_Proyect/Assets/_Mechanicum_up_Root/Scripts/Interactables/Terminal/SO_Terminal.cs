@@ -46,3 +46,5 @@ public class SO_Terminal : MonoBehaviour
             terminalCanvas.SetActive(false);
     }
 }
+
+
