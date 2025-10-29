@@ -1,47 +1,76 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class P_ElectricityArea : MonoBehaviour
 {
-    [Header("Configuración")]
-    public float electricityRadius = 3f;     // Radio de efecto
-    public float electricityConsumption = 5f; // Cuánto gasta al activar
-    public LayerMask electrifiableLayer;     // Layer de objetos que pueden recibir electricidad
+    [Header("Configuración de energía")]
+    public float maxEnergy = 10f;         // Energía máxima
+    public float currentEnergy = 10f;     // Energía actual
+    public float baseConsumption = 0.5f;  // Consumo por segundo al estar activo
+    public float activeConsumption = 1f;  // Consumo extra al usar electricidad
+    public float radius = 3f;             // Radio de efecto para objetos electrificables
 
-    [HideInInspector] public float currentEnergy = 100f;  // Energía del jugador
-    public float maxEnergy = 100f;
-    public float rechargeRate = 10f;         // Recarga por segundo
+    [Header("Controles")]
+    public Key activateKey = Key.F;
+
+    private bool isActive = false;
 
     private void Update()
     {
-        // Recargar energía pasiva
-        if (currentEnergy < maxEnergy)
-            currentEnergy += rechargeRate * Time.deltaTime;
+        // Activar o desactivar electricidad
+        if (Keyboard.current[activateKey].wasPressedThisFrame)
+            isActive = !isActive;
 
-        // Activar electricidad con tecla (por ejemplo, E)
-        if (Input.GetKey(KeyCode.E) && currentEnergy > 0f)
+        if (isActive)
         {
-            currentEnergy -= electricityConsumption * Time.deltaTime;
-            SendElectricity();
+            // Consumo de energía
+            float consumption = baseConsumption + activeConsumption;
+            currentEnergy -= consumption * Time.deltaTime;
+            if (currentEnergy <= 0f)
+            {
+                currentEnergy = 0f;
+                isActive = false;
+                Debug.Log("Energía agotada!");
+            }
+
+            // Aplicar electricidad a objetos cercanos
+            ApplyElectricity();
+        }
+        else
+        {
+            // Consumo pasivo
+            currentEnergy -= baseConsumption * Time.deltaTime;
+            if (currentEnergy < 0f)
+                currentEnergy = 0f;
         }
     }
 
-    private void SendElectricity()
+    private void ApplyElectricity()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, electricityRadius, electrifiableLayer);
-
-        foreach (Collider col in hits)
+        Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+        foreach (var hit in hits)
         {
-            I_Electrifiable electrifiable = col.GetComponent<I_Electrifiable>();
+            I_Electrifiable electrifiable = hit.GetComponent<I_Electrifiable>();
             if (electrifiable != null)
             {
-                electrifiable.ReceiveElectricity(Time.deltaTime); // Cantidad de energía por frame
+                electrifiable.PowerOn();
             }
         }
+    }
+
+    public void RechargeEnergy(float amount)
+    {
+        currentEnergy += amount;
+        if (currentEnergy > maxEnergy)
+            currentEnergy = maxEnergy;
+
+        Debug.Log($"Energía recargada a {currentEnergy}/{maxEnergy}");
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, electricityRadius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

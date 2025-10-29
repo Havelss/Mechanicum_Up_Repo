@@ -1,31 +1,19 @@
 ﻿using UnityEngine;
 
-public class T_Recharge : MonoBehaviour, I_Electrifiable
+public class T_Recharge : MonoBehaviour
 {
     [Header("Configuración")]
-    public float energyProvided = 50f;  // Cuánta energía da al jugador
-    public bool isUsed = false;         // Una vez usada, no se puede usar otra vez
+    public float rechargeAmount = 1f;      // Energía que da al jugador
+    public bool isUsed = false;            // Si ya fue usada, no se puede volver a descargar
 
-    public void ReceiveElectricity(float amount)
+    private void OnTriggerEnter(Collider other)
     {
-        if (isUsed) return;
-
-        // Aquí podrías activar el objeto electrificado (por ejemplo, encender la terminal)
-        isUsed = true;
-
-        // Notificar al jugador
-        P_ElectricityArea player = FindFirstObjectByType<P_ElectricityArea>();
-        if (player != null)
+        P_ElectricityArea playerEnergy = other.GetComponent<P_ElectricityArea>();
+        if (playerEnergy != null && !isUsed)
         {
-            player.currentEnergy = Mathf.Min(player.currentEnergy + energyProvided, player.maxEnergy);
+            playerEnergy.RechargeEnergy(rechargeAmount);
+            isUsed = true;
+            Debug.Log($"{name} ha recargado al jugador.");
         }
-
-        // Opcional: animación o efecto visual
-        Debug.Log($"{name} ha sido recargada con electricidad.");
-    }
-
-    public bool IsElectrified()
-    {
-        return isUsed;
     }
 }

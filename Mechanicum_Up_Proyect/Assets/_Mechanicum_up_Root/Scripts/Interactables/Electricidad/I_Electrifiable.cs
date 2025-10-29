@@ -1,10 +1,11 @@
 using UnityEngine;
 
+// Interfaz para cualquier objeto que pueda recibir electricidad
 public interface I_Electrifiable
 {
-    // Método que activa el objeto con electricidad
-    void ReceiveElectricity(float amount);
+    // Se llama para activar el objeto con electricidad
+    void PowerOn();
 
-    // Método para consultar si está activo
-    bool IsElectrified();
+    // Opcional: desactivar el objeto (si quieres implementar apagado)
+    void PowerOff();
 }

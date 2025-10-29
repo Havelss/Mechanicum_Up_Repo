@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public class SO_Terminal : MonoBehaviour
 {
     [Header("Referencias")]
@@ -46,5 +47,6 @@ public class SO_Terminal : MonoBehaviour
             terminalCanvas.SetActive(false);
     }
 }
+
 
 
