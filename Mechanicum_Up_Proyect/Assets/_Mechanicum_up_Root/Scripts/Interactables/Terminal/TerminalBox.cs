@@ -1,8 +1,6 @@
 using UnityEngine;
 
 
-
-
 /*
 public class TerminalBox : MonoBehaviour
 {
@@ -47,6 +45,7 @@ public class TerminalBox : MonoBehaviour
             return;
         }
 
+        
         // Solo abrir la terminal si tiene electricidad
         if (linkedTerminal.IsElectrified())
         {
@@ -56,6 +55,7 @@ public class TerminalBox : MonoBehaviour
         {
             Debug.LogWarning($"{name}: la terminal está apagada, necesitas darle electricidad primero.");
         }
+         //electricidad
     }
 }
 

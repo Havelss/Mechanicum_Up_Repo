@@ -3225,7 +3225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5983583514387470086, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.471134
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5983583514387470086, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6435,7 +6435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979122025106112990, guid: aecd7d5a50833b14e8f9bca1c784c139, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.683
+      value: -7.6200953
       objectReference: {fileID: 0}
     - target: {fileID: 7979122025106112990, guid: aecd7d5a50833b14e8f9bca1c784c139, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6720,14 +6720,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58793d82c6537fb429aeb691abbc56a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  electricityRadius: 2
-  electricityConsumption: 5
-  electrifiableLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  currentEnergy: 100
   maxEnergy: 100
-  rechargeRate: 10
+  currentEnergy: 100
+  baseConsumption: 0.5
+  activeConsumption: 1
+  radius: 3
+  activateKey: 20
 --- !u!1 &898545200
 GameObject:
   m_ObjectHideFlags: 0
@@ -7939,7 +7937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070939aa4d9fcf946b9e8074cb77953e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyProvided: 50
+  rechargeAmount: 1
   isUsed: 0
 --- !u!1 &1050388882
 GameObject:
@@ -10901,11 +10899,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232385314218074165, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.2457
+      value: -31.7543
       objectReference: {fileID: 0}
     - target: {fileID: 7232385314218074165, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.687424
+      value: 2.6874237
       objectReference: {fileID: 0}
     - target: {fileID: 7232385314218074165, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: m_LocalPosition.z
