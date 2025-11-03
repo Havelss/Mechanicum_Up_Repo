@@ -10102,13 +10102,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1987701131}
   m_HandleRect: {fileID: 1823453461}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.696
+  m_Value: 0.637
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1475244714}
+        m_TargetAssemblyTypeName: VolumeSttings, Assembly-CSharp
+        m_MethodName: SetMusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1198300837
 GameObject:
   m_ObjectHideFlags: 0
@@ -12779,6 +12791,7 @@ GameObject:
   - component: {fileID: 1475244710}
   - component: {fileID: 1475244709}
   - component: {fileID: 1475244713}
+  - component: {fileID: 1475244714}
   m_Layer: 5
   m_Name: PauseManager
   m_TagString: Untagged
@@ -12884,6 +12897,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 1579241767}
   optionsMenuCanvas: {fileID: 1253150153}
+--- !u!114 &1475244714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475244708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc92c0b924c505c4c8648171a049e806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMixer: {fileID: 24100000, guid: 9562cc09664b2964e906d39601efa533, type: 2}
+  musicSlider: {fileID: 1197941385}
 --- !u!1 &1476102140
 GameObject:
   m_ObjectHideFlags: 0
