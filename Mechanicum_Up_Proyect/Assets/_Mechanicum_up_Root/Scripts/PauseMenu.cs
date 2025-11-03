@@ -59,8 +59,8 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // 🔹 Abre el submenú de opciones
-    public void OpenOptions()
+    
+    public void OpenOptions() //Abre el submenú de opciones
     {
         if (panelMain != null)
             panelMain.SetActive(false);
@@ -69,8 +69,8 @@ public class PauseMenu : MonoBehaviour
             panelOptions.SetActive(true);
     }
 
-    // 🔹 Vuelve del submenú al menú principal
-    public void BackFromOptions()
+    
+    public void BackFromOptions() //Vuelve del submenú al menú principal
     {
         if (panelOptions != null)
             panelOptions.SetActive(false);
