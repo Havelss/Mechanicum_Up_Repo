@@ -3,80 +3,89 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [Header("UI Panels")]
-    [SerializeField] private GameObject panelMain;     // Panel principal del menú de pausa
-    [SerializeField] private GameObject panelOptions;  // Panel de opciones
+    [Header("Referencias UI")]
+    [SerializeField] private GameObject pauseMenuCanvas;   // Canvas del menú de pausa
+    [SerializeField] private GameObject optionsMenuCanvas; // Canvas del submenú de opciones
 
     private bool isPaused = false;
 
-    private void Start()
+    void Start()
     {
-        if (panelMain != null)
-            panelMain.SetActive(false);
-
-        if (panelOptions != null)
-            panelOptions.SetActive(false);
+        if (pauseMenuCanvas != null) pauseMenuCanvas.SetActive(false);
+        if (optionsMenuCanvas != null) optionsMenuCanvas.SetActive(false);
     }
 
-    private void Update()
+    void Update()
     {
+        // Evitar abrir el menú si una terminal está activa
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
-                Resume();
-            else
+            if (IsAnyTerminalOpen()) return;
+
+            if (!isPaused)
                 Pause();
+            else
+                Resume();
         }
     }
+
+    private bool IsAnyTerminalOpen()
+    {
+        // Usa el nuevo método recomendado por Unity 2023+
+        SO_Terminal[] terminals = Object.FindObjectsByType<SO_Terminal>(FindObjectsSortMode.None);
+        foreach (SO_Terminal terminal in terminals)
+        {
+            if (terminal != null && terminal.IsOpen())
+                return true;
+        }
+        return false;
+    }
+
 
     public void Pause()
     {
-        if (panelMain != null)
-        {
-            panelMain.SetActive(true);
-            panelOptions.SetActive(false);
-        }
+        if (pauseMenuCanvas != null)
+            pauseMenuCanvas.SetActive(true);
+
+        if (optionsMenuCanvas != null)
+            optionsMenuCanvas.SetActive(false);
 
         Time.timeScale = 0f;
-        isPaused = true;
-
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        isPaused = true;
     }
 
     public void Resume()
     {
-        if (panelMain != null)
-            panelMain.SetActive(false);
+        if (pauseMenuCanvas != null)
+            pauseMenuCanvas.SetActive(false);
 
-        if (panelOptions != null)
-            panelOptions.SetActive(false);
+        if (optionsMenuCanvas != null)
+            optionsMenuCanvas.SetActive(false);
 
         Time.timeScale = 1f;
-        isPaused = false;
-
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        isPaused = false;
     }
 
-    
-    public void OpenOptions() //Abre el submenú de opciones
+    public void OpenOptions()
     {
-        if (panelMain != null)
-            panelMain.SetActive(false);
+        if (optionsMenuCanvas != null)
+            optionsMenuCanvas.SetActive(true);
 
-        if (panelOptions != null)
-            panelOptions.SetActive(true);
+        if (pauseMenuCanvas != null)
+            pauseMenuCanvas.SetActive(false);
     }
 
-    
-    public void BackFromOptions() //Vuelve del submenú al menú principal
+    public void CloseOptions()
     {
-        if (panelOptions != null)
-            panelOptions.SetActive(false);
+        if (optionsMenuCanvas != null)
+            optionsMenuCanvas.SetActive(false);
 
-        if (panelMain != null)
-            panelMain.SetActive(true);
+        if (pauseMenuCanvas != null)
+            pauseMenuCanvas.SetActive(true);
     }
 
     public void QuitToMenu()
@@ -85,4 +94,5 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    
 }

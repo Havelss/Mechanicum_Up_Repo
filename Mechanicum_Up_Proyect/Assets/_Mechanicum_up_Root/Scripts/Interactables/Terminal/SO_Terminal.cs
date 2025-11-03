@@ -84,17 +84,14 @@ public class SO_Terminal : MonoBehaviour
     // 🔹 Ahora recibe el objeto controlado dinámicamente
     public void OpenTerminal(MonoBehaviour controlledObject)
     {
-        if (!isElectrified)
-        {
-            Debug.LogWarning($"{name}: no tiene energía para abrirse.");
-            return;
-        }
-
         if (isOpen) return;
         isOpen = true;
 
         if (terminalCanvas != null)
             terminalCanvas.SetActive(true);
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.SetMenuState(true); // 👈 activa cursor y bloquea el resto
 
         if (SymbolManager.Instance != null && terminalController != null)
             SymbolManager.Instance.SetupTerminalButtons(terminalController);
@@ -104,11 +101,13 @@ public class SO_Terminal : MonoBehaviour
             terminalController.ControlledObject = controlledObject;
             terminalController.ClearSequence();
         }
-        else
-        {
-            Debug.LogWarning($"La terminal {name} no tiene asignado un SymbolTerminalController.");
-        }
     }
+
+    public bool IsOpen()
+    {
+        return isOpen;
+    }
+
 
     public void CloseTerminal()
     {
@@ -117,5 +116,8 @@ public class SO_Terminal : MonoBehaviour
 
         if (terminalCanvas != null)
             terminalCanvas.SetActive(false);
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.SetMenuState(false); // 👈 desactiva cursor si no hay más menús
     }
 }

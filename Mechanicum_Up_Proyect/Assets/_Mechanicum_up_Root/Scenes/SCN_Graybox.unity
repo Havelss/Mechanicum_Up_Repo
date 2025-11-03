@@ -2597,6 +2597,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243649104}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &256422714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256422715}
+  - component: {fileID: 256422716}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &256422715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256422714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 353.33923, y: 236.87383, z: -178.29184}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &256422716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256422714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdb8baa1f7686d42a1bd8f27f916588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &257178133
 GameObject:
   m_ObjectHideFlags: 0
@@ -12644,7 +12688,7 @@ GameObject:
   - component: {fileID: 1475244709}
   - component: {fileID: 1475244713}
   m_Layer: 5
-  m_Name: MenuPause
+  m_Name: PauseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12746,8 +12790,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7db0f866585dde4e9779cf9d710918d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelMain: {fileID: 1579241767}
-  panelOptions: {fileID: 1253150153}
+  pauseMenuCanvas: {fileID: 1579241767}
+  optionsMenuCanvas: {fileID: 1253150153}
 --- !u!1 &1476102140
 GameObject:
   m_ObjectHideFlags: 0
@@ -18861,6 +18905,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 256422715}
+  - {fileID: 1475244712}
   - {fileID: 478174619}
   - {fileID: 268877815}
   - {fileID: 1839875143}
@@ -18877,4 +18923,3 @@ SceneRoots:
   - {fileID: 762991239}
   - {fileID: 796075910}
   - {fileID: 563559571}
-  - {fileID: 1475244712}
