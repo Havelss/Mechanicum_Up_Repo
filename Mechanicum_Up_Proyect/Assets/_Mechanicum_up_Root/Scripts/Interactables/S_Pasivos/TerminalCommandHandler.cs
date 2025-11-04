@@ -1,0 +1,70 @@
+﻿using UnityEngine;  
+
+public class TerminalCommandHandler : MonoBehaviour
+{
+    public static TerminalCommandHandler Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    // Procesa comandos del jugador (ej: "up" o "no,up")
+    public void ProcessCommand(string command)
+    {
+        command = command.Trim().ToLower();
+        Debug.Log($"Comando recibido: {command}");
+
+        bool validCommand = false;
+
+        switch (command)
+        {
+            // 🔹 Combinaciones válidas
+            case "up":
+                var elevator1 = FindFirstObjectByType<Elevator>();
+                if (elevator1 != null)
+                {
+                    elevator1.MoveUp();
+                    validCommand = true;
+                }
+                break;
+
+            case "no,up":
+                var elevator2 = FindFirstObjectByType<Elevator>();
+                if (elevator2 != null)
+                {
+                    elevator2.MoveDown();
+                    validCommand = true;
+                }
+                break;
+
+            // 🔹 Aquí puedes agregar más combinaciones:
+            // case "left,right": ...
+            // case "power,on": ...
+
+            default:
+                Debug.LogWarning($"Comando desconocido o combinación inválida: {command}");
+                break;
+        }
+
+        // Si la combinación es correcta, cierra la terminal
+        if (validCommand)
+        {
+            var playerTerminal = FindFirstObjectByType<SO_Terminal>();
+            if (playerTerminal != null)
+            {
+                Debug.Log("✅ Comando correcto — cerrando terminal automáticamente.");
+                playerTerminal.CloseTerminal();
+            }
+        }
+        else
+        {
+            Debug.Log("❌ Comando incorrecto — permanece en la terminal.");
+        }
+    }
+}

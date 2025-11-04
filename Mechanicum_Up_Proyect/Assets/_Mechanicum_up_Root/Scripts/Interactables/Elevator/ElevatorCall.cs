@@ -22,4 +22,10 @@ public class ElevatorCall : MonoBehaviour, IInteractable
             Debug.LogWarning($"{name} no tiene asignado un Elevator válido.");
         }
     }
+
+    public MonoBehaviour GetControlledObject()
+    {
+        return controlledObject;
+    }
+
 }
