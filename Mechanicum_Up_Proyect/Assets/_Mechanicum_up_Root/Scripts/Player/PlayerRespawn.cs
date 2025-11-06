@@ -46,4 +46,10 @@ public class PlayerRespawn : MonoBehaviour
         respawnPoint = newRespawn;
         Debug.Log($"🟢 Nuevo punto de respawn establecido: {newRespawn.name}");
     }
+
+    public void UpdateRespawn(Transform newRespawnPoint)
+    {
+        respawnPoint = newRespawnPoint;
+        Debug.Log($"Respawn actualizado a: {newRespawnPoint.position}");
+    }
 }

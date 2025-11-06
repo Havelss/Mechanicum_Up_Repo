@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
-
 public class SO_Terminal : MonoBehaviour
 {
     [Header("Referencias")]
     public GameObject terminalCanvas;
     public SymbolTerminalController terminalController;
 
-    private bool isOpen = false;
+    [Header("Respawn")]
+    [SerializeField] private Transform respawnPoint; // Empty hijo de la terminal
 
-    // ⚡ Estado de electricidad
-    private bool isElectrified = true; // por defecto encendida (puedes cambiar a false si lo deseas)
+    private bool isOpen = false;
+    private bool isElectrified = true; // por defecto encendida
 
     private void Start()
     {
@@ -18,20 +18,19 @@ public class SO_Terminal : MonoBehaviour
             terminalCanvas.SetActive(false);
     }
 
-    // 🔹 Llamado por la electricidad para encender la terminal
+    // 🔹 Encender / apagar la terminal
     public void SetElectrified(bool state)
     {
         isElectrified = state;
         Debug.Log($"{name} electricidad: {(isElectrified ? "encendida" : "apagada")}");
     }
 
-    // 🔹 Consultado por la TerminalBox antes de abrirla
     public bool IsElectrified()
     {
         return isElectrified;
     }
 
-    // 🔹 Ahora recibe el objeto controlado dinámicamente
+    // 🔹 Abre la terminal y actualiza el respawn
     public void OpenTerminal(MonoBehaviour controlledObject)
     {
         if (isOpen) return;
@@ -41,7 +40,7 @@ public class SO_Terminal : MonoBehaviour
             terminalCanvas.SetActive(true);
 
         if (UIManager.Instance != null)
-            UIManager.Instance.SetMenuState(true); // 👈 activa cursor y bloquea el resto
+            UIManager.Instance.SetMenuState(true);
 
         if (SymbolManager.Instance != null && terminalController != null)
             SymbolManager.Instance.SetupTerminalButtons(terminalController);
@@ -51,13 +50,20 @@ public class SO_Terminal : MonoBehaviour
             terminalController.ControlledObject = controlledObject;
             terminalController.ClearSequence();
         }
+
+        // 🧠 Actualizar respawn del jugador si existe un punto válido
+        var player = FindFirstObjectByType<PlayerRespawn>();
+        if (player != null && respawnPoint != null)
+        {
+            player.UpdateRespawn(respawnPoint);
+            Debug.Log($"Nuevo punto de respawn establecido en {respawnPoint.name}");
+        }
     }
 
     public bool IsOpen()
     {
         return isOpen;
     }
-
 
     public void CloseTerminal()
     {
@@ -68,6 +74,8 @@ public class SO_Terminal : MonoBehaviour
             terminalCanvas.SetActive(false);
 
         if (UIManager.Instance != null)
-            UIManager.Instance.SetMenuState(false); // 👈 desactiva cursor si no hay más menús
+            UIManager.Instance.SetMenuState(false);
     }
 }
+
+
