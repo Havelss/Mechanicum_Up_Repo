@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class T_Electrifiable : MonoBehaviour
+public class T_Electrifiable : MonoBehaviour, I_Electrifiable
 {
     [Header("Terminal apagada")]
     public SO_Terminal terminal;
@@ -14,13 +14,18 @@ public class T_Electrifiable : MonoBehaviour
         isPowered = true;
         if (terminal != null)
         {
-            terminal.terminalCanvas.SetActive(true); // O simplemente permitir que funcione
+            terminal.terminalCanvas.SetActive(true);
             Debug.Log($"{name} ha recibido energía y ahora funciona.");
         }
     }
 
     public void PowerOff()
     {
-        // Opcional: si quieres, pero según tu diseño, una vez encendida no se apaga
+        // Opcional
+    }
+
+    public bool IsPowered()
+    {
+        return isPowered;
     }
 }

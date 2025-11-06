@@ -12,9 +12,16 @@ public class P_ElectricityArea : MonoBehaviour
     public float radius = 3f;             // Radio de efecto para objetos electrificables
 
     [Header("Controles")]
-    public Key activateKey = Key.F;
+    public Key activateKey = Key.F;       // Activar/desactivar electricidad
+    public Key interactKey = Key.E;       // Interactuar con terminales
 
     private bool isActive = false;
+    private P_ElectricityPowerUp powerUp;
+
+    private void Start()
+    {
+        powerUp = GetComponent<P_ElectricityPowerUp>();
+    }
 
     private void Update()
     {
@@ -44,6 +51,12 @@ public class P_ElectricityArea : MonoBehaviour
             if (currentEnergy < 0f)
                 currentEnergy = 0f;
         }
+
+        // Interactuar con terminales si se tiene el poder
+        if (powerUp != null && Keyboard.current[interactKey].wasPressedThisFrame)
+        {
+            TryInteractWithTerminal();
+        }
     }
 
     private void ApplyElectricity()
@@ -55,6 +68,27 @@ public class P_ElectricityArea : MonoBehaviour
             if (electrifiable != null)
             {
                 electrifiable.PowerOn();
+            }
+        }
+    }
+
+    private void TryInteractWithTerminal()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+        foreach (var hit in hits)
+        {
+            var terminal = hit.GetComponent<T_Electrifiable>();
+            if (terminal != null)
+            {
+                if (terminal.IsPowered())
+                {
+                    powerUp.AbsorbEnergyFromTerminal(terminal, 2f); // cantidad que absorbe
+                }
+                else
+                {
+                    powerUp.TransferEnergyToTerminal(terminal, 2f); // cantidad que transfiere
+                }
+                break;
             }
         }
     }
