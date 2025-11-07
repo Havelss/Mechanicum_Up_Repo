@@ -5,65 +5,91 @@ using UnityEngine.InputSystem;
 public class P_ElectricityArea : MonoBehaviour
 {
     [Header("Configuración de energía")]
-    public float maxEnergy = 10f;         // Energía máxima
-    public float currentEnergy = 10f;     // Energía actual
-    public float baseConsumption = 0.5f;  // Consumo por segundo al estar activo
-    public float activeConsumption = 1f;  // Consumo extra al usar electricidad
-    public float radius = 3f;             // Radio de efecto para objetos electrificables
+    public float maxEnergy = 10f;
+    public float currentEnergy = 10f;
+    public float baseConsumption = 0.5f;
+    public float activeConsumption = 1f;
+    public float radius = 3f;
+
+    [Header("Aura visual")]
+    public GameObject auraVisual; // asigna aquí un objeto visual (por ejemplo, una esfera transparente con material brillante)
+    public float auraExpandSpeed = 5f; // qué tan rápido aparece/desaparece el aura
 
     [Header("Controles")]
-    public Key activateKey = Key.F;       // Activar/desactivar electricidad
-    public Key interactKey = Key.E;       // Interactuar con terminales
+    public Key activateKey = Key.F;
+    public Key interactKey = Key.E;
 
     private bool isActive = false;
     private P_ElectricityPowerUp powerUp;
+    private Vector3 targetScale;
 
     private void Start()
     {
         powerUp = GetComponent<P_ElectricityPowerUp>();
+
+        if (auraVisual != null)
+        {
+            auraVisual.SetActive(false);
+            auraVisual.transform.localScale = Vector3.zero;
+        }
     }
 
     private void Update()
     {
-        // Activar o desactivar electricidad
+        // Activar o desactivar electricidad (aura)
         if (Keyboard.current[activateKey].wasPressedThisFrame)
+        {
             isActive = !isActive;
+            if (auraVisual != null)
+                auraVisual.SetActive(isActive);
+        }
 
+        // Ajustar tamaño del aura visual suavemente
+        if (auraVisual != null)
+        {
+            targetScale = isActive ? Vector3.one * (radius * 2f) : Vector3.zero;
+            auraVisual.transform.localScale = Vector3.Lerp(auraVisual.transform.localScale, targetScale, Time.deltaTime * auraExpandSpeed);
+        }
+
+        // Manejar consumo y efectos
         if (isActive)
         {
-            // Consumo de energía
             float consumption = baseConsumption + activeConsumption;
             currentEnergy -= consumption * Time.deltaTime;
+
             if (currentEnergy <= 0f)
             {
                 currentEnergy = 0f;
                 isActive = false;
+                if (auraVisual != null) auraVisual.SetActive(false);
                 Debug.Log("Energía agotada!");
+                return;
             }
 
-            // Aplicar electricidad a objetos cercanos
-            ApplyElectricity();
+            // Aplicar electricidad a objetos cercanos con tag "Electrifiable"
+            ApplyElectricityAura();
         }
         else
         {
-            // Consumo pasivo
             currentEnergy -= baseConsumption * Time.deltaTime;
             if (currentEnergy < 0f)
                 currentEnergy = 0f;
         }
 
-        // Interactuar con terminales si se tiene el poder
+        // Interacción con terminales (solo si tiene power-up)
         if (powerUp != null && Keyboard.current[interactKey].wasPressedThisFrame)
         {
             TryInteractWithTerminal();
         }
     }
 
-    private void ApplyElectricity()
+    private void ApplyElectricityAura()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, radius);
         foreach (var hit in hits)
         {
+            if (!hit.CompareTag("Electrifiable")) continue; // solo afecta objetos con el tag
+
             I_Electrifiable electrifiable = hit.GetComponent<I_Electrifiable>();
             if (electrifiable != null)
             {
@@ -77,17 +103,16 @@ public class P_ElectricityArea : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(transform.position, radius);
         foreach (var hit in hits)
         {
+            if (!hit.CompareTag("Electrifiable")) continue;
+
             var terminal = hit.GetComponent<T_Electrifiable>();
             if (terminal != null)
             {
                 if (terminal.IsPowered())
-                {
-                    powerUp.AbsorbEnergyFromTerminal(terminal, 2f); // cantidad que absorbe
-                }
+                    powerUp.AbsorbEnergyFromTerminal(terminal, 2f);
                 else
-                {
-                    powerUp.TransferEnergyToTerminal(terminal, 2f); // cantidad que transfiere
-                }
+                    powerUp.TransferEnergyToTerminal(terminal, 2f);
+
                 break;
             }
         }
@@ -104,7 +129,7 @@ public class P_ElectricityArea : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

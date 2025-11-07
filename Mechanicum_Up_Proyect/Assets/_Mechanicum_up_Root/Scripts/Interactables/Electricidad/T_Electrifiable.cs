@@ -9,9 +9,9 @@ public class T_Electrifiable : MonoBehaviour, I_Electrifiable
 
     public void PowerOn()
     {
-        if (isPowered) return;  // Una vez encendida no se apaga
-
+        if (isPowered) return;
         isPowered = true;
+
         if (terminal != null)
         {
             terminal.terminalCanvas.SetActive(true);
@@ -19,10 +19,7 @@ public class T_Electrifiable : MonoBehaviour, I_Electrifiable
         }
     }
 
-    public void PowerOff()
-    {
-        // Opcional
-    }
+    public void PowerOff() { }
 
     public bool IsPowered()
     {
