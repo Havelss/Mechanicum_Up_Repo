@@ -1,98 +1,112 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-/*
+
+
+//public class SymbolTerminalController : MonoBehaviour
+//{
+//    [Header("UI")]
+//    public Text displayText;
+//    public Button executeButton;
+//    public Button exitButton;
+//    public List<Button> symbolButtons = new List<Button>();
+
+//    [HideInInspector] public MonoBehaviour ControlledObject;
+
+//    private List<string> currentSequence;
+
+//    private void Awake()
+//    {
+//        currentSequence = new List<string>();
+
+//        if (executeButton != null)
+//            executeButton.onClick.AddListener(() => ExecuteSequence(ControlledObject));
+
+//        if (exitButton != null)
+//            exitButton.onClick.AddListener(() =>
+//            {
+//                var terminal = GetComponentInParent<SO_Terminal>();
+//                if (terminal != null)
+//                    terminal.CloseTerminal();
+//            });
+//    }
+
+//    public void AddSymbol(string symbolID)
+//    {
+//        currentSequence.Add(symbolID);
+//        UpdateDisplay();
+//    }
+
+//    public void ClearSequence()
+//    {
+//        currentSequence.Clear();
+//        UpdateDisplay();
+//    }
+
+//    private void UpdateDisplay()
+//    {
+//        if (displayText != null)
+//            displayText.text = string.Join(",", currentSequence);
+//    }
+
+//    public void ExecuteSequence(MonoBehaviour target)
+//    {
+//        if (currentSequence.Count == 0 || target == null)
+//        {
+//            Debug.LogWarning("No hay comando o el objeto controlado es nulo.");
+//            return;
+//        }
+
+//        string command = string.Join(",", currentSequence).Trim().ToLower();
+//        Debug.Log($"[Terminal] Ejecutando comando: {command}");
+
+//        bool executedSuccessfully = false;
+
+//        // Comprueba si el objeto es un ascensor
+//        if (target is Elevator elevator)
+//        {
+//            if (command == "up")
+//            {
+//                elevator.MoveUp();
+//                executedSuccessfully = true;
+//            }
+//            else if (command == "no,up")
+//            {
+//                elevator.MoveDown();
+//                executedSuccessfully = true;
+//            }
+//            else
+//            {
+//                Debug.LogWarning($"[Terminal] Comando desconocido: {command}");
+//            }
+//        }
+
+//        // 🔹 Si la secuencia fue válida → cerrar terminal
+//        if (executedSuccessfully)
+//        {
+//            var terminal = GetComponentInParent<SO_Terminal>();
+//            if (terminal != null)
+//                terminal.CloseTerminal();
+//        }
+
+//        ClearSequence();
+//    }
+//}
+
+
+
 public class SymbolTerminalController : MonoBehaviour
 {
     [Header("UI")]
-    public Text displayText;
+    public Text displayText;                       // muestra la secuencia (modo fallback)
     public Button executeButton;
     public Button exitButton;
-    public List<Button> symbolButtons = new List<Button>(); // Solo botones de esta terminal
 
-    [HideInInspector] private MonoBehaviour controlledObject;
+    [Header("Modo botones (legacy)")]
+    public List<Button> symbolButtons = new List<Button>(); // botones Up/No/Left para compatibilidad
 
-    public MonoBehaviour ControlledObject
-    {
-        get => controlledObject;
-        set => controlledObject = value;
-    }
-
-    private List<string> currentSequence;
-
-    private void Awake()
-    {
-        currentSequence = new List<string>();
-
-        if (executeButton != null)
-            executeButton.onClick.AddListener(() => ExecuteSequence(controlledObject));
-
-        if (exitButton != null)
-            exitButton.onClick.AddListener(() =>
-            {
-                var terminal = GetComponentInParent<SO_Terminal>();
-                if (terminal != null)
-                    terminal.CloseTerminal();
-            });
-    }
-
-    public void AddSymbol(string symbolID)
-    {
-        currentSequence.Add(symbolID);
-        UpdateDisplay();
-    }
-
-    public void ClearSequence()
-    {
-        currentSequence.Clear();
-        UpdateDisplay();
-    }
-
-    private void UpdateDisplay()
-    {
-        if (displayText != null)
-            displayText.text = string.Join(",", currentSequence);
-    }
-
-    public void ExecuteSequence(MonoBehaviour target)
-    {
-        if (currentSequence.Count == 0 || target == null) return;
-
-        string command = string.Join(",", currentSequence).Trim().ToLower();
-        Debug.Log($"Ejecutando comando: {command}");
-
-        if (target is Elevator elevator)
-        {
-            if (command == "up")
-            {
-                elevator.MoveUp();
-            }
-            else if (command == "no,up")
-            {
-                elevator.MoveDown();
-            }
-            else
-            {
-                Debug.LogWarning($"Comando desconocido: {command}");
-            }
-        }
-
-        ClearSequence();
-    }
-
-}
-
-
-*/
-
-
-public class SymbolTerminalController : MonoBehaviour
-{
-    [Header("UI")]
-    public Text displayText;
-    public Button executeButton;
-    public Button exitButton;
-    public List<Button> symbolButtons = new List<Button>();
+    [Header("Modo drag & drop (slots)")]
+    public List<SymbolSlot> symbolSlots = new List<SymbolSlot>(); // si usas slots, se rellenan primero
 
     [HideInInspector] public MonoBehaviour ControlledObject;
 
@@ -114,8 +128,41 @@ public class SymbolTerminalController : MonoBehaviour
             });
     }
 
+    private void Start()
+    {
+        UpdateDisplay();
+    }
+
+    // Método público que SymbolManager usa al asignar listeners.
+    // Añade el símbolo: si hay un slot vacío lo pone allí (drag&drop compat),
+    // si no hay slots o están todos ocupados lo añade a currentSequence (texto).
     public void AddSymbol(string symbolID)
     {
+        if (string.IsNullOrEmpty(symbolID)) return;
+
+        // 1) Si hay slots (drag&drop style), rellenar el primer vacío
+        if (symbolSlots != null && symbolSlots.Count > 0)
+        {
+            foreach (var slot in symbolSlots)
+            {
+                if (slot != null && string.IsNullOrEmpty(slot.currentSymbol))
+                {
+                    // poseer sprite desde SymbolManager si existe
+                    var img = slot.iconImage;
+                    var dataSprite = SymbolManager.Instance?.GetSpriteFor(symbolID);
+                    if (img != null && dataSprite != null)
+                    {
+                        img.sprite = dataSprite;
+                        img.enabled = true;
+                    }
+
+                    slot.currentSymbol = symbolID;
+                    return;
+                }
+            }
+        }
+
+        // 2) Fallback: añadir a la secuencia textual
         currentSequence.Add(symbolID);
         UpdateDisplay();
     }
@@ -124,6 +171,15 @@ public class SymbolTerminalController : MonoBehaviour
     {
         currentSequence.Clear();
         UpdateDisplay();
+
+        // limpiar slots también
+        if (symbolSlots != null)
+        {
+            foreach (var s in symbolSlots)
+                s?.ClearSlot();
+        }
+
+        // si tienes symbolButtons en modo legacy, nada que limpiar aquí (botones permanecen)
     }
 
     private void UpdateDisplay()
@@ -132,46 +188,51 @@ public class SymbolTerminalController : MonoBehaviour
             displayText.text = string.Join(",", currentSequence);
     }
 
+    // Ejecuta la secuencia: si hay slots, lee de ellos; si no, lee currentSequence
     public void ExecuteSequence(MonoBehaviour target)
     {
-        if (currentSequence.Count == 0 || target == null)
+        if (target == null)
         {
-            Debug.LogWarning("No hay comando o el objeto controlado es nulo.");
+            Debug.LogWarning("No hay objeto controlado asignado a esta terminal.");
             return;
         }
 
-        string command = string.Join(",", currentSequence).Trim().ToLower();
+        List<string> sequence = new List<string>();
+
+        // Preferir slots si existen (drag&drop mode)
+        if (symbolSlots != null && symbolSlots.Count > 0)
+        {
+            foreach (var slot in symbolSlots)
+            {
+                if (slot != null && !string.IsNullOrEmpty(slot.currentSymbol))
+                    sequence.Add(slot.currentSymbol.ToLower());
+            }
+        }
+        else
+        {
+            sequence.AddRange(currentSequence.ConvertAll(s => s.ToLower()));
+        }
+
+        string command = string.Join(",", sequence);
         Debug.Log($"[Terminal] Ejecutando comando: {command}");
 
-        bool executedSuccessfully = false;
-
-        // Comprueba si el objeto es un ascensor
+        // ejemplo para Elevator (extiende aquí para otros objetos)
         if (target is Elevator elevator)
         {
             if (command == "up")
-            {
                 elevator.MoveUp();
-                executedSuccessfully = true;
-            }
             else if (command == "no,up")
-            {
                 elevator.MoveDown();
-                executedSuccessfully = true;
-            }
             else
-            {
-                Debug.LogWarning($"[Terminal] Comando desconocido: {command}");
-            }
+                Debug.LogWarning($"Comando desconocido: {command}");
         }
 
-        // 🔹 Si la secuencia fue válida → cerrar terminal
-        if (executedSuccessfully)
-        {
-            var terminal = GetComponentInParent<SO_Terminal>();
-            if (terminal != null)
-                terminal.CloseTerminal();
-        }
-
+        // limpiar después de ejecutar
         ClearSequence();
+
+        // cerrar terminal si la terminal lo hace (opcional)
+        var parent = GetComponentInParent<SO_Terminal>();
+        parent?.CloseTerminal();
     }
 }
+
