@@ -563,17 +563,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 905011493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -41.896}
---- !u!114 &39200997 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2694263467280162770, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-  m_PrefabInstance: {fileID: 621379491}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &43623447
 GameObject:
   m_ObjectHideFlags: 0
@@ -5919,14 +5908,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 520902393907295522, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 520902393907295522, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 3407310931451218689, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: linkedTerminal
       value: 
@@ -5935,38 +5916,6 @@ PrefabInstance:
       propertyPath: controlledObject
       value: 
       objectReference: {fileID: 1171628599}
-    - target: {fileID: 3792306370086975346, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: executeButton
-      value: 
-      objectReference: {fileID: 1259863212}
-    - target: {fileID: 3792306370086975346, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: controlledObject
-      value: 
-      objectReference: {fileID: 1171628599}
-    - target: {fileID: 3792306370086975346, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: symbolButtons.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3792306370086975346, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: 'symbolButtons.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1665525495}
-    - target: {fileID: 3792306370086975346, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: 'symbolButtons.Array.data[1]'
-      value: 
-      objectReference: {fileID: 39200997}
-    - target: {fileID: 3792306370086975346, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: 'symbolButtons.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1025190554}
-    - target: {fileID: 3827772473526219440, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873200427886800887, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_Name
-      value: SymbolTerminalController
-      objectReference: {fileID: 0}
     - target: {fileID: 5983583514387470086, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.008230452
@@ -6019,30 +5968,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7266699662805295326, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7695855294526650235, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: terminalCanvas
       value: 
       objectReference: {fileID: 1988399048}
-    - target: {fileID: 7695855294526650235, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: controlledObject
-      value: 
-      objectReference: {fileID: 1171628599}
-    - target: {fileID: 8876181066699753383, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8888027428212617467, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1566210246}
-    - target: {fileID: 8888027428212617467, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9297,17 +9226,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1589555517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1025190554 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3138280516440384111, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-  m_PrefabInstance: {fileID: 621379491}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1032960566
 GameObject:
   m_ObjectHideFlags: 0
@@ -11748,17 +11666,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1259863212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 356090817391066007, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-  m_PrefabInstance: {fileID: 621379491}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1261927751
 GameObject:
   m_ObjectHideFlags: 0
@@ -15153,11 +15060,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542757622}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1566210246 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3827772473526219440, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-  m_PrefabInstance: {fileID: 621379491}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1568395185
 GameObject:
   m_ObjectHideFlags: 0
@@ -16588,17 +16490,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 905011493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1665525495 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4700513599134772974, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
-  m_PrefabInstance: {fileID: 621379491}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1669143523
 GameObject:
   m_ObjectHideFlags: 0
