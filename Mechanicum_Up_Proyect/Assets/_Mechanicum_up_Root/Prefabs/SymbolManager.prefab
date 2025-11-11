@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2979662504435652531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5908642571271063501}
+  - component: {fileID: 2015757582403316116}
+  - component: {fileID: 8113290056139137312}
+  m_Layer: 0
+  m_Name: SymbolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5908642571271063501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979662504435652531}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -31, y: 3, z: 0.0000006556511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2015757582403316116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979662504435652531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf47e72b05d66e4ca28f5b57b0eda64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8113290056139137312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979662504435652531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f2bbeb2cb54a048abd6a6a43fe2c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  symbols:
+  - id: Up
+    lockedSprite: {fileID: 21300000, guid: 92b2ecf8d7d12aa4f92f6c678108cc12, type: 3}
+    unlockedSprite: {fileID: 21300000, guid: 9b480b08e805e6947a4d24f9a37c58a7, type: 3}
+    isUnlocked: 0
+  - id: No
+    lockedSprite: {fileID: 21300000, guid: e08fe736222b7df44a9d71f686113be5, type: 3}
+    unlockedSprite: {fileID: 21300000, guid: 4e3ada624aae68740a63df705123365e, type: 3}
+    isUnlocked: 0
+  - id: Left
+    lockedSprite: {fileID: 21300000, guid: d6d777b09235fbf4bb910e96d274fec6, type: 3}
+    unlockedSprite: {fileID: 21300000, guid: bcb2de3f387cb3e4ebef308968612900, type: 3}
+    isUnlocked: 0
