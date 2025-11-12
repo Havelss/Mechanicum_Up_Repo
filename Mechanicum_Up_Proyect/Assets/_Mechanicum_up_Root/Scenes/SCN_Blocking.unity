@@ -2124,11 +2124,11 @@ Transform:
   m_GameObject: {fileID: 375588790}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071058, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 14.74, y: 24.93, z: 0.64}
+  m_LocalPosition: {x: -44.260002, y: 13.71922, z: 1.9758}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1896430897}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &377595160
 GameObject:
@@ -6192,11 +6192,11 @@ Transform:
   m_GameObject: {fileID: 1407248972}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071058, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 38.38, y: 22, z: -0.16}
+  m_LocalPosition: {x: -20.619999, y: 10.78922, z: 1.1758001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1896430897}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1409241817
 GameObject:
@@ -8730,6 +8730,8 @@ Transform:
   - {fileID: 189963630}
   - {fileID: 793605545}
   - {fileID: 71352832}
+  - {fileID: 375588793}
+  - {fileID: 1407248975}
   m_Father: {fileID: 94601662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1946641057 stripped
@@ -19783,7 +19785,7 @@ GameObject:
   - component: {fileID: 8824569409349630151}
   - component: {fileID: 8824569409349630153}
   - component: {fileID: 8824569409349630152}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: SM_Valvula.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24872,5 +24874,3 @@ SceneRoots:
   - {fileID: 820664939}
   - {fileID: 212154810}
   - {fileID: 94601662}
-  - {fileID: 375588793}
-  - {fileID: 1407248975}
