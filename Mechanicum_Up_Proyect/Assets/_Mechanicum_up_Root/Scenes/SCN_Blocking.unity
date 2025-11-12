@@ -19525,6 +19525,8 @@ GameObject:
   - component: {fileID: 1746764000449304191}
   - component: {fileID: 7690990313647006782}
   - component: {fileID: 8824569409349630151}
+  - component: {fileID: 8824569409349630153}
+  - component: {fileID: 8824569409349630152}
   m_Layer: 7
   m_Name: SM_Valvula.001
   m_TagString: Untagged
@@ -23948,6 +23950,43 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8824569409349630152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751220220347696551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bfebfab724a74429de0f774e1d2a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElevatorCall
+  controlledObject: {fileID: 4180075666251058952}
+  callUp: 0
+  promptMessage: "Usar tuber\xEDa"
+--- !u!64 &8824569409349630153
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751220220347696551}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1128120066583096984, guid: a42eb2d97d8b03e42a32d1012f1fa900, type: 3}
 --- !u!33 &8827195082869500951
 MeshFilter:
   m_ObjectHideFlags: 0

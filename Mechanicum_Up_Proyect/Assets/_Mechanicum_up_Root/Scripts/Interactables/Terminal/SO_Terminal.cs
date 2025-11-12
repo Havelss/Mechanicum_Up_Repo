@@ -36,6 +36,9 @@ public class SO_Terminal : MonoBehaviour
         if (isOpen) return;
         isOpen = true;
 
+        // 🕒 Pausar el tiempo
+        Time.timeScale = 0f;
+
         if (terminalCanvas != null)
             terminalCanvas.SetActive(true);
 
@@ -51,7 +54,7 @@ public class SO_Terminal : MonoBehaviour
             terminalController.ClearSequence();
         }
 
-        // 🧠 Actualizar respawn del jugador si existe un punto válido
+        // Actualizar respawn del jugador si existe un punto válido
         var player = FindFirstObjectByType<PlayerRespawn>();
         if (player != null && respawnPoint != null)
         {
@@ -70,6 +73,9 @@ public class SO_Terminal : MonoBehaviour
         if (!isOpen) return;
         isOpen = false;
 
+        // 🕒 Reanudar el tiempo
+        Time.timeScale = 1f;
+
         if (terminalCanvas != null)
             terminalCanvas.SetActive(false);
 
@@ -77,5 +83,3 @@ public class SO_Terminal : MonoBehaviour
             UIManager.Instance.SetMenuState(false);
     }
 }
-
-
