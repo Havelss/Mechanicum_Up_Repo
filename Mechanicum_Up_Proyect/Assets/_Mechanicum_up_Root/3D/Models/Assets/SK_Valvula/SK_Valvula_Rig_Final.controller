@@ -197,9 +197,6 @@ AnimatorStateMachine:
     m_State: {fileID: -2916424087792851712}
     m_Position: {x: 400, y: 30, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 8313756100966313364}
-    m_Position: {x: 400, y: 220, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -1673336450788149259}
     m_Position: {x: 540, y: 130, z: 0}
   - serializedVersion: 1
@@ -281,29 +278,3 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &8313756100966313364
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Valvula_Idle_360G
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 9042991968585802660, guid: a224b95aabc9a5646a410e153a2e2734, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
