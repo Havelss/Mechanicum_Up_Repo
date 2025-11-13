@@ -4,18 +4,18 @@ using System.Collections;
 public class ValveAnimationController : MonoBehaviour
 {
     [Header("Animator de la válvula")]
-    public Animator valveAnimator; // ← Aquí arrastras el componente Animator del objeto SK_Valvula_Rig_Final
+    public Animator valveAnimator;
 
     [Header("Nombres de animaciones")]
-    public string idleStart = "Valvula_Idle_0G";              // Idle inicial
-    public string rotateRight = "Valvula_Rotacion_Derecha";   // Girar a la derecha
-    public string idleEnd = "Valvula_Idle_360G";              // Idle tras giro completo
-    public string rotateLeft = "Valvula_Rotacion_Izquierda";  // Girar a la izquierda
+    public string idleStart = "Valvula_Idle_0G";
+    public string rotateRight = "Valvula_Rotacion_Derecha";
+    public string idleEnd = "Valvula_Idle_360G";
+    public string rotateLeft = "Valvula_Rotacion_Izquierda";
 
-    /// <summary>
-    /// Ejecuta la animación de rotación según si el ascensor sube o baja.
-    /// </summary>
-    public void PlayValveRotation(bool goingUp)
+    private Coroutine returnCoroutine;
+    private bool lastRotationWasRight = false; // 👉 Controla la dirección anterior
+
+    public void PlayValveRotation()
     {
         if (valveAnimator == null)
         {
@@ -23,23 +23,49 @@ public class ValveAnimationController : MonoBehaviour
             return;
         }
 
-        if (goingUp)
-        {
-            valveAnimator.Play(rotateLeft);
-            StartCoroutine(ReturnToIdle(idleStart, valveAnimator.GetCurrentAnimatorStateInfo(0).length));
+        // Alternar la dirección
+        lastRotationWasRight = !lastRotationWasRight;
 
-            
-        }
-        else
+        string playAnim = lastRotationWasRight ? rotateRight : rotateLeft;
+        string idleToPlay = lastRotationWasRight ? idleEnd : idleStart;
+
+        // Buscar duración del clip
+        float clipLength = GetClipLengthByName(playAnim);
+        if (clipLength <= 0f)
         {
-            valveAnimator.Play(rotateRight);
-            StartCoroutine(ReturnToIdle(idleEnd, valveAnimator.GetCurrentAnimatorStateInfo(0).length));
+            clipLength = 1f;
+            Debug.LogWarning("[ValveAnimationController] No se encontró duración del clip: " + playAnim);
         }
+
+        // Reproducir animación
+        valveAnimator.Play(playAnim, 0, 0);
+
+        // Cancelar coroutine anterior si existía
+        if (returnCoroutine != null)
+            StopCoroutine(returnCoroutine);
+
+        // Esperar hasta que termine para volver al idle
+        returnCoroutine = StartCoroutine(ReturnToIdle(idleToPlay, clipLength + 0.05f));
     }
 
     private IEnumerator ReturnToIdle(string idleAnim, float delay)
     {
         yield return new WaitForSeconds(delay);
         valveAnimator.Play(idleAnim);
+        returnCoroutine = null;
+    }
+
+    private float GetClipLengthByName(string clipName)
+    {
+        if (valveAnimator == null || valveAnimator.runtimeAnimatorController == null)
+            return 0f;
+
+        foreach (var clip in valveAnimator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+                return clip.length / valveAnimator.speed;
+        }
+
+        return 0f;
     }
 }

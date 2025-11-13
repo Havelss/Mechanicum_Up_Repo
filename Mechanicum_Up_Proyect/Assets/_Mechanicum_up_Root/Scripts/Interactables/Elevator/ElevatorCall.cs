@@ -28,7 +28,8 @@ public class ElevatorCall : MonoBehaviour, IInteractable
 
         // 🔹 Activa animación de giro
         if (valveAnim != null)
-            valveAnim.PlayValveRotation(callUp);
+            valveAnim.PlayValveRotation();
+
 
         // 🔹 Mueve el ascensor
         if (callUp)
