@@ -725,7 +725,7 @@ Transform:
   m_GameObject: {fileID: 114125776}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64, y: 3, z: -1}
+  m_LocalPosition: {x: -27.1, y: 5.78, z: 0.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14310,6 +14310,10 @@ PrefabInstance:
       propertyPath: controlledObject
       value: 
       objectReference: {fileID: 1746827879}
+    - target: {fileID: 838451572468085485, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 5.785395e-27
+      objectReference: {fileID: 0}
     - target: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_Name
       value: PF_Valvula
@@ -14317,6 +14321,18 @@ PrefabInstance:
     - target: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313200046455396707, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98021
+      objectReference: {fileID: 0}
+    - target: {fileID: 7785434223771804878, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98021
+      objectReference: {fileID: 0}
+    - target: {fileID: 7785434223771804878, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.000030517573
       objectReference: {fileID: 0}
     - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_LocalPosition.x

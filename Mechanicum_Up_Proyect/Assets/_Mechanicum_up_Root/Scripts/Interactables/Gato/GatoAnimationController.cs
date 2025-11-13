@@ -7,23 +7,18 @@ using UnityEngine;
 public class GatoAnimationController : MonoBehaviour
 {
     [Header("Animator del Gato")]
-    public Animator gatoAnimator; // Aquí arrastras el Animator de PF_Gato_Rig_Final
+    public Animator gatoAnimator; // Arrastra aquí PF_Gato_Rig_Final
 
     [Header("Comandos de la terminal")]
     public string commandUp = "up";       // Comando que hace que suba
     public string commandDown = "no,up";  // Comando que hace que baje
 
     [Header("Nombres de animaciones")]
-    public string upAnimation = "MoveUp";
-    public string downAnimation = "MoveDown";
-    public string idleUpAnimation = "IdleUp";
-    public string idleDownAnimation = "IdleDown";
+    public string upAnimation = "Gato_Subida";
+    public string downAnimation = "Gato_bajada";
+    public string idleUpAnimation = "Gato_idle_arriba";
+    public string idleDownAnimation = "Gato_Idle_Abajo";
 
-    /// <summary>
-    /// Llamar desde SymbolTerminalController.ExecuteSequence
-    /// Ejecuta la animación correspondiente según el comando recibido
-    /// </summary>
-    /// <param name="command">Comando recibido desde la terminal</param>
     public void ExecuteTerminalCommand(string command)
     {
         if (gatoAnimator == null || string.IsNullOrEmpty(command)) return;
@@ -32,13 +27,11 @@ public class GatoAnimationController : MonoBehaviour
 
         if (command == commandUp.ToLower())
         {
-            // Ejecuta animación de subir y vuelve a IdleUp
             gatoAnimator.Play(upAnimation);
             StartCoroutine(ReturnToIdle(idleUpAnimation, gatoAnimator.GetCurrentAnimatorStateInfo(0).length));
         }
         else if (command == commandDown.ToLower())
         {
-            // Ejecuta animación de bajar y vuelve a IdleDown
             gatoAnimator.Play(downAnimation);
             StartCoroutine(ReturnToIdle(idleDownAnimation, gatoAnimator.GetCurrentAnimatorStateInfo(0).length));
         }
@@ -48,9 +41,6 @@ public class GatoAnimationController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Vuelve a la animación Idle después de la duración de la animación actual
-    /// </summary>
     private System.Collections.IEnumerator ReturnToIdle(string idleAnim, float delay)
     {
         yield return new WaitForSeconds(delay);
