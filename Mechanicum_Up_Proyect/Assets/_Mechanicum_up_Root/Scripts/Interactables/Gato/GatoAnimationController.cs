@@ -1,17 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-/// <summary>
-/// Controlador de animaciones específico para el Gato Mecánico.
-/// Funciona con la terminal para ejecutar animaciones según comandos.
-/// </summary>
 public class GatoAnimationController : MonoBehaviour
 {
     [Header("Animator del Gato")]
-    public Animator gatoAnimator; // Arrastra aquí PF_Gato_Rig_Final
+    public Animator gatoAnimator; // Se puede arrastrar, pero tambiÃ©n se autoasigna
 
     [Header("Comandos de la terminal")]
-    public string commandUp = "up";       // Comando que hace que suba
-    public string commandDown = "no,up";  // Comando que hace que baje
+    public string commandUp = "up";
+    public string commandDown = "no,up";
 
     [Header("Nombres de animaciones")]
     public string upAnimation = "Gato_Subida";
@@ -19,17 +15,29 @@ public class GatoAnimationController : MonoBehaviour
     public string idleUpAnimation = "Gato_idle_arriba";
     public string idleDownAnimation = "Gato_Idle_Abajo";
 
+    private void Awake()
+    {
+        // ðŸ”¹ Si no lo arrastras manualmente, busca el Animator en este objeto
+        if (gatoAnimator == null)
+        {
+            gatoAnimator = GetComponent<Animator>();
+            if (gatoAnimator == null)
+                Debug.LogWarning("[GatoAnimationController] No se encontrÃ³ Animator en este objeto.");
+        }
+    }
+
     public void ExecuteTerminalCommand(string command)
     {
-        Debug.Log($"[Gato] Comando recibido: {command}");
-
         if (gatoAnimator == null)
         {
             Debug.LogWarning("[Gato] Animator no asignado!");
             return;
         }
 
+        if (string.IsNullOrEmpty(command)) return;
+
         command = command.Trim().ToLower();
+        Debug.Log($"[Gato] Comando recibido: {command}");
 
         if (command == commandUp.ToLower())
         {
@@ -46,7 +54,6 @@ public class GatoAnimationController : MonoBehaviour
             Debug.LogWarning($"[Gato] Comando desconocido: {command}");
         }
     }
-
 
     private System.Collections.IEnumerator ReturnToIdle(string idleAnim, float delay)
     {

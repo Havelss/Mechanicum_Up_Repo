@@ -2,99 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
-//public class SymbolTerminalController : MonoBehaviour
-//{
-//    [Header("UI")]
-//    public Text displayText;
-//    public Button executeButton;
-//    public Button exitButton;
-//    public List<Button> symbolButtons = new List<Button>();
-
-//    [HideInInspector] public MonoBehaviour ControlledObject;
-
-//    private List<string> currentSequence;
-
-//    private void Awake()
-//    {
-//        currentSequence = new List<string>();
-
-//        if (executeButton != null)
-//            executeButton.onClick.AddListener(() => ExecuteSequence(ControlledObject));
-
-//        if (exitButton != null)
-//            exitButton.onClick.AddListener(() =>
-//            {
-//                var terminal = GetComponentInParent<SO_Terminal>();
-//                if (terminal != null)
-//                    terminal.CloseTerminal();
-//            });
-//    }
-
-//    public void AddSymbol(string symbolID)
-//    {
-//        currentSequence.Add(symbolID);
-//        UpdateDisplay();
-//    }
-
-//    public void ClearSequence()
-//    {
-//        currentSequence.Clear();
-//        UpdateDisplay();
-//    }
-
-//    private void UpdateDisplay()
-//    {
-//        if (displayText != null)
-//            displayText.text = string.Join(",", currentSequence);
-//    }
-
-//    public void ExecuteSequence(MonoBehaviour target)
-//    {
-//        if (currentSequence.Count == 0 || target == null)
-//        {
-//            Debug.LogWarning("No hay comando o el objeto controlado es nulo.");
-//            return;
-//        }
-
-//        string command = string.Join(",", currentSequence).Trim().ToLower();
-//        Debug.Log($"[Terminal] Ejecutando comando: {command}");
-
-//        bool executedSuccessfully = false;
-
-//        // Comprueba si el objeto es un ascensor
-//        if (target is Elevator elevator)
-//        {
-//            if (command == "up")
-//            {
-//                elevator.MoveUp();
-//                executedSuccessfully = true;
-//            }
-//            else if (command == "no,up")
-//            {
-//                elevator.MoveDown();
-//                executedSuccessfully = true;
-//            }
-//            else
-//            {
-//                Debug.LogWarning($"[Terminal] Comando desconocido: {command}");
-//            }
-//        }
-
-//        // 🔹 Si la secuencia fue válida → cerrar terminal
-//        if (executedSuccessfully)
-//        {
-//            var terminal = GetComponentInParent<SO_Terminal>();
-//            if (terminal != null)
-//                terminal.CloseTerminal();
-//        }
-
-//        ClearSequence();
-//    }
-//}
-
-
-
 public class SymbolTerminalController : MonoBehaviour
 {
     [Header("UI")]
@@ -199,7 +106,6 @@ public class SymbolTerminalController : MonoBehaviour
 
         List<string> sequence = new List<string>();
 
-        // Preferir slots si existen (drag&drop mode)
         if (symbolSlots != null && symbolSlots.Count > 0)
         {
             foreach (var slot in symbolSlots)
@@ -216,8 +122,13 @@ public class SymbolTerminalController : MonoBehaviour
         string command = string.Join(",", sequence);
         Debug.Log($"[Terminal] Ejecutando comando: {command}");
 
-        // ejemplo para Elevator (extiende aquí para otros objetos)
-        if (target is Elevator elevator)
+       
+        if (target is GatoAnimationController gato) // 🔹 Caso del gato mecánico
+        {
+            gato.ExecuteTerminalCommand(command);
+        }
+        // (Puedes mantener el caso del ascensor u otros objetos debajo)
+        else if (target is Elevator elevator)
         {
             if (command == "up")
                 elevator.MoveUp();
@@ -227,12 +138,10 @@ public class SymbolTerminalController : MonoBehaviour
                 Debug.LogWarning($"Comando desconocido: {command}");
         }
 
-        // limpiar después de ejecutar
         ClearSequence();
-
-        // cerrar terminal si la terminal lo hace (opcional)
         var parent = GetComponentInParent<SO_Terminal>();
         parent?.CloseTerminal();
     }
+
 }
 
