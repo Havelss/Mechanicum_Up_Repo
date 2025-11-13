@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 838451572468085485}
   - component: {fileID: 8774183659483481960}
   - component: {fileID: 7244497147039108387}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,8 @@ GameObject:
   - component: {fileID: 5880140509537243039}
   - component: {fileID: 1436258266045624242}
   - component: {fileID: 151593075921059275}
-  m_Layer: 0
+  - component: {fileID: 2733099339069159270}
+  m_Layer: 6
   m_Name: PF_Valvula
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +119,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4066, y: 1.4066, z: 1.4066}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3313200046455396707}
@@ -193,7 +194,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -1681817485025661590, guid: 172dfc79729b28342bdedcdbc47d8fc1, type: 3}
 --- !u!114 &151593075921059275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,10 +207,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bfebfab724a74429de0f774e1d2a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElevatorCall
-  controlledObject: {fileID: 0}
-  callUp: 1
-  promptMessage: "Usar v\xE1lvula"
-  valveAnim: {fileID: 0}
+  controlledElevator: {fileID: 0}
+  callUp: 0
+  promptMessage: "Usar tuber\xEDa"
+  valveAnim: {fileID: 2733099339069159270}
+--- !u!114 &2733099339069159270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142190656106726981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddba689c944127845b624dd4ff4ce174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ValveAnimationController
+  valveAnimator: {fileID: 1882516168816477938}
+  idleStart: Valvula_Idle_0G
+  rotateRight: Valvula_Rotacion_Derecha
+  idleEnd: Valvula_Idle_360G
+  rotateLeft: Valvula_Rotacion_Izquierda
 --- !u!1 &4065536522320663435
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3313200046455396707}
   - component: {fileID: 1882516168816477938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_Valvula_Rig_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +260,7 @@ Transform:
   m_Children:
   - {fileID: 7785434223771804878}
   m_Father: {fileID: 8143293675563142187}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98021, y: 0, z: 0}
 --- !u!95 &1882516168816477938
 Animator:
   serializedVersion: 7
@@ -274,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7785434223771804878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,4 +314,4 @@ Transform:
   m_Children:
   - {fileID: 838451572468085485}
   m_Father: {fileID: 3313200046455396707}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98021, y: -179.99998, z: 0}

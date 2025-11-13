@@ -25,13 +25,15 @@ public class ValveAnimationController : MonoBehaviour
 
         if (goingUp)
         {
-            valveAnimator.Play(rotateRight);
-            StartCoroutine(ReturnToIdle(idleEnd, valveAnimator.GetCurrentAnimatorStateInfo(0).length));
+            valveAnimator.Play(rotateLeft);
+            StartCoroutine(ReturnToIdle(idleStart, valveAnimator.GetCurrentAnimatorStateInfo(0).length));
+
+            
         }
         else
         {
-            valveAnimator.Play(rotateLeft);
-            StartCoroutine(ReturnToIdle(idleStart, valveAnimator.GetCurrentAnimatorStateInfo(0).length));
+            valveAnimator.Play(rotateRight);
+            StartCoroutine(ReturnToIdle(idleEnd, valveAnimator.GetCurrentAnimatorStateInfo(0).length));
         }
     }
 

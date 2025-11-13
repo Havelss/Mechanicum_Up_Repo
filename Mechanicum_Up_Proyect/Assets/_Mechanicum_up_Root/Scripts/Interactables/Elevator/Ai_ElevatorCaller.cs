@@ -1,45 +1,56 @@
 using UnityEngine;
+using System.Collections;
 
 public class Ai_ElevatorCaller : MonoBehaviour
 {
     [Header("Referencia a la llamada del ascensor")]
-    [SerializeField] private ElevatorCall elevatorCall; // Arrastra aquí el GameObject que tiene ElevatorCall
+    [SerializeField] private ElevatorCall elevatorCall; // GameObject con ElevatorCall
 
-    [Header("Opciones de llamada automática")]
-    [SerializeField] private bool callUp = true; // true = subir, false = bajar
-    [SerializeField] private bool callOnStart = false; // Llamar automáticamente al inicio
+    [Header("Opciones de llamada")]
+    [SerializeField] private bool callUp = true;         // true = subir, false = bajar
+    [SerializeField] private float callDelay = 1f;       // Tiempo entre llamadas
+    [SerializeField] private float detectionRange = 3f;  // Distancia para “detectar al jugador”
+    [SerializeField] private Transform playerTransform;  // Transform del jugador
+
+    private bool isCalling = true;
 
     private void Start()
-    {
-        if (callOnStart)
-            CallElevator();
-    }
-
-    /// <summary>
-    /// Ejecuta la llamada al ascensor usando el ElevatorCall asignado
-    /// </summary>
-    public void CallElevator()
     {
         if (elevatorCall == null)
         {
             Debug.LogWarning("[Ai_ElevatorCaller] No hay ElevatorCall asignado.");
+            enabled = false;
             return;
         }
 
-        // Configura la dirección de la llamada
-        elevatorCall.callUp = callUp;
+        if (playerTransform == null)
+        {
+            Debug.LogWarning("[Ai_ElevatorCaller] No hay jugador asignado para la detección.");
+            enabled = false;
+            return;
+        }
 
-        // Llama a la función de interacción directamente
-        elevatorCall.Interact(null); // Si no hay interactor, puedes pasar null
+        StartCoroutine(CallLoop());
     }
 
-    /// <summary>
-    /// Si quieres, puedes llamar desde otro script o trigger
-    /// </summary>
-    public void CallElevator(bool directionUp)
+    private IEnumerator CallLoop()
     {
-        if (elevatorCall == null) return;
-        elevatorCall.callUp = directionUp;
-        elevatorCall.Interact(null);
+        while (isCalling)
+        {
+            // Llama al ascensor
+            elevatorCall.callUp = callUp;
+            elevatorCall.Interact(null);
+
+            // Espera el tiempo configurado
+            yield return new WaitForSeconds(callDelay);
+
+            // Comprueba si el jugador está dentro del rango
+            float distance = Vector3.Distance(playerTransform.position, transform.position);
+            if (distance <= detectionRange)
+            {
+                isCalling = false;
+                Destroy(gameObject); // Se elimina el objeto que hace la llamada
+            }
+        }
     }
 }
