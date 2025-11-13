@@ -7755,6 +7755,7 @@ Transform:
   - {fileID: 1746827880}
   - {fileID: 4180075666251058951}
   - {fileID: 4070593691758460537}
+  - {fileID: 1236547885078572177}
   - {fileID: 8569666548131992520}
   - {fileID: 1571023406}
   - {fileID: 1592711188}
@@ -9817,7 +9818,7 @@ PrefabInstance:
     - target: {fileID: 3407310931451218689, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: controlledObject
       value: 
-      objectReference: {fileID: 8569666548131992524}
+      objectReference: {fileID: 1236547885078572178}
     - target: {fileID: 5983583514387470086, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.116247
@@ -13912,7 +13913,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1496377377}
     m_Modifications:
     - target: {fileID: 6733429532930576813, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_Name
@@ -13920,31 +13921,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.424877
+      value: -9.4272995
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.8696103
+      value: -4.977259
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.11853361
+      value: 0.11853361
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13961,8 +13962,45 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6733429532930576813, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236547885078572178}
   m_SourcePrefab: {fileID: 100100000, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
+--- !u!1 &1236547885078572176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6733429532930576813, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
+  m_PrefabInstance: {fileID: 1236547885078572175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1236547885078572177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9209456881590481247, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
+  m_PrefabInstance: {fileID: 1236547885078572175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1236547885078572178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236547885078572176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd9d7ad837584246b884f49978e475a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GatoAnimationController
+  gatoAnimator: {fileID: 1236547885078572179}
+  commandUp: up
+  commandDown: no,up
+  upAnimation: Gato_Subida
+  downAnimation: Gato_bajada
+  idleUpAnimation: Gato_idle_arriba
+  idleDownAnimation: Gato_Idle_Abajo
+--- !u!95 &1236547885078572179 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5927640214870242840, guid: 8ef2c70b382b03847ad8c3dae7920f26, type: 3}
+  m_PrefabInstance: {fileID: 1236547885078572175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1258733864882897473
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26426,4 +26464,3 @@ SceneRoots:
   - {fileID: 586046474}
   - {fileID: 74478940}
   - {fileID: 355918737}
-  - {fileID: 1236547885078572175}
