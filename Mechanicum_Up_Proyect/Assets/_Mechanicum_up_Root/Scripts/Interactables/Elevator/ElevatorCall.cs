@@ -3,63 +3,50 @@
 public class ElevatorCall : MonoBehaviour, IInteractable
 {
     [Header("Configuración de la llamada")]
-    [SerializeField] private MonoBehaviour controlledObject; // El ascensor controlado
-    [SerializeField] public bool callUp = true;              // true = subir, false = bajar
+    [SerializeField] private Elevator controlledElevator;
+    [SerializeField] public bool callUp = true;
     [SerializeField] private string promptMessage = "Usar válvula";
 
     [Header("Animación")]
-    [SerializeField] private AnimationController valveAnim;  // Controlador de animación de la válvula
+    [SerializeField] private ValveAnimationController valveAnim;
 
     private bool isTurning = false;
 
-    //private void Start()
-    //{
-    //    valveAnim.GetComponentInChildren<Animator>();
-    //}
     public string InteractionPrompt => promptMessage;
 
     public void Interact(Interactor interactor)
     {
-        if (!(controlledObject is Elevator elevator))
+        if (controlledElevator == null)
         {
             Debug.LogWarning($"{name} no tiene asignado un Elevator válido.");
             return;
         }
 
-        // Evita activar si ya está en uso o el ascensor se está moviendo
-        if (isTurning || elevator.IsMoving()) return;
+        if (isTurning || controlledElevator.IsMoving()) return;
 
         isTurning = true;
 
-        // Reproduce animación de la válvula mientras el ascensor se mueve
+        // 🔹 Activa animación de giro
         if (valveAnim != null)
-            valveAnim.PlayAnimation("ValveTurn", "Idle");
+            valveAnim.PlayValveRotation(callUp);
 
-        // Llama al ascensor
+        // 🔹 Mueve el ascensor
         if (callUp)
-            elevator.MoveUp();
+            controlledElevator.MoveUp();
         else
-            elevator.MoveDown();
+            controlledElevator.MoveDown();
 
-        // Corrutina para esperar a que el ascensor termine
-        StartCoroutine(WaitForElevatorToStop(elevator));
+        // 🔹 Espera a que termine
+        StartCoroutine(WaitForElevatorToStop(controlledElevator));
     }
 
     private System.Collections.IEnumerator WaitForElevatorToStop(Elevator elevator)
     {
-        // Espera mientras el ascensor se mueve
         while (elevator.IsMoving())
             yield return null;
 
-        // Cambia a Idle cuando termina
-        if (valveAnim != null)
-            valveAnim.PlayAnimation("Idle");
+        
 
         isTurning = false;
-    }
-
-    public MonoBehaviour GetControlledObject()
-    {
-        return controlledObject;
     }
 }

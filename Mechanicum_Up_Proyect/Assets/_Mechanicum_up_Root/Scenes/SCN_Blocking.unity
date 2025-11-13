@@ -768,13 +768,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff4faaff1ea4584a8aff9209b52f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCall: {fileID: 7313004028212793633}
-  callInterval: 10
-  detectionRange: 25
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  destroyOnSeen: 1
+  elevatorCall: {fileID: 7313004028212793633}
+  callUp: 1
+  callOnStart: 1
 --- !u!65 &124332111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1783,6 +1779,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283608551}
   m_CullTransparentMesh: 1
+--- !u!1 &308840271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+  m_PrefabInstance: {fileID: 1388537369626421826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &320432393 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1111543973344460390, guid: de4148d5480c4044c8c613fadeb02035, type: 3}
@@ -4212,7 +4213,6 @@ Transform:
   - {fileID: 1722571297311631323}
   - {fileID: 6999056514503340514}
   - {fileID: 1833397690}
-  - {fileID: 1746764000449304191}
   - {fileID: 1208953225768709449}
   m_Father: {fileID: 1496377377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10307,6 +10307,11 @@ Transform:
   - {fileID: 2000405290}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!95 &1816950039 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1882516168816477938, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+  m_PrefabInstance: {fileID: 1388537369626421826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1826506323
 GameObject:
   m_ObjectHideFlags: 0
@@ -10448,6 +10453,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
   m_PrefabInstance: {fileID: 1388537369626421826}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1833397694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308840271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddba689c944127845b624dd4ff4ce174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ValveAnimationController
+  valveAnimator: {fileID: 1816950039}
+  idleStart: Valvula_Idle_0G
+  rotateRight: Valvula_Rotacion_Derecha
+  idleEnd: Valvula_Idle_360G
+  rotateLeft: Valvula_Rotacion_Izquierda
 --- !u!1 &1873738968
 GameObject:
   m_ObjectHideFlags: 0
@@ -14347,12 +14369,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 151593075921059275, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: valveAnim
+      value: 
+      objectReference: {fileID: 1833397694}
+    - target: {fileID: 151593075921059275, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: promptMessage
+      value: "Usar tuber\xEDa"
+      objectReference: {fileID: 0}
+    - target: {fileID: 151593075921059275, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: controlledObject
       value: 
       objectReference: {fileID: 1746827879}
+    - target: {fileID: 151593075921059275, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: controlledElevator
+      value: 
+      objectReference: {fileID: 1746827879}
+    - target: {fileID: 528784131698950645, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 838451572468085485, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 5.785395e-27
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436258266045624242, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -1681817485025661590, guid: 172dfc79729b28342bdedcdbc47d8fc1, type: 3}
+    - target: {fileID: 1436258266045624242, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_Name
@@ -14366,6 +14412,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -89.98021
       objectReference: {fileID: 0}
+    - target: {fileID: 4065536522320663435, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303683743539109351, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7785434223771804878, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -89.98021
@@ -14373,6 +14427,18 @@ PrefabInstance:
     - target: {fileID: 7785434223771804878, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -0.000030517573
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4066
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4066
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4066
       objectReference: {fileID: 0}
     - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14417,7 +14483,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1833397694}
   m_SourcePrefab: {fileID: 100100000, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
 --- !u!1001 &1402803711015963434
 PrefabInstance:
@@ -15127,21 +15196,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3499280799454340886}
   m_Mesh: {fileID: 3372121482441909288, guid: 27ef3e4dd13f8254bb0bb986ab05f75c, type: 3}
---- !u!4 &1746764000449304191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751220220347696551}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 6.4194775, y: -3.9301958, z: -1.3898644}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 668320400}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1758117721258392344
 Transform:
   m_ObjectHideFlags: 0
@@ -19194,7 +19248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bfebfab724a74429de0f774e1d2a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElevatorCall
-  controlledObject: {fileID: 4070593691758460539}
+  controlledElevator: {fileID: 4070593691758460539}
   callUp: 0
   promptMessage: "Usar tuber\xEDa"
   valveAnim: {fileID: 0}
@@ -20761,7 +20815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bfebfab724a74429de0f774e1d2a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElevatorCall
-  controlledObject: {fileID: 1324799143}
+  controlledElevator: {fileID: 1324799143}
   callUp: 0
   promptMessage: "Usar tuber\xEDa"
   valveAnim: {fileID: 0}
@@ -20784,7 +20838,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6703010854458018189, guid: 27ef3e4dd13f8254bb0bb986ab05f75c, type: 3}
 --- !u!4 &5325679574067592507 stripped
@@ -21496,26 +21550,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 687411444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5751220220347696551
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1746764000449304191}
-  - component: {fileID: 7690990313647006782}
-  - component: {fileID: 8824569409349630151}
-  - component: {fileID: 8824569409349630153}
-  - component: {fileID: 8824569409349630152}
-  m_Layer: 6
-  m_Name: SM_Valvula.001
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &5772092674110872765
 Transform:
   m_ObjectHideFlags: 0
@@ -24163,14 +24197,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &7690990313647006782
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751220220347696551}
-  m_Mesh: {fileID: -1128120066583096984, guid: a42eb2d97d8b03e42a32d1012f1fa900, type: 3}
 --- !u!4 &7699445163186014620
 Transform:
   m_ObjectHideFlags: 0
@@ -25799,92 +25825,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5711682646963156462, guid: ffbc834efc338034cb72abd63e9083c5, type: 3}
   m_PrefabInstance: {fileID: 3171419881100698382}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &8824569409349630151
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751220220347696551}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 7a4b78125ff5c654abac477bfe12a87a, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8824569409349630152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751220220347696551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24bfebfab724a74429de0f774e1d2a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ElevatorCall
-  controlledObject: {fileID: 1746827879}
-  callUp: 0
-  promptMessage: "Usar tuber\xEDa"
-  valveAnim: {fileID: 0}
---- !u!64 &8824569409349630153
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751220220347696551}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1128120066583096984, guid: a42eb2d97d8b03e42a32d1012f1fa900, type: 3}
 --- !u!33 &8827195082869500951
 MeshFilter:
   m_ObjectHideFlags: 0
