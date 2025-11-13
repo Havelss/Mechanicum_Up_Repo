@@ -2,91 +2,139 @@
 
 public class Elevator : MonoBehaviour
 {
-    [Header("Configuración del ascensor")]
+    [Header("Puntos de movimiento")]
     [SerializeField] private Transform upperPoint;
     [SerializeField] private Transform lowerPoint;
+
+    [Header("Ajustes del ascensor")]
     [SerializeField] private float speed = 2f;
-    [SerializeField] private AnimationController elevatorAnim; // Controlador de animación del ascensor
+
+    [Header("Animator de las puertas")]
+    [SerializeField] private Animator doorAnimator;  // Un solo animator para las dos puertas
+
+    [Header("Detección del jugador")]
+    [SerializeField] private float playerDetectDistance = 3f;
+    [SerializeField] private Transform player;
+
+    // Nombres de animaciones
+    private const string IDLE_OPEN = "Ascensor_Idle_Abierto";
+    private const string IDLE_CLOSED = "Ascensor_Idle_Cerrado";
+    private const string CLOSE = "Ascensor_Cerrar";
+
+    private const string MOVE_UP = "Ascensor_Subir";
+    private const string MOVE_DOWN = "Ascensor_Bajar";
 
     private bool movingUp = false;
     private bool movingDown = false;
+    private bool playerNearby = false;
+
+    private void Start()
+    {
+        PlayIdleClosed();
+    }
 
     private void Update()
     {
+        DetectPlayer();
+
         if (movingUp)
+            MoveTowards(upperPoint, MOVE_UP);
+
+        if (movingDown)
+            MoveTowards(lowerPoint, MOVE_DOWN);
+    }
+
+    // ------------------------------------------
+    // DETECCIÓN DE JUGADOR
+    // ------------------------------------------
+    private void DetectPlayer()
+    {
+        if (player == null || IsMoving()) return;
+
+        float dist = Vector3.Distance(transform.position, player.position);
+
+        if (dist <= playerDetectDistance)
         {
-            MoveTowards(upperPoint, "MoveUp");
+            if (!playerNearby)
+            {
+                playerNearby = true;
+                PlayIdleOpen();
+            }
         }
-        else if (movingDown)
+        else
         {
-            MoveTowards(lowerPoint, "MoveDown");
+            if (playerNearby)
+            {
+                playerNearby = false;
+                PlayIdleClosed();
+            }
         }
     }
 
-    private void MoveTowards(Transform target, string animName)
+    // ------------------------------------------
+    // MOVIMIENTO DEL ASCENSOR
+    // ------------------------------------------
+    private void MoveTowards(Transform target, string moveAnim)
     {
-        if (target == null)
-        {
-            Debug.LogWarning("No se ha asignado un punto de destino al ascensor.");
-            return;
-        }
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            target.position,
+            speed * Time.deltaTime
+        );
 
-        // Reproduce animación mientras se mueve, vuelve a Idle al detenerse
-        if (elevatorAnim != null)
-            elevatorAnim.PlayAnimation(animName, "Idle");
+        // Puertas cerradas + animación de movimiento
+        PlayDoors(moveAnim);
 
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
-        // Si llega al destino, detén el movimiento
         if (Vector3.Distance(transform.position, target.position) < 0.05f)
         {
             movingUp = false;
             movingDown = false;
-            if (elevatorAnim != null)
-                elevatorAnim.PlayAnimation("Idle"); // Asegura Idle
-            Debug.Log($"Ascensor detenido en {target.name}");
+
+            if (playerNearby)
+                PlayIdleOpen();
+            else
+                PlayIdleClosed();
+
+            Debug.Log("Ascensor detenido.");
         }
     }
 
     public void MoveUp()
     {
-        if (upperPoint == null)
-        {
-            Debug.LogWarning("El ascensor no tiene asignado un punto superior.");
-            return;
-        }
+        if (upperPoint == null) return;
 
         movingDown = false;
         movingUp = true;
-        Debug.Log("Ascensor subiendo...");
+
+        PlayClosing();
     }
 
     public void MoveDown()
     {
-        if (lowerPoint == null)
-        {
-            Debug.LogWarning("El ascensor no tiene asignado un punto inferior.");
-            return;
-        }
+        if (lowerPoint == null) return;
 
         movingUp = false;
         movingDown = true;
-        Debug.Log("Ascensor bajando...");
-    }
 
-    public void StopElevator()
-    {
-        movingUp = false;
-        movingDown = false;
-
-        if (elevatorAnim != null)
-            elevatorAnim.PlayAnimation("Idle");
-
-        Debug.Log("Ascensor detenido manualmente.");
+        PlayClosing();
     }
 
     public bool IsMoving()
     {
         return movingUp || movingDown;
     }
+
+    // ------------------------------------------
+    // ANIMACIONES
+    // ------------------------------------------
+    private void Play(string anim)
+    {
+        if (doorAnimator != null)
+            doorAnimator.Play(anim);
+    }
+
+    private void PlayIdleOpen() => Play(IDLE_OPEN);
+    private void PlayIdleClosed() => Play(IDLE_CLOSED);
+    private void PlayClosing() => Play(CLOSE);
+    private void PlayDoors(string anim) => Play(anim);
 }
