@@ -1811,7 +1811,7 @@ Transform:
   m_GameObject: {fileID: 331494353}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.52, y: -7.47, z: 0}
+  m_LocalPosition: {x: 17.52, y: -6.38, z: -0.41}
   m_LocalScale: {x: 1.4582, y: 0.36927, z: 0.61188996}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2858,7 +2858,7 @@ Transform:
   m_GameObject: {fileID: 482790610}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.52, y: 0.1499995, z: 0}
+  m_LocalPosition: {x: 17.52, y: 0.1499995, z: -0.41}
   m_LocalScale: {x: 1.4582, y: 0.36927, z: 0.61188996}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4202,6 +4202,7 @@ Transform:
   m_Children:
   - {fileID: 1722571297311631323}
   - {fileID: 6999056514503340514}
+  - {fileID: 1833397690}
   - {fileID: 1746764000449304191}
   - {fileID: 1208953225768709449}
   m_Father: {fileID: 1496377377}
@@ -4742,7 +4743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &820664935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6839,6 +6840,7 @@ MonoBehaviour:
   upperPoint: {fileID: 482790611}
   lowerPoint: {fileID: 331494354}
   speed: 2
+  elevatorAnim: {fileID: 0}
 --- !u!65 &1324799144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9563,6 +9565,7 @@ MonoBehaviour:
   upperPoint: {fileID: 564823019}
   lowerPoint: {fileID: 1801782294}
   speed: 2
+  elevatorAnim: {fileID: 0}
 --- !u!4 &1746827880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7962a4686bf5159429400aa433e296ee, type: 3}
@@ -10409,6 +10412,11 @@ Transform:
   - {fileID: 4716054216024222987}
   m_Father: {fileID: 543450652652331953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1833397690 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+  m_PrefabInstance: {fileID: 1388537369626421826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1873738968
 GameObject:
   m_ObjectHideFlags: 0
@@ -14248,6 +14256,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1658915723}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1388537369626421826
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 668320400}
+    m_Modifications:
+    - target: {fileID: 151593075921059275, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: callUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 151593075921059275, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: controlledObject
+      value: 
+      objectReference: {fileID: 1746827879}
+    - target: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_Name
+      value: PF_Valvula
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.4575777
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.8768697
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.339
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
 --- !u!1001 &1402803711015963434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18629,6 +18706,7 @@ MonoBehaviour:
   upperPoint: {fileID: 1487133534}
   lowerPoint: {fileID: 519870095}
   speed: 2
+  elevatorAnim: {fileID: 0}
 --- !u!1 &4073653216290204189
 GameObject:
   m_ObjectHideFlags: 0
@@ -19025,6 +19103,7 @@ MonoBehaviour:
   controlledObject: {fileID: 4070593691758460539}
   callUp: 0
   promptMessage: "Usar tuber\xEDa"
+  valveAnim: {fileID: 0}
 --- !u!4 &4180075666251058951
 Transform:
   m_ObjectHideFlags: 0
@@ -19055,6 +19134,7 @@ MonoBehaviour:
   upperPoint: {fileID: 564823019}
   lowerPoint: {fileID: 1801782294}
   speed: 2
+  elevatorAnim: {fileID: 0}
 --- !u!65 &4180075666251058953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20590,6 +20670,7 @@ MonoBehaviour:
   controlledObject: {fileID: 1324799143}
   callUp: 0
   promptMessage: "Usar tuber\xEDa"
+  valveAnim: {fileID: 0}
 --- !u!64 &5289520918944872611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -25357,6 +25438,7 @@ MonoBehaviour:
   upperPoint: {fileID: 1571023406}
   lowerPoint: {fileID: 1592711188}
   speed: 2
+  elevatorAnim: {fileID: 0}
 --- !u!33 &8683496408347805358
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -25686,6 +25768,7 @@ MonoBehaviour:
   controlledObject: {fileID: 1746827879}
   callUp: 0
   promptMessage: "Usar tuber\xEDa"
+  valveAnim: {fileID: 0}
 --- !u!64 &8824569409349630153
 MeshCollider:
   m_ObjectHideFlags: 0

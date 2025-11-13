@@ -1,11 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-    [Header("Configuraci�n del ascensor")]
-    [SerializeField] private Transform upperPoint;     // Punto superior
-    [SerializeField] private Transform lowerPoint;     // Punto inferior
-    [SerializeField] private float speed = 2f;         // Velocidad de movimiento
+    [Header("Configuración del ascensor")]
+    [SerializeField] private Transform upperPoint;
+    [SerializeField] private Transform lowerPoint;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private AnimationController elevatorAnim; // Controlador de animación del ascensor
 
     private bool movingUp = false;
     private bool movingDown = false;
@@ -14,15 +15,15 @@ public class Elevator : MonoBehaviour
     {
         if (movingUp)
         {
-            MoveTowards(upperPoint);
+            MoveTowards(upperPoint, "MoveUp");
         }
         else if (movingDown)
         {
-            MoveTowards(lowerPoint);
+            MoveTowards(lowerPoint, "MoveDown");
         }
     }
 
-    private void MoveTowards(Transform target)
+    private void MoveTowards(Transform target, string animName)
     {
         if (target == null)
         {
@@ -30,13 +31,19 @@ public class Elevator : MonoBehaviour
             return;
         }
 
+        // Reproduce animación mientras se mueve, vuelve a Idle al detenerse
+        if (elevatorAnim != null)
+            elevatorAnim.PlayAnimation(animName, "Idle");
+
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-        // Si llega al punto destino, detenemos el movimiento
+        // Si llega al destino, detén el movimiento
         if (Vector3.Distance(transform.position, target.position) < 0.05f)
         {
             movingUp = false;
             movingDown = false;
+            if (elevatorAnim != null)
+                elevatorAnim.PlayAnimation("Idle"); // Asegura Idle
             Debug.Log($"Ascensor detenido en {target.name}");
         }
     }
@@ -67,12 +74,19 @@ public class Elevator : MonoBehaviour
         Debug.Log("Ascensor bajando...");
     }
 
-    // Puedes llamar a este m�todo desde el terminal global
     public void StopElevator()
     {
         movingUp = false;
         movingDown = false;
+
+        if (elevatorAnim != null)
+            elevatorAnim.PlayAnimation("Idle");
+
         Debug.Log("Ascensor detenido manualmente.");
     }
-}
 
+    public bool IsMoving()
+    {
+        return movingUp || movingDown;
+    }
+}
