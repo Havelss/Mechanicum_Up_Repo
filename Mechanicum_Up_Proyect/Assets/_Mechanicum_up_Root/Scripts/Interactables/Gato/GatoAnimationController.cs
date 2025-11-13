@@ -21,7 +21,13 @@ public class GatoAnimationController : MonoBehaviour
 
     public void ExecuteTerminalCommand(string command)
     {
-        if (gatoAnimator == null || string.IsNullOrEmpty(command)) return;
+        Debug.Log($"[Gato] Comando recibido: {command}");
+
+        if (gatoAnimator == null)
+        {
+            Debug.LogWarning("[Gato] Animator no asignado!");
+            return;
+        }
 
         command = command.Trim().ToLower();
 
@@ -37,9 +43,10 @@ public class GatoAnimationController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"[GatoAnimationController] Comando desconocido: {command}");
+            Debug.LogWarning($"[Gato] Comando desconocido: {command}");
         }
     }
+
 
     private System.Collections.IEnumerator ReturnToIdle(string idleAnim, float delay)
     {
