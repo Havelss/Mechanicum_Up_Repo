@@ -3,7 +3,12 @@ guid: 0a9a661da196b804c87d45c823b93b22
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Gato Hidr\xE1ulico"
+    second: {fileID: 2100000, guid: 48466d7e30f96e247b2da883dee2c918, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

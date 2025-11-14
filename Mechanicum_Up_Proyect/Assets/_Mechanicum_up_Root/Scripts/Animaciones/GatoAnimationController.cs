@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class GatoAnimationController : MonoBehaviour
 {
     [Header("Animator del Gato")]
-    public Animator gatoAnimator; // Se puede arrastrar, pero también se autoasigna
+    public Animator gatoAnimator;
 
     [Header("Comandos de la terminal")]
     public string commandUp = "up";
@@ -15,9 +16,10 @@ public class GatoAnimationController : MonoBehaviour
     public string idleUpAnimation = "Gato_idle_arriba";
     public string idleDownAnimation = "Gato_Idle_Abajo";
 
+    private Coroutine currentRoutine;
+
     private void Awake()
     {
-        // 🔹 Si no lo arrastras manualmente, busca el Animator en este objeto
         if (gatoAnimator == null)
         {
             gatoAnimator = GetComponent<Animator>();
@@ -28,12 +30,7 @@ public class GatoAnimationController : MonoBehaviour
 
     public void ExecuteTerminalCommand(string command)
     {
-        if (gatoAnimator == null)
-        {
-            Debug.LogWarning("[Gato] Animator no asignado!");
-            return;
-        }
-
+        if (gatoAnimator == null) return;
         if (string.IsNullOrEmpty(command)) return;
 
         command = command.Trim().ToLower();
@@ -41,13 +38,11 @@ public class GatoAnimationController : MonoBehaviour
 
         if (command == commandUp.ToLower())
         {
-            gatoAnimator.Play(upAnimation);
-            StartCoroutine(ReturnToIdle(idleUpAnimation, gatoAnimator.GetCurrentAnimatorStateInfo(0).length));
+            PlayWithReturn(upAnimation, idleUpAnimation);
         }
         else if (command == commandDown.ToLower())
         {
-            gatoAnimator.Play(downAnimation);
-            StartCoroutine(ReturnToIdle(idleDownAnimation, gatoAnimator.GetCurrentAnimatorStateInfo(0).length));
+            PlayWithReturn(downAnimation, idleDownAnimation);
         }
         else
         {
@@ -55,7 +50,32 @@ public class GatoAnimationController : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator ReturnToIdle(string idleAnim, float delay)
+    private void PlayWithReturn(string anim, string idle)
+    {
+        // Cancelar una animación anterior que aún no ha terminado
+        if (currentRoutine != null)
+            StopCoroutine(currentRoutine);
+
+        gatoAnimator.Play(anim);
+
+        float clipLength = GetClipLength(anim);
+
+        currentRoutine = StartCoroutine(ReturnToIdle(idle, clipLength));
+    }
+
+    private float GetClipLength(string clipName)
+    {
+        foreach (var clip in gatoAnimator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+                return clip.length;
+        }
+
+        Debug.LogWarning($"[Gato] No se encontró el clip {clipName}");
+        return 0.1f;
+    }
+
+    private IEnumerator ReturnToIdle(string idleAnim, float delay)
     {
         yield return new WaitForSeconds(delay);
         gatoAnimator.Play(idleAnim);
