@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
 
+    [Header("Audio de pasos")]
+    [SerializeField] AudioSource footstepSource;
+    [SerializeField] AudioClip footstepClip;
+
     Rigidbody playerRB;
     Vector2 moveInput;
     bool isGrounded;
@@ -34,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckIfGrounded();
         UpdateAnimator();
+        HandleFootsteps(); // NUEVO: control de audio por Speed
     }
 
     private void FixedUpdate()
@@ -72,7 +77,6 @@ public class PlayerController : MonoBehaviour
         wasGrounded = isGrounded;
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Detectar aterrizaje
         if (!wasGrounded && isGrounded)
         {
             isJumping = false;
@@ -100,6 +104,32 @@ public class PlayerController : MonoBehaviour
         float moveMagnitude = moveInput.magnitude;
         playerAnimator.SetFloat("Speed", moveMagnitude);
         playerAnimator.SetBool("IsGrounded", isGrounded);
+    }
+
+    // ------------------------------------------
+    // AUDIO DE PASOS SEGÚN SPEED
+    // ------------------------------------------
+    private void HandleFootsteps()
+    {
+        if (playerAnimator == null || footstepSource == null || footstepClip == null)
+            return;
+
+        float speedValue = playerAnimator.GetFloat("Speed");
+
+        if (speedValue > 0.1f && isGrounded)
+        {
+            if (!footstepSource.isPlaying)
+            {
+                footstepSource.clip = footstepClip;
+                footstepSource.loop = true;
+                footstepSource.Play();
+            }
+        }
+        else
+        {
+            if (footstepSource.isPlaying)
+                footstepSource.Stop();
+        }
     }
 
     private void OnDrawGizmosSelected()
