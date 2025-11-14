@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Elevator : MonoBehaviour
 {
@@ -10,13 +11,16 @@ public class Elevator : MonoBehaviour
     [SerializeField] private float speed = 2f;
 
     [Header("Animator de las puertas")]
-    [SerializeField] private Animator doorAnimator;  // Un solo animator para las dos puertas
+    [SerializeField] private Animator doorAnimator;
 
     [Header("Detección del jugador")]
     [SerializeField] private float playerDetectDistance = 3f;
     [SerializeField] private Transform player;
 
-    // Nombres de animaciones
+    [Header("Audio del Ascensor")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip ascensorClip;
+
     private const string IDLE_OPEN = "Ascensor_Idle_Abierto";
     private const string IDLE_CLOSED = "Ascensor_Idle_Cerrado";
     private const string CLOSE = "Ascensor_Cerrar";
@@ -31,6 +35,13 @@ public class Elevator : MonoBehaviour
     private void Start()
     {
         PlayIdleClosed();
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+                Debug.LogWarning("[Elevator] No se encontró AudioSource.");
+        }
     }
 
     private void Update()
@@ -42,6 +53,8 @@ public class Elevator : MonoBehaviour
 
         if (movingDown)
             MoveTowards(lowerPoint, MOVE_DOWN);
+
+        CheckElevatorSound();
     }
 
     // ------------------------------------------
@@ -72,7 +85,38 @@ public class Elevator : MonoBehaviour
     }
 
     // ------------------------------------------
-    // MOVIMIENTO DEL ASCENSOR
+    // CONTROL DE SONIDO
+    // ------------------------------------------
+    private void CheckElevatorSound()
+    {
+        if (doorAnimator == null || audioSource == null) return;
+
+        AnimatorStateInfo state = doorAnimator.GetCurrentAnimatorStateInfo(0);
+
+        bool isMovingAnim =
+            state.IsName(MOVE_UP) ||
+            state.IsName(MOVE_DOWN);
+
+        // Si está en animación de subir/bajar → sonido ON
+        if (isMovingAnim)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = ascensorClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            // Cambia a otra animación → cortar sonido
+            if (audioSource.isPlaying)
+                audioSource.Stop();
+        }
+    }
+
+    // ------------------------------------------
+    // MOVIMIENTO
     // ------------------------------------------
     private void MoveTowards(Transform target, string moveAnim)
     {
@@ -82,7 +126,6 @@ public class Elevator : MonoBehaviour
             speed * Time.deltaTime
         );
 
-        // Puertas cerradas + animación de movimiento
         PlayDoors(moveAnim);
 
         if (Vector3.Distance(transform.position, target.position) < 0.05f)

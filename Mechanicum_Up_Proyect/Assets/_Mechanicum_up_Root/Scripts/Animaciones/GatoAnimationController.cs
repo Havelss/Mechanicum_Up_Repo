@@ -6,6 +6,10 @@ public class GatoAnimationController : MonoBehaviour
     [Header("Animator del Gato")]
     public Animator gatoAnimator;
 
+    [Header("Audio del Gato")]
+    public AudioSource audioSource;
+    public AudioClip gatoClip;
+
     [Header("Comandos de la terminal")]
     public string commandUp = "up";
     public string commandDown = "no,up";
@@ -25,6 +29,47 @@ public class GatoAnimationController : MonoBehaviour
             gatoAnimator = GetComponent<Animator>();
             if (gatoAnimator == null)
                 Debug.LogWarning("[GatoAnimationController] No se encontró Animator en este objeto.");
+        }
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+                Debug.LogWarning("[GatoAnimationController] No se encontró AudioSource en este objeto.");
+        }
+    }
+
+    private void Update()
+    {
+        ControlSoundByAnimation();
+    }
+
+    private void ControlSoundByAnimation()
+    {
+        if (gatoAnimator == null || audioSource == null || gatoClip == null)
+            return;
+
+        AnimatorStateInfo state = gatoAnimator.GetCurrentAnimatorStateInfo(0);
+
+        bool isMoving =
+            state.IsName(upAnimation) ||
+            state.IsName(downAnimation);
+
+        if (isMoving)
+        {
+            // Si está en animación de subida o bajada → asegurar sonido activo
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = gatoClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            // Si cambia a cualquier otra animación → cortar sonido
+            if (audioSource.isPlaying)
+                audioSource.Stop();
         }
     }
 
@@ -52,7 +97,6 @@ public class GatoAnimationController : MonoBehaviour
 
     private void PlayWithReturn(string anim, string idle)
     {
-        // Cancelar una animación anterior que aún no ha terminado
         if (currentRoutine != null)
             StopCoroutine(currentRoutine);
 
