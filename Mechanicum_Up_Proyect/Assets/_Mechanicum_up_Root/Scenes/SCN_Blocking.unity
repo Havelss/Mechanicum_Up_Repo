@@ -4820,8 +4820,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0997539, y: 2.4003992, z: 3.994989}
-  m_Center: {x: -21.820795, y: -0.5711901, z: 6.7777824}
+  m_Size: {x: 3.5982966, y: 2.4003992, z: 3.994988}
+  m_Center: {x: -22.070148, y: -0.5711901, z: 6.7777996}
 --- !u!1 &371040942
 GameObject:
   m_ObjectHideFlags: 0
@@ -11412,13 +11412,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929908277}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -38.24, y: 4.31, z: 0.8657999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.078317456, y: 0.0089722825, z: -0.00070487603, w: 0.99688786}
+  m_LocalPosition: {x: -38.238827, y: 1.8047667, z: -12.695437}
+  m_LocalScale: {x: 4.1444, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1896430897}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!114 &929908279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11457,9 +11457,9 @@ Light:
   m_GameObject: {fileID: 929908277}
   m_Enabled: 1
   serializedVersion: 11
-  m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.8
+  m_Type: 1
+  m_Color: {r: 0.7736294, g: 0.8962264, b: 0.8808642, a: 1}
+  m_Intensity: 231.6
   m_Range: 12.1
   m_SpotAngle: 46.67329
   m_InnerSpotAngle: 21.80208
@@ -11498,7 +11498,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 3.62, y: 2.57}
   m_BounceIntensity: 1
@@ -18217,7 +18217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: rotSpeed
-      value: 7
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: jumpForce
@@ -19366,8 +19366,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02924047, y: 0.01908725, z: 0.008049762}
-  m_Center: {x: -0.0011365331, y: -0.031201262, z: 0.030433077}
+  m_Size: {x: 0.032256152, y: 0.019087251, z: 0.008049762}
+  m_Center: {x: 0.0003713107, y: -0.031201262, z: 0.030433077}
 --- !u!1001 &1732560172
 PrefabInstance:
   m_ObjectHideFlags: 0

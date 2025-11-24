@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movimiento")]
     [SerializeField] float speed = 10f;
-    [SerializeField] float rotSpeed = 15f;
+    //[SerializeField] float rotSpeed = 15f;
 
     [Header("Salto")]
     [SerializeField] float jumpForce = 8f;
@@ -71,15 +71,30 @@ public class PlayerController : MonoBehaviour
         playerRB.linearVelocity = new Vector3(moveDirection.x * speed, playerRB.linearVelocity.y, moveDirection.z * speed);
     }
 
+    //void HandleRotation()
+    //{
+    //    if (moveInput == Vector2.zero) return;
+
+    //    Vector3 moveDirection = new Vector3(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
+    //    if (moveDirection == Vector3.zero) return;
+
+    //    Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+    //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotSpeed * Time.fixedDeltaTime);
+    //}
+
     void HandleRotation()
     {
         if (moveInput == Vector2.zero) return;
 
+        // Calcular la dirección del movimiento
         Vector3 moveDirection = new Vector3(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
         if (moveDirection == Vector3.zero) return;
 
+        // Calcular la rotación objetivo
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotSpeed * Time.fixedDeltaTime);
+
+        // Asignar la rotación directamente para que sea instantánea
+        transform.rotation = targetRotation;
     }
 
     void CheckIfGrounded()
