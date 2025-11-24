@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     bool wasGrounded;
     bool isJumping;
+    bool isTouchingWall; // Nuevo: Para detectar si está tocando una pared
 
     private void Awake()
     {
@@ -38,13 +39,21 @@ public class PlayerController : MonoBehaviour
     {
         CheckIfGrounded();
         UpdateAnimator();
-        HandleFootsteps(); // NUEVO: control de audio por Speed
+        HandleFootsteps();
     }
 
     private void FixedUpdate()
     {
-        HandleMovement();
-        HandleRotation();
+        if (!isTouchingWall || isGrounded) // Solo mover si no está tocando una pared o está en el suelo
+        {
+            HandleMovement();
+            HandleRotation();
+        }
+        else
+        {
+            // Si está tocando una pared en el aire, detener el movimiento horizontal
+            playerRB.linearVelocity = new Vector3(0, playerRB.linearVelocity.y, 0);
+        }
     }
 
     void HandleMovement()
@@ -58,6 +67,7 @@ public class PlayerController : MonoBehaviour
         cameraRight.Normalize();
 
         Vector3 moveDirection = (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
+
         playerRB.linearVelocity = new Vector3(moveDirection.x * speed, playerRB.linearVelocity.y, moveDirection.z * speed);
     }
 
@@ -97,6 +107,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        // Detectar si el jugador está tocando una pared
+        if (!isGrounded && collision.gameObject.CompareTag("Wall"))
+        {
+            isTouchingWall = true;
+
+            // Detener el movimiento horizontal
+            playerRB.linearVelocity = new Vector3(0, playerRB.linearVelocity.y, 0);
+        }
+        else
+        {
+            isTouchingWall = false;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Detectar cuando el jugador deja de tocar una pared
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            isTouchingWall = false;
+        }
+    }
+
     void UpdateAnimator()
     {
         if (playerAnimator == null) return;
@@ -106,9 +141,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("IsGrounded", isGrounded);
     }
 
-    // ------------------------------------------
-    // AUDIO DE PASOS SEGÚN SPEED
-    // ------------------------------------------
     private void HandleFootsteps()
     {
         if (playerAnimator == null || footstepSource == null || footstepClip == null)
