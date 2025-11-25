@@ -27,7 +27,7 @@ public class ElevatorCrushDetector : MonoBehaviour
         // ¿Está el jugador atrapado entre el ascensor y otro collider?
         if (IsPlayerCrushed(other.transform))
         {
-            TryKillPlayer(other.gameObject);
+            KillPlayer(other.gameObject);
         }
     }
 
@@ -41,24 +41,24 @@ public class ElevatorCrushDetector : MonoBehaviour
         return hitUp && hitDown;
     }
 
-    private void TryKillPlayer(GameObject player)
+    private void KillPlayer(GameObject player)
     {
-        // Sistema de muerte personalizado
-        var health = player.GetComponent<PlayerHealth>();
-        if (health != null)
-        {
-            health.DieByCrush();
-            return;
-        }
-
-        // Fallback a respawn
-        var respawn = player.GetComponent<PlayerRespawn>();
+        // Intentamos usar PlayerRespawn para que siga el flujo de respawn
+        PlayerRespawn respawn = player.GetComponent<PlayerRespawn>();
         if (respawn != null)
         {
-            respawn.Respawn();
+            // Llamamos a Die() del PlayerController directamente para no usar vida
+            var playerController = player.GetComponent<PlayerController>();
+            if (playerController != null && !playerController.IsDead())
+            {
+                playerController.Die("crush");
+            }
             return;
         }
 
-        Debug.LogWarning("El jugador fue aplastado, pero no tiene sistema de muerte asignado.");
+        // Si no tiene PlayerRespawn, destruimos como fallback
+        Destroy(player);
+
+        Debug.Log("[ElevatorCrushDetector] Jugador aplastado y eliminado (sin respawn).");
     }
 }
