@@ -29,9 +29,7 @@ public class SymbolTerminalController : MonoBehaviour
         if (exitButton != null)
             exitButton.onClick.AddListener(() =>
             {
-                var terminal = GetComponentInParent<SO_Terminal>();
-                if (terminal != null)
-                    terminal.CloseTerminal();
+                CloseTerminal();
             });
     }
 
@@ -40,21 +38,46 @@ public class SymbolTerminalController : MonoBehaviour
         UpdateDisplay();
     }
 
-    // Método público que SymbolManager usa al asignar listeners.
-    // Añade el símbolo: si hay un slot vacío lo pone allí (drag&drop compat),
-    // si no hay slots o están todos ocupados lo añade a currentSequence (texto).
+    private void Update()
+    {
+        // Detectar si se presiona la tecla E
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            CloseTerminal();
+        }
+    }
+
+    private void CloseTerminal()
+    {
+        var terminal = GetComponentInParent<SO_Terminal>();
+        if (terminal != null)
+        {
+            terminal.CloseTerminal();
+        }
+    }
+
     public void AddSymbol(string symbolID)
     {
         if (string.IsNullOrEmpty(symbolID)) return;
 
-        // 1) Si hay slots (drag&drop style), rellenar el primer vacío
+        // Verificar si el símbolo ya está en uso en algún slot
         if (symbolSlots != null && symbolSlots.Count > 0)
         {
             foreach (var slot in symbolSlots)
             {
+                if (slot != null && slot.currentSymbol == symbolID)
+                {
+                    Debug.LogWarning($"El símbolo '{symbolID}' ya está asignado a un slot.");
+                    return; // No permitir duplicados
+                }
+            }
+
+            // Rellenar el primer slot vacío
+            foreach (var slot in symbolSlots)
+            {
                 if (slot != null && string.IsNullOrEmpty(slot.currentSymbol))
                 {
-                    // poseer sprite desde SymbolManager si existe
+                    // Asignar el sprite desde SymbolManager si existe
                     var img = slot.iconImage;
                     var dataSprite = SymbolManager.Instance?.GetSpriteFor(symbolID);
                     if (img != null && dataSprite != null)
@@ -69,7 +92,7 @@ public class SymbolTerminalController : MonoBehaviour
             }
         }
 
-        // 2) Fallback: añadir a la secuencia textual
+        // Fallback: añadir a la secuencia textual si no hay slots disponibles
         currentSequence.Add(symbolID);
         UpdateDisplay();
     }
@@ -95,7 +118,6 @@ public class SymbolTerminalController : MonoBehaviour
             displayText.text = string.Join(",", currentSequence);
     }
 
-    // Ejecuta la secuencia: si hay slots, lee de ellos; si no, lee currentSequence
     public void ExecuteSequence(MonoBehaviour target)
     {
         if (target == null)
@@ -114,20 +136,18 @@ public class SymbolTerminalController : MonoBehaviour
                     sequence.Add(slot.currentSymbol.ToLower());
             }
         }
-        //else
-        //{
-        //    sequence.AddRange(currentSequence.ConvertAll(s => s.ToLower()));
-        //}
+        else
+        {
+            sequence.AddRange(currentSequence.ConvertAll(s => s.ToLower()));
+        }
 
         string command = string.Join(",", sequence);
         Debug.Log($"[Terminal] Ejecutando comando: {command}");
 
-       
         if (target is GatoAnimationController gato) // 🔹 Caso del gato mecánico
         {
             gato.ExecuteTerminalCommand(command);
         }
-        // (Puedes mantener el caso del ascensor u otros objetos debajo)
         else if (target is Elevator elevator)
         {
             if (command == "up")
@@ -139,9 +159,6 @@ public class SymbolTerminalController : MonoBehaviour
         }
 
         ClearSequence();
-        var parent = GetComponentInParent<SO_Terminal>();
-        parent?.CloseTerminal();
+        CloseTerminal();
     }
-
 }
-
