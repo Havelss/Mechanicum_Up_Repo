@@ -114,10 +114,10 @@ public class SymbolTerminalController : MonoBehaviour
                     sequence.Add(slot.currentSymbol.ToLower());
             }
         }
-        else
-        {
-            sequence.AddRange(currentSequence.ConvertAll(s => s.ToLower()));
-        }
+        //else
+        //{
+        //    sequence.AddRange(currentSequence.ConvertAll(s => s.ToLower()));
+        //}
 
         string command = string.Join(",", sequence);
         Debug.Log($"[Terminal] Ejecutando comando: {command}");
