@@ -9883,6 +9883,7 @@ GameObject:
   - component: {fileID: 778072924}
   - component: {fileID: 778072926}
   - component: {fileID: 778072927}
+  - component: {fileID: 778072928}
   m_Layer: 0
   m_Name: muerte
   m_TagString: Untagged
@@ -9899,7 +9900,7 @@ Transform:
   m_GameObject: {fileID: 778072923}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0.000000010536713, z: 0.000000010536711, w: 0.7071067}
-  m_LocalPosition: {x: 0.081106186, y: 0.22, z: -0.00022461265}
+  m_LocalPosition: {x: 0.03, y: 0.22, z: -0.00022461265}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9933,14 +9934,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778072923}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74744453ea98eb64ebb2ca003789abea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GatoCrushDetector
   playerTag: Player
   movingParent: {fileID: 1236547885078572177}
-  boxSize: {x: 1.82, y: 0.11, z: 1.26}
+  boxSize: {x: 2.04, y: 0.11, z: 1.26}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &778072928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778072923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9056dce5446387f4db715b9bb983dc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  boxSize: {x: -0.02, y: -0.02, z: 0.003}
   crushLayers:
     serializedVersion: 2
     m_Bits: 8
