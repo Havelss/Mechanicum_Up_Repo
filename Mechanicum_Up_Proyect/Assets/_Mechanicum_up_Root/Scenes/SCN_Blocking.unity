@@ -4775,7 +4775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0c2fcd6e9902834489bcf823c07a035f, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2104993402387549794, guid: 0c2fcd6e9902834489bcf823c07a035f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -21093,56 +21093,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c8ee89c9b12b314d9b8d8460a9431b1, type: 3}
---- !u!1 &1811375467
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1811375469}
-  - component: {fileID: 1811375468}
-  m_Layer: 0
-  m_Name: CameraHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1811375468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811375467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d21dc919a8a694fb746bc7fa6bf7ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1399192248}
-  offset: {x: 75.8, y: 8.47, z: 12.5}
-  smoothSpeed: 1
-  xLimits: {x: 10, y: 298.7}
-  yLimits: {x: 10, y: 17.5}
---- !u!4 &1811375469
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811375467}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 66.3, y: 17.1, z: -32.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2000405290}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &1826506323
 GameObject:
   m_ObjectHideFlags: 0
@@ -23262,9 +23212,10 @@ GameObject:
   - component: {fileID: 2000405290}
   - component: {fileID: 2000405293}
   - component: {fileID: 2000405292}
+  - component: {fileID: 2000405294}
   - component: {fileID: 2000405291}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: cam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23278,12 +23229,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000405289}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000028591603, y: -0.99520105, z: 0.097852215, w: 0.0000029057264}
-  m_LocalPosition: {x: 76.741844, y: -1.9887371, z: 26.7}
+  m_LocalRotation: {x: -0.097852215, y: -0.0000029057264, z: 0.00000028591603, w: -0.99520105}
+  m_LocalPosition: {x: -10.441841, y: 15.111263, z: -59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1811375469}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 11.231, y: -180, z: 0}
 --- !u!114 &2000405291
 MonoBehaviour:
@@ -23388,6 +23339,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &2000405294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000405289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d21dc919a8a694fb746bc7fa6bf7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  target: {fileID: 1399192248}
+  offset: {x: 0, y: 2.43, z: -11.11}
+  smoothSpeed: 1
+  xLimits: {x: 10, y: 298.7}
+  yLimits: {x: 10, y: 17.5}
 --- !u!1001 &2032406750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26130,7 +26098,7 @@ GameObject:
   - component: {fileID: 543450651870632316}
   - component: {fileID: 919132147661685703}
   - component: {fileID: 919132147661685704}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: blocking sala 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26149,12 +26117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88a154a6ab4e0f4da2e5fabaa56ecbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRoom
-  xLimits: {x: 0, y: 0}
-  yLimits: {x: 0, y: 0}
-  customOffset: {x: 0, y: 0, z: 0}
+  xLimits: {x: 30.497578, y: 59.497578}
+  yLimits: {x: 24.399998, y: 39.4}
   useCustomOffset: 0
-  customSmoothSpeed: 0.1
+  customOffset: {x: 0, y: 0, z: 0}
   useCustomSmooth: 0
+  customSmoothSpeed: 0.1
 --- !u!65 &919132147661685704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26187,7 +26155,7 @@ GameObject:
   - component: {fileID: 543450651872239282}
   - component: {fileID: 919132147669582857}
   - component: {fileID: 919132147669582858}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: blocking sala 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26206,12 +26174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88a154a6ab4e0f4da2e5fabaa56ecbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRoom
-  xLimits: {x: 0, y: 0}
-  yLimits: {x: 0, y: 0}
-  customOffset: {x: 0, y: 0, z: 0}
+  xLimits: {x: 58.10853, y: 103.49758}
+  yLimits: {x: 2.5999985, y: 38.6}
   useCustomOffset: 0
-  customSmoothSpeed: 0.1
+  customOffset: {x: 0, y: 0, z: 0}
   useCustomSmooth: 0
+  customSmoothSpeed: 0.1
 --- !u!65 &919132147669582858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26263,12 +26231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88a154a6ab4e0f4da2e5fabaa56ecbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRoom
-  xLimits: {x: 0, y: 0}
-  yLimits: {x: 0, y: 0}
-  customOffset: {x: 0, y: 0, z: 0}
+  xLimits: {x: -35.502422, y: 7.4975777}
+  yLimits: {x: -0.6499996, y: 17.35}
   useCustomOffset: 0
-  customSmoothSpeed: 0.1
+  customOffset: {x: 0, y: 0, z: 0}
   useCustomSmooth: 0
+  customSmoothSpeed: 0.1
 --- !u!65 &919132148344135921
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26317,7 +26285,7 @@ GameObject:
   - component: {fileID: 543450652652331953}
   - component: {fileID: 919132149003303180}
   - component: {fileID: 919132149003303181}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: blocking sala 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26336,12 +26304,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88a154a6ab4e0f4da2e5fabaa56ecbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRoom
-  xLimits: {x: 0, y: 0}
-  yLimits: {x: 0, y: 0}
-  customOffset: {x: 0, y: 0, z: 0}
+  xLimits: {x: 8.121037, y: 50.497578}
+  yLimits: {x: 2.3468704, y: 17.34687}
   useCustomOffset: 0
-  customSmoothSpeed: 0.1
+  customOffset: {x: 0, y: 0, z: 0}
   useCustomSmooth: 0
+  customSmoothSpeed: 0.1
 --- !u!65 &919132149003303181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26361,8 +26329,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 43, y: 15.000001, z: 20}
-  m_Center: {x: -11, y: -0.9999995, z: -4.5}
+  m_Size: {x: 42.37654, y: 15.000001, z: 20}
+  m_Center: {x: -11.3117285, y: -0.9999995, z: -4.5}
 --- !u!1 &969531648439695318
 GameObject:
   m_ObjectHideFlags: 0
@@ -38499,7 +38467,7 @@ SceneRoots:
   - {fileID: 31417620}
   - {fileID: 1765493260}
   - {fileID: 1302266020}
-  - {fileID: 1811375469}
+  - {fileID: 2000405290}
   - {fileID: 543450651872239282}
   - {fileID: 543450651870632316}
   - {fileID: 543450652652331953}
