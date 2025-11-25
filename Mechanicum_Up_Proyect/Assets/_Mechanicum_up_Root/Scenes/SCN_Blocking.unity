@@ -23215,7 +23215,7 @@ GameObject:
   - component: {fileID: 2000405294}
   - component: {fileID: 2000405291}
   m_Layer: 0
-  m_Name: cam
+  m_Name: camara
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26305,7 +26305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRoom
   xLimits: {x: 8.121037, y: 50.497578}
-  yLimits: {x: 2.3468704, y: 17.34687}
+  yLimits: {x: 2.3468704, y: 16.071869}
   useCustomOffset: 0
   customOffset: {x: 0, y: 0, z: 0}
   useCustomSmooth: 0
@@ -26329,8 +26329,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 42.37654, y: 15.000001, z: 20}
-  m_Center: {x: -11.3117285, y: -0.9999995, z: -4.5}
+  m_Size: {x: 42.37654, y: 13.724999, z: 20}
+  m_Center: {x: -11.311729, y: -1.6375003, z: -4.5}
 --- !u!1 &969531648439695318
 GameObject:
   m_ObjectHideFlags: 0
