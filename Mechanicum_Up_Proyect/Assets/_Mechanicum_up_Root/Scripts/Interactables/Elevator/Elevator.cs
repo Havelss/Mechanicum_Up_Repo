@@ -84,6 +84,8 @@ public class Elevator : MonoBehaviour
         }
     }
 
+
+
     // ------------------------------------------
     // CONTROL DE SONIDO
     // ------------------------------------------
@@ -165,6 +167,8 @@ public class Elevator : MonoBehaviour
     public bool IsMoving()
     {
         return movingUp || movingDown;
+
+
     }
 
     // ------------------------------------------

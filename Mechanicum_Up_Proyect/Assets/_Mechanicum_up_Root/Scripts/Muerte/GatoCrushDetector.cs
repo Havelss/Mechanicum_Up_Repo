@@ -1,14 +1,14 @@
-Ôªøusing UnityEngine;
+using UnityEngine;
 
-public class ElevatorCrushDetector : MonoBehaviour
+public class GatoCrushDetector : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Elevator elevator;   // referencia a tu script Elevator
+    [SerializeField] private GatoAnimationController gatoController; // referencia al gato
     [SerializeField] private string playerTag = "Player";
 
     [Header("Crush Settings")]
-    [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 1f, 0.5f); // tama√±o del box para detectar al jugador
-    [SerializeField] private LayerMask crushLayers; // suelo, techo, elevador, etc.
+    [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 1f, 0.5f);
+    [SerializeField] private LayerMask crushLayers;
 
     private void Reset()
     {
@@ -17,10 +17,9 @@ public class ElevatorCrushDetector : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!elevator.IsMoving())
-            return;
+        if (gatoController == null) return;
 
-        // Detectamos todo lo que est√© dentro del box (jugador)
+        // Detectamos jugadores dentro del volumen de aplastamiento
         Collider[] hits = Physics.OverlapBox(transform.position, boxSize * 0.5f, Quaternion.identity, crushLayers);
 
         foreach (var hit in hits)
@@ -29,6 +28,7 @@ public class ElevatorCrushDetector : MonoBehaviour
                 continue;
 
             KillPlayer(hit.gameObject);
+            PlayGatoAnimation();
         }
     }
 
@@ -37,18 +37,22 @@ public class ElevatorCrushDetector : MonoBehaviour
         var playerController = player.GetComponent<PlayerController>();
         if (playerController != null && !playerController.IsDead())
         {
-            playerController.DieInstant("crush");
-            return;
+            playerController.DieInstant("crush"); // muerte instant·nea
         }
     }
 
+    private void PlayGatoAnimation()
+    {
+        if (gatoController != null)
+        {
+            // Por ejemplo, hacer que el gato baje instant·neamente
+            gatoController.PlayInstant(gatoController.downAnimation);
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
-        // Visualizar el box en la escena
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(transform.position, boxSize);
     }
-
-
 }

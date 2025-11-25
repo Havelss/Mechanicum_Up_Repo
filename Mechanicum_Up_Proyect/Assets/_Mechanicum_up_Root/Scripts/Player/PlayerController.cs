@@ -222,4 +222,20 @@ public class PlayerController : MonoBehaviour
         return isDead;
     }
 
+    public void DieInstant(string cause)
+{
+    if (isDead) return;
+    isDead = true;
+
+    // Saltarse animaciones y efectos, ir directo a respawn
+    RespawnAtCheckpoint();
+}
+    private void RespawnAtCheckpoint()
+    {
+        if (currentCheckpoint != null)
+            transform.position = currentCheckpoint.position;
+        isDead = false;
+        playerAnimator.Play("Idle");
+    }
+
 }
