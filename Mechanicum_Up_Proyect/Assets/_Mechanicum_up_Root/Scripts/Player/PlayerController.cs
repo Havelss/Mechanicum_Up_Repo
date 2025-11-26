@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     public Transform currentCheckpoint;
     public float respawnDelay = 1.5f;
 
+    [Header("Caída pesada")]
+    public float normalMass = 1f;
+    public float fallingMass = 4f; // ← masa al caer
+
     Rigidbody playerRB;
     Vector2 moveInput;
     bool isGrounded;
@@ -32,13 +36,17 @@ public class PlayerController : MonoBehaviour
     bool isJumping;
     bool isTouchingWall;
 
-    bool isDead = false; // NUEVO
+    bool isDead = false;
 
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody>();
-        if (camTransform == null) camTransform = Camera.main.transform;
+
+        if (camTransform == null)
+            camTransform = Camera.main.transform;
+
         playerRB.freezeRotation = true;
+        playerRB.mass = normalMass;
     }
 
     void Update()
@@ -46,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
 
         CheckIfGrounded();
+        HandleFallingMass();
         UpdateAnimator();
         HandleFootsteps();
     }
@@ -72,12 +81,18 @@ public class PlayerController : MonoBehaviour
 
         cameraForward.y = 0;
         cameraRight.y = 0;
+
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        Vector3 moveDirection = (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
+        Vector3 moveDirection =
+            (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
 
-        playerRB.linearVelocity = new Vector3(moveDirection.x * speed, playerRB.linearVelocity.y, moveDirection.z * speed);
+        playerRB.linearVelocity = new Vector3(
+            moveDirection.x * speed,
+            playerRB.linearVelocity.y,
+            moveDirection.z * speed
+        );
     }
 
     void HandleRotation()
@@ -103,11 +118,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ------------------ CAÍDA PESADA ------------------
+
+    void HandleFallingMass()
+    {
+        if (!isGrounded)
+        {
+            // En el aire = masa pesada
+            playerRB.mass = fallingMass;
+        }
+        else
+        {
+            // En el suelo = masa normal
+            playerRB.mass = normalMass;
+        }
+    }
+
+    // ------------------ SALTO ------------------
+
     void Jump()
     {
         if (isGrounded && !isDead)
         {
-            playerRB.linearVelocity = new Vector3(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
+            playerRB.linearVelocity = new Vector3(
+                playerRB.linearVelocity.x,
+                0,
+                playerRB.linearVelocity.z
+            );
+
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true;
 
@@ -116,26 +154,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (!isGrounded && collision.gameObject.CompareTag("Wall"))
-        {
-            isTouchingWall = true;
-            playerRB.linearVelocity = new Vector3(0, playerRB.linearVelocity.y, 0);
-        }
-        else
-        {
-            isTouchingWall = false;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            isTouchingWall = false;
-        }
-    }
+    // ------------------ ANIMACIONES ------------------
 
     void UpdateAnimator()
     {
@@ -169,7 +188,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // --------------- SISTEMA DE MUERTE GENERAL -----------------
+    // ------------------ MUERTE ------------------
 
     public void Die(string cause = "")
     {
@@ -177,11 +196,9 @@ public class PlayerController : MonoBehaviour
 
         isDead = true;
 
-        // Detener movimiento e input
         moveInput = Vector2.zero;
         playerRB.linearVelocity = Vector3.zero;
 
-        // Elegir animación según la causa
         if (cause == "crush")
             playerAnimator.Play("DeathCrushed");
         else
@@ -194,16 +211,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
 
-        // Respawn al checkpoint
         if (currentCheckpoint != null)
             transform.position = currentCheckpoint.position;
 
-        // Resetear estados
         isDead = false;
         playerAnimator.Play("Idle");
     }
-
-    // ---------------- INPUT METHODS -----------------
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -223,19 +236,18 @@ public class PlayerController : MonoBehaviour
     }
 
     public void DieInstant(string cause)
-{
-    if (isDead) return;
-    isDead = true;
+    {
+        if (isDead) return;
+        isDead = true;
+        RespawnAtCheckpoint();
+    }
 
-    // Saltarse animaciones y efectos, ir directo a respawn
-    RespawnAtCheckpoint();
-}
     private void RespawnAtCheckpoint()
     {
         if (currentCheckpoint != null)
             transform.position = currentCheckpoint.position;
+
         isDead = false;
         playerAnimator.Play("Idle");
     }
-
 }
