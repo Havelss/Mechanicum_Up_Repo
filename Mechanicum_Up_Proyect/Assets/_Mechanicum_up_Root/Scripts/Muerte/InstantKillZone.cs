@@ -2,41 +2,70 @@ using UnityEngine;
 
 public class InstantKillZone : MonoBehaviour
 {
-    [Header("Opciones de movimiento")]
-    [Tooltip("Si se quiere que el jugador siga el objeto en movimiento (tipo elevador)")]
+    [Header("Opciones de movimiento (opcional)")]
+    [Tooltip("Si quieres que esta zona se mueva junto a otro objeto, por ejemplo un elevador o gato.")]
     public Transform movingParent;
 
-    [Header("Configuración")]
+    [Header("Configuración básica")]
     public string playerTag = "Player";
 
-    [Header("Zona de Aplastamiento")]
-    [Tooltip("Tamaño del área de detección (ancho, alto, profundidad)")]
+    [Header("Zona de Detección")]
+    [Tooltip("Tamaño del Box donde el jugador muere instantáneamente")]
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
-    public LayerMask crushLayers = ~0; // Todos los layers por defecto
+
+    [Tooltip("Capas que se detectarán dentro del box")]
+    public LayerMask crushLayers = ~0; // Detecta todo por defecto
+
+    [Header("Animación al Activarse (opcional)")]
+    public Animator optionalAnimator;
+    public string triggerAnimationName;
+
+    [Header("Sonido al Activarse (opcional)")]
+    public AudioSource optionalAudioSource;
+    public AudioClip activationSFX;
+
+    private bool effectTriggered = false;
 
     private void Start()
     {
-        // Si quieres que el jugador se mueva con este objeto
+        // Si quieres que la zona siga un objeto en movimiento (ej. elevador)
         if (movingParent != null)
-        {
             transform.SetParent(movingParent);
-        }
     }
 
     private void FixedUpdate()
     {
-        // Detecta jugadores dentro del box
+        // Detecta dentro del Box
         Collider[] hits = Physics.OverlapBox(transform.position, boxSize * 0.5f, Quaternion.identity, crushLayers);
 
         foreach (var hit in hits)
         {
-            if (!hit.CompareTag(playerTag)) continue;
+            if (!hit.CompareTag(playerTag))
+                continue;
 
-            PlayerController playerController = hit.GetComponent<PlayerController>();
-            if (playerController != null && !playerController.IsDead())
+            PlayerController pc = hit.GetComponent<PlayerController>();
+
+            if (pc != null && !pc.IsDead())
             {
-                playerController.DieInstant("crush");
+                TriggerEffects();   // animación + sonido (sin retrasar la muerte)
+                pc.DieInstant("crush");
             }
+        }
+    }
+
+    private void TriggerEffects()
+    {
+        if (effectTriggered) return; // Para evitar repetir
+        effectTriggered = true;
+
+        // Animación opcional
+        if (optionalAnimator != null && !string.IsNullOrEmpty(triggerAnimationName))
+            optionalAnimator.Play(triggerAnimationName);
+
+        // Sonido opcional
+        if (optionalAudioSource != null && activationSFX != null)
+        {
+            optionalAudioSource.PlayOneShot(activationSFX);
         }
     }
 
