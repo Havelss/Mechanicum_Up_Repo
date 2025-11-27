@@ -3290,8 +3290,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.023064192, y: 0.015633924, z: 0.016118541}
-  m_Center: {x: -0.011388216, y: -0.000000011920928, z: 0.04067602}
+  m_Size: {x: 0.023610128, y: 0.015633924, z: 0.016439663}
+  m_Center: {x: -0.011661189, y: -0.000000012120395, z: 0.040836625}
 --- !u!65 &233660086
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5021,7 +5021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0c2fcd6e9902834489bcf823c07a035f, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 2104993402387549794, guid: 0c2fcd6e9902834489bcf823c07a035f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -13297,9 +13297,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.14
-  m_Height: 4.4959946
+  m_Height: 1.6346302
   m_Direction: 1
-  m_Center: {x: 0, y: 2.2579975, z: 0}
+  m_Center: {x: 0, y: 0.82731533, z: 0}
 --- !u!114 &1148112918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18606,7 +18606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4914241915933990279, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: m_Mass
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4914241915933990279, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: m_Constraints
@@ -18705,6 +18705,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
+      propertyPath: fallMultiplier
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 154181717}
@@ -18748,9 +18752,17 @@ PrefabInstance:
       propertyPath: controlledElevator
       value: 
       objectReference: {fileID: 593886940}
+    - target: {fileID: 1436258266045624242, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_Name
       value: PF_Valvula
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142190656106726981, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 7244497147039108387, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -26786,7 +26798,7 @@ GameObject:
   - component: {fileID: 8144261807493516090}
   m_Layer: 7
   m_Name: SM_Tuberia.001
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28040,7 +28052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.339
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8143293675563142187, guid: 9ba03eb29b6330f4ca7e72925f29efd7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30221,7 +30233,7 @@ Transform:
   m_GameObject: {fileID: 5125059771722486268}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -31.354345, y: -3.810021, z: 0.42009932}
+  m_LocalPosition: {x: -31.683, y: -3.810021, z: 0.42009932}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
