@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxJumpForce = 16f;
     [SerializeField] float maxChargeTime = 1.5f;
     [SerializeField] float chargeDownAmount = 0.4f;
-    [SerializeField] float squashSpeed = 5f; // velocidad del squash gradual
+    [SerializeField] float squashSpeed = 5f;
     bool isChargingJump = false;
     float chargeTimer = 0f;
     Vector3 targetScale;
@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     bool isGrounded;
     bool wasGrounded;
+    bool isTouchingWall;
     #endregion
 
     #region Caída Pesada
@@ -63,78 +64,72 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
         originalScale = transform.localScale;
 
-
-if (camTransform == null)
+        if (camTransform == null)
             camTransform = Camera.main.transform;
-
-
-}
+    }
 
     private void Update()
     {
         if (isDead) return;
 
-
-CheckIfGrounded();
+        CheckWall();
+        CheckIfGrounded();
         UpdateAnimator();
         HandleFootsteps();
 
         if (isChargingJump)
         {
             chargeTimer += Time.deltaTime;
-            // squash gradual
             transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * squashSpeed);
         }
-
-
-}
+    }
 
     private void FixedUpdate()
     {
         if (isDead) return;
 
-
-HandleMovement();
+        HandleMovement();
         HandleRotation();
         HandleFalling();
-
-
-}
+    }
     #endregion
 
     #region Movimiento y Rotación
     void HandleMovement()
     {
-        Vector3 cameraForward = camTransform.forward;
-        Vector3 cameraRight = camTransform.right;
+        Vector3 camForward = camTransform.forward;
+        Vector3 camRight = camTransform.right;
+        camForward.y = 0; camRight.y = 0;
+        camForward.Normalize(); camRight.Normalize();
 
-
-cameraForward.y = 0;
-        cameraRight.y = 0;
-        cameraForward.Normalize();
-        cameraRight.Normalize();
-
-        Vector3 moveDir = cameraForward * moveInput.y + cameraRight * moveInput.x;
-        moveDir.Normalize();
+        Vector3 moveDir = (camForward * moveInput.y + camRight * moveInput.x).normalized;
 
         if (!isChargingJump)
+        {
+            // Bloqueo horizontal al tocar pared en el aire
+            if (!isGrounded && isTouchingWall)
+            {
+                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+                return;
+            }
+
             rb.linearVelocity = new Vector3(moveDir.x * speed, rb.linearVelocity.y, moveDir.z * speed);
+        }
         else
+        {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-
-
-}
+        }
+    }
 
     void HandleRotation()
     {
-        if (moveInput != Vector2.zero)
+        if (moveInput == Vector2.zero) return;
+
+        Vector3 lookDir = new Vector3(moveInput.x, 0, moveInput.y);
+        if (lookDir != Vector3.zero)
         {
-            Vector3 lookDir = new Vector3(moveInput.x, 0, moveInput.y);
-            if (lookDir != Vector3.zero)
-            {
-                float angle = Mathf.Atan2(lookDir.x, lookDir.z) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, angle, 0);
-            }
+            float angle = Mathf.Atan2(lookDir.x, lookDir.z) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, angle, 0);
         }
     }
     #endregion
@@ -144,37 +139,28 @@ cameraForward.y = 0;
     {
         if (isDead) return;
 
-
-if (context.performed)
-            StartChargingJump();
-        else if (context.canceled)
-            ReleaseJump();
-
-
-}
+        if (context.performed) StartChargingJump();
+        else if (context.canceled) ReleaseJump();
+    }
 
     void StartChargingJump()
     {
         if (!isGrounded || isChargingJump) return;
 
-
-isChargingJump = true;
+        isChargingJump = true;
         chargeTimer = 0f;
         targetScale = new Vector3(originalScale.x, originalScale.y - chargeDownAmount, originalScale.z);
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
         if (playerAnimator)
             playerAnimator.SetBool("ChargingJump", true);
-
-
-}
+    }
 
     void ReleaseJump()
     {
         if (!isChargingJump) return;
 
-
-isChargingJump = false;
+        isChargingJump = false;
         transform.localScale = originalScale;
 
         float jumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, Mathf.Clamp01(chargeTimer / maxChargeTime));
@@ -187,9 +173,7 @@ isChargingJump = false;
         }
 
         chargeTimer = 0f;
-
-
-}
+    }
     #endregion
 
     #region GroundCheck y Caída
@@ -198,15 +182,9 @@ isChargingJump = false;
         wasGrounded = isGrounded;
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
-
-if (!wasGrounded && isGrounded)
-        {
-            if (playerAnimator)
-                playerAnimator.SetTrigger("JumpEnd");
-        }
-
-
-}
+        if (!wasGrounded && isGrounded && playerAnimator != null)
+            playerAnimator.SetTrigger("JumpEnd");
+    }
 
     void HandleFalling()
     {
@@ -219,6 +197,7 @@ if (!wasGrounded && isGrounded)
     void UpdateAnimator()
     {
         if (!playerAnimator) return;
+
         playerAnimator.SetFloat("Speed", moveInput.magnitude);
         playerAnimator.SetBool("IsGrounded", isGrounded);
     }
@@ -227,9 +206,9 @@ if (!wasGrounded && isGrounded)
     {
         if (playerAnimator == null || footstepSource == null || footstepClip == null) return;
 
+        bool walking = playerAnimator.GetFloat("Speed") > 0.1f && isGrounded;
 
-float speedValue = playerAnimator.GetFloat("Speed");
-        if (speedValue > 0.1f && isGrounded)
+        if (walking)
         {
             if (!footstepSource.isPlaying)
             {
@@ -238,14 +217,11 @@ float speedValue = playerAnimator.GetFloat("Speed");
                 footstepSource.Play();
             }
         }
-        else
+        else if (footstepSource.isPlaying)
         {
-            if (footstepSource.isPlaying)
-                footstepSource.Stop();
+            footstepSource.Stop();
         }
-
-
-}
+    }
     #endregion
 
     #region Muerte y Respawn
@@ -254,32 +230,25 @@ float speedValue = playerAnimator.GetFloat("Speed");
     public void DieInstant(string cause)
     {
         if (isDead) return;
-
-
-isDead = true;
+        isDead = true;
         RespawnAtCheckpoint();
-
-
-}
+    }
 
     public void Die(string cause = "")
     {
         if (isDead) return;
 
-
-isDead = true;
+        isDead = true;
         rb.linearVelocity = Vector3.zero;
+
         if (playerAnimator)
         {
-            if (cause == "crush")
-                playerAnimator.Play("DeathCrushed");
-            else
-                playerAnimator.Play("Death");
+            if (cause == "crush") playerAnimator.Play("DeathCrushed");
+            else playerAnimator.Play("Death");
         }
+
         StartCoroutine(RespawnAfterDeath());
-
-
-}
+    }
 
     IEnumerator RespawnAfterDeath()
     {
@@ -287,25 +256,40 @@ isDead = true;
         RespawnAtCheckpoint();
     }
 
-    private void RespawnAtCheckpoint()
+    void RespawnAtCheckpoint()
     {
         if (currentCheckpoint != null)
             transform.position = currentCheckpoint.position;
 
-
-isDead = false;
-        if (playerAnimator)
-            playerAnimator.Play("Idle");
-
-
-}
+        isDead = false;
+        if (playerAnimator) playerAnimator.Play("Idle");
+    }
     #endregion
 
     #region Input Movimiento
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (!isDead)
-            moveInput = context.ReadValue<Vector2>();
+        if (!isDead) moveInput = ctx.ReadValue<Vector2>();
+    }
+    #endregion
+
+    #region Detección de Pared
+    void CheckWall()
+    {
+        if (moveInput.magnitude < 0.1f)
+        {
+            isTouchingWall = false;
+            return;
+        }
+
+        Vector3 camForward = camTransform.forward;
+        Vector3 camRight = camTransform.right;
+        camForward.y = 0; camRight.y = 0;
+        camForward.Normalize(); camRight.Normalize();
+
+        Vector3 worldDir = (camForward * moveInput.y + camRight * moveInput.x).normalized;
+
+        isTouchingWall = Physics.Raycast(transform.position, worldDir, 0.6f, groundLayer);
     }
     #endregion
 }
