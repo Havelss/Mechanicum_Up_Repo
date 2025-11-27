@@ -13,21 +13,31 @@ public class CameraRoom : MonoBehaviour
     public bool useCustomSmooth = false;
     public float customSmoothSpeed = 0.1f;
 
+    private CameraFollow camara;
+
+
+    private void Start()
+    {
+        camara = Camera.main.GetComponent<CameraFollow>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        if (camara == null)
         {
-            CameraFollow cam = Camera.main.GetComponent<CameraFollow>();
-
-            cam.SetRoomLimits(xLimits, yLimits);
-
-            if (useCustomOffset)
-                cam.SetCameraOffset(customOffset);
-
-            if (useCustomSmooth)
-                cam.SetSmoothSpeed(customSmoothSpeed);
+            camara = Camera.main.GetComponent<CameraFollow>();
+            if (camara == null)
+            {
+                Debug.LogError("CameraFollow no encontrado en la MainCamera!");
+                return;
+            }
         }
+
+        camara.SetRoomLimits(xLimits, yLimits);
     }
+
 
     // Gizmo para ver el área de la sala fácilmente
     private void OnDrawGizmos()

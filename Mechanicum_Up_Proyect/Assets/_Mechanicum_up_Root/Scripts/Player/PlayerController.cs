@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movimiento")]
     [SerializeField] float speed = 10f;
-    //[SerializeField] float rotSpeed = 15f;
 
     [Header("Salto")]
     [SerializeField] float jumpForce = 8f;
@@ -21,37 +21,55 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource footstepSource;
     [SerializeField] AudioClip footstepClip;
 
+    [Header("Muerte y Respawn")]
+    public Transform currentCheckpoint;
+    public float respawnDelay = 1.5f;
+
+    [Header("Caída pesada")]
+    public float normalMass = 1f;
+    public float fallingMass = 4f; // ← masa al caer
+
     Rigidbody playerRB;
     Vector2 moveInput;
     bool isGrounded;
     bool wasGrounded;
     bool isJumping;
-    bool isTouchingWall; // Nuevo: Para detectar si está tocando una pared
+    bool isTouchingWall;
+
+    bool isDead = false;
 
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody>();
-        if (camTransform == null) camTransform = Camera.main.transform;
+
+        if (camTransform == null)
+            camTransform = Camera.main.transform;
+
         playerRB.freezeRotation = true;
+        playerRB.mass = normalMass;
     }
 
     void Update()
     {
+        if (isDead) return;
+
         CheckIfGrounded();
+        HandleFallingMass();
         UpdateAnimator();
         HandleFootsteps();
     }
 
     private void FixedUpdate()
     {
-        if (!isTouchingWall || isGrounded) // Solo mover si no está tocando una pared o está en el suelo
+        if (isDead) return;
+
+        if (!isTouchingWall || isGrounded)
         {
             HandleMovement();
             HandleRotation();
         }
         else
         {
-            // Si está tocando una pared en el aire, detener el movimiento horizontal
             playerRB.linearVelocity = new Vector3(0, playerRB.linearVelocity.y, 0);
         }
     }
@@ -63,37 +81,28 @@ public class PlayerController : MonoBehaviour
 
         cameraForward.y = 0;
         cameraRight.y = 0;
+
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        Vector3 moveDirection = (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
+        Vector3 moveDirection =
+            (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
 
-        playerRB.linearVelocity = new Vector3(moveDirection.x * speed, playerRB.linearVelocity.y, moveDirection.z * speed);
+        playerRB.linearVelocity = new Vector3(
+            moveDirection.x * speed,
+            playerRB.linearVelocity.y,
+            moveDirection.z * speed
+        );
     }
-
-    //void HandleRotation()
-    //{
-    //    if (moveInput == Vector2.zero) return;
-
-    //    Vector3 moveDirection = new Vector3(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
-    //    if (moveDirection == Vector3.zero) return;
-
-    //    Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotSpeed * Time.fixedDeltaTime);
-    //}
 
     void HandleRotation()
     {
         if (moveInput == Vector2.zero) return;
 
-        // Calcular la dirección del movimiento
         Vector3 moveDirection = new Vector3(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
         if (moveDirection == Vector3.zero) return;
 
-        // Calcular la rotación objetivo
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-
-        // Asignar la rotación directamente para que sea instantánea
         transform.rotation = targetRotation;
     }
 
@@ -109,11 +118,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ------------------ CAÍDA PESADA ------------------
+
+    void HandleFallingMass()
+    {
+        if (!isGrounded)
+        {
+            // En el aire = masa pesada
+            playerRB.mass = fallingMass;
+        }
+        else
+        {
+            // En el suelo = masa normal
+            playerRB.mass = normalMass;
+        }
+    }
+
+    // ------------------ SALTO ------------------
+
     void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && !isDead)
         {
-            playerRB.linearVelocity = new Vector3(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
+            playerRB.linearVelocity = new Vector3(
+                playerRB.linearVelocity.x,
+                0,
+                playerRB.linearVelocity.z
+            );
+
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true;
 
@@ -122,30 +154,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        // Detectar si el jugador está tocando una pared
-        if (!isGrounded && collision.gameObject.CompareTag("Wall"))
-        {
-            isTouchingWall = true;
-
-            // Detener el movimiento horizontal
-            playerRB.linearVelocity = new Vector3(0, playerRB.linearVelocity.y, 0);
-        }
-        else
-        {
-            isTouchingWall = false;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        // Detectar cuando el jugador deja de tocar una pared
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            isTouchingWall = false;
-        }
-    }
+    // ------------------ ANIMACIONES ------------------
 
     void UpdateAnimator()
     {
@@ -179,24 +188,66 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    // ------------------ MUERTE ------------------
+
+    public void Die(string cause = "")
     {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
+        if (isDead) return;
+
+        isDead = true;
+
+        moveInput = Vector2.zero;
+        playerRB.linearVelocity = Vector3.zero;
+
+        if (cause == "crush")
+            playerAnimator.Play("DeathCrushed");
+        else
+            playerAnimator.Play("Death");
+
+        StartCoroutine(RespawnAfterDeath());
     }
 
-    #region Input Methods
+    IEnumerator RespawnAfterDeath()
+    {
+        yield return new WaitForSeconds(respawnDelay);
+
+        if (currentCheckpoint != null)
+            transform.position = currentCheckpoint.position;
+
+        isDead = false;
+        playerAnimator.Play("Idle");
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        if (!isDead)
+            moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed) Jump();
+        if (context.performed && !isDead)
+            Jump();
     }
-    #endregion
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
+    public void DieInstant(string cause)
+    {
+        if (isDead) return;
+        isDead = true;
+        RespawnAtCheckpoint();
+    }
+
+    private void RespawnAtCheckpoint()
+    {
+        if (currentCheckpoint != null)
+            transform.position = currentCheckpoint.position;
+
+        isDead = false;
+        playerAnimator.Play("Idle");
+    }
 }
