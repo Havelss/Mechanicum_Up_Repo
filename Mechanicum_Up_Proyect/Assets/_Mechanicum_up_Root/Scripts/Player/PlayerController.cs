@@ -11,16 +11,17 @@ public class PlayerController : MonoBehaviour
     [Header("Audio de pasos")]
     [SerializeField] AudioSource footstepSource;
     [SerializeField] AudioClip footstepClip;
-    #endregion
+#endregion
 
-    #region Movimiento
-    [Header("Movimiento")]
+
+#region Movimiento  
+[Header("Movimiento")]
     [SerializeField] float speed = 10f;
-    [SerializeField] float rotationSpeed = 720f; // grados/segundo para rotación suave
+    [SerializeField] float rotationSpeed = 720f;
     Vector2 moveInput;
     #endregion
 
-    #region Salto Cargado
+    #region Salto Cargado  
     [Header("Salto cargado")]
     [SerializeField] float minJumpForce = 8f;
     [SerializeField] float maxJumpForce = 16f;
@@ -32,22 +33,21 @@ public class PlayerController : MonoBehaviour
     Vector3 targetScale;
     #endregion
 
-    #region GroundCheck
+    #region GroundCheck  
     [Header("GroundCheck")]
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
     bool isGrounded;
     bool wasGrounded;
-    bool isTouchingWall;
     #endregion
 
-    #region Caída Pesada
+    #region Caída Pesada  
     [Header("Caída pesada")]
     [SerializeField] float fallMultiplier = 2.5f;
     #endregion
 
-    #region Muerte y Respawn
+    #region Muerte y Respawn  
     [Header("Muerte y Respawn")]
     public Transform currentCheckpoint;
     public float respawnDelay = 1.5f;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     Vector3 originalScale;
 
-    #region Unity Methods
+    #region Unity Methods  
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
 
-        CheckWall();
         CheckIfGrounded();
         UpdateAnimator();
         HandleFootsteps();
@@ -94,7 +93,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Movimiento y Rotación
+    #region Movimiento y Rotación  
     void HandleMovement()
     {
         Vector3 camForward = camTransform.forward;
@@ -106,13 +105,6 @@ public class PlayerController : MonoBehaviour
 
         if (!isChargingJump)
         {
-            // Bloqueo horizontal al tocar pared en el aire
-            if (!isGrounded && isTouchingWall)
-            {
-                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-                return;
-            }
-
             rb.linearVelocity = new Vector3(moveDir.x * speed, rb.linearVelocity.y, moveDir.z * speed);
         }
         else
@@ -134,7 +126,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Salto Cargado
+    #region Salto Cargado  
     public void OnJump(InputAction.CallbackContext context)
     {
         if (isDead) return;
@@ -176,7 +168,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region GroundCheck y Caída
+    #region GroundCheck y Caída  
     void CheckIfGrounded()
     {
         wasGrounded = isGrounded;
@@ -193,7 +185,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Animaciones y Sonido
+    #region Animaciones y Sonido  
     void UpdateAnimator()
     {
         if (!playerAnimator) return;
@@ -224,7 +216,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Muerte y Respawn
+    #region Muerte y Respawn  
     public bool IsDead() => isDead;
 
     public void DieInstant(string cause)
@@ -266,30 +258,12 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Input Movimiento
+    #region Input Movimiento  
     public void OnMove(InputAction.CallbackContext ctx)
     {
         if (!isDead) moveInput = ctx.ReadValue<Vector2>();
-    }
-    #endregion
+    }  
+#endregion  
 
-    #region Detección de Pared
-    void CheckWall()
-    {
-        if (moveInput.magnitude < 0.1f)
-        {
-            isTouchingWall = false;
-            return;
-        }
 
-        Vector3 camForward = camTransform.forward;
-        Vector3 camRight = camTransform.right;
-        camForward.y = 0; camRight.y = 0;
-        camForward.Normalize(); camRight.Normalize();
-
-        Vector3 worldDir = (camForward * moveInput.y + camRight * moveInput.x).normalized;
-
-        isTouchingWall = Physics.Raycast(transform.position, worldDir, 0.6f, groundLayer);
-    }
-    #endregion
 }
