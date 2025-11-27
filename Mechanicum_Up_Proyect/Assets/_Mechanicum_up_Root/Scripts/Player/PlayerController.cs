@@ -196,6 +196,15 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
+    // ---------------- CHECKPOINT SUPPORT ----------------
+    [HideInInspector] public Transform currentCheckpoint;
+
+    // Wrapper para compatibilidad con PlayerRespawn
+    public void Die(string cause = "")
+    {
+        DieInstant(cause);
+    }
+
 
     // ---------------- MUERTE GENERAL ----------------
 
