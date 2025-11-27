@@ -1892,7 +1892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
-  boxSize: {x: 1.08, y: 0.06, z: 1}
+  boxSize: {x: 1.63, y: 0.41, z: 1}
   crushLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -1909,7 +1909,7 @@ Transform:
   m_GameObject: {fileID: 147248456}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 6, z: 0}
+  m_LocalPosition: {x: 21, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18690,7 +18690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: jumpForce
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: normalMass
@@ -18698,7 +18698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: fallingMass
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7805069512450620528, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
       propertyPath: playerAnimator
