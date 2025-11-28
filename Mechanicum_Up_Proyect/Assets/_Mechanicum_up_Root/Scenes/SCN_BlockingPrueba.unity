@@ -6593,6 +6593,11 @@ MonoBehaviour:
   upperPoint: {fileID: 194270359}
   lowerPoint: {fileID: 1147440987}
   speed: 2
+  doorAnimator: {fileID: 0}
+  playerDetectDistance: 3
+  player: {fileID: 0}
+  audioSource: {fileID: 0}
+  ascensorClip: {fileID: 0}
 --- !u!65 &712883256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7554,17 +7559,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4448637373116966175, guid: 68c6ae704a8bc864b8065da56a2f8f04, type: 3}
   m_PrefabInstance: {fileID: 796075910}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &796075912 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1385438463161787668, guid: 68c6ae704a8bc864b8065da56a2f8f04, type: 3}
-  m_PrefabInstance: {fileID: 796075910}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24bfebfab724a74429de0f774e1d2a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &837067407
 GameObject:
   m_ObjectHideFlags: 0
@@ -9858,6 +9852,11 @@ MonoBehaviour:
   upperPoint: {fileID: 1050388883}
   lowerPoint: {fileID: 755254651}
   speed: 1.5
+  doorAnimator: {fileID: 0}
+  playerDetectDistance: 3
+  player: {fileID: 0}
+  audioSource: {fileID: 0}
+  ascensorClip: {fileID: 0}
 --- !u!1 &1061094419
 GameObject:
   m_ObjectHideFlags: 0
@@ -10538,6 +10537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionPrompt: E
   symbolID: No
+  animator: {fileID: 0}
 --- !u!65 &1116870622
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12535,7 +12535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1326013963
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14056,7 +14056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1475244709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17046,13 +17046,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff4faaff1ea4584a8aff9209b52f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCall: {fileID: 796075912}
-  callInterval: 10
+  elevatorCall: {fileID: 0}
+  callUp: 1
+  callDelay: 1
   detectionRange: 25
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  destroyOnSeen: 1
+  playerTransform: {fileID: 0}
 --- !u!65 &1737241233
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19515,6 +19513,11 @@ MonoBehaviour:
   upperPoint: {fileID: 46499692}
   lowerPoint: {fileID: 2019793111}
   speed: 2
+  doorAnimator: {fileID: 0}
+  playerDetectDistance: 3
+  player: {fileID: 0}
+  audioSource: {fileID: 0}
+  ascensorClip: {fileID: 0}
 --- !u!1 &1984390301
 GameObject:
   m_ObjectHideFlags: 0
@@ -19740,6 +19743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionPrompt: E
   symbolID: Up
+  animator: {fileID: 0}
 --- !u!65 &2002875865
 BoxCollider:
   m_ObjectHideFlags: 0
