@@ -11,15 +11,20 @@ public class MinecartController : MonoBehaviour
     public Transform playerSeat;
     public bool isPlayerInside = false;
 
-    [Header("Terminal interna de la bagoneta")]
+    [Header("Terminal interna")]
     public GameObject cartTerminalUI;
 
     [Header("Desmontaje")]
     public Vector3 cartSeatForwardOffset = new Vector3(0, 0, 2f);
 
+    // Preparado para plataformas móviles
+    private Transform currentPlatform;
+    private Vector3 currentPlatformLastPos;
+
     private Rigidbody rb;
     private CartDirection currentDirection = CartDirection.None;
     private GameObject currentPlayer;
+    private int originalPlayerLayer = 0;
 
     private static bool cartExists = false;
 
@@ -36,20 +41,16 @@ public class MinecartController : MonoBehaviour
             seatGO.transform.localPosition = Vector3.zero;
             seatGO.transform.localRotation = Quaternion.identity;
             playerSeat = seatGO.transform;
-
-            Debug.LogWarning("[MinecartController] playerSeat no asignado, se creó automáticamente un empty GameObject.");
         }
+
+        // Rigidbody estable
+        rb.mass = 100f;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
-    private void OnDestroy()
-    {
-        cartExists = false;
-    }
+    private void OnDestroy() => cartExists = false;
 
-    public static bool CanSpawnCart()
-    {
-        return !cartExists;
-    }
+    public static bool CanSpawnCart() => !cartExists;
 
     public void Command_NO() => currentDirection = CartDirection.Left;
     public void Command_LEFT() => currentDirection = CartDirection.Right;
@@ -57,31 +58,37 @@ public class MinecartController : MonoBehaviour
 
     public void FinalizeEnter(GameObject player)
     {
-        if (player == null)
-        {
-            Debug.LogError("[MinecartController] Player es null en FinalizeEnter!");
-            return;
-        }
-
-        if (playerSeat == null)
-        {
-            Debug.LogError("[MinecartController] playerSeat no asignado!");
-            return;
-        }
+        if (player == null || playerSeat == null) return;
 
         isPlayerInside = true;
         currentPlayer = player;
 
-        // Desactivar Rigidbody y bloquear input completo
+        originalPlayerLayer = player.layer;
+
+        // Rigidbody del jugador
         var rbPlayer = player.GetComponent<Rigidbody>();
         if (rbPlayer != null)
         {
             rbPlayer.linearVelocity = Vector3.zero;
             rbPlayer.angularVelocity = Vector3.zero;
-            rbPlayer.isKinematic = true;
+            rbPlayer.isKinematic = true; // Bloquea física
         }
 
-        LockPlayerInput();
+        // Collider del jugador
+        var coll = player.GetComponent<Collider>();
+        if (coll != null) coll.enabled = false;
+
+        // Layer seguro
+        int cartLayer = LayerMask.NameToLayer("PlayerInCart");
+        if (cartLayer >= 0) player.layer = cartLayer;
+
+        // Bloquear PlayerController (input, salto, groundcheck)
+        var controller = player.GetComponent<PlayerController>();
+        if (controller != null) controller.enabled = false;
+
+        // Root motion
+        var anim = player.GetComponentInChildren<Animator>();
+        if (anim != null) anim.applyRootMotion = false;
 
         // Teletransportar al asiento
         player.transform.SetParent(playerSeat);
@@ -95,59 +102,69 @@ public class MinecartController : MonoBehaviour
 
         isPlayerInside = false;
 
-        // Reactivar Rigidbody y PlayerController
+        // Rigidbody y collider
         var rbPlayer = currentPlayer.GetComponent<Rigidbody>();
-        if (rbPlayer != null)
-        {
-            rbPlayer.isKinematic = false;
-        }
+        if (rbPlayer != null) rbPlayer.isKinematic = false;
 
-        UnlockPlayerInput();
+        var coll = currentPlayer.GetComponent<Collider>();
+        if (coll != null) coll.enabled = true;
 
-        // Separar del carrito y colocar delante
+        // Layer original
+        currentPlayer.layer = originalPlayerLayer;
+
+        // Reactivar PlayerController
+        var controller = currentPlayer.GetComponent<PlayerController>();
+        if (controller != null) controller.enabled = true;
+
+        // Root motion
+        var anim = currentPlayer.GetComponentInChildren<Animator>();
+        if (anim != null) anim.applyRootMotion = true;
+
+        // Desmontar
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSeat.position + cartSeatForwardOffset;
 
         // Cerrar terminal
-        if (cartTerminalUI != null)
-            cartTerminalUI.SetActive(false);
+        if (cartTerminalUI != null) cartTerminalUI.SetActive(false);
 
         currentPlayer = null;
     }
 
-    // Bloquea todo el input (caminar, correr, saltar)
-    public void LockPlayerInput()
-    {
-        if (currentPlayer == null) return;
-        var controller = currentPlayer.GetComponent<PlayerController>();
-        if (controller != null) controller.enabled = false;
-    }
-
-    // Desbloquea todo el input
-    public void UnlockPlayerInput()
-    {
-        if (currentPlayer == null) return;
-        var controller = currentPlayer.GetComponent<PlayerController>();
-        if (controller != null) controller.enabled = true;
-    }
-
     public void OpenInternalTerminal()
     {
-        if (cartTerminalUI != null)
-            cartTerminalUI.SetActive(true);
+        if (cartTerminalUI != null) cartTerminalUI.SetActive(true);
     }
 
     private void FixedUpdate()
     {
-        Vector3 vel = rb.linearVelocity;
+        Vector3 moveDir = Vector3.zero;
+        if (currentDirection == CartDirection.Left) moveDir = Vector3.left;
+        else if (currentDirection == CartDirection.Right) moveDir = Vector3.right;
 
-        if (currentDirection == CartDirection.Left)
-            vel.x = -moveSpeed;
-        else if (currentDirection == CartDirection.Right)
-            vel.x = moveSpeed;
-        else
-            vel.x = 0;
+        Vector3 platformOffset = Vector3.zero;
+        if (currentPlatform != null)
+        {
+            platformOffset = currentPlatform.position - currentPlatformLastPos;
+            currentPlatformLastPos = currentPlatform.position;
+        }
 
-        rb.linearVelocity = vel;
+        rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime + platformOffset);
     }
+
+    // Preparado para futuras plataformas móviles
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("MovingPlatform"))
+        {
+            currentPlatform = collision.transform;
+            currentPlatformLastPos = currentPlatform.position;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform == currentPlatform) currentPlatform = null;
+    }
+    */
 }
