@@ -20,8 +20,9 @@ public class CartRiderTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && !cart.isPlayerInside)
         {
-            player = other.gameObject;
+            player = other.transform.root.gameObject; // Tomar objeto raíz por si el collider está en un hijo
             canMount = true;
+            Debug.Log($"[CartRiderTrigger] Player detected: {player.name}");
         }
     }
 
@@ -36,12 +37,13 @@ public class CartRiderTrigger : MonoBehaviour
 
     private void Update()
     {
+        // Montar
         if (canMount && !cart.isPlayerInside && !isConnecting && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(StartConnectionSequence());
         }
 
-        // Desmontaje con E si ya está dentro
+        // Desmontar
         if (cart.isPlayerInside && Input.GetKeyDown(KeyCode.E))
         {
             cart.ExitCart();
@@ -50,45 +52,63 @@ public class CartRiderTrigger : MonoBehaviour
 
     private System.Collections.IEnumerator StartConnectionSequence()
     {
+        if (player == null)
+        {
+            Debug.LogError("[CartRiderTrigger] Player es null al iniciar coroutine!");
+            yield break;
+        }
+
+        GameObject playerLocal = player; // Guardamos referencia local
         isConnecting = true;
 
-        var controller = player.GetComponent<PlayerController>();
-        var rb = player.GetComponent<Rigidbody>();
-        var anim = player.GetComponentInChildren<Animator>();
+        var controller = playerLocal.GetComponent<PlayerController>();
+        var rb = playerLocal.GetComponent<Rigidbody>();
+        var anim = playerLocal.GetComponentInChildren<Animator>();
 
-        // Bloquear control y Rigidbody
+        // Bloquear input y Rigidbody
         if (controller != null) controller.enabled = false;
         if (rb != null)
         {
             rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
         }
 
-        // Mover player al asiento
+        // Teletransportar al asiento
         if (cart.playerSeat != null)
         {
-            player.transform.SetParent(cart.playerSeat);
-            player.transform.localPosition = Vector3.zero;
-            player.transform.localRotation = Quaternion.identity;
-
-            Debug.Log($"[CartRiderTrigger] Player {player.name} moved to seat {cart.playerSeat.name}");
-        }
-        else
-        {
-            Debug.LogWarning("[CartRiderTrigger] playerSeat no asignado en MinecartController");
+            playerLocal.transform.SetParent(cart.playerSeat);
+            playerLocal.transform.localPosition = Vector3.zero;
+            playerLocal.transform.localRotation = Quaternion.identity;
+            Debug.Log($"[CartRiderTrigger] Player {playerLocal.name} moved to seat {cart.playerSeat.name}");
         }
 
-        // Reproducir animación si existe
-        if (anim != null) anim.SetTrigger("ConnectToCart");
+        // Animación (solo si existe)
+        if (anim != null && anim.HasParameterOfType("ConnectToCart", UnityEngine.AnimatorControllerParameterType.Trigger))
+            anim.SetTrigger("ConnectToCart");
 
         yield return new WaitForSeconds(connectDuration);
 
         // Finalizar entrada
-        cart.FinalizeEnter(player);
+        if (playerLocal != null)
+            cart.FinalizeEnter(playerLocal);
+        else
+            Debug.LogError("[CartRiderTrigger] Player se perdió antes de llamar a FinalizeEnter");
 
-        // Abrir terminal
         cart.OpenInternalTerminal();
-
         isConnecting = false;
+    }
+}
+
+// Método auxiliar para verificar si un trigger existe
+public static class AnimatorExtensions
+{
+    public static bool HasParameterOfType(this Animator animator, string paramName, AnimatorControllerParameterType type)
+    {
+        foreach (var param in animator.parameters)
+        {
+            if (param.type == type && param.name == paramName) return true;
+        }
+        return false;
     }
 }
