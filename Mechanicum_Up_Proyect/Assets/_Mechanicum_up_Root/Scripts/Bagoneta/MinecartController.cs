@@ -11,10 +11,18 @@ public class MinecartController : MonoBehaviour
     public Transform playerSeat;
     public bool isPlayerInside = false;
 
+    [Header("Terminal interna de la bagoneta")]
+    public GameObject cartTerminalUI;
+
+    [Header("Desmontaje")]
+    public Vector3 cartSeatForwardOffset = new Vector3(0, 0, 2f);
+
     private Rigidbody rb;
     private CartDirection currentDirection = CartDirection.None;
 
-    private static bool cartExists = false; // solo una bagoneta activa
+    private static bool cartExists = false;
+
+    private GameObject currentPlayer;
 
     private void Awake()
     {
@@ -27,80 +35,105 @@ public class MinecartController : MonoBehaviour
         cartExists = false;
     }
 
-    /// ---------------------------------------------------------
-    ///   MÉTODO QUE LLAMA LA TERMINAL  (NO,UP → Spawnear)
-    /// ---------------------------------------------------------
     public static bool CanSpawnCart()
     {
         return !cartExists;
     }
 
-    /// ---------------------------------------------------------
-    ///     Control desde terminal dentro de la bagoneta
-    /// ---------------------------------------------------------
+    public void Command_NO() => currentDirection = CartDirection.Left;
+    public void Command_LEFT() => currentDirection = CartDirection.Right;
+    public void Command_Stop() => currentDirection = CartDirection.None;
 
-    // Cuando la terminal hace "NO"
-    public void Command_NO()
+    public void LockPlayerInput()
     {
-        currentDirection = CartDirection.Left;
+        if (currentPlayer == null) return;
+
+        var controller = currentPlayer.GetComponent<PlayerController>();
+        if (controller != null)
+        {
+            controller.enabled = false; // Esto bloquea todo el input de movimiento
+        }
     }
 
-    // Cuando la terminal hace "LEFT"
-    public void Command_LEFT()
+    public void UnlockPlayerInput()
     {
-        currentDirection = CartDirection.Right;
+        if (currentPlayer == null) return;
+
+        var controller = currentPlayer.GetComponent<PlayerController>();
+        if (controller != null)
+        {
+            controller.enabled = true; // Vuelve a habilitar el input
+        }
     }
 
-    // Para parar si hace falta
-    public void Command_Stop()
-    {
-        currentDirection = CartDirection.None;
-    }
 
-    /// ---------------------------------------------------------
-    ///     Entrada del jugador a la bagoneta
-    /// ---------------------------------------------------------
-    public void EnterCart(GameObject player)
+    // Llamada desde CartRiderTrigger después de mover al player al asiento
+    public void FinalizeEnter(GameObject player)
     {
-        if (isPlayerInside) return;
+        if (player == null || playerSeat == null)
+        {
+            Debug.LogError("[MinecartController] Player o playerSeat no asignado!");
+            return;
+        }
 
         isPlayerInside = true;
+        currentPlayer = player;
 
-        // Poner al jugador fijo a la bagoneta
+        // Bloquear Rigidbody y PlayerController
+        var rb = player.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.linearVelocity = Vector3.zero;
+        }
+
+        LockPlayerInput(); // Bloquea el input de movimiento
+
         player.transform.SetParent(playerSeat);
         player.transform.localPosition = Vector3.zero;
         player.transform.localRotation = Quaternion.identity;
-
-        // Desactivar movimiento del PlayerController
-        var controller = player.GetComponent<PlayerController>();
-        if (controller != null) controller.enabled = false;
     }
 
-    public void ExitCart(GameObject player)
+
+    // Método para desmontar al jugador
+    public void ExitCart()
     {
-        if (!isPlayerInside) return;
+        if (!isPlayerInside || currentPlayer == null) return;
 
         isPlayerInside = false;
 
-        player.transform.SetParent(null);
+        var rb = currentPlayer.GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = false;
 
-        var controller = player.GetComponent<PlayerController>();
-        if (controller != null) controller.enabled = true;
+        UnlockPlayerInput(); // Desbloquea el input al salir
+
+        currentPlayer.transform.SetParent(null);
+        currentPlayer.transform.position = playerSeat.position + cartSeatForwardOffset;
+
+        if (cartTerminalUI != null)
+            cartTerminalUI.SetActive(false);
+
+        currentPlayer = null;
+    }
+
+
+    public void OpenInternalTerminal()
+    {
+        if (cartTerminalUI != null)
+            cartTerminalUI.SetActive(true);
     }
 
     private void FixedUpdate()
     {
+        Vector3 vel = rb.linearVelocity;
+
         if (currentDirection == CartDirection.Left)
-        {
-            rb.linearVelocity = new Vector3(-moveSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
-        }
+            vel.x = -moveSpeed;
         else if (currentDirection == CartDirection.Right)
-        {
-            rb.linearVelocity = new Vector3(moveSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
-        }
+            vel.x = moveSpeed;
         else
-        {
-            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, rb.linearVelocity.z);
-        }
+            vel.x = 0;
+
+        rb.linearVelocity = vel;
     }
 }
