@@ -5,22 +5,34 @@ public class TerminalCallCart : MonoBehaviour
     public GameObject cartPrefab;
     public Transform spawnPoint;
 
-    public void OnTerminalCommand(string[] symbols)
+    public void ExecuteCommand(string command)
     {
-        // Comando exacto que quieres: NO, UP
-        if (symbols.Length == 2 &&
-            symbols[0] == "NO" &&
-            symbols[1] == "UP")
+        Debug.Log($"[TerminalCallCart] ExecuteCommand recibido: '{command}'");
+
+        // Normalizamos el texto
+        command = command.ToLower().Trim();
+
+        // Comando esperado
+        if (command == "no,up")
         {
+            Debug.Log("[TerminalCallCart] Comando correcto -> TrySpawnCart()");
             TrySpawnCart();
+        }
+        else
+        {
+            Debug.Log("[TerminalCallCart] Comando incorrecto o desconocido");
         }
     }
 
     void TrySpawnCart()
     {
         if (!MinecartController.CanSpawnCart())
+        {
+            Debug.Log("[TerminalCallCart] No se puede spawnear la bagoneta ahora.");
             return;
+        }
 
+        Debug.Log("[TerminalCallCart] Instanciando bagoneta...");
         Instantiate(cartPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }
