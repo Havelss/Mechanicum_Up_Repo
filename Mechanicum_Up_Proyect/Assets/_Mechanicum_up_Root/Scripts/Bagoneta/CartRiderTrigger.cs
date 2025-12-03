@@ -65,7 +65,7 @@ public class CartRiderTrigger : MonoBehaviour
 
         yield return new WaitForSeconds(connectDuration);
 
-        if (player != null) cart.FinalizeEnter(player);
+        if (player != null) cart.FinalizeEnter(player.transform);
         cart.OpenInternalTerminal();
         isConnecting = false;
     }

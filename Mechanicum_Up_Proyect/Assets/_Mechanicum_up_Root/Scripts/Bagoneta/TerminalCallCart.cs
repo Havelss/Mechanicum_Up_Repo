@@ -7,21 +7,9 @@ public class TerminalCallCart : MonoBehaviour
 
     public void ExecuteCommand(string command)
     {
-        Debug.Log($"[TerminalCallCart] ExecuteCommand recibido: '{command}'");
-
-        // Normalizamos el texto
         command = command.ToLower().Trim();
-
-        // Comando esperado
         if (command == "no,up")
-        {
-            Debug.Log("[TerminalCallCart] Comando correcto -> TrySpawnCart()");
             TrySpawnCart();
-        }
-        else
-        {
-            Debug.Log("[TerminalCallCart] Comando incorrecto o desconocido");
-        }
     }
 
     void TrySpawnCart()
@@ -32,7 +20,21 @@ public class TerminalCallCart : MonoBehaviour
             return;
         }
 
-        Debug.Log("[TerminalCallCart] Instanciando bagoneta...");
-        Instantiate(cartPrefab, spawnPoint.position, spawnPoint.rotation);
+        // Instanciamos la bagoneta y la ajustamos sobre el suelo
+        GameObject cart = Instantiate(cartPrefab, spawnPoint.position, spawnPoint.rotation);
+        Rigidbody rb = cart.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            Vector3 vel = rb.linearVelocity;
+            vel.y = -0.1f;  // Empuj�n inicial para que caiga
+            rb.linearVelocity = vel;
+        }
+
+        // Ajuste opcional de altura: raycast
+        RaycastHit hit;
+        if (Physics.Raycast(cart.transform.position + Vector3.up * 5f, Vector3.down, out hit, 50f, LayerMask.GetMask("Ground")))
+        {
+            cart.transform.position = hit.point + Vector3.up * 0.1f;
+        }
     }
 }

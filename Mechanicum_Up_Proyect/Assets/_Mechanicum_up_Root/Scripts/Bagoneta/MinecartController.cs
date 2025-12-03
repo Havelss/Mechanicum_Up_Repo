@@ -2,169 +2,163 @@
 
 public class MinecartController : MonoBehaviour
 {
-    public enum CartDirection { None, Left, Right }
+    [Header("Referencias")]
+    public Transform playerSeat;
+    public GameObject cartTerminalUI;
+    public Rigidbody rb;
 
-    [Header("Movement")]
-    public float moveSpeed = 5f;
+    [Header("Movimiento")]
+    public float forwardSpeed = 12f;
+    public float gravity = 40f;
+    public LayerMask groundMask;
+    public float groundCheckDistance = 1f;
 
     [Header("Player")]
-    public Transform playerSeat;
     public bool isPlayerInside = false;
+    Transform player;
+    PlayerController playerController;
 
-    [Header("Terminal interna")]
-    public GameObject cartTerminalUI;
+    bool grounded;
 
-    [Header("Desmontaje")]
-    public Vector3 cartSeatForwardOffset = new Vector3(0, 0, 2f);
-
-    // Preparado para plataformas móviles
-    private Transform currentPlatform;
-    private Vector3 currentPlatformLastPos;
-
-    private Rigidbody rb;
-    private CartDirection currentDirection = CartDirection.None;
-    private GameObject currentPlayer;
-    private int originalPlayerLayer = 0;
-
+    // Control de instancia
     private static bool cartExists = false;
+    private void OnEnable() => cartExists = true;
+    private void OnDestroy() => cartExists = false;
+    public static bool CanSpawnCart() => !cartExists;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        cartExists = true;
+        if (rb == null) rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
 
-        // Crear playerSeat automático si no está asignado
-        if (playerSeat == null)
+    private void Start()
+    {
+        // Ajustar posición inicial sobre el suelo
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up * 5f, Vector3.down, out hit, 50f, groundMask))
         {
-            GameObject seatGO = new GameObject("PlayerSeat");
-            seatGO.transform.SetParent(transform);
-            seatGO.transform.localPosition = Vector3.zero;
-            seatGO.transform.localRotation = Quaternion.identity;
-            playerSeat = seatGO.transform;
+            transform.position = hit.point + Vector3.up * 0.1f; // un poquito arriba del suelo
         }
 
-        // Rigidbody estable
-        rb.mass = 100f;
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-    }
-
-    private void OnDestroy() => cartExists = false;
-
-    public static bool CanSpawnCart() => !cartExists;
-
-    public void Command_NO() => currentDirection = CartDirection.Left;
-    public void Command_LEFT() => currentDirection = CartDirection.Right;
-    public void Command_Stop() => currentDirection = CartDirection.None;
-
-    public void FinalizeEnter(GameObject player)
-    {
-        if (player == null || playerSeat == null) return;
-
-        isPlayerInside = true;
-        currentPlayer = player;
-
-        originalPlayerLayer = player.layer;
-
-        // Rigidbody del jugador
-        var rbPlayer = player.GetComponent<Rigidbody>();
-        if (rbPlayer != null)
-        {
-            rbPlayer.linearVelocity = Vector3.zero;
-            rbPlayer.angularVelocity = Vector3.zero;
-            rbPlayer.isKinematic = true; // Bloquea física
-        }
-
-        // Collider del jugador
-        var coll = player.GetComponent<Collider>();
-        if (coll != null) coll.enabled = false;
-
-        // Layer seguro
-        int cartLayer = LayerMask.NameToLayer("PlayerInCart");
-        if (cartLayer >= 0) player.layer = cartLayer;
-
-        // Bloquear PlayerController (input, salto, groundcheck)
-        var controller = player.GetComponent<PlayerController>();
-        if (controller != null) controller.enabled = false;
-
-        // Root motion
-        var anim = player.GetComponentInChildren<Animator>();
-        if (anim != null) anim.applyRootMotion = false;
-
-        // Teletransportar al asiento
-        player.transform.SetParent(playerSeat);
-        player.transform.localPosition = Vector3.zero;
-        player.transform.localRotation = Quaternion.identity;
-    }
-
-    public void ExitCart()
-    {
-        if (!isPlayerInside || currentPlayer == null) return;
-
-        isPlayerInside = false;
-
-        // Rigidbody y collider
-        var rbPlayer = currentPlayer.GetComponent<Rigidbody>();
-        if (rbPlayer != null) rbPlayer.isKinematic = false;
-
-        var coll = currentPlayer.GetComponent<Collider>();
-        if (coll != null) coll.enabled = true;
-
-        // Layer original
-        currentPlayer.layer = originalPlayerLayer;
-
-        // Reactivar PlayerController
-        var controller = currentPlayer.GetComponent<PlayerController>();
-        if (controller != null) controller.enabled = true;
-
-        // Root motion
-        var anim = currentPlayer.GetComponentInChildren<Animator>();
-        if (anim != null) anim.applyRootMotion = true;
-
-        // Desmontar
-        currentPlayer.transform.SetParent(null);
-        currentPlayer.transform.position = playerSeat.position + cartSeatForwardOffset;
-
-        // Cerrar terminal
-        if (cartTerminalUI != null) cartTerminalUI.SetActive(false);
-
-        currentPlayer = null;
-    }
-
-    public void OpenInternalTerminal()
-    {
-        if (cartTerminalUI != null) cartTerminalUI.SetActive(true);
+        // Empujón inicial para que la gravedad manual funcione
+        Vector3 vel = rb.linearVelocity;
+        vel.y = -0.1f;
+        rb.linearVelocity = vel;
     }
 
     private void FixedUpdate()
     {
-        Vector3 moveDir = Vector3.zero;
-        if (currentDirection == CartDirection.Left) moveDir = Vector3.left;
-        else if (currentDirection == CartDirection.Right) moveDir = Vector3.right;
+        HandleGroundCheck();
+        ApplyGravity();
 
-        Vector3 platformOffset = Vector3.zero;
-        if (currentPlatform != null)
+        if (isPlayerInside)
+            MoveCartForward();
+    }
+
+    void HandleGroundCheck()
+    {
+        grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
+        Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, grounded ? Color.green : Color.red);
+    }
+
+    void ApplyGravity()
+    {
+        Vector3 vel = rb.linearVelocity;
+        if (!grounded)
+            vel.y -= gravity * Time.fixedDeltaTime;
+        else if (vel.y < 0f)
+            vel.y = -0.1f;
+        rb.linearVelocity = vel;
+    }
+
+    void MoveCartForward()
+    {
+        Vector3 vel = rb.linearVelocity;
+        vel.x = transform.forward.x * forwardSpeed;
+        vel.z = transform.forward.z * forwardSpeed;
+        rb.linearVelocity = vel;
+    }
+
+    // -------------------------
+    //      ENTRAR AL CART
+    // -------------------------
+    public void FinalizeEnter(Transform playerObj)
+    {
+        player = playerObj;
+        playerController = player.GetComponent<PlayerController>();
+        Animator anim = player.GetComponentInChildren<Animator>();
+
+        if (playerController != null)
         {
-            platformOffset = currentPlatform.position - currentPlatformLastPos;
-            currentPlatformLastPos = currentPlatform.position;
+            playerController.enabled = false;
+            Rigidbody prb = player.GetComponent<Rigidbody>();
+            if (prb != null) prb.isKinematic = true;
         }
 
-        rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime + platformOffset);
-    }
-
-    // Preparado para futuras plataformas móviles
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("MovingPlatform"))
+        // Forzar al Animator a estado Idle/neutral
+        if (anim != null)
         {
-            currentPlatform = collision.transform;
-            currentPlatformLastPos = currentPlatform.position;
+            anim.ResetTrigger("JumpStart");
+            anim.ResetTrigger("JumpEnd");
+            anim.SetFloat("Speed", 0f);
+            anim.SetBool("IsGrounded", true);
+            anim.Play("Idle"); // Ajusta según tu animación Idle
         }
+
+        // Colocar en asiento
+        player.position = playerSeat.position;
+        player.rotation = playerSeat.rotation;
+
+        isPlayerInside = true;
     }
 
-    private void OnCollisionExit(Collision collision)
+    // -------------------------
+    //      SALIR DEL CART
+    // -------------------------
+    public void ExitCart()
     {
-        if (collision.transform == currentPlatform) currentPlatform = null;
+        if (!isPlayerInside) return;
+
+        isPlayerInside = false;
+
+        if (playerController != null)
+        {
+            playerController.enabled = true; // Reactiva movimiento
+            Rigidbody prb = player.GetComponent<Rigidbody>();
+            if (prb != null) prb.isKinematic = false;
+        }
+
+        // Restaurar Animator
+        Animator anim = player.GetComponentInChildren<Animator>();
+        if (anim != null)
+        {
+            anim.ResetTrigger("JumpStart");
+            anim.ResetTrigger("JumpEnd");
+            anim.SetFloat("Speed", 0f);
+            anim.SetBool("IsGrounded", true);
+            anim.Play("Idle"); // Ajusta según tu animación Idle
+        }
+
+        // Dar un pequeño empujón para que no caiga dentro del carrito
+        player.position += transform.right * 1f + Vector3.up * 0.5f;
+
+        CloseInternalTerminal();
     }
-    */
+
+    // -------------------------
+    //      TERMINAL UI
+    // -------------------------
+    public void OpenInternalTerminal()
+    {
+        if (cartTerminalUI != null)
+            cartTerminalUI.SetActive(true);
+    }
+
+    public void CloseInternalTerminal()
+    {
+        if (cartTerminalUI != null)
+            cartTerminalUI.SetActive(false);
+    }
 }
