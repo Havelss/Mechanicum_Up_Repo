@@ -3,37 +3,51 @@ using UnityEngine.UI;
 
 public class MinecartTerminalUI : MonoBehaviour
 {
-    [Header("UI Buttons")]
-    public Button noButton;
-    public Button rightButton;
+    [Header("Referencias")]
+    public MinecartController cart;       // La bagoneta controlada
+    public Button noButton;               // Botón para mover a la izquierda (-X)
+    public Button rightButton;            // Botón para mover a la derecha (+X)
 
-    [Header("Referencia al carrito")]
-    public MinecartController cart;
+    private bool noPressed = false;
+    private bool rightPressed = false;
 
-    private void Awake()
+    private void Start()
     {
         if (noButton != null)
-            noButton.onClick.AddListener(() => OnNoPressed());
+            noButton.onClick.AddListener(OnNoButtonPressed);
 
         if (rightButton != null)
-            rightButton.onClick.AddListener(() => OnRightPressed());
+            rightButton.onClick.AddListener(OnRightButtonPressed);
     }
 
-    private void OnNoPressed()
+    private void OnNoButtonPressed()
     {
+        if (noPressed) return; // ya está activo
+        noPressed = true;
+        rightPressed = false;
+
+        // Mover la bagoneta a la izquierda
         if (cart != null)
-        {
             cart.MoveLeft();
-            Debug.Log("[MinecartTerminal] Botón NO pulsado → MoveLeft");
-        }
     }
 
-    private void OnRightPressed()
+    private void OnRightButtonPressed()
     {
+        if (rightPressed) return; // ya está activo
+        rightPressed = true;
+        noPressed = false;
+
+        // Mover la bagoneta a la derecha
         if (cart != null)
-        {
             cart.MoveRight();
-            Debug.Log("[MinecartTerminal] Botón RIGHT pulsado → MoveRight");
-        }
+    }
+
+    // Método opcional para detener movimiento lateral
+    public void StopCartLateral()
+    {
+        noPressed = false;
+        rightPressed = false;
+        if (cart != null)
+            cart.StopLateral();
     }
 }

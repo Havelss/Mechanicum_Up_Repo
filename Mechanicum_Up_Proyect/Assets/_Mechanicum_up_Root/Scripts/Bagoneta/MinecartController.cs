@@ -2,31 +2,31 @@
 
 public class MinecartController : MonoBehaviour
 {
-    public enum CartDirection { None, Left, Right }
-
     [Header("Referencias")]
-    public Transform playerSeat;         // Asiento del jugador
-    public GameObject cartTerminalUI;    // UI del terminal
-    public Rigidbody rb;                 // Rigidbody de la bagoneta
+    public Transform playerSeat;                  // Donde se sienta el player
+    public GameObject cartTerminalUI;             // UI del terminal
+    public Rigidbody rb;                          // Rigidbody del carrito
 
     [Header("Movimiento")]
-    public float forwardSpeed = 12f;     // Velocidad hacia adelante
-    public float gravity = 40f;          // Gravedad manual
+    public float forwardSpeed = 12f;              // Velocidad hacia adelante
+    public float lateralSpeed = 8f;               // Velocidad lateral
+    public float gravity = 40f;                   // Gravedad manual fuerte
     public LayerMask groundMask;
     public float groundCheckDistance = 0.3f;
 
     [Header("Player")]
     public bool isPlayerInside = false;
+    Transform player;
+    PlayerController playerController;
 
-    private Transform player;
-    private PlayerController playerController;
-    private Animator playerAnimator;
-    private CartDirection currentDirection = CartDirection.None;
-    private bool grounded;
+    bool grounded;
+    private float lateralDirection = 0f; // -1 = izquierda, 1 = derecha
 
     private void Awake()
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
+
+        // Desactivar gravedad real de Unity
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
@@ -37,74 +37,71 @@ public class MinecartController : MonoBehaviour
 
         if (isPlayerInside)
         {
-            HandleCartMovement();
+            MoveCartForward();
+            MoveCartLateral();
         }
     }
 
-    private void HandleGroundCheck()
+    // -------------------------
+    //       FÍSICAS
+    // -------------------------
+    void HandleGroundCheck()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
 
-        Vector3 vel = rb.linearVelocity;
+        Vector3 vel = rb.linearVelocity; // Cambiado de velocity a linearVelocity
 
+        // Aplicar gravedad manual
         if (!grounded)
             vel.y -= gravity * Time.deltaTime;
         else if (vel.y < -1f)
-            vel.y = -1f;
+            vel.y = -1f; // Mantener pegado al suelo
 
-        rb.linearVelocity = vel;
+        rb.linearVelocity = vel; // Cambiado de velocity a linearVelocity
     }
 
-    private void HandleCartMovement()
+    void MoveCartForward()
     {
-        Vector3 vel = rb.linearVelocity;
-
-        if (currentDirection == CartDirection.Left)
-            vel.x = -forwardSpeed;
-        else if (currentDirection == CartDirection.Right)
-            vel.x = forwardSpeed;
-        else
-            vel.x = 0;
-
-        rb.linearVelocity = vel;
+        Vector3 vel = rb.linearVelocity; // Cambiado de velocity a linearVelocity
+        vel.x = transform.forward.x * forwardSpeed;
+        vel.z = transform.forward.z * forwardSpeed;
+        rb.linearVelocity = vel; // Cambiado de velocity a linearVelocity
     }
 
-    // -------------------------
-    // Métodos para terminal
-    // -------------------------
-    public void MoveLeft() => currentDirection = CartDirection.Left;
-    public void MoveRight() => currentDirection = CartDirection.Right;
+    void MoveCartLateral()
+    {
+        Vector3 vel = rb.linearVelocity; // Cambiado de velocity a linearVelocity
+        vel += transform.right * lateralDirection * lateralSpeed;
+        rb.linearVelocity = vel; // Cambiado de velocity a linearVelocity
+    }
+
+    public void MoveLeft() => lateralDirection = -1f;
+    public void MoveRight() => lateralDirection = 1f;
+    public void StopLateral() => lateralDirection = 0f;
 
     // -------------------------
-    // Entrar en la bagoneta
+    //      ENTRAR AL CART
     // -------------------------
     public void FinalizeEnter(Transform playerObj)
     {
         player = playerObj;
         playerController = player.GetComponent<PlayerController>();
-        playerAnimator = player.GetComponentInChildren<Animator>();
 
         if (playerController != null)
-            playerController.enabled = false;
-
-        if (playerAnimator != null)
         {
-            playerAnimator.applyRootMotion = true; // reproducir animación de entrada
+            playerController.enabled = false;
+            player.GetComponent<Rigidbody>().isKinematic = true;
         }
 
-        // Posicionar jugador
+        // Colocar en asiento
         player.position = playerSeat.position;
         player.rotation = playerSeat.rotation;
 
         isPlayerInside = true;
-
-        // Mostrar terminal UI
-        if (cartTerminalUI != null)
-            cartTerminalUI.SetActive(true);
     }
 
     // -------------------------
-    // Salir de la bagoneta
+    //      SALIR DEL CART
     // -------------------------
     public void ExitCart()
     {
@@ -113,25 +110,20 @@ public class MinecartController : MonoBehaviour
         isPlayerInside = false;
 
         if (playerController != null)
-            playerController.enabled = true;
-
-        if (playerAnimator != null)
         {
-            playerAnimator.applyRootMotion = false;
-            playerAnimator.speed = 1f;
-            playerAnimator.Play("Idle"); // dejar idle
+            playerController.enabled = true;
+            Rigidbody prb = player.GetComponent<Rigidbody>();
+            prb.isKinematic = false;
         }
 
-        // Sacar jugador del asiento un poco
+        // Dar un pequeño empujón para que no caiga dentro del carrito
         player.position += transform.right * 1f + Vector3.up * 0.5f;
 
-        // Ocultar terminal UI
-        if (cartTerminalUI != null)
-            cartTerminalUI.SetActive(false);
+        CloseInternalTerminal();
     }
 
     // -------------------------
-    // Terminal UI
+    //      TERMINAL UI
     // -------------------------
     public void OpenInternalTerminal()
     {
@@ -143,5 +135,13 @@ public class MinecartController : MonoBehaviour
     {
         if (cartTerminalUI != null)
             cartTerminalUI.SetActive(false);
+    }
+
+    // -------------------------
+    //      MÉTODO ESTÁTICO SPAWN
+    // -------------------------
+    public static bool CanSpawnCart()
+    {
+        return FindObjectsByType<MinecartController>(FindObjectsSortMode.None).Length == 0; // Cambiado de FindObjectsOfType a FindObjectsByType
     }
 }
