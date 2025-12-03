@@ -2,29 +2,27 @@
 
 public class MinecartController : MonoBehaviour
 {
+    public enum CartDirection { None, Left, Right }
+
     [Header("Referencias")]
-    public Transform playerSeat;
-    public GameObject cartTerminalUI;
-    public Rigidbody rb;
+    public Transform playerSeat;         // Asiento del jugador
+    public GameObject cartTerminalUI;    // UI del terminal
+    public Rigidbody rb;                 // Rigidbody de la bagoneta
 
     [Header("Movimiento")]
-    public float forwardSpeed = 12f;
-    public float gravity = 40f;
+    public float forwardSpeed = 12f;     // Velocidad hacia adelante
+    public float gravity = 40f;          // Gravedad manual
     public LayerMask groundMask;
-    public float groundCheckDistance = 1f;
+    public float groundCheckDistance = 0.3f;
 
     [Header("Player")]
     public bool isPlayerInside = false;
-    Transform player;
-    PlayerController playerController;
 
-    bool grounded;
-
-    // Control de instancia
-    private static bool cartExists = false;
-    private void OnEnable() => cartExists = true;
-    private void OnDestroy() => cartExists = false;
-    public static bool CanSpawnCart() => !cartExists;
+    private Transform player;
+    private PlayerController playerController;
+    private Animator playerAnimator;
+    private CartDirection currentDirection = CartDirection.None;
+    private bool grounded;
 
     private void Awake()
     {
@@ -33,89 +31,80 @@ public class MinecartController : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    private void Start()
-    {
-        // Ajustar posición inicial sobre el suelo
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up * 5f, Vector3.down, out hit, 50f, groundMask))
-        {
-            transform.position = hit.point + Vector3.up * 0.1f; // un poquito arriba del suelo
-        }
-
-        // Empujón inicial para que la gravedad manual funcione
-        Vector3 vel = rb.linearVelocity;
-        vel.y = -0.1f;
-        rb.linearVelocity = vel;
-    }
-
-    private void FixedUpdate()
+    private void Update()
     {
         HandleGroundCheck();
-        ApplyGravity();
 
         if (isPlayerInside)
-            MoveCartForward();
+        {
+            HandleCartMovement();
+        }
     }
 
-    void HandleGroundCheck()
+    private void HandleGroundCheck()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
-        Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, grounded ? Color.green : Color.red);
-    }
 
-    void ApplyGravity()
-    {
         Vector3 vel = rb.linearVelocity;
+
         if (!grounded)
-            vel.y -= gravity * Time.fixedDeltaTime;
-        else if (vel.y < 0f)
-            vel.y = -0.1f;
+            vel.y -= gravity * Time.deltaTime;
+        else if (vel.y < -1f)
+            vel.y = -1f;
+
         rb.linearVelocity = vel;
     }
 
-    void MoveCartForward()
+    private void HandleCartMovement()
     {
         Vector3 vel = rb.linearVelocity;
-        vel.x = transform.forward.x * forwardSpeed;
-        vel.z = transform.forward.z * forwardSpeed;
+
+        if (currentDirection == CartDirection.Left)
+            vel.x = -forwardSpeed;
+        else if (currentDirection == CartDirection.Right)
+            vel.x = forwardSpeed;
+        else
+            vel.x = 0;
+
         rb.linearVelocity = vel;
     }
 
     // -------------------------
-    //      ENTRAR AL CART
+    // Métodos para terminal
+    // -------------------------
+    public void MoveLeft() => currentDirection = CartDirection.Left;
+    public void MoveRight() => currentDirection = CartDirection.Right;
+
+    // -------------------------
+    // Entrar en la bagoneta
     // -------------------------
     public void FinalizeEnter(Transform playerObj)
     {
         player = playerObj;
         playerController = player.GetComponent<PlayerController>();
-        Animator anim = player.GetComponentInChildren<Animator>();
+        playerAnimator = player.GetComponentInChildren<Animator>();
 
         if (playerController != null)
-        {
             playerController.enabled = false;
-            Rigidbody prb = player.GetComponent<Rigidbody>();
-            if (prb != null) prb.isKinematic = true;
-        }
 
-        // Forzar al Animator a estado Idle/neutral
-        if (anim != null)
+        if (playerAnimator != null)
         {
-            anim.ResetTrigger("JumpStart");
-            anim.ResetTrigger("JumpEnd");
-            anim.SetFloat("Speed", 0f);
-            anim.SetBool("IsGrounded", true);
-            anim.Play("Idle"); // Ajusta según tu animación Idle
+            playerAnimator.applyRootMotion = true; // reproducir animación de entrada
         }
 
-        // Colocar en asiento
+        // Posicionar jugador
         player.position = playerSeat.position;
         player.rotation = playerSeat.rotation;
 
         isPlayerInside = true;
+
+        // Mostrar terminal UI
+        if (cartTerminalUI != null)
+            cartTerminalUI.SetActive(true);
     }
 
     // -------------------------
-    //      SALIR DEL CART
+    // Salir de la bagoneta
     // -------------------------
     public void ExitCart()
     {
@@ -124,31 +113,25 @@ public class MinecartController : MonoBehaviour
         isPlayerInside = false;
 
         if (playerController != null)
+            playerController.enabled = true;
+
+        if (playerAnimator != null)
         {
-            playerController.enabled = true; // Reactiva movimiento
-            Rigidbody prb = player.GetComponent<Rigidbody>();
-            if (prb != null) prb.isKinematic = false;
+            playerAnimator.applyRootMotion = false;
+            playerAnimator.speed = 1f;
+            playerAnimator.Play("Idle"); // dejar idle
         }
 
-        // Restaurar Animator
-        Animator anim = player.GetComponentInChildren<Animator>();
-        if (anim != null)
-        {
-            anim.ResetTrigger("JumpStart");
-            anim.ResetTrigger("JumpEnd");
-            anim.SetFloat("Speed", 0f);
-            anim.SetBool("IsGrounded", true);
-            anim.Play("Idle"); // Ajusta según tu animación Idle
-        }
-
-        // Dar un pequeño empujón para que no caiga dentro del carrito
+        // Sacar jugador del asiento un poco
         player.position += transform.right * 1f + Vector3.up * 0.5f;
 
-        CloseInternalTerminal();
+        // Ocultar terminal UI
+        if (cartTerminalUI != null)
+            cartTerminalUI.SetActive(false);
     }
 
     // -------------------------
-    //      TERMINAL UI
+    // Terminal UI
     // -------------------------
     public void OpenInternalTerminal()
     {
