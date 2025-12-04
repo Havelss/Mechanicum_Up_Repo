@@ -26,7 +26,6 @@ public class MinecartController : MonoBehaviour
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
 
-        // Desactivar gravedad real de Unity
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
@@ -49,30 +48,29 @@ public class MinecartController : MonoBehaviour
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
 
-        Vector3 vel = rb.linearVelocity; // Cambiado de velocity a linearVelocity
+        Vector3 vel = rb.linearVelocity;
 
-        // Aplicar gravedad manual
         if (!grounded)
             vel.y -= gravity * Time.deltaTime;
         else if (vel.y < -1f)
-            vel.y = -1f; // Mantener pegado al suelo
+            vel.y = -1f;
 
-        rb.linearVelocity = vel; // Cambiado de velocity a linearVelocity
+        rb.linearVelocity = vel;
     }
 
     void MoveCartForward()
     {
-        Vector3 vel = rb.linearVelocity; // Cambiado de velocity a linearVelocity
+        Vector3 vel = rb.linearVelocity;
         vel.x = transform.forward.x * forwardSpeed;
         vel.z = transform.forward.z * forwardSpeed;
-        rb.linearVelocity = vel; // Cambiado de velocity a linearVelocity
+        rb.linearVelocity = vel;
     }
 
     void MoveCartLateral()
     {
-        Vector3 vel = rb.linearVelocity; // Cambiado de velocity a linearVelocity
+        Vector3 vel = rb.linearVelocity;
         vel += transform.right * lateralDirection * lateralSpeed;
-        rb.linearVelocity = vel; // Cambiado de velocity a linearVelocity
+        rb.linearVelocity = vel;
     }
 
     public void MoveLeft() => lateralDirection = -1f;
@@ -93,11 +91,12 @@ public class MinecartController : MonoBehaviour
             player.GetComponent<Rigidbody>().isKinematic = true;
         }
 
-        // Colocar en asiento
         player.position = playerSeat.position;
         player.rotation = playerSeat.rotation;
 
         isPlayerInside = true;
+
+        OpenInternalTerminal();  // ⭐ AÑADIDO — mostrar terminal al entrar
     }
 
     // -------------------------
@@ -116,7 +115,6 @@ public class MinecartController : MonoBehaviour
             prb.isKinematic = false;
         }
 
-        // Dar un pequeño empujón para que no caiga dentro del carrito
         player.position += transform.right * 1f + Vector3.up * 0.5f;
 
         CloseInternalTerminal();
@@ -138,10 +136,10 @@ public class MinecartController : MonoBehaviour
     }
 
     // -------------------------
-    //      MÉTODO ESTÁTICO SPAWN
+    //      SPAWN
     // -------------------------
     public static bool CanSpawnCart()
     {
-        return FindObjectsByType<MinecartController>(FindObjectsSortMode.None).Length == 0; // Cambiado de FindObjectsOfType a FindObjectsByType
+        return FindObjectsByType<MinecartController>(FindObjectsSortMode.None).Length == 0;
     }
 }
