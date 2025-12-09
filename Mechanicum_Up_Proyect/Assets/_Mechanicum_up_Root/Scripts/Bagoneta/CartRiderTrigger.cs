@@ -82,15 +82,19 @@ public class CartRiderTrigger : MonoBehaviour
     public float connectDuration = 1f;
     private bool isConnecting = false;
 
+    private void Start()
+    {
+        // Obtener el MinecartController en el padre
+        cart = GetComponentInParent<MinecartController>();
+        if (cart == null)
+            Debug.LogError("[CartRiderTrigger] No se encontró MinecartController en el padre.");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (cart == null) return;
 
-        // Buscar MinecartController dinámicamente si no está asignado
-        if (cart == null)
-            cart = GetComponentInParent<MinecartController>();
-
-        if (cart != null && !cart.isPlayerInside)
+        if (other.CompareTag("Player") && !cart.isPlayerInside)
         {
             player = other.transform.root.gameObject;
             canMount = true;
@@ -99,9 +103,9 @@ public class CartRiderTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (cart == null) return;
 
-        if (cart != null && !cart.isPlayerInside)
+        if (other.CompareTag("Player") && !cart.isPlayerInside)
         {
             canMount = false;
             player = null;
@@ -110,12 +114,16 @@ public class CartRiderTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (canMount && !isConnecting && cart != null && !cart.isPlayerInside && Input.GetKeyDown(KeyCode.E))
+        if (cart == null) return;
+
+        // Subirse a la vagoneta
+        if (canMount && !cart.isPlayerInside && !isConnecting && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(StartConnectionSequence());
         }
 
-        if (cart != null && cart.isPlayerInside && Input.GetKeyDown(KeyCode.E))
+        // Salir de la vagoneta
+        if (cart.isPlayerInside && Input.GetKeyDown(KeyCode.E))
         {
             cart.ExitCart();
         }
@@ -123,14 +131,14 @@ public class CartRiderTrigger : MonoBehaviour
 
     private IEnumerator StartConnectionSequence()
     {
-        if (player == null || cart == null) yield break;
+        if (player == null) yield break;
 
         isConnecting = true;
 
-        // Desactivar controles del jugador
-        var controller = player.GetComponent<PlayerController>();
-        var rb = player.GetComponent<Rigidbody>();
-        var anim = player.GetComponentInChildren<Animator>();
+        // Desactivar player mientras se monta
+        PlayerController controller = player.GetComponent<PlayerController>();
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        Animator anim = player.GetComponentInChildren<Animator>();
 
         if (controller != null) controller.enabled = false;
         if (rb != null)
@@ -151,10 +159,9 @@ public class CartRiderTrigger : MonoBehaviour
 
         yield return new WaitForSeconds(connectDuration);
 
-        // Finalizar entrada
+        // Subir al carrito
         cart.FinalizeEnter(player.transform);
 
         isConnecting = false;
     }
 }
-

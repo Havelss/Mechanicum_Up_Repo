@@ -15,15 +15,21 @@ public class MinecartTerminalAnimator : MonoBehaviour
     private void Awake()
     {
         // Forzar posición inicial y alpha
-        Vector2 pos = terminalPanel.anchoredPosition;
-        pos.y = hiddenY;
-        terminalPanel.anchoredPosition = pos;
+        if (terminalPanel != null)
+        {
+            Vector2 pos = terminalPanel.anchoredPosition;
+            pos.y = hiddenY;
+            terminalPanel.anchoredPosition = pos;
+        }
+
         if (canvasGroup != null)
-            canvasGroup.alpha = 255f;
+            canvasGroup.alpha = 0f; // valores 0 a 1
     }
 
     private void Update()
     {
+        if (terminalPanel == null) return;
+
         // Animación de subida
         if (isVisible && animTimer < animationTime)
         {
@@ -55,7 +61,6 @@ public class MinecartTerminalAnimator : MonoBehaviour
     // ---------- API ----------
     public void ShowTerminal()
     {
-        gameObject.SetActive(true);
         isVisible = true;
         animTimer = 0f; // reset animación
     }
