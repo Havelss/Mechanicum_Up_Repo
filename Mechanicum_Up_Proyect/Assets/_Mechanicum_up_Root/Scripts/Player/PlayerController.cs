@@ -284,7 +284,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip footstepClip;
     #endregion
 
-
     #region Movimiento  
     [Header("Movimiento")]
     [SerializeField] float speed = 10f;
@@ -536,11 +535,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-
-    // ---------------------------------------------------------
-    //  SISTEMA PARA ENTRAR A LA VAGONETA (Opción A)
-    // ---------------------------------------------------------
-
+    #region Vagoneta
     [Header("Vagoneta")]
     public MinecartController currentCart;
     public bool isInCart = false;
@@ -590,7 +585,7 @@ public class PlayerController : MonoBehaviour
         moveInput = Vector2.zero;
         rb.linearVelocity = Vector3.zero;
 
-        // Animación
+        // Animación de entrar
         if (playerAnimator != null)
             playerAnimator.SetTrigger("EnterCart");
 
@@ -602,9 +597,12 @@ public class PlayerController : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
-        // Desactivar control del jugador totalmente
+        // Desactivar control
         this.enabled = false;
 
-        currentCart.PlayerEntered();
+        // Entrar a la vagoneta
+        currentCart.FinalizeEnter(transform);
     }
+    #endregion
 }
+
