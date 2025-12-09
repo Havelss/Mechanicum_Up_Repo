@@ -78,13 +78,13 @@ public class TerminalCallCart : MonoBehaviour
             cartObj.transform.position = hit.point + Vector3.up * 0.1f;
         }
 
-        // Buscar la terminal en la escena y asignarla al cart
+        // Asignar la terminal en la escena al cart
         MinecartController cart = cartObj.GetComponent<MinecartController>();
         MinecartTerminalUI terminalUI = GameObject.FindWithTag("CartTerminal")?.GetComponent<MinecartTerminalUI>();
         if (terminalUI != null)
         {
-            cart.cartTerminalUI = terminalUI;
-            terminalUI.cart = cart;
+            cart.cartTerminalUI = terminalUI;   // Referencia al script de UI
+            terminalUI.SetCart(cart);           // Asigna la bagoneta al UI
         }
         else
         {
@@ -92,4 +92,5 @@ public class TerminalCallCart : MonoBehaviour
         }
     }
 }
+
 

@@ -58,9 +58,10 @@ using UnityEngine.UI;
 public class MinecartTerminalUI : MonoBehaviour
 {
     [Header("Referencias")]
-    public MinecartController cart;       // Se asigna en runtime
-    public Button noButton;               // Botón para mover a la izquierda (-X)
-    public Button rightButton;            // Botón para mover a la derecha (+X)
+    public Button noButton;
+    public Button rightButton;
+
+    private MinecartController cart;       // Ahora privado, se asigna con SetCart
 
     private bool noPressed = false;
     private bool rightPressed = false;
@@ -72,6 +73,11 @@ public class MinecartTerminalUI : MonoBehaviour
 
         if (rightButton != null)
             rightButton.onClick.AddListener(OnRightButtonPressed);
+    }
+
+    public void SetCart(MinecartController newCart)
+    {
+        cart = newCart;
     }
 
     private void OnNoButtonPressed()
@@ -102,3 +108,4 @@ public class MinecartTerminalUI : MonoBehaviour
             cart.StopLateral();
     }
 }
+

@@ -19,7 +19,7 @@ public class MinecartTerminalAnimator : MonoBehaviour
         pos.y = hiddenY;
         terminalPanel.anchoredPosition = pos;
         if (canvasGroup != null)
-            canvasGroup.alpha = 0f;
+            canvasGroup.alpha = 255f;
     }
 
     private void Update()

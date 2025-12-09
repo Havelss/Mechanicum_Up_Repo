@@ -8079,7 +8079,7 @@ GameObject:
   - component: {fileID: 733289608}
   m_Layer: 7
   m_Name: CartTerminalPanel
-  m_TagString: CartTerminal
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8102,7 +8102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: -331}
+  m_AnchoredPosition: {x: 8, y: -762}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &733289608
@@ -8121,7 +8121,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 1651261519}
   animationTime: 0.6
   hiddenY: -500
-  shownY: -400
+  shownY: 353.7
 --- !u!114 &733289609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15098,7 +15098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bda39701d92c794bb147a277b4aceda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinecartTerminalUI
-  cart: {fileID: 0}
   noButton: {fileID: 543797386}
   rightButton: {fileID: 912255478}
 --- !u!114 &1651261521
