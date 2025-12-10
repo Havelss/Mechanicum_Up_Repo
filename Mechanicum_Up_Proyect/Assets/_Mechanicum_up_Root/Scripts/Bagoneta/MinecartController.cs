@@ -156,15 +156,177 @@
 //    }
 //}
 
+
+////10/12/2025/////
+
+
+//using UnityEngine;
+
+//public class MinecartController : MonoBehaviour
+//{
+//    [Header("Referencias")]
+//    public Transform playerSeat;                  // Donde se sienta el jugador
+//    public MinecartTerminalUI cartTerminalUI;     // Terminal UI (asignada en runtime)
+//    public MinecartTerminalAnimator terminalAnimator; // Animator opcional del panel tipo tablet
+//    public Rigidbody rb;                          // Rigidbody del carrito
+
+//    [Header("Movimiento")]
+//    public float forwardSpeed = 12f;
+//    public float lateralSpeed = 8f;
+
+//    [Header("Player")]
+//    public bool isPlayerInside = false;
+//    private Transform player;
+//    private PlayerController playerController;
+//    private float lateralDirection = 0f; // -1 = izquierda, 1 = derecha
+
+//    //private void Awake()
+//    //{
+//    //    if (rb == null) rb = GetComponent<Rigidbody>();
+//    //    rb.useGravity = false;
+//    //    rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+//    //    // Buscar la terminal en la escena si no se asignó desde inspector
+//    //    if (cartTerminalUI == null)
+//    //    {
+//    //        var terminal = GameObject.FindWithTag("CartTerminal");
+//    //        if (terminal != null)
+//    //        {
+//    //            cartTerminalUI = terminal.GetComponent<MinecartTerminalUI>();
+//    //            if (cartTerminalUI != null)
+//    //                cartTerminalUI.SetCart(this);
+//    //        }
+//    //        else
+//    //        {
+//    //            Debug.LogWarning("No se encontró ningún panel con tag 'CartTerminal' en la escena.");
+//    //        }
+//    //    }
+//    //}
+
+//    private void Awake()
+//    {
+//        if (rb == null) rb = GetComponent<Rigidbody>();
+//        rb.useGravity = false;
+//        rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+//        // Buscar la terminal en la escena si no se asignó desde inspector
+//        if (cartTerminalUI == null)
+//        {
+//            var terminal = GameObject.FindWithTag("CartTerminal");
+//            if (terminal != null)
+//            {
+//                cartTerminalUI = terminal.GetComponent<MinecartTerminalUI>();
+//                if (cartTerminalUI != null)
+//                    cartTerminalUI.SetCart(this);
+//            }
+//            else
+//            {
+//                Debug.LogWarning("No se encontró ningún panel con tag 'CartTerminal' en la escena.");
+//            }
+//        }
+
+//        // Buscar el animator si existe
+//        if (terminalAnimator == null && cartTerminalUI != null)
+//        {
+//            terminalAnimator = cartTerminalUI.GetComponent<MinecartTerminalAnimator>();
+//            if (terminalAnimator == null)
+//                Debug.LogWarning("No se encontró MinecartTerminalAnimator en la terminal.");
+//        }
+//    }
+
+
+
+//    private void Update()
+//    {
+//        if (isPlayerInside)
+//        {
+//            MoveCartLateral();
+//        }
+//    }
+
+//    // -------------------------
+//    // MOVIMIENTO LATERAL
+//    // -------------------------
+//    private void MoveCartLateral()
+//    {
+//        Vector3 vel = rb.linearVelocity;
+//        vel += transform.right * lateralDirection * lateralSpeed;
+//        rb.linearVelocity = vel;
+//    }
+
+//    public void MoveLeft() => lateralDirection = -1f;
+//    public void MoveRight() => lateralDirection = 1f;
+//    public void StopLateral() => lateralDirection = 0f;
+
+//    // -------------------------
+//    // ENTRAR AL CART
+//    // -------------------------
+//    public void FinalizeEnter(Transform playerObj)
+//    {
+//        player = playerObj;
+//        playerController = player.GetComponent<PlayerController>();
+
+//        if (playerController != null)
+//        {
+//            playerController.enabled = false;
+//            player.GetComponent<Rigidbody>().isKinematic = true;
+//        }
+
+//        player.position = playerSeat.position;
+//        player.rotation = playerSeat.rotation;
+
+//        isPlayerInside = true;
+
+//        // ---------- Mostrar terminal con animación ----------
+//        if (terminalAnimator != null)
+//            terminalAnimator.ShowTerminal();
+//        else if (cartTerminalUI != null)
+//            cartTerminalUI.gameObject.SetActive(true);
+
+//        // ---------- Activar cursor ----------
+//        Cursor.visible = true;
+//        Cursor.lockState = CursorLockMode.None;
+//    }
+
+//    // -------------------------
+//    // SALIR DEL CART
+//    // -------------------------
+//    public void ExitCart()
+//    {
+//        if (!isPlayerInside) return;
+
+//        isPlayerInside = false;
+
+//        if (playerController != null)
+//        {
+//            playerController.enabled = true;
+//            Rigidbody prb = player.GetComponent<Rigidbody>();
+//            prb.isKinematic = false;
+//        }
+
+//        player.position += transform.right * 1f + Vector3.up * 0.5f;
+
+//        // ---------- Ocultar terminal ----------
+//        if (terminalAnimator != null)
+//            terminalAnimator.HideTerminal();
+//        else if (cartTerminalUI != null)
+//            cartTerminalUI.gameObject.SetActive(false);
+
+//        // ---------- Ocultar cursor ----------
+//        Cursor.visible = false;
+//        Cursor.lockState = CursorLockMode.Locked;
+//    }
+//}
+
 using UnityEngine;
 
 public class MinecartController : MonoBehaviour
 {
     [Header("Referencias")]
-    public Transform playerSeat;                  // Donde se sienta el jugador
-    public MinecartTerminalUI cartTerminalUI;     // Terminal UI (asignada en runtime)
-    public MinecartTerminalAnimator terminalAnimator; // Animator opcional del panel tipo tablet
-    public Rigidbody rb;                          // Rigidbody del carrito
+    public Transform playerSeat;
+    public MinecartTerminalUI cartTerminalUI;
+    public MinecartTerminalAnimator terminalAnimator;
+    public Rigidbody rb;
 
     [Header("Movimiento")]
     public float forwardSpeed = 12f;
@@ -174,7 +336,7 @@ public class MinecartController : MonoBehaviour
     public bool isPlayerInside = false;
     private Transform player;
     private PlayerController playerController;
-    private float lateralDirection = 0f; // -1 = izquierda, 1 = derecha
+    private float lateralDirection = 0f;
 
     private void Awake()
     {
@@ -182,34 +344,29 @@ public class MinecartController : MonoBehaviour
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-        // Buscar la terminal en la escena si no se asignó desde inspector
+        // Asignar referencias si no están puestas en inspector
         if (cartTerminalUI == null)
         {
-            var terminal = GameObject.FindWithTag("CartTerminal");
-            if (terminal != null)
+            var terminalUIObj = GameObject.FindWithTag("CartTerminal");
+            if (terminalUIObj != null)
             {
-                cartTerminalUI = terminal.GetComponent<MinecartTerminalUI>();
-                if (cartTerminalUI != null)
-                    cartTerminalUI.SetCart(this);
+                cartTerminalUI = terminalUIObj.GetComponent<MinecartTerminalUI>();
+                if (cartTerminalUI != null) cartTerminalUI.SetCart(this);
             }
-            else
-            {
-                Debug.LogWarning("No se encontró ningún panel con tag 'CartTerminal' en la escena.");
-            }
+        }
+
+        if (terminalAnimator == null)
+        {
+            var terminalAnimObj = GameObject.Find("PanelTerminal")?.GetComponent<MinecartTerminalAnimator>();
+            if (terminalAnimObj != null) terminalAnimator = terminalAnimObj;
         }
     }
 
     private void Update()
     {
-        if (isPlayerInside)
-        {
-            MoveCartLateral();
-        }
+        if (isPlayerInside) MoveCartLateral();
     }
 
-    // -------------------------
-    // MOVIMIENTO LATERAL
-    // -------------------------
     private void MoveCartLateral()
     {
         Vector3 vel = rb.linearVelocity;
@@ -221,11 +378,11 @@ public class MinecartController : MonoBehaviour
     public void MoveRight() => lateralDirection = 1f;
     public void StopLateral() => lateralDirection = 0f;
 
-    // -------------------------
-    // ENTRAR AL CART
-    // -------------------------
+    // ------------------------- ENTRAR AL CART -------------------------
     public void FinalizeEnter(Transform playerObj)
     {
+        if (playerObj == null) return;
+
         player = playerObj;
         playerController = player.GetComponent<PlayerController>();
 
@@ -240,20 +397,23 @@ public class MinecartController : MonoBehaviour
 
         isPlayerInside = true;
 
-        // ---------- Mostrar terminal con animación ----------
+        // Mostrar terminal y animación
         if (terminalAnimator != null)
+        {
+            terminalAnimator.isVisible = true;
             terminalAnimator.ShowTerminal();
+        }
         else if (cartTerminalUI != null)
+        {
             cartTerminalUI.gameObject.SetActive(true);
+        }
 
-        // ---------- Activar cursor ----------
+        // Cursor visible
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // -------------------------
-    // SALIR DEL CART
-    // -------------------------
+    // ------------------------- SALIR DEL CART (solo si muere) -------------------------
     public void ExitCart()
     {
         if (!isPlayerInside) return;
@@ -269,15 +429,12 @@ public class MinecartController : MonoBehaviour
 
         player.position += transform.right * 1f + Vector3.up * 0.5f;
 
-        // ---------- Ocultar terminal ----------
-        if (terminalAnimator != null)
-            terminalAnimator.HideTerminal();
-        else if (cartTerminalUI != null)
-            cartTerminalUI.gameObject.SetActive(false);
+        if (terminalAnimator != null) terminalAnimator.HideTerminal();
+        else if (cartTerminalUI != null) cartTerminalUI.gameObject.SetActive(false);
 
-        // ---------- Ocultar cursor ----------
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 }
+
 

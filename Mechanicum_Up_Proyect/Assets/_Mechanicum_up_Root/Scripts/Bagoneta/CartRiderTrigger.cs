@@ -84,16 +84,13 @@ public class CartRiderTrigger : MonoBehaviour
 
     private void Start()
     {
-        // Obtener el MinecartController en el padre
         cart = GetComponentInParent<MinecartController>();
-        if (cart == null)
-            Debug.LogError("[CartRiderTrigger] No se encontró MinecartController en el padre.");
+        if (cart == null) Debug.LogError("[CartRiderTrigger] No se encontró MinecartController en el padre.");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (cart == null) return;
-
         if (other.CompareTag("Player") && !cart.isPlayerInside)
         {
             player = other.transform.root.gameObject;
@@ -104,7 +101,6 @@ public class CartRiderTrigger : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (cart == null) return;
-
         if (other.CompareTag("Player") && !cart.isPlayerInside)
         {
             canMount = false;
@@ -116,17 +112,8 @@ public class CartRiderTrigger : MonoBehaviour
     {
         if (cart == null) return;
 
-        // Subirse a la vagoneta
         if (canMount && !cart.isPlayerInside && !isConnecting && Input.GetKeyDown(KeyCode.E))
-        {
             StartCoroutine(StartConnectionSequence());
-        }
-
-        // Salir de la vagoneta
-        if (cart.isPlayerInside && Input.GetKeyDown(KeyCode.E))
-        {
-            cart.ExitCart();
-        }
     }
 
     private IEnumerator StartConnectionSequence()
@@ -135,21 +122,14 @@ public class CartRiderTrigger : MonoBehaviour
 
         isConnecting = true;
 
-        // Desactivar player mientras se monta
         PlayerController controller = player.GetComponent<PlayerController>();
         Rigidbody rb = player.GetComponent<Rigidbody>();
         Animator anim = player.GetComponentInChildren<Animator>();
 
         if (controller != null) controller.enabled = false;
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
-        }
+        if (rb != null) { rb.linearVelocity = Vector3.zero; rb.angularVelocity = Vector3.zero; rb.isKinematic = true; }
         if (anim != null) anim.applyRootMotion = false;
 
-        // Mover jugador al asiento
         if (cart.playerSeat != null)
         {
             player.transform.SetParent(cart.playerSeat);
@@ -159,7 +139,6 @@ public class CartRiderTrigger : MonoBehaviour
 
         yield return new WaitForSeconds(connectDuration);
 
-        // Subir al carrito
         cart.FinalizeEnter(player.transform);
 
         isConnecting = false;

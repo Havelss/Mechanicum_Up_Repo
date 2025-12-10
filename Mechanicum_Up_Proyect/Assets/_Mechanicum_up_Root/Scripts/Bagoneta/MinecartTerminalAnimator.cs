@@ -1,20 +1,98 @@
+//using UnityEngine;
+
+//public class MinecartTerminalAnimator : MonoBehaviour
+//{
+//    [Header("Panel de terminal")]
+//    public RectTransform terminalPanel;  // El panel que se mueve
+//    public CanvasGroup canvasGroup;      // Para controlar alpha
+//    public float animationTime = 0.5f;   // Duración de la animación
+//    public float hiddenY = -500f;        // Posición fuera de pantalla
+//    public float shownY = 0f;            // Posición visible en pantalla
+
+//    private float animTimer = 0f;
+//    private bool isVisible = false;
+
+//    private void Awake()
+//    {
+//        // Forzar posición inicial y alpha
+//        if (terminalPanel != null)
+//        {
+//            Vector2 pos = terminalPanel.anchoredPosition;
+//            pos.y = hiddenY;
+//            terminalPanel.anchoredPosition = pos;
+//        }
+
+//        if (canvasGroup != null)
+//            canvasGroup.alpha = 255f; // valores 0 a 1
+//    }
+
+//    private void Update()
+//    {
+//        if (terminalPanel == null) return;
+
+//        // Animación de subida
+//        if (isVisible && animTimer < animationTime)
+//        {
+//            animTimer += Time.deltaTime;
+//            float t = Mathf.SmoothStep(0f, 1f, animTimer / animationTime);
+
+//            Vector2 pos = terminalPanel.anchoredPosition;
+//            pos.y = Mathf.Lerp(hiddenY, shownY, t);
+//            terminalPanel.anchoredPosition = pos;
+
+//            if (canvasGroup != null)
+//                canvasGroup.alpha = t;
+//        }
+//        // Animación de bajada
+//        else if (!isVisible && animTimer > 0f)
+//        {
+//            animTimer -= Time.deltaTime;
+//            float t = Mathf.SmoothStep(0f, 1f, animTimer / animationTime);
+
+//            Vector2 pos = terminalPanel.anchoredPosition;
+//            pos.y = Mathf.Lerp(hiddenY, shownY, t);
+//            terminalPanel.anchoredPosition = pos;
+
+//            if (canvasGroup != null)
+//                canvasGroup.alpha = t;
+//        }
+//    }
+
+//    // ---------- API ----------
+//    public void ShowTerminal()
+//    {
+//        isVisible = true;
+//        animTimer = 0f; // reset animación
+//    }
+
+//    public void HideTerminal()
+//    {
+//        isVisible = false;
+//        animTimer = animationTime; // empezar desde visible
+//    }
+//}
+
 using UnityEngine;
 
 public class MinecartTerminalAnimator : MonoBehaviour
 {
     [Header("Panel de terminal")]
-    public RectTransform terminalPanel;  // El panel que se mueve
-    public CanvasGroup canvasGroup;      // Para controlar alpha
-    public float animationTime = 0.5f;   // Duración de la animación
-    public float hiddenY = -500f;        // Posición fuera de pantalla
-    public float shownY = 0f;            // Posición visible en pantalla
+    public RectTransform terminalPanel;
+    public CanvasGroup canvasGroup;
+
+    [Header("Animación")]
+    public float animationTime = 0.5f;
+    public float hiddenY = -500f;
+    public float shownY = 0f;
+
+    [Header("Visibilidad")]
+    public bool isVisible = false;  // Se puede activar desde otros scripts
 
     private float animTimer = 0f;
-    private bool isVisible = false;
 
     private void Awake()
     {
-        // Forzar posición inicial y alpha
+        // Posición inicial fuera de pantalla
         if (terminalPanel != null)
         {
             Vector2 pos = terminalPanel.anchoredPosition;
@@ -22,52 +100,36 @@ public class MinecartTerminalAnimator : MonoBehaviour
             terminalPanel.anchoredPosition = pos;
         }
 
-        if (canvasGroup != null)
-            canvasGroup.alpha = 0f; // valores 0 a 1
+        // Alpha inicial
+        if (canvasGroup != null) canvasGroup.alpha = 0f;
     }
 
     private void Update()
     {
-        if (terminalPanel == null) return;
+        if (terminalPanel == null || canvasGroup == null) return;
 
-        // Animación de subida
-        if (isVisible && animTimer < animationTime)
-        {
-            animTimer += Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, animTimer / animationTime);
+        float dir = isVisible ? 1f : -1f;
+        animTimer += dir * Time.deltaTime;
+        animTimer = Mathf.Clamp(animTimer, 0f, animationTime);
 
-            Vector2 pos = terminalPanel.anchoredPosition;
-            pos.y = Mathf.Lerp(hiddenY, shownY, t);
-            terminalPanel.anchoredPosition = pos;
+        float t = Mathf.SmoothStep(0f, 1f, animTimer / animationTime);
 
-            if (canvasGroup != null)
-                canvasGroup.alpha = t;
-        }
-        // Animación de bajada
-        else if (!isVisible && animTimer > 0f)
-        {
-            animTimer -= Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, animTimer / animationTime);
+        Vector2 pos = terminalPanel.anchoredPosition;
+        pos.y = Mathf.Lerp(hiddenY, shownY, t);
+        terminalPanel.anchoredPosition = pos;
 
-            Vector2 pos = terminalPanel.anchoredPosition;
-            pos.y = Mathf.Lerp(hiddenY, shownY, t);
-            terminalPanel.anchoredPosition = pos;
-
-            if (canvasGroup != null)
-                canvasGroup.alpha = t;
-        }
+        canvasGroup.alpha = t;
     }
 
-    // ---------- API ----------
     public void ShowTerminal()
     {
         isVisible = true;
-        animTimer = 0f; // reset animación
     }
 
     public void HideTerminal()
     {
         isVisible = false;
-        animTimer = animationTime; // empezar desde visible
     }
 }
+
+

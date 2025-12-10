@@ -48,14 +48,12 @@ public class TerminalCallCart : MonoBehaviour
 
     public void ExecuteCommand(string command)
     {
-        command = command.ToLower().Trim();
-        if (command == "no,up")
+        if (command.ToLower().Trim() == "no,up")
             TrySpawnCart();
     }
 
     void TrySpawnCart()
     {
-        // Verificar si ya existe otra bagoneta en la escena
         if (FindObjectsOfType<MinecartController>().Length > 0)
         {
             Debug.Log("[TerminalCallCart] No se puede spawnear la bagoneta ahora.");
@@ -63,6 +61,8 @@ public class TerminalCallCart : MonoBehaviour
         }
 
         GameObject cartObj = Instantiate(cartPrefab, spawnPoint.position, spawnPoint.rotation);
+
+        // Ajustar Rigidbody
         Rigidbody rb = cartObj.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -71,26 +71,27 @@ public class TerminalCallCart : MonoBehaviour
             rb.linearVelocity = vel;
         }
 
-        // Ajuste opcional de altura con raycast
+        // Ajuste de altura con raycast
         RaycastHit hit;
         if (Physics.Raycast(cartObj.transform.position + Vector3.up * 5f, Vector3.down, out hit, 50f, LayerMask.GetMask("Ground")))
         {
             cartObj.transform.position = hit.point + Vector3.up * 0.1f;
         }
 
-        // Asignar la terminal en la escena al cart
+        // Vincular terminal UI y Animator
         MinecartController cart = cartObj.GetComponent<MinecartController>();
-        MinecartTerminalUI terminalUI = GameObject.FindWithTag("CartTerminal")?.GetComponent<MinecartTerminalUI>();
-        if (terminalUI != null)
+        GameObject terminalObj = GameObject.FindWithTag("CartTerminal");
+        if (terminalObj != null)
         {
-            cart.cartTerminalUI = terminalUI;   // Referencia al script de UI
-            terminalUI.SetCart(cart);           // Asigna la bagoneta al UI
+            cart.cartTerminalUI = terminalObj.GetComponentInChildren<MinecartTerminalUI>();
+            cart.terminalAnimator = terminalObj.GetComponentInChildren<MinecartTerminalAnimator>();
+
+            cart.cartTerminalUI?.SetCart(cart);
         }
         else
         {
-            Debug.LogWarning("No se encontró la terminal en la escena");
+            Debug.LogWarning("[TerminalCallCart] No se encontró terminal con tag 'CartTerminal'");
         }
     }
 }
-
 
