@@ -44,12 +44,10 @@ public class CartDestroy : MonoBehaviour
 
     private void SafeDestroyCart()
     {
-        if (cart != null && cart.isPlayerInside)
-            cart.ExitCart();
-
         Destroy(gameObject);
         Debug.Log("[CartDestroy] La bagoneta destruida de manera segura.");
     }
+
 }
 
 

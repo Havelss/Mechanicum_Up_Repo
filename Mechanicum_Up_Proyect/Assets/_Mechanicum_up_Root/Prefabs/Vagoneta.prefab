@@ -81,7 +81,7 @@ Rigidbody:
   m_Mass: 500
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_CenterOfMass: {x: 0, y: 112.44, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -90,7 +90,7 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   rb: {fileID: 5632492999525089806}
   forwardSpeed: 12
   lateralSpeed: 8
-  isPlayerInside: 1
+  isPlayerInside: 0
 --- !u!114 &2274330568730562266
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -133,10 +133,7 @@ public class MinecartTerminalUI : MonoBehaviour
         if (rightButton != null) rightButton.onClick.AddListener(OnRightButtonPressed);
     }
 
-    public void SetCart(MinecartController newCart)
-    {
-        cart = newCart;
-    }
+    public void SetCart(MinecartController newCart) => cart = newCart;
 
     private void OnNoButtonPressed()
     {
@@ -144,7 +141,7 @@ public class MinecartTerminalUI : MonoBehaviour
         noPressed = true;
         rightPressed = false;
 
-        if (cart != null) cart.MoveLeft();
+        cart?.MoveLeft();
     }
 
     private void OnRightButtonPressed()
@@ -153,13 +150,13 @@ public class MinecartTerminalUI : MonoBehaviour
         rightPressed = true;
         noPressed = false;
 
-        if (cart != null) cart.MoveRight();
+        cart?.MoveRight();
     }
 
     public void StopCartLateral()
     {
         noPressed = false;
         rightPressed = false;
-        if (cart != null) cart.StopLateral();
+        cart?.StopLateral();
     }
 }

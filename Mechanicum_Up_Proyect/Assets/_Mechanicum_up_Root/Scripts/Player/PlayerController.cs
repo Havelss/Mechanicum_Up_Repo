@@ -327,7 +327,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     Vector3 originalScale;
 
-    #region Unity Methods  
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -361,9 +360,7 @@ public class PlayerController : MonoBehaviour
         HandleRotation();
         HandleFalling();
     }
-    #endregion
 
-    #region Movimiento y Rotación  
     void HandleMovement()
     {
         Vector3 camForward = camTransform.forward;
@@ -394,9 +391,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, angle, 0);
         }
     }
-    #endregion
 
-    #region Salto Cargado  
     public void OnJump(InputAction.CallbackContext context)
     {
         if (isDead) return;
@@ -436,9 +431,7 @@ public class PlayerController : MonoBehaviour
 
         chargeTimer = 0f;
     }
-    #endregion
 
-    #region GroundCheck y Caída  
     void CheckIfGrounded()
     {
         wasGrounded = isGrounded;
@@ -453,9 +446,7 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded && rb.linearVelocity.y < 0)
             rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
     }
-    #endregion
 
-    #region Animaciones y Sonido  
     void UpdateAnimator()
     {
         if (!playerAnimator) return;
@@ -484,9 +475,7 @@ public class PlayerController : MonoBehaviour
             footstepSource.Stop();
         }
     }
-    #endregion
 
-    #region Muerte y Respawn  
     public bool IsDead() => isDead;
 
     public void DieInstant(string cause)
@@ -526,83 +515,9 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         if (playerAnimator) playerAnimator.Play("Idle");
     }
-    #endregion
 
-    #region Input Movimiento  
     public void OnMove(InputAction.CallbackContext ctx)
     {
         if (!isDead) moveInput = ctx.ReadValue<Vector2>();
     }
-    #endregion
-
-    #region Vagoneta
-    [Header("Vagoneta")]
-    public MinecartController currentCart;
-    public bool isInCart = false;
-    public Transform playerSeatTarget;
-
-    bool canEnterCart = false;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("CartRideTrigger"))
-        {
-            MinecartController cart = other.GetComponentInParent<MinecartController>();
-            if (cart != null)
-            {
-                currentCart = cart;
-                canEnterCart = true;
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("CartRideTrigger"))
-        {
-            if (!isInCart)
-            {
-                currentCart = null;
-                canEnterCart = false;
-            }
-        }
-    }
-
-    public void OnInteract(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.performed) return;
-        if (!canEnterCart) return;
-        if (isInCart) return;
-
-        StartCoroutine(EnterCartRoutine());
-    }
-
-    IEnumerator EnterCartRoutine()
-    {
-        isInCart = true;
-
-        // Bloquear movimiento
-        moveInput = Vector2.zero;
-        rb.linearVelocity = Vector3.zero;
-
-        // Animación de entrar
-        if (playerAnimator != null)
-            playerAnimator.SetTrigger("EnterCart");
-
-        yield return new WaitForSeconds(0.5f);
-
-        // Mover al asiento
-        playerSeatTarget = currentCart.playerSeat;
-        transform.SetParent(playerSeatTarget);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-
-        // Desactivar control
-        this.enabled = false;
-
-        // Entrar a la vagoneta
-        currentCart.FinalizeEnter(transform);
-    }
-    #endregion
 }
-

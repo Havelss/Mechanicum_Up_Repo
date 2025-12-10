@@ -323,10 +323,10 @@ using UnityEngine;
 public class MinecartController : MonoBehaviour
 {
     [Header("Referencias")]
-    public Transform playerSeat;
-    public MinecartTerminalUI cartTerminalUI;
-    public MinecartTerminalAnimator terminalAnimator;
-    public Rigidbody rb;
+    public Transform playerSeat;                      // Donde se sienta el jugador
+    public MinecartTerminalUI cartTerminalUI;         // UI de la terminal
+    public MinecartTerminalAnimator terminalAnimator; // Animator opcional del panel
+    public Rigidbody rb;                              // Rigidbody del carrito
 
     [Header("Movimiento")]
     public float forwardSpeed = 12f;
@@ -334,9 +334,10 @@ public class MinecartController : MonoBehaviour
 
     [Header("Player")]
     public bool isPlayerInside = false;
+
     private Transform player;
     private PlayerController playerController;
-    private float lateralDirection = 0f;
+    private float lateralDirection = 0f; // -1 = izquierda, 1 = derecha
 
     private void Awake()
     {
@@ -344,27 +345,25 @@ public class MinecartController : MonoBehaviour
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-        // Asignar referencias si no están puestas en inspector
+        // Buscar la terminal en la escena si no se asignó
         if (cartTerminalUI == null)
         {
-            var terminalUIObj = GameObject.FindWithTag("CartTerminal");
-            if (terminalUIObj != null)
+            var terminal = GameObject.FindWithTag("CartTerminal");
+            if (terminal != null)
             {
-                cartTerminalUI = terminalUIObj.GetComponent<MinecartTerminalUI>();
-                if (cartTerminalUI != null) cartTerminalUI.SetCart(this);
+                cartTerminalUI = terminal.GetComponent<MinecartTerminalUI>();
+                cartTerminalUI.SetCart(this);
             }
         }
 
-        if (terminalAnimator == null)
-        {
-            var terminalAnimObj = GameObject.Find("PanelTerminal")?.GetComponent<MinecartTerminalAnimator>();
-            if (terminalAnimObj != null) terminalAnimator = terminalAnimObj;
-        }
+        if (terminalAnimator == null && cartTerminalUI != null)
+            terminalAnimator = cartTerminalUI.GetComponentInChildren<MinecartTerminalAnimator>();
     }
 
     private void Update()
     {
-        if (isPlayerInside) MoveCartLateral();
+        if (isPlayerInside)
+            MoveCartLateral();
     }
 
     private void MoveCartLateral()
@@ -378,7 +377,7 @@ public class MinecartController : MonoBehaviour
     public void MoveRight() => lateralDirection = 1f;
     public void StopLateral() => lateralDirection = 0f;
 
-    // ------------------------- ENTRAR AL CART -------------------------
+    // Aquí se maneja la entrada del jugador
     public void FinalizeEnter(Transform playerObj)
     {
         if (playerObj == null) return;
@@ -387,33 +386,28 @@ public class MinecartController : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
 
         if (playerController != null)
-        {
             playerController.enabled = false;
-            player.GetComponent<Rigidbody>().isKinematic = true;
-        }
 
+        Rigidbody prb = player.GetComponent<Rigidbody>();
+        if (prb != null) prb.isKinematic = true;
+
+        // Mover al PlayerSeat asignado en el inspector
         player.position = playerSeat.position;
         player.rotation = playerSeat.rotation;
 
         isPlayerInside = true;
 
-        // Mostrar terminal y animación
+        // Mostrar terminal
         if (terminalAnimator != null)
-        {
-            terminalAnimator.isVisible = true;
             terminalAnimator.ShowTerminal();
-        }
         else if (cartTerminalUI != null)
-        {
             cartTerminalUI.gameObject.SetActive(true);
-        }
 
         // Cursor visible
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // ------------------------- SALIR DEL CART (solo si muere) -------------------------
     public void ExitCart()
     {
         if (!isPlayerInside) return;
@@ -421,20 +415,24 @@ public class MinecartController : MonoBehaviour
         isPlayerInside = false;
 
         if (playerController != null)
-        {
             playerController.enabled = true;
-            Rigidbody prb = player.GetComponent<Rigidbody>();
-            prb.isKinematic = false;
-        }
+
+        Rigidbody prb = player.GetComponent<Rigidbody>();
+        if (prb != null) prb.isKinematic = false;
 
         player.position += transform.right * 1f + Vector3.up * 0.5f;
 
-        if (terminalAnimator != null) terminalAnimator.HideTerminal();
-        else if (cartTerminalUI != null) cartTerminalUI.gameObject.SetActive(false);
+        // Ocultar terminal
+        if (terminalAnimator != null)
+            terminalAnimator.HideTerminal();
+        else if (cartTerminalUI != null)
+            cartTerminalUI.gameObject.SetActive(false);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        player = null;
+        playerController = null;
     }
 }
-
 

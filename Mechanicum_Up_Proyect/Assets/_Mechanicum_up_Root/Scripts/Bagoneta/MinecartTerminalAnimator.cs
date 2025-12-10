@@ -85,14 +85,13 @@ public class MinecartTerminalAnimator : MonoBehaviour
     public float hiddenY = -500f;
     public float shownY = 0f;
 
-    [Header("Visibilidad")]
-    public bool isVisible = false;  // Se puede activar desde otros scripts
+    [Header("Inspector Toggle")]
+    public bool isVisible = false;
 
     private float animTimer = 0f;
 
     private void Awake()
     {
-        // Posición inicial fuera de pantalla
         if (terminalPanel != null)
         {
             Vector2 pos = terminalPanel.anchoredPosition;
@@ -100,8 +99,8 @@ public class MinecartTerminalAnimator : MonoBehaviour
             terminalPanel.anchoredPosition = pos;
         }
 
-        // Alpha inicial
-        if (canvasGroup != null) canvasGroup.alpha = 0f;
+        if (canvasGroup != null)
+            canvasGroup.alpha = 0f;
     }
 
     private void Update()
@@ -121,15 +120,7 @@ public class MinecartTerminalAnimator : MonoBehaviour
         canvasGroup.alpha = t;
     }
 
-    public void ShowTerminal()
-    {
-        isVisible = true;
-    }
-
-    public void HideTerminal()
-    {
-        isVisible = false;
-    }
+    public void ShowTerminal() => isVisible = true;
+    public void HideTerminal() => isVisible = false;
 }
-
 
