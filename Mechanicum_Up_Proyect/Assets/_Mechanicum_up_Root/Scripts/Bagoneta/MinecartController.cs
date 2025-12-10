@@ -320,6 +320,13 @@
 
 using UnityEngine;
 
+[System.Serializable]
+public class CartSpeedSettings
+{
+    public float forwardSpeed = 12f;
+    public float lateralSpeed = 8f;
+}
+
 public class MinecartController : MonoBehaviour
 {
     [Header("Referencias")]
@@ -331,13 +338,15 @@ public class MinecartController : MonoBehaviour
     [Header("Movimiento")]
     public float forwardSpeed = 12f;
     public float lateralSpeed = 8f;
+    public float lateralAcceleration = 5f; // Ajusta la aceleración lateral
 
     [Header("Player")]
     public bool isPlayerInside = false;
-
     private Transform player;
     private PlayerController playerController;
-    private float lateralDirection = 0f; // -1 = izquierda, 1 = derecha
+
+    private float lateralDirection = 0f;        // -1 = izquierda, 1 = derecha
+    private float currentLateralSpeed = 0f;     // Velocidad actual lateral progresiva
 
     private void Awake()
     {
@@ -363,25 +372,33 @@ public class MinecartController : MonoBehaviour
     private void Update()
     {
         if (isPlayerInside)
+        {
             MoveCartLateral();
+        }
     }
 
     private void MoveCartLateral()
     {
+        // Calculamos la velocidad objetivo según la dirección
+        float targetSpeed = lateralDirection * lateralSpeed;
+
+        // Aceleramos o desaceleramos progresivamente hacia targetSpeed
+        currentLateralSpeed = Mathf.MoveTowards(currentLateralSpeed, targetSpeed, lateralAcceleration * Time.deltaTime);
+
+        // Aplicamos la velocidad lateral
         Vector3 vel = rb.linearVelocity;
-        vel += transform.right * lateralDirection * lateralSpeed;
+        vel += transform.right * (currentLateralSpeed - vel.x); // Ajuste local
         rb.linearVelocity = vel;
     }
 
+    // Métodos para controlar la dirección desde la terminal o input
     public void MoveLeft() => lateralDirection = -1f;
     public void MoveRight() => lateralDirection = 1f;
     public void StopLateral() => lateralDirection = 0f;
 
-    // Aquí se maneja la entrada del jugador
+    #region Player Enter/Exit
     public void FinalizeEnter(Transform playerObj)
     {
-        if (playerObj == null) return;
-
         player = playerObj;
         playerController = player.GetComponent<PlayerController>();
 
@@ -391,7 +408,6 @@ public class MinecartController : MonoBehaviour
         Rigidbody prb = player.GetComponent<Rigidbody>();
         if (prb != null) prb.isKinematic = true;
 
-        // Mover al PlayerSeat asignado en el inspector
         player.position = playerSeat.position;
         player.rotation = playerSeat.rotation;
 
@@ -434,5 +450,5 @@ public class MinecartController : MonoBehaviour
         player = null;
         playerController = null;
     }
+    #endregion
 }
-

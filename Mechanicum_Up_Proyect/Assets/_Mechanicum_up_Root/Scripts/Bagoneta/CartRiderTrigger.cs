@@ -126,7 +126,7 @@ public class CartRiderTrigger : MonoBehaviour
         {
             Debug.Log("E key pressed");
 
-            if (canMount && !cart.isPlayerInside && !isConnecting)
+            if (canMount && !cart.isPlayerInside && !isConnecting && Input.GetKey(KeyCode.E))
             {
                 Debug.Log("Conditions met, starting connection sequence");
                 StartCoroutine(StartConnectionSequence());
