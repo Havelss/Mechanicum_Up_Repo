@@ -245,8 +245,9 @@ public class MinecartController : MonoBehaviour
         );
 
         // Solo eje X
-        Vector3 newPos = rb.position + new Vector3(currentLateralSpeed * Time.deltaTime, 0, 0);
+        Vector3 newPos = rb.position + new Vector3(currentLateralSpeed * Time.fixedDeltaTime, 0, 0);
         rb.MovePosition(newPos);
+
 
         Debug.Log($"[MoveCartLateral] lateralDirection={lateralDirection}, targetSpeed={targetSpeed}, currentLateralSpeed={currentLateralSpeed}, rb.pos={rb.position}");
     }
@@ -267,16 +268,19 @@ public class MinecartController : MonoBehaviour
             playerController.enabled = false;
 
         Rigidbody prb = player.GetComponent<Rigidbody>();
-        if (prb != null) prb.isKinematic = true;
+        if (prb != null)
+        {
+            prb.isKinematic = true;
+            prb.constraints = RigidbodyConstraints.FreezeAll; // 🔥 Freeze total
+        }
 
-        // Fijar player al asiento
+        // Parent al asiento
         player.SetParent(playerSeat);
         player.localPosition = Vector3.zero;
         player.localRotation = Quaternion.identity;
 
         isPlayerInside = true;
 
-        // Mostrar terminal
         if (terminalAnimator != null)
             terminalAnimator.ShowTerminal();
         else if (cartTerminalUI != null)
@@ -286,9 +290,37 @@ public class MinecartController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+
     public void ExitCart()
     {
-        // No permitimos salir
+        if (!isPlayerInside) return;
+
+        isPlayerInside = false;
+
+        if (playerController != null)
+            playerController.enabled = true;
+
+        Rigidbody prb = player.GetComponent<Rigidbody>();
+        if (prb != null)
+        {
+            prb.isKinematic = false;
+            prb.constraints = RigidbodyConstraints.None; // restaurar físicas normales
+        }
+
+        player.SetParent(null);
+        player.position += transform.right * 1f + Vector3.up * 0.5f;
+
+        if (terminalAnimator != null)
+            terminalAnimator.HideTerminal();
+        else if (cartTerminalUI != null)
+            cartTerminalUI.gameObject.SetActive(false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        player = null;
+        playerController = null;
     }
+
     #endregion
 }
