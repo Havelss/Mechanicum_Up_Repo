@@ -79,7 +79,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3676305756911907625}
   serializedVersion: 5
-  m_Mass: 500
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 112.44, z: 0}
@@ -105,7 +105,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3676305756911907625}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4ba6b61297338814fae43227f41e51f3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -117,8 +117,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.8234215, z: 3}
-  m_Center: {x: -0, y: 0.08828926, z: -0}
+  m_Size: {x: 3, y: 0.82432556, z: 3}
+  m_Center: {x: -0, y: 0.08783722, z: -0}
 --- !u!114 &6886338106329882953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,15 +135,14 @@ MonoBehaviour:
   cartTerminalUI: {fileID: 0}
   terminalAnimator: {fileID: 0}
   rb: {fileID: 5632492999525089806}
-  forwardSpeed: 0
-  lateralSpeed: 1
-  lateralAcceleration: 5
+  lateralSpeed: 8
+  lateralAcceleration: 10
   isPlayerInside: 0
-  groundMask:
+  groundCheck: {fileID: 972001996878180176}
+  groundCheckRadius: 0.2
+  groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.2
   minHeight: 0.01
 --- !u!114 &2274330568730562266
 MonoBehaviour:
@@ -317,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 6228454305489430662}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.073, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2632504, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

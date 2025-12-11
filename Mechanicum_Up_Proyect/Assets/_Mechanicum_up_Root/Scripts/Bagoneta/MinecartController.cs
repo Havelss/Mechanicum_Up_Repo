@@ -138,35 +138,35 @@ using UnityEngine;
 [System.Serializable]
 public class CartSpeedSettings
 {
-    public float lateralSpeed = 8f;
+    public float lateralSpeed = 8f; // velocidad lateral
 }
 
 public class MinecartController : MonoBehaviour
 {
     [Header("Referencias")]
-    public Transform playerSeat;
-    public MinecartTerminalUI cartTerminalUI;
-    public MinecartTerminalAnimator terminalAnimator;
-    public Rigidbody rb;
+    public Transform playerSeat;                      // Donde se sienta el jugador
+    public MinecartTerminalUI cartTerminalUI;         // UI de la terminal
+    public MinecartTerminalAnimator terminalAnimator; // Animator opcional del panel
+    public Rigidbody rb;                              // Rigidbody de la vagoneta
 
     [Header("Movimiento")]
-    public float forwardSpeed = 12f;
     public float lateralSpeed = 8f;
-    public float lateralAcceleration = 5f; // Aceleración progresiva
+    public float lateralAcceleration = 5f; // aceleración progresiva lateral
 
     [Header("Player")]
     public bool isPlayerInside = false;
     private Transform player;
     private PlayerController playerController;
 
-    private float lateralDirection = 0f;        // -1 = izquierda, 1 = derecha
-    private float currentLateralSpeed = 0f;     // Velocidad lateral progresiva
+    private float lateralDirection = 0f;    // -1 izquierda, 1 derecha
+    private float currentLateralSpeed = 0f; // velocidad lateral progresiva
 
     [Header("Ground Check")]
-    public LayerMask groundMask;
     public Transform groundCheck;
-    public float groundCheckDistance = 0.2f;
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer;
     public float minHeight = 0.01f;
+    private bool isGrounded;
 
     private void Awake()
     {
@@ -174,6 +174,7 @@ public class MinecartController : MonoBehaviour
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
+        // Asignar terminal si no está asignada
         if (cartTerminalUI == null)
         {
             var terminal = GameObject.FindWithTag("CartTerminal");
@@ -201,6 +202,7 @@ public class MinecartController : MonoBehaviour
     {
         if (isPlayerInside)
         {
+            // Movimiento lateral controlado por la terminal
             MoveCartLateral();
         }
     }
@@ -208,22 +210,21 @@ public class MinecartController : MonoBehaviour
     private void FixedUpdate()
     {
         CheckGround();
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(
-            groundCheck.position,
-            Vector3.down,
-            groundCheckDistance,
-            groundMask
-        );
+        // Puedes aplicar movimiento lateral también aquí si quieres física consistente
     }
 
     private void CheckGround()
     {
-        if (!IsGrounded()) return;
+        // GroundCheck estilo PlayerController
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
+        if (!isGrounded)
+        {
+            // Si no está en el suelo, la gravedad actúa normalmente
+            return;
+        }
+
+        // Si toca suelo, no atraviesa
         Vector3 pos = rb.position;
         if (pos.y < minHeight)
         {
@@ -243,14 +244,14 @@ public class MinecartController : MonoBehaviour
             lateralAcceleration * Time.deltaTime
         );
 
-        Vector3 vel = rb.linearVelocity;
-        float verticalVel = vel.y; // mantener caída natural
-        vel = transform.forward * forwardSpeed + transform.right * currentLateralSpeed;
-        vel.y = verticalVel;
-        rb.linearVelocity = vel;
+        // Solo eje X
+        Vector3 newPos = rb.position + new Vector3(currentLateralSpeed * Time.deltaTime, 0, 0);
+        rb.MovePosition(newPos);
+
+        Debug.Log($"[MoveCartLateral] lateralDirection={lateralDirection}, targetSpeed={targetSpeed}, currentLateralSpeed={currentLateralSpeed}, rb.pos={rb.position}");
     }
 
-    #region Métodos de movimiento desde UI
+    #region Métodos de movimiento lateral (Terminal)
     public void MoveLeft() => lateralDirection = -1f;
     public void MoveRight() => lateralDirection = 1f;
     public void StopLateral() => lateralDirection = 0f;
@@ -275,6 +276,7 @@ public class MinecartController : MonoBehaviour
 
         isPlayerInside = true;
 
+        // Mostrar terminal
         if (terminalAnimator != null)
             terminalAnimator.ShowTerminal();
         else if (cartTerminalUI != null)
@@ -287,7 +289,6 @@ public class MinecartController : MonoBehaviour
     public void ExitCart()
     {
         // No permitimos salir
-        return;
     }
     #endregion
 }
