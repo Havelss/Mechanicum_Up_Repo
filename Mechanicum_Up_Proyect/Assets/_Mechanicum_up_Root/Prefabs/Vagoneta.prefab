@@ -115,7 +115,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3, y: 0.8234215, z: 3}
   m_Center: {x: -0, y: 0.08828926, z: -0}
@@ -135,15 +135,16 @@ MonoBehaviour:
   cartTerminalUI: {fileID: 0}
   terminalAnimator: {fileID: 0}
   rb: {fileID: 5632492999525089806}
-  groundCheck: {fileID: 972001996878180176}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
   forwardSpeed: 0
   lateralSpeed: 1
-  gravity: -9.81
-  groundCheckDistance: 0.5
+  lateralAcceleration: 5
   isPlayerInside: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  groundCheck: {fileID: 0}
+  groundCheckDistance: 0.2
+  minHeight: 0.01
 --- !u!114 &2274330568730562266
 MonoBehaviour:
   m_ObjectHideFlags: 0
