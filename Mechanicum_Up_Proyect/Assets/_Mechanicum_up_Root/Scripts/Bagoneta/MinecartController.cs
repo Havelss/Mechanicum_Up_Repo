@@ -247,9 +247,9 @@ public class MinecartController : MonoBehaviour
         currentLateralSpeed = Mathf.MoveTowards(currentLateralSpeed, targetSpeed, lateralAcceleration * Time.fixedDeltaTime);
 
         // Movimiento con rb.velocity
-        Vector3 vel = rb.velocity;
+        Vector3 vel = rb.linearVelocity;
         vel.x = currentLateralSpeed;
-        rb.velocity = vel;
+        rb.linearVelocity = vel;
     }
 
     #region Métodos de movimiento lateral
