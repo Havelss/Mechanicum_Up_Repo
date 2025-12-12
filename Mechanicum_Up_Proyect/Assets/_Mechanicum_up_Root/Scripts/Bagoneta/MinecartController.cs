@@ -172,6 +172,8 @@ public class MinecartController : MonoBehaviour
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
+
+        // Solo freeze de rotación
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         // Asignar terminal si no está asignada
@@ -202,29 +204,26 @@ public class MinecartController : MonoBehaviour
     {
         if (isPlayerInside)
         {
-            // Movimiento lateral controlado por la terminal
-            MoveCartLateral();
+            // Guardamos la dirección de entrada para usarla en FixedUpdate
+            currentLateralSpeed = Mathf.MoveTowards(currentLateralSpeed,
+                lateralDirection * lateralSpeed,
+                lateralAcceleration * Time.deltaTime);
         }
     }
 
     private void FixedUpdate()
     {
         CheckGround();
-        // Puedes aplicar movimiento lateral también aquí si quieres física consistente
+        MoveCartLateral();
+        FollowSeatFix();
     }
 
     private void CheckGround()
     {
-        // GroundCheck estilo PlayerController
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
-        if (!isGrounded)
-        {
-            // Si no está en el suelo, la gravedad actúa normalmente
-            return;
-        }
+        if (!isGrounded) return;
 
-        // Si toca suelo, no atraviesa
         Vector3 pos = rb.position;
         if (pos.y < minHeight)
         {
@@ -235,21 +234,15 @@ public class MinecartController : MonoBehaviour
 
     private void MoveCartLateral()
     {
-        float targetSpeed = lateralDirection * lateralSpeed;
+        Vector3 vel = rb.linearVelocity;
 
-        // Velocidad progresiva
-        currentLateralSpeed = Mathf.MoveTowards(
-            currentLateralSpeed,
-            targetSpeed,
-            lateralAcceleration * Time.deltaTime
-        );
+        // Solo modificar el eje X
+        vel.x = currentLateralSpeed;
 
-        // Solo eje X
-        Vector3 newPos = rb.position + new Vector3(currentLateralSpeed * Time.fixedDeltaTime, 0, 0);
-        rb.MovePosition(newPos);
+        // Mantener la gravedad en Y y la Z (si aplica)
+        rb.linearVelocity = vel;
 
-
-        Debug.Log($"[MoveCartLateral] lateralDirection={lateralDirection}, targetSpeed={targetSpeed}, currentLateralSpeed={currentLateralSpeed}, rb.pos={rb.position}");
+        Debug.Log($"[MoveCartLateral] lateralDirection={lateralDirection}, currentLateralSpeed={currentLateralSpeed}, rb.pos={rb.position}");
     }
 
     #region Métodos de movimiento lateral (Terminal)
@@ -271,7 +264,7 @@ public class MinecartController : MonoBehaviour
         if (prb != null)
         {
             prb.isKinematic = true;
-            prb.constraints = RigidbodyConstraints.FreezeAll; // 🔥 Freeze total
+            prb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         // Parent al asiento
@@ -290,7 +283,6 @@ public class MinecartController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-
     public void ExitCart()
     {
         if (!isPlayerInside) return;
@@ -304,7 +296,7 @@ public class MinecartController : MonoBehaviour
         if (prb != null)
         {
             prb.isKinematic = false;
-            prb.constraints = RigidbodyConstraints.None; // restaurar físicas normales
+            prb.constraints = RigidbodyConstraints.None;
         }
 
         player.SetParent(null);
@@ -321,6 +313,16 @@ public class MinecartController : MonoBehaviour
         player = null;
         playerController = null;
     }
+    #endregion
 
+    #region PlayerSeat Follow
+    private void FollowSeatFix()
+    {
+        if (playerSeat == null) return;
+
+        // Solo mover el seat, no la vagoneta
+        playerSeat.position = rb.position + Vector3.up * 1f;
+        playerSeat.rotation = transform.rotation;
+    }
     #endregion
 }
