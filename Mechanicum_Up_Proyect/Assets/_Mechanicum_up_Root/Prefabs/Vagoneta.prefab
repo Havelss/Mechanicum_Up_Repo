@@ -79,7 +79,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3676305756911907625}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 112.44, z: 0}
@@ -91,8 +91,8 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -117,8 +117,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.82432556, z: 3}
-  m_Center: {x: -0, y: 0.08783722, z: -0}
+  m_Size: {x: 3.932951, y: 1.844741, z: 3.247815}
+  m_Center: {x: -0, y: 0.5980446, z: -0.007288575}
 --- !u!114 &6886338106329882953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,15 +135,9 @@ MonoBehaviour:
   cartTerminalUI: {fileID: 0}
   terminalAnimator: {fileID: 0}
   rb: {fileID: 5632492999525089806}
-  lateralSpeed: 4
-  lateralAcceleration: 8
+  lateralSpeed: 3
+  lateralAcceleration: 4
   isPlayerInside: 0
-  groundCheck: {fileID: 972001996878180176}
-  groundCheckRadius: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  minHeight: 0.01
 --- !u!114 &2274330568730562266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,8 +203,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 2.2828076}
+  m_Center: {x: 0, y: 0, z: 0.021865964}
 --- !u!114 &2956632616458091046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74ddcde747bd2f46b858ba4ddea30c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartRiderTrigger
-  connectDuration: 0.5
+  connectDuration: 0
 --- !u!1 &6224883390307519254
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,8 +270,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 2.319251}
+  m_Center: {x: 0, y: 0, z: -0.0036444664}
 --- !u!114 &8503987796160846310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74ddcde747bd2f46b858ba4ddea30c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartRiderTrigger
-  connectDuration: 0.5
+  connectDuration: 0
 --- !u!1 &6228454305489430662
 GameObject:
   m_ObjectHideFlags: 0

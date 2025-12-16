@@ -133,10 +133,10 @@ public class CartSpeedSettings
 public class MinecartController : MonoBehaviour
 {
     [Header("Referencias")]
-    public Transform playerSeat;
+    public Transform playerSeat;                      // Empty dentro de la vagoneta
     public MinecartTerminalUI cartTerminalUI;
     public MinecartTerminalAnimator terminalAnimator;
-    public Rigidbody rb;
+    public Rigidbody rb;                              // Rigidbody de la vagoneta
 
     [Header("Movimiento")]
     public float lateralSpeed = 8f;
@@ -149,39 +149,39 @@ public class MinecartController : MonoBehaviour
 
     private float lateralDirection = 0f;
     private float currentLateralSpeed = 0f;
+    public float seatHeightOffset = 1f; // altura del player respecto al Rigidbody
 
     private void Awake()
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
-
         rb.useGravity = true;
-        rb.isKinematic = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-        rb.WakeUp(); // 🔥 importantísimo al instanciar
-    }
-
-    private void Update()
-    {
-        // Aquí NO movemos el Rigidbody
-        // Solo mantenemos estado (dirección ya viene de la UI)
     }
 
     private void FixedUpdate()
     {
-        if (!isPlayerInside) return;
-
+        // Mover la vagoneta lateralmente
         MoveCartLateral();
+
+        // Mantener el playerSeat en la vagoneta
+        if (playerSeat != null)
+        {
+            playerSeat.position = rb.position + Vector3.up * seatHeightOffset;
+            playerSeat.rotation = transform.rotation;
+        }
+
+        // Actualizar posición y rotación del player
+        if (isPlayerInside && player != null)
+        {
+            player.position = playerSeat.position;
+            player.rotation = playerSeat.rotation;
+        }
     }
 
     private void MoveCartLateral()
     {
         float targetSpeed = lateralDirection * lateralSpeed;
-
-        currentLateralSpeed = Mathf.MoveTowards(
-            currentLateralSpeed,
-            targetSpeed,
-            lateralAcceleration * Time.fixedDeltaTime
-        );
+        currentLateralSpeed = Mathf.MoveTowards(currentLateralSpeed, targetSpeed, lateralAcceleration * Time.fixedDeltaTime);
 
         Vector3 vel = rb.linearVelocity;
         vel.x = currentLateralSpeed;
@@ -194,43 +194,28 @@ public class MinecartController : MonoBehaviour
     public void StopLateral() => lateralDirection = 0f;
     #endregion
 
-    #region Player Enter / Exit
+    #region Player Enter/Exit
     public void FinalizeEnter(Transform playerObj)
     {
         player = playerObj;
         playerController = player.GetComponent<PlayerController>();
 
-        if (playerController != null)
-            playerController.enabled = false;
+        if (playerController != null) playerController.enabled = false;
 
         Rigidbody prb = player.GetComponent<Rigidbody>();
         Collider pcol = player.GetComponent<Collider>();
 
-        // 🔒 El player deja de existir para la física
-        if (prb != null)
-        {
-            prb.linearVelocity = Vector3.zero;
-            prb.angularVelocity = Vector3.zero;
-            prb.isKinematic = true;
-            prb.detectCollisions = false;
-        }
+        if (prb != null) prb.isKinematic = true;
+        if (pcol != null) pcol.enabled = false;
 
-        if (pcol != null)
-            pcol.enabled = false;
-
-        // 🔥 ANCLA REAL
-        player.SetParent(playerSeat, worldPositionStays: false);
-        player.localPosition = Vector3.zero;
+        // Posicionar en el seat
+        player.localPosition = Vector3.zero; // local respecto al seat
         player.localRotation = Quaternion.identity;
 
         isPlayerInside = true;
 
-        rb.WakeUp(); // por si estaba dormido
-
-        if (terminalAnimator != null)
-            terminalAnimator.ShowTerminal();
-        else if (cartTerminalUI != null)
-            cartTerminalUI.gameObject.SetActive(true);
+        if (terminalAnimator != null) terminalAnimator.ShowTerminal();
+        else if (cartTerminalUI != null) cartTerminalUI.gameObject.SetActive(true);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -242,29 +227,19 @@ public class MinecartController : MonoBehaviour
 
         isPlayerInside = false;
 
-        if (playerController != null)
-            playerController.enabled = true;
+        if (playerController != null) playerController.enabled = true;
 
         Rigidbody prb = player.GetComponent<Rigidbody>();
         Collider pcol = player.GetComponent<Collider>();
 
-        player.SetParent(null, true);
+        if (prb != null) prb.isKinematic = false;
+        if (pcol != null) pcol.enabled = true;
 
-        if (prb != null)
-        {
-            prb.isKinematic = false;
-            prb.detectCollisions = true;
-        }
-
-        if (pcol != null)
-            pcol.enabled = true;
-
+        player.SetParent(null);
         player.position += transform.right * 1f + Vector3.up * 0.5f;
 
-        if (terminalAnimator != null)
-            terminalAnimator.HideTerminal();
-        else if (cartTerminalUI != null)
-            cartTerminalUI.gameObject.SetActive(false);
+        if (terminalAnimator != null) terminalAnimator.HideTerminal();
+        else if (cartTerminalUI != null) cartTerminalUI.gameObject.SetActive(false);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
