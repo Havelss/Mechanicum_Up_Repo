@@ -124,4 +124,17 @@ public class GatoAnimationController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         gatoAnimator.Play(idleAnim);
     }
+
+    public void PlayInstant(string anim)
+    {
+        if (gatoAnimator == null) return;
+
+        // Detener corrutina actual para no esperar retorno a idle
+        if (currentRoutine != null)
+            StopCoroutine(currentRoutine);
+
+        // Ejecutar animación directamente
+        gatoAnimator.Play(anim);
+    }
+
 }
