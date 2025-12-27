@@ -6,50 +6,52 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private float respawnFallLimit = -10f;
 
-    private Rigidbody playerRB;
+    private PlayerController playerController;
 
     private void Awake()
     {
-        playerRB = GetComponent<Rigidbody>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
     {
+        // Muerte por caída
         if (transform.position.y <= respawnFallLimit)
-            Respawn();
+        {
+            if (!playerController.IsDead())
+                playerController.Die("fall");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Muerte por enemigo
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Respawn();
+            if (!playerController.IsDead())
+                playerController.Die("enemy");
         }
     }
 
-    private void Respawn()
-    {
-        if (playerRB != null)
-            playerRB.linearVelocity = Vector3.zero;
+    // -------------------------------
+    //  CHECKPOINT SYSTEM (como antes)
+    // -------------------------------
 
-        if (respawnPoint != null)
-            transform.position = respawnPoint.position;
-        else
-            Debug.LogWarning("⚠️ No hay punto de respawn asignado.");
-    }
-
-    // 🔹 Llamar a este método cuando interactúe con una terminal
     public void SetRespawnPoint(Transform newRespawn)
     {
         if (newRespawn == null) return;
 
         respawnPoint = newRespawn;
+        playerController.currentCheckpoint = newRespawn;
+
         Debug.Log($"🟢 Nuevo punto de respawn establecido: {newRespawn.name}");
     }
 
     public void UpdateRespawn(Transform newRespawnPoint)
     {
         respawnPoint = newRespawnPoint;
+        playerController.currentCheckpoint = newRespawnPoint;
+
         Debug.Log($"Respawn actualizado a: {newRespawnPoint.position}");
     }
 }

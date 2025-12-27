@@ -32,9 +32,16 @@ public class Elevator : MonoBehaviour
     private bool movingDown = false;
     private bool playerNearby = false;
 
+    private Rigidbody rb;
+
     private void Start()
     {
         PlayIdleClosed();
+
+        rb = GetComponent<Rigidbody>();
+        if (rb == null) rb = gameObject.AddComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
 
         if (audioSource == null)
         {
@@ -47,19 +54,17 @@ public class Elevator : MonoBehaviour
     private void Update()
     {
         DetectPlayer();
-
-        if (movingUp)
-            MoveTowards(upperPoint, MOVE_UP);
-
-        if (movingDown)
-            MoveTowards(lowerPoint, MOVE_DOWN);
-
         CheckElevatorSound();
     }
 
-    // ------------------------------------------
-    // DETECCIÓN DE JUGADOR
-    // ------------------------------------------
+    private void FixedUpdate()
+    {
+        if (movingUp)
+            MoveTowardsPhysics(upperPoint, MOVE_UP);
+        else if (movingDown)
+            MoveTowardsPhysics(lowerPoint, MOVE_DOWN);
+    }
+
     private void DetectPlayer()
     {
         if (player == null || IsMoving()) return;
@@ -84,9 +89,6 @@ public class Elevator : MonoBehaviour
         }
     }
 
-    // ------------------------------------------
-    // CONTROL DE SONIDO
-    // ------------------------------------------
     private void CheckElevatorSound()
     {
         if (doorAnimator == null || audioSource == null) return;
@@ -97,7 +99,6 @@ public class Elevator : MonoBehaviour
             state.IsName(MOVE_UP) ||
             state.IsName(MOVE_DOWN);
 
-        // Si está en animación de subir/bajar → sonido ON
         if (isMovingAnim)
         {
             if (!audioSource.isPlaying)
@@ -109,26 +110,19 @@ public class Elevator : MonoBehaviour
         }
         else
         {
-            // Cambia a otra animación → cortar sonido
             if (audioSource.isPlaying)
                 audioSource.Stop();
         }
     }
 
-    // ------------------------------------------
-    // MOVIMIENTO
-    // ------------------------------------------
-    private void MoveTowards(Transform target, string moveAnim)
+    private void MoveTowardsPhysics(Transform target, string moveAnim)
     {
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            target.position,
-            speed * Time.deltaTime
-        );
+        Vector3 newPos = Vector3.MoveTowards(rb.position, target.position, speed * Time.fixedDeltaTime);
+        rb.MovePosition(newPos);
 
         PlayDoors(moveAnim);
 
-        if (Vector3.Distance(transform.position, target.position) < 0.05f)
+        if (Vector3.Distance(rb.position, target.position) < 0.05f)
         {
             movingUp = false;
             movingDown = false;
@@ -137,8 +131,6 @@ public class Elevator : MonoBehaviour
                 PlayIdleOpen();
             else
                 PlayIdleClosed();
-
-            Debug.Log("Ascensor detenido.");
         }
     }
 
@@ -162,14 +154,8 @@ public class Elevator : MonoBehaviour
         PlayClosing();
     }
 
-    public bool IsMoving()
-    {
-        return movingUp || movingDown;
-    }
+    public bool IsMoving() => movingUp || movingDown;
 
-    // ------------------------------------------
-    // ANIMACIONES
-    // ------------------------------------------
     private void Play(string anim)
     {
         if (doorAnimator != null)

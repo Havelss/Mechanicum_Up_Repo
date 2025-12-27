@@ -6,8 +6,15 @@ public class ScreenFader : MonoBehaviour
 {
     public static ScreenFader Instance { get; private set; }
 
+    [Header("Fade UI")]
     [SerializeField] private Image fadeImage;
     [SerializeField] private float fadeDuration = 1.5f;
+
+    [Header("Triggers que activan FadeOut")]
+    [SerializeField] private Collider[] fadeOutTriggers;
+
+    [Header("Triggers que activan FadeIn")]
+    [SerializeField] private Collider[] fadeInTriggers;
 
     private void Awake()
     {
@@ -16,8 +23,29 @@ public class ScreenFader : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Registrar eventos de triggers
+        RegisterTriggers();
+    }
+
+    private void RegisterTriggers()
+    {
+        foreach (var trigger in fadeOutTriggers)
+        {
+            trigger.isTrigger = true;
+            TriggerHook hook = trigger.gameObject.AddComponent<TriggerHook>();
+            hook.onEnter += () => StartCoroutine(FadeOut());
+        }
+
+        foreach (var trigger in fadeInTriggers)
+        {
+            trigger.isTrigger = true;
+            TriggerHook hook = trigger.gameObject.AddComponent<TriggerHook>();
+            hook.onEnter += () => StartCoroutine(FadeIn());
+        }
     }
 
     public IEnumerator FadeOut()
