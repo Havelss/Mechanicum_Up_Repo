@@ -8,40 +8,15 @@ public class PlayerController : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] Transform camTransform;
     [SerializeField] Animator playerAnimator;
-<<<<<<< HEAD
-
-    [Header("Movimiento")]
-    [SerializeField] float speed = 10f;
-
-    [Header("Salto")]
-    [SerializeField] float jumpForce = 8f;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] float groundCheckRadius = 0.2f;
-    [SerializeField] LayerMask groundLayer;
-
-=======
->>>>>>> Alexander_Vagoneta_Merge_V2
     [Header("Audio de pasos")]
     [SerializeField] AudioSource footstepSource;
     [SerializeField] AudioClip footstepClip;
     #endregion
 
-<<<<<<< HEAD
-    [Header("Muerte y Respawn")]
-    public Transform currentCheckpoint;
-    public float respawnDelay = 1.5f;
-
-    [Header("Caída pesada")]
-    public float normalMass = 1f;
-    public float fallingMass = 4f; // ← masa al caer
-
-    Rigidbody playerRB;
-=======
     #region Movimiento  
     [Header("Movimiento")]
     [SerializeField] float speed = 10f;
     [SerializeField] float rotationSpeed = 720f;
->>>>>>> Alexander_Vagoneta_Merge_V2
     Vector2 moveInput;
     #endregion
 
@@ -64,22 +39,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     bool isGrounded;
     bool wasGrounded;
-<<<<<<< HEAD
-    bool isJumping;
-    bool isTouchingWall;
-
-    bool isDead = false;
-
-    private void Awake()
-    {
-        playerRB = GetComponent<Rigidbody>();
-
-        if (camTransform == null)
-            camTransform = Camera.main.transform;
-
-        playerRB.freezeRotation = true;
-        playerRB.mass = normalMass;
-=======
     #endregion
 
     #region Caída Pesada  
@@ -105,7 +64,6 @@ public class PlayerController : MonoBehaviour
 
         if (camTransform == null)
             camTransform = Camera.main.transform;
->>>>>>> Alexander_Vagoneta_Merge_V2
     }
 
     private void Update()
@@ -113,7 +71,6 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
 
         CheckIfGrounded();
-        HandleFallingMass();
         UpdateAnimator();
         HandleFootsteps();
 
@@ -128,21 +85,9 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
 
-<<<<<<< HEAD
-        if (!isTouchingWall || isGrounded)
-        {
-            HandleMovement();
-            HandleRotation();
-        }
-        else
-        {
-            playerRB.linearVelocity = new Vector3(0, playerRB.linearVelocity.y, 0);
-        }
-=======
         HandleMovement();
         HandleRotation();
         HandleFalling();
->>>>>>> Alexander_Vagoneta_Merge_V2
     }
 
     void HandleMovement()
@@ -152,22 +97,6 @@ public class PlayerController : MonoBehaviour
         camForward.y = 0; camRight.y = 0;
         camForward.Normalize(); camRight.Normalize();
 
-<<<<<<< HEAD
-        cameraForward.y = 0;
-        cameraRight.y = 0;
-
-        cameraForward.Normalize();
-        cameraRight.Normalize();
-
-        Vector3 moveDirection =
-            (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
-
-        playerRB.linearVelocity = new Vector3(
-            moveDirection.x * speed,
-            playerRB.linearVelocity.y,
-            moveDirection.z * speed
-        );
-=======
         Vector3 moveDir = (camForward * moveInput.y + camRight * moveInput.x).normalized;
 
         if (!isChargingJump)
@@ -178,20 +107,12 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
->>>>>>> Alexander_Vagoneta_Merge_V2
     }
 
     void HandleRotation()
     {
         if (moveInput == Vector2.zero) return;
 
-<<<<<<< HEAD
-        Vector3 moveDirection = new Vector3(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
-        if (moveDirection == Vector3.zero) return;
-
-        Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-        transform.rotation = targetRotation;
-=======
         Vector3 lookDir = new Vector3(moveInput.x, 0, moveInput.y);
         if (lookDir != Vector3.zero)
         {
@@ -238,7 +159,6 @@ public class PlayerController : MonoBehaviour
         }
 
         chargeTimer = 0f;
->>>>>>> Alexander_Vagoneta_Merge_V2
     }
 
     void CheckIfGrounded()
@@ -250,51 +170,11 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetTrigger("JumpEnd");
     }
 
-<<<<<<< HEAD
-    // ------------------ CAÍDA PESADA ------------------
-
-    void HandleFallingMass()
-    {
-        if (!isGrounded)
-        {
-            // En el aire = masa pesada
-            playerRB.mass = fallingMass;
-        }
-        else
-        {
-            // En el suelo = masa normal
-            playerRB.mass = normalMass;
-        }
-    }
-
-    // ------------------ SALTO ------------------
-
-    void Jump()
-    {
-        if (isGrounded && !isDead)
-        {
-            playerRB.linearVelocity = new Vector3(
-                playerRB.linearVelocity.x,
-                0,
-                playerRB.linearVelocity.z
-            );
-
-            playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isJumping = true;
-
-            playerAnimator.ResetTrigger("JumpEnd");
-            playerAnimator.SetTrigger("JumpStart");
-        }
-    }
-
-    // ------------------ ANIMACIONES ------------------
-=======
     void HandleFalling()
     {
         if (!isGrounded && rb.linearVelocity.y < 0)
             rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
     }
->>>>>>> Alexander_Vagoneta_Merge_V2
 
     void UpdateAnimator()
     {
@@ -325,42 +205,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-    // ------------------ MUERTE ------------------
-
-    public void Die(string cause = "")
-    {
-        if (isDead) return;
-
-        isDead = true;
-
-        moveInput = Vector2.zero;
-        playerRB.linearVelocity = Vector3.zero;
-
-        if (cause == "crush")
-            playerAnimator.Play("DeathCrushed");
-        else
-            playerAnimator.Play("Death");
-
-        StartCoroutine(RespawnAfterDeath());
-    }
-
-    IEnumerator RespawnAfterDeath()
-    {
-        yield return new WaitForSeconds(respawnDelay);
-
-        if (currentCheckpoint != null)
-            transform.position = currentCheckpoint.position;
-
-        isDead = false;
-        playerAnimator.Play("Idle");
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        if (!isDead)
-            moveInput = context.ReadValue<Vector2>();
-=======
     public bool IsDead() => isDead;
 
     public void DieInstant(string cause)
@@ -390,38 +234,10 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
         RespawnAtCheckpoint();
->>>>>>> Alexander_Vagoneta_Merge_V2
     }
 
     void RespawnAtCheckpoint()
     {
-<<<<<<< HEAD
-        if (context.performed && !isDead)
-            Jump();
-    }
-
-    public bool IsDead()
-    {
-        return isDead;
-    }
-
-    public void DieInstant(string cause)
-    {
-        if (isDead) return;
-        isDead = true;
-        RespawnAtCheckpoint();
-    }
-
-    private void RespawnAtCheckpoint()
-    {
-        if (currentCheckpoint != null)
-            transform.position = currentCheckpoint.position;
-
-        isDead = false;
-        playerAnimator.Play("Idle");
-    }
-}
-=======
         if (currentCheckpoint != null)
             transform.position = currentCheckpoint.position;
 
@@ -434,4 +250,3 @@ public class PlayerController : MonoBehaviour
         if (!isDead) moveInput = ctx.ReadValue<Vector2>();
     }
 }
->>>>>>> Alexander_Vagoneta_Merge_V2
