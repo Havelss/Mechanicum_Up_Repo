@@ -145,7 +145,7 @@ public class MinecartController : MonoBehaviour
     [Header("Player")]
     public bool isPlayerInside = false;
     private Transform player;
-    private PlayerController playerController;
+    // private PlayerController playerController;//
 
     private float lateralDirection = 0f;
     private float currentLateralSpeed = 0f;
@@ -198,9 +198,9 @@ public class MinecartController : MonoBehaviour
     public void FinalizeEnter(Transform playerObj)
     {
         player = playerObj;
-        playerController = player.GetComponent<PlayerController>();
+        // playerController = player.GetComponent<PlayerController>();
 
-        if (playerController != null) playerController.enabled = false;
+        // if (playerController != null) playerController.enabled = false;
 
         Rigidbody prb = player.GetComponent<Rigidbody>();
         Collider pcol = player.GetComponent<Collider>();
@@ -227,7 +227,7 @@ public class MinecartController : MonoBehaviour
 
         isPlayerInside = false;
 
-        if (playerController != null) playerController.enabled = true;
+        // if (playerController != null) playerController.enabled = true;
 
         Rigidbody prb = player.GetComponent<Rigidbody>();
         Collider pcol = player.GetComponent<Collider>();
@@ -245,7 +245,7 @@ public class MinecartController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         player = null;
-        playerController = null;
+        //  playerController = null;//
     }
     #endregion
 }

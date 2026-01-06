@@ -40,10 +40,10 @@ public class GatoCrushDetector : MonoBehaviour
 
     private void KillPlayer(GameObject player)
     {
-        var playerController = player.GetComponent<PlayerController>();
-        if (playerController != null && !playerController.IsDead())
+        //   var playerController = player.GetComponent<PlayerController>();
+        //   if (playerController != null && !playerController.IsDead())
         {
-            playerController.DieInstant("crush"); // muerte instantánea con respawn
+            //      playerController.DieInstant("crush"); // muerte instantánea con respawn
         }
     }
 

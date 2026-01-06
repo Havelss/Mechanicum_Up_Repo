@@ -6,11 +6,11 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private float respawnFallLimit = -10f;
 
-    private PlayerController playerController;
+    //    private PlayerController playerController;
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
+        // playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
@@ -18,8 +18,8 @@ public class PlayerRespawn : MonoBehaviour
         // Muerte por caída
         if (transform.position.y <= respawnFallLimit)
         {
-            if (!playerController.IsDead())
-                playerController.Die("fall");
+            //     if (!playerController.IsDead())
+            //  playerController.Die("fall");
         }
     }
 
@@ -28,8 +28,8 @@ public class PlayerRespawn : MonoBehaviour
         // Muerte por enemigo
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (!playerController.IsDead())
-                playerController.Die("enemy");
+            //  if (!playerController.IsDead())
+            //   playerController.Die("enemy");
         }
     }
 
@@ -42,7 +42,7 @@ public class PlayerRespawn : MonoBehaviour
         if (newRespawn == null) return;
 
         respawnPoint = newRespawn;
-        playerController.currentCheckpoint = newRespawn;
+        //   playerController.currentCheckpoint = newRespawn;
 
         Debug.Log($"🟢 Nuevo punto de respawn establecido: {newRespawn.name}");
     }
@@ -50,7 +50,7 @@ public class PlayerRespawn : MonoBehaviour
     public void UpdateRespawn(Transform newRespawnPoint)
     {
         respawnPoint = newRespawnPoint;
-        playerController.currentCheckpoint = newRespawnPoint;
+        //  playerController.currentCheckpoint = newRespawnPoint;
 
         Debug.Log($"Respawn actualizado a: {newRespawnPoint.position}");
     }

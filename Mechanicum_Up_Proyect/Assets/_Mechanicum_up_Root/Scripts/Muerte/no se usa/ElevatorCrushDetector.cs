@@ -34,10 +34,10 @@ public class ElevatorCrushDetector : MonoBehaviour
 
     private void KillPlayer(GameObject player)
     {
-        var playerController = player.GetComponent<PlayerController>();
-        if (playerController != null && !playerController.IsDead())
+        // var playerController = player.GetComponent<PlayerController>();
+        //   if (playerController != null && !playerController.IsDead())
         {
-            playerController.DieInstant("crush");
+            //     playerController.DieInstant("crush");
             return;
         }
     }

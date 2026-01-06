@@ -230,12 +230,12 @@ public class CartRiderTrigger : MonoBehaviour
 
         isConnecting = true;
 
-        PlayerController controller = player.GetComponent<PlayerController>();
+        //   PlayerController controller = player.GetComponent<PlayerController>();
         Rigidbody rb = player.GetComponent<Rigidbody>();
         Collider col = player.GetComponent<Collider>();
         Animator anim = player.GetComponentInChildren<Animator>();
 
-        if (controller != null) controller.enabled = false;
+        // if (controller != null) controller.enabled = false;
 
         if (rb != null)
         {

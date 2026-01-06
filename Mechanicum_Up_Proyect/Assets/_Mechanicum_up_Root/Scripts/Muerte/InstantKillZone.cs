@@ -43,12 +43,12 @@ public class InstantKillZone : MonoBehaviour
             if (!hit.CompareTag(playerTag))
                 continue;
 
-            PlayerController pc = hit.GetComponent<PlayerController>();
+            //     PlayerController pc = hit.GetComponent<PlayerController>();
 
-            if (pc != null && !pc.IsDead())
+            // if (pc != null && !pc.IsDead())
             {
                 TriggerEffects();   // animación + sonido (sin retrasar la muerte)
-                pc.DieInstant("crush");
+                                    //       pc.DieInstant("crush");
             }
         }
     }
