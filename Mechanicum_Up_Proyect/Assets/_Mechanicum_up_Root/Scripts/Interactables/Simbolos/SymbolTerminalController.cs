@@ -118,51 +118,6 @@ public class SymbolTerminalController : MonoBehaviour
             displayText.text = string.Join(",", currentSequence);
     }
 
-    //public void ExecuteSequence(MonoBehaviour target)
-    //{
-    //    if (target == null)
-    //    {
-    //        Debug.LogWarning("No hay objeto controlado asignado a esta terminal.");
-    //        return;
-
-    //    }
-
-    //    List<string> sequence = new List<string>();
-
-    //    if (symbolSlots != null && symbolSlots.Count > 0)
-    //    {
-    //        foreach (var slot in symbolSlots)
-    //        {
-    //            if (slot != null && !string.IsNullOrEmpty(slot.currentSymbol))
-    //                sequence.Add(slot.currentSymbol.ToLower());
-    //        }
-    //    }
-    //    else
-    //    {
-    //        sequence.AddRange(currentSequence.ConvertAll(s => s.ToLower()));
-    //    }
-
-    //    string command = string.Join(",", sequence);
-    //    Debug.Log($"[Terminal] Ejecutando comando: {command}");
-
-    //    if (target is GatoAnimationController gato) // 🔹 Caso del gato mecánico
-    //    {
-    //        gato.ExecuteTerminalCommand(command);
-    //    }
-    //    else if (target is Elevator elevator)
-    //    {
-    //        if (command == "up")
-    //            elevator.MoveUp();
-    //        else if (command == "no,up")
-    //            elevator.MoveDown();
-    //        else
-    //            Debug.LogWarning($"Comando desconocido: {command}");
-    //    }
-
-    //    ClearSequence();
-    //    CloseTerminal();
-    //}
-
     public void ExecuteSequence(MonoBehaviour target)
     {
         if (target == null)
