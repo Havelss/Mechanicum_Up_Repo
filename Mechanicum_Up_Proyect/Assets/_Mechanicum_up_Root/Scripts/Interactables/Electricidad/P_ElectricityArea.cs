@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class P_ElectricityArea : MonoBehaviour
 {
+    [Header("Power Up")]
+    [SerializeField] private bool hasElectricPower = false;
+
     [Header("Configuración de energía")]
     public float maxEnergy = 10f;
     public float currentEnergy = 10f;
@@ -11,20 +14,17 @@ public class P_ElectricityArea : MonoBehaviour
     public float radius = 3f;
 
     [Header("Aura visual")]
-    public GameObject electricityAura;   // Asigna una esfera o sistema de partículas
-    public AnimationCurve auraGrowth;    // Opcional: curva para el crecimiento del aura
+    public GameObject electricityAura;
+    public AnimationCurve auraGrowth;
     private float auraTime;
 
     [Header("Controles")]
     public Key activateKey = Key.F;
 
     private bool isActive = false;
-    private P_ElectricityPowerUp powerUp;
 
     private void Start()
     {
-        powerUp = GetComponent<P_ElectricityPowerUp>();
-
         if (electricityAura != null)
         {
             electricityAura.SetActive(false);
@@ -34,23 +34,18 @@ public class P_ElectricityArea : MonoBehaviour
 
     private void Update()
     {
-        // Si no tiene el poder eléctrico aún, no puede usar la electricidad
-        if (powerUp == null || !powerUp.HasPower())
+        // 🔒 No puede usar electricidad si no tiene el power-up
+        if (!hasElectricPower)
             return;
 
-        // Detectar pulsación para activar
+        // Activar al presionar
         if (Keyboard.current[activateKey].wasPressedThisFrame)
-        {
             StartElectricity();
-        }
 
-        // Detectar cuándo se suelta
+        // Desactivar al soltar
         if (Keyboard.current[activateKey].wasReleasedThisFrame)
-        {
             StopElectricity();
-        }
 
-        // Si está activa, consumir energía y mantener el aura
         if (isActive)
         {
             float consumption = baseConsumption + activeConsumption;
@@ -69,22 +64,36 @@ public class P_ElectricityArea : MonoBehaviour
         }
         else
         {
-            // Consumo pasivo mínimo
+            // Consumo pasivo
             currentEnergy -= baseConsumption * Time.deltaTime;
             if (currentEnergy < 0f)
                 currentEnergy = 0f;
         }
     }
 
+    // =========================
+    // POWER UP
+    // =========================
+
+    public void ActivatePower()
+    {
+        hasElectricPower = true;
+        Debug.Log("⚡ Poder eléctrico desbloqueado");
+    }
+
+    public bool HasPower()
+    {
+        return hasElectricPower;
+    }
+
+    // =========================
+    // ELECTRICIDAD
+    // =========================
+
     private void StartElectricity()
     {
-        if (currentEnergy <= 0f)
-        {
-            Debug.Log("❌ No hay energía suficiente.");
+        if (currentEnergy <= 0f || isActive)
             return;
-        }
-
-        if (isActive) return;
 
         isActive = true;
         auraTime = 0f;
@@ -127,7 +136,6 @@ public class P_ElectricityArea : MonoBehaviour
         }
         else
         {
-            // Si no hay curva, usa una escala constante
             electricityAura.transform.localScale = Vector3.one * radius;
         }
     }
@@ -146,6 +154,10 @@ public class P_ElectricityArea : MonoBehaviour
         }
     }
 
+    // =========================
+    // ENERGÍA
+    // =========================
+
     public void RechargeEnergy(float amount)
     {
         currentEnergy += amount;
@@ -154,6 +166,10 @@ public class P_ElectricityArea : MonoBehaviour
 
         Debug.Log($"🔋 Energía recargada a {currentEnergy}/{maxEnergy}");
     }
+
+    // =========================
+    // DEBUG
+    // =========================
 
     private void OnDrawGizmosSelected()
     {

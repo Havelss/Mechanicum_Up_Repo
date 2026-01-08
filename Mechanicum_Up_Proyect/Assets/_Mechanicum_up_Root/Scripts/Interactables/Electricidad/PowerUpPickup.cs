@@ -4,17 +4,12 @@ public class PowerUpPickup : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"El objeto {other.name} ha tocado el power-up.");
-
-        var powerUp = other.GetComponent<P_ElectricityPowerUp>();
-        if (powerUp != null)
+        var electricity = other.GetComponent<P_ElectricityArea>();
+        if (electricity != null)
         {
-            powerUp.ActivatePower();
+            electricity.ActivatePower();
             Debug.Log("⚡ Power-up de electricidad obtenido!");
             Destroy(gameObject);
         }
     }
-
-
-
 }
