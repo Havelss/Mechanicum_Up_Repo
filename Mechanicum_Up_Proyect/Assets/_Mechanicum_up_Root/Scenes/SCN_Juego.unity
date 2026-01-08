@@ -7421,7 +7421,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -11382,6 +11381,10 @@ PrefabInstance:
     - target: {fileID: 3269815954350405874, guid: 0a758ee717f1fdd47a3b2c17fc645f5c, type: 3}
       propertyPath: m_Name
       value: PF_Tileable_Pared_Plano (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269815954350405874, guid: 0a758ee717f1fdd47a3b2c17fc645f5c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3269815954350405874, guid: 0a758ee717f1fdd47a3b2c17fc645f5c, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -34067,7 +34070,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -50702,7 +50704,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -66157,7 +66158,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -78361,7 +78361,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
