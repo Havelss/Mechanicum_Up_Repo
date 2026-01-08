@@ -8,4 +8,5 @@ public interface I_Electrifiable
 
     // Opcional: desactivar el objeto (si quieres implementar apagado)
     void PowerOff();
+
 }
