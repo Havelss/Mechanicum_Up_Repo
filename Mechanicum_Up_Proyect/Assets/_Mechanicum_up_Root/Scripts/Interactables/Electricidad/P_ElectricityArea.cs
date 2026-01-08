@@ -9,9 +9,13 @@
 //    [Header("Configuración de energía")]
 //    public float maxEnergy = 10f;
 //    public float currentEnergy = 10f;
-//    public float baseConsumption = 0.5f;
-//    public float activeConsumption = 1f;
+//    public float baseConsumption = 0.5f;    // gasto pasivo
+//    public float activeConsumption = 1f;    // gasto mientras usa electricidad
 //    public float radius = 3f;
+
+//    [Header("Absorción de energía (editable)")]
+//    [Tooltip("Velocidad a la que se recarga energía de terminales (por segundo)")]
+//    public float absorbRate = 3f; // puedes manipularlo desde el inspector
 
 //    [Header("Aura visual")]
 //    public GameObject electricityAura;
@@ -19,7 +23,8 @@
 //    private float auraTime;
 
 //    [Header("Controles")]
-//    public Key activateKey = Key.F;
+//    public Key usePowerKey = Key.Q;   // activar electricidad ofensiva
+//    public Key absorbKey = Key.F;     // recargar energía de terminales
 
 //    private bool isActive = false;
 
@@ -34,18 +39,18 @@
 
 //    private void Update()
 //    {
-//        // 🔒 No puede usar electricidad si no tiene el power-up
+//        // 🔒 No puede usar electricidad si no tiene el poder
 //        if (!hasElectricPower)
 //            return;
 
-//        // Activar al presionar
-//        if (Keyboard.current[activateKey].wasPressedThisFrame)
+//        // --- ACTIVAR EL PODER (Q) ---
+//        if (Keyboard.current[usePowerKey].wasPressedThisFrame)
 //            StartElectricity();
 
-//        // Desactivar al soltar
-//        if (Keyboard.current[activateKey].wasReleasedThisFrame)
+//        if (Keyboard.current[usePowerKey].wasReleasedThisFrame)
 //            StopElectricity();
 
+//        // --- USO ACTIVO DE ELECTRICIDAD ---
 //        if (isActive)
 //        {
 //            float consumption = baseConsumption + activeConsumption;
@@ -69,6 +74,12 @@
 //            if (currentEnergy < 0f)
 //                currentEnergy = 0f;
 //        }
+
+//        // --- ABSORBER ENERGÍA DE TERMINALES (F) ---
+//        if (Keyboard.current[absorbKey].isPressed && !isActive)
+//        {
+//            AbsorbEnergyFromTerminal();
+//        }
 //    }
 
 //    // =========================
@@ -87,7 +98,7 @@
 //    }
 
 //    // =========================
-//    // ELECTRICIDAD
+//    // ELECTRICIDAD ACTIVA
 //    // =========================
 
 //    private void StartElectricity()
@@ -155,6 +166,34 @@
 //    }
 
 //    // =========================
+//    // ABSORCIÓN DE ENERGÍA
+//    // =========================
+
+//    private void AbsorbEnergyFromTerminal()
+//    {
+//        if (currentEnergy >= maxEnergy)
+//            return;
+
+//        Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+//        foreach (var hit in hits)
+//        {
+//            if (!hit.CompareTag("Electrifiable"))
+//                continue;
+
+//            T_Electrifiable terminal = hit.GetComponent<T_Electrifiable>();
+//            if (terminal != null && terminal.IsPowered())
+//            {
+//                currentEnergy += absorbRate * Time.deltaTime; // usa el valor editable
+//                if (currentEnergy > maxEnergy)
+//                    currentEnergy = maxEnergy;
+
+//                Debug.Log("🔌 Absorbiendo energía de terminal");
+//                return; // solo una terminal a la vez
+//            }
+//        }
+//    }
+
+//    // =========================
 //    // ENERGÍA
 //    // =========================
 
@@ -189,21 +228,28 @@ public class P_ElectricityArea : MonoBehaviour
     [Header("Configuración de energía")]
     public float maxEnergy = 10f;
     public float currentEnergy = 10f;
-    public float baseConsumption = 0.5f;
-    public float activeConsumption = 1f;
-    public float radius = 3f;
+    public float baseConsumption = 0.5f;    // gasto pasivo
+    public float activeConsumption = 1f;    // gasto mientras usa electricidad
 
-    [Header("Absorción de energía")]
-    public float absorbRate = 2f; // energía por segundo al absorber
+    
+
+    [Header("Absorción de energía (editable)")]
+    [Tooltip("Velocidad a la que se recarga energía de terminales (por segundo)")]
+    public float absorbRate = 3f;
 
     [Header("Aura visual")]
     public GameObject electricityAura;
     public AnimationCurve auraGrowth;
     private float auraTime;
 
+    [Header("Radio del aura (por ejes)")]
+    public Vector3 auraRadius = new Vector3(3f, 3f, 3f); // editable desde Inspector
+
     [Header("Controles")]
     public Key usePowerKey = Key.Q;   // activar electricidad ofensiva
     public Key absorbKey = Key.F;     // recargar energía de terminales
+
+    public float radius = 3f; // radio para detección de electrificables
 
     private bool isActive = false;
 
@@ -313,6 +359,9 @@ public class P_ElectricityArea : MonoBehaviour
         Debug.Log("💤 Electricidad desactivada");
     }
 
+    // =========================
+    // ACTUALIZAR AURA VISUAL
+    // =========================
     private void UpdateAuraVisual()
     {
         if (electricityAura == null)
@@ -322,14 +371,22 @@ public class P_ElectricityArea : MonoBehaviour
         {
             auraTime += Time.deltaTime;
             float scaleFactor = auraGrowth.Evaluate(auraTime);
-            electricityAura.transform.localScale = Vector3.one * radius * scaleFactor;
+            electricityAura.transform.localScale = new Vector3(
+                auraRadius.x * scaleFactor,
+                auraRadius.y * scaleFactor,
+                auraRadius.z * scaleFactor
+            );
         }
         else
         {
-            electricityAura.transform.localScale = Vector3.one * radius;
+            // si no hay curva, solo usa la escala base editable
+            electricityAura.transform.localScale = auraRadius;
         }
     }
 
+    // =========================
+    // APLICAR ELECTRICIDAD A OBJETOS
+    // =========================
     private void ApplyElectricity()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, radius);
@@ -347,7 +404,6 @@ public class P_ElectricityArea : MonoBehaviour
     // =========================
     // ABSORCIÓN DE ENERGÍA
     // =========================
-
     private void AbsorbEnergyFromTerminal()
     {
         if (currentEnergy >= maxEnergy)
@@ -362,7 +418,7 @@ public class P_ElectricityArea : MonoBehaviour
             T_Electrifiable terminal = hit.GetComponent<T_Electrifiable>();
             if (terminal != null && terminal.IsPowered())
             {
-                currentEnergy += absorbRate * Time.deltaTime;
+                currentEnergy += absorbRate * Time.deltaTime; // valor editable por Inspector
                 if (currentEnergy > maxEnergy)
                     currentEnergy = maxEnergy;
 
@@ -373,9 +429,8 @@ public class P_ElectricityArea : MonoBehaviour
     }
 
     // =========================
-    // ENERGÍA
+    // RECARGAR ENERGÍA MANUAL
     // =========================
-
     public void RechargeEnergy(float amount)
     {
         currentEnergy += amount;
@@ -388,11 +443,9 @@ public class P_ElectricityArea : MonoBehaviour
     // =========================
     // DEBUG
     // =========================
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
-
