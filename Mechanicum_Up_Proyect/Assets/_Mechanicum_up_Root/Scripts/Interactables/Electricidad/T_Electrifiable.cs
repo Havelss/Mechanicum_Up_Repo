@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 // Implementa la interfaz para objetos que pueden recibir electricidad
 public class T_Electrifiable : MonoBehaviour, I_Electrifiable
@@ -6,36 +6,37 @@ public class T_Electrifiable : MonoBehaviour, I_Electrifiable
     [Header("Terminal apagada")]
     public SO_Terminal terminal;   // Terminal asociada (opcional)
 
-    public bool isPowered = false; // estado interno de energÌa
+    public bool isPowered = false; // estado interno de energ√≠a
 
     // =========================
     // ENCENDER EL OBJETO
     // =========================
     public void PowerOn()
+{
+    if (isPowered) return;
+    isPowered = true;
+
+    if (terminal != null)
     {
-        if (isPowered) return;  // ya estaba encendido
-
-        isPowered = true;
-
-        if (terminal != null)
-        {
-            // Mostrar la terminal si existe
-            terminal.terminalCanvas.SetActive(true);
-            Debug.Log($"{name} ha recibido energÌa y ahora funciona.");
-        }
+        terminal.SetElectrified(true); // üî• ENCENDIDA PARA SIEMPRE
+        terminal.terminalCanvas.SetActive(false);
     }
+
+    Debug.Log($"{name} ha sido electrificada permanentemente.");
+}
+
 
     // =========================
     // APAGAR EL OBJETO (opcional)
     // =========================
     public void PowerOff()
     {
-        // AquÌ puedes implementar apagar si lo deseas
-        // Por ahora, seg˙n tu diseÒo, no hace nada
+        // Aqu√≠ puedes implementar apagar si lo deseas
+        // Por ahora, seg√∫n tu dise√±o, no hace nada
     }
 
     // =========================
-    // CHEQUEAR SI EST¡ ENCENDIDO
+    // CHEQUEAR SI EST√Å ENCENDIDO
     // =========================
     public bool IsPowered()
     {
@@ -43,7 +44,7 @@ public class T_Electrifiable : MonoBehaviour, I_Electrifiable
     }
 
     // =========================
-    // OPCIONAL: M…TODO PARA RESETEAR (si quieres)
+    // OPCIONAL: M√âTODO PARA RESETEAR (si quieres)
     // =========================
     public void ResetPower()
     {
