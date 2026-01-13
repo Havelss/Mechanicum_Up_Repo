@@ -4097,7 +4097,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 545164219}
     m_Modifications:
     - target: {fileID: -8807947670519030257, guid: e9138880c06dc8643970874c283b28ec, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4284,6 +4284,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9138880c06dc8643970874c283b28ec, type: 3}
+--- !u!4 &128474432 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e9138880c06dc8643970874c283b28ec, type: 3}
+  m_PrefabInstance: {fileID: 128474431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &129660248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7447,6 +7452,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &184456584
 Transform:
   m_ObjectHideFlags: 0
@@ -23223,6 +23238,9 @@ Transform:
   m_Children:
   - {fileID: 1496377377}
   - {fileID: 744187016}
+  - {fileID: 128474432}
+  - {fileID: 971285974}
+  - {fileID: 2130561312}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &545164220
@@ -34154,6 +34172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &840969245
 Transform:
   m_ObjectHideFlags: 0
@@ -39401,7 +39429,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 545164219}
     m_Modifications:
     - target: {fileID: -8807947670519030257, guid: e9138880c06dc8643970874c283b28ec, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -39588,6 +39616,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9138880c06dc8643970874c283b28ec, type: 3}
+--- !u!4 &971285974 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e9138880c06dc8643970874c283b28ec, type: 3}
+  m_PrefabInstance: {fileID: 971285973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &972265103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0bfd9df4a23abd14a85df0a7900dad99, type: 3}
@@ -40639,6 +40672,7 @@ MonoBehaviour:
   terminalCanvas: {fileID: 1756656790}
   terminalController: {fileID: 1065998164}
   respawnPoint: {fileID: 1838950795}
+  startsElectrified: 0
 --- !u!114 &1005981316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44650,6 +44684,7 @@ MonoBehaviour:
   terminalCanvas: {fileID: 553584543}
   terminalController: {fileID: 339674497}
   respawnPoint: {fileID: 84490683}
+  startsElectrified: 0
 --- !u!114 &1112466082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51280,6 +51315,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &1313043883
 Transform:
   m_ObjectHideFlags: 0
@@ -66749,6 +66794,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &1760146062
 Transform:
   m_ObjectHideFlags: 0
@@ -79188,6 +79243,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &2113313571
 Transform:
   m_ObjectHideFlags: 0
@@ -79666,7 +79731,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 545164219}
     m_Modifications:
     - target: {fileID: -8807947670519030257, guid: e9138880c06dc8643970874c283b28ec, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -79853,6 +79918,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9138880c06dc8643970874c283b28ec, type: 3}
+--- !u!4 &2130561312 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e9138880c06dc8643970874c283b28ec, type: 3}
+  m_PrefabInstance: {fileID: 2130561311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2131545297
 GameObject:
   m_ObjectHideFlags: 0
@@ -118179,9 +118249,6 @@ SceneRoots:
   - {fileID: 212154810}
   - {fileID: 1455432342}
   - {fileID: 921609978}
-  - {fileID: 128474431}
-  - {fileID: 971285973}
-  - {fileID: 2130561311}
   - {fileID: 44426095}
   - {fileID: 376240990}
   - {fileID: 8470587221939855759}
