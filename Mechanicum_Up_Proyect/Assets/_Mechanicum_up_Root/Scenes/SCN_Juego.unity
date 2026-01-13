@@ -7456,7 +7456,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -34287,7 +34286,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -36828,9 +36826,11 @@ GameObject:
   - component: {fileID: 900567106}
   - component: {fileID: 900567105}
   - component: {fileID: 900567104}
+  - component: {fileID: 900567109}
   - component: {fileID: 900567103}
   - component: {fileID: 900567107}
-  m_Layer: 0
+  - component: {fileID: 900567108}
+  m_Layer: 7
   m_Name: plataforma
   m_TagString: Electrifiable
   m_Icon: {fileID: 0}
@@ -36943,7 +36943,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElectricProgressPlatform
   startPoint: {fileID: 1910280382}
   endPoint: {fileID: 774004464}
-  progressSpeed: 0.5
+  speed: 2
+--- !u!114 &900567108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900567102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d3fb01d4f9348458e2995b1dd53786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlatformPassenger
+--- !u!54 &900567109
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900567102}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &905242032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51557,7 +51596,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -67036,7 +67074,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -79596,7 +79633,6 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -108538,7 +108574,7 @@ Transform:
   m_GameObject: {fileID: 8520193424702070012}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071067, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -8, y: 1.9, z: 0.376}
+  m_LocalPosition: {x: -25.29, y: 1.9, z: 0.376}
   m_LocalScale: {x: 37.244, y: 37.24399, z: 37.24399}
   m_ConstrainProportionsScale: 0
   m_Children: []
