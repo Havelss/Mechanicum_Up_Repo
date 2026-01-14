@@ -1,29 +1,27 @@
 using UnityEngine;
 
-public class Lanzallama : MonoBehaviour
+public class ChimeneaLanzallamas : MonoBehaviour
 {
-    public float duracion = 1.5f;      // Tiempo que dura la llama antes de desaparecer
-    public float intervalo = 2f;       // Tiempo entre “explosiones” de la misma chimenea
-    public Transform spawnPoint;       // Punto de salida, opcional si quieres reutilizar el prefab
+    public GameObject lanzallamasPrefab; // El prefab "Lanzallamas"
+    public Transform spawnPoint;         // Punto de salida del fuego
+    public float fireInterval = 2f;      // Cada cuánto tiempo dispara
 
-    void Start()
+    private float timer;
+
+    void Update()
     {
-        // Llama la primera vez
-        StartCoroutine(CicloLlamas());
+        timer += Time.deltaTime;
+
+        if (timer >= fireInterval)
+        {
+            Disparar();
+            timer = 0f;
+        }
     }
 
-    System.Collections.IEnumerator CicloLlamas()
+    void Disparar()
     {
-        while (true) // Bucle infinito
-        {
-            // Instancia la llama (puede ser el mismo prefab o un efecto visual)
-            GameObject llama = Instantiate(gameObject, spawnPoint.position, spawnPoint.rotation);
-
-            // Destruye la llama después de 'duracion'
-            Destroy(llama, duracion);
-
-            // Espera 'intervalo' segundos antes de volver a disparar
-            yield return new WaitForSeconds(intervalo);
-        }
+        // Instancia el prefab en el spawnPoint, sin moverse
+        Instantiate(lanzallamasPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }
