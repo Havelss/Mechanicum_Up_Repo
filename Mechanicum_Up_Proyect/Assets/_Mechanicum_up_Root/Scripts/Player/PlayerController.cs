@@ -207,16 +207,51 @@ public class PlayerController : MonoBehaviour
 
     public bool IsDead() => isDead;
 
+    //public void DieInstant(string cause)
+    //{
+    //    if (isDead) return;
+    //    isDead = true;
+    //    RespawnAtCheckpoint();
+    //}
+
     public void DieInstant(string cause)
     {
         if (isDead) return;
+
+        
+        var mount = GetComponent<PlayerVagonetaMount>();
+        if (mount != null)
+            mount.ForceUnmount();
+
         isDead = true;
         RespawnAtCheckpoint();
     }
 
+
+    //public void Die(string cause = "")
+    //{
+    //    if (isDead) return;
+
+    //    isDead = true;
+    //    rb.linearVelocity = Vector3.zero;
+
+    //    if (playerAnimator)
+    //    {
+    //        if (cause == "crush") playerAnimator.Play("DeathCrushed");
+    //        else playerAnimator.Play("Death");
+    //    }
+
+    //    StartCoroutine(RespawnAfterDeath());
+    //}
+
     public void Die(string cause = "")
     {
         if (isDead) return;
+
+        // 🔥 LIMPIEZA CRÍTICA
+        var mount = GetComponent<PlayerVagonetaMount>();
+        if (mount != null)
+            mount.ForceUnmount();
 
         isDead = true;
         rb.linearVelocity = Vector3.zero;
@@ -230,6 +265,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(RespawnAfterDeath());
     }
 
+
     IEnumerator RespawnAfterDeath()
     {
         yield return new WaitForSeconds(respawnDelay);
@@ -238,6 +274,8 @@ public class PlayerController : MonoBehaviour
 
     void RespawnAtCheckpoint()
     {
+        transform.SetParent(null);
+
         if (currentCheckpoint != null)
             transform.position = currentCheckpoint.position;
 
