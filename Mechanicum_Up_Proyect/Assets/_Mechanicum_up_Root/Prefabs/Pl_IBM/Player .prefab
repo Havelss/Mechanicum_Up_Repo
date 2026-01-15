@@ -82,7 +82,6 @@ GameObject:
   - component: {fileID: 1280854915990259382}
   - component: {fileID: 8229347100543789560}
   - component: {fileID: 7667539808897127514}
-  - component: {fileID: 2701167941160419470}
   m_Layer: 3
   m_Name: 'Player '
   m_TagString: Player
@@ -299,11 +298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58793d82c6537fb429aeb691abbc56a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasElectricPower: 0
   maxEnergy: 100
   currentEnergy: 100
   baseConsumption: 1
   activeConsumption: 2
-  radius: 0.8
+  absorbRate: 3
   electricityAura: {fileID: 3353584280797540177}
   auraGrowth:
     serializedVersion: 2
@@ -329,19 +329,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  activateKey: 20
---- !u!114 &2701167941160419470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3752121666832799407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51ddd342742210a4fb0b577d8476cbde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  auraRadius: {x: 3, y: 3, z: 3}
+  usePowerKey: 31
+  absorbKey: 20
+  radius: 0.8
 --- !u!1 &5474348316033140236
 GameObject:
   m_ObjectHideFlags: 0

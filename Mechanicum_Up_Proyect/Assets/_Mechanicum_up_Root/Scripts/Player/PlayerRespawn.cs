@@ -42,7 +42,7 @@ public class PlayerRespawn : MonoBehaviour
         if (newRespawn == null) return;
 
         respawnPoint = newRespawn;
-        playerController.currentCheckpoint = newRespawn;
+        PlayerManager.Instance.SetCheckpoint(newRespawn);
 
         Debug.Log($"🟢 Nuevo punto de respawn establecido: {newRespawn.name}");
     }
@@ -54,4 +54,5 @@ public class PlayerRespawn : MonoBehaviour
 
         Debug.Log($"Respawn actualizado a: {newRespawnPoint.position}");
     }
+
 }
