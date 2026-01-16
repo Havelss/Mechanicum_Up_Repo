@@ -42704,6 +42704,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 575885015526711610, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.436
+      objectReference: {fileID: 0}
     - target: {fileID: 634889247288191399, guid: b93cce485b569e24295c37198bc7b9df, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -90646,6 +90650,10 @@ PrefabInstance:
       propertyPath: doorAnimator
       value: 
       objectReference: {fileID: 468959901}
+    - target: {fileID: 425547358058303378, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 689541147359855438, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
