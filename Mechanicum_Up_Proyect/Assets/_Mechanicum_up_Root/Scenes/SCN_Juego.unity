@@ -7680,6 +7680,7 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -27552,6 +27553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   playerPrefab: {fileID: 3752121666832799407, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
+  currentPlayer: {fileID: 0}
   currentCheckpoint: {fileID: 114125777}
 --- !u!1001 &651435267
 PrefabInstance:
@@ -34466,6 +34468,7 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -52160,6 +52163,7 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -68676,6 +68680,7 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -82038,6 +82043,7 @@ MonoBehaviour:
   playerTag: Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -121164,6 +121170,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 582168982}
+  - {fileID: 114125777}
+  - {fileID: 2000405290}
   - {fileID: 639931725}
   - {fileID: 2122159582}
   - {fileID: 649696043}
@@ -121172,13 +121180,11 @@ SceneRoots:
   - {fileID: 223355550}
   - {fileID: 1765493260}
   - {fileID: 929908278}
-  - {fileID: 2000405290}
   - {fileID: 1087391949}
   - {fileID: 2006570352}
   - {fileID: 545164219}
   - {fileID: 747654624}
   - {fileID: 543450653376105594}
-  - {fileID: 114125777}
   - {fileID: 820664939}
   - {fileID: 212154810}
   - {fileID: 1455432342}

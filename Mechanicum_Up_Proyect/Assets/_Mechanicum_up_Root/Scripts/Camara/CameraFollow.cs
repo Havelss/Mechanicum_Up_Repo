@@ -43,6 +43,12 @@ public class CameraFollow : MonoBehaviour
         smoothSpeed = newSmooth;
     }
 
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
+
     // --- Gizmos para debug ---
     private void OnDrawGizmos()
     {

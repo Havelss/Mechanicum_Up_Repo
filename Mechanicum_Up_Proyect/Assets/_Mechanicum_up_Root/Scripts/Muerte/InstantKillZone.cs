@@ -48,7 +48,7 @@ public class InstantKillZone : MonoBehaviour
             if (pc != null && !pc.IsDead())
             {
                 TriggerEffects();   // animación + sonido (sin retrasar la muerte)
-                pc.DieInstant("crush");
+                pc.Die("crush");
             }
         }
     }
