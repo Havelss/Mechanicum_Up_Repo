@@ -15,7 +15,7 @@ public class Elevator : MonoBehaviour
 
     [Header("Detección del jugador")]
     [SerializeField] private float playerDetectDistance = 3f;
-    [SerializeField] private Transform player;
+    [SerializeField] private LayerMask playerLayer; // ← asignable en Inspector
 
     [Header("Audio del Ascensor")]
     [SerializeField] private AudioSource audioSource;
@@ -33,6 +33,7 @@ public class Elevator : MonoBehaviour
     private bool playerNearby = false;
 
     private Rigidbody rb;
+    private Transform player;
 
     private void Start()
     {
@@ -53,6 +54,7 @@ public class Elevator : MonoBehaviour
 
     private void Update()
     {
+        FindPlayer();
         DetectPlayer();
         CheckElevatorSound();
     }
@@ -63,6 +65,20 @@ public class Elevator : MonoBehaviour
             MoveTowardsPhysics(upperPoint, MOVE_UP);
         else if (movingDown)
             MoveTowardsPhysics(lowerPoint, MOVE_DOWN);
+    }
+
+    private void FindPlayer()
+    {
+        if (player != null) return;
+
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position,
+            playerDetectDistance,
+            playerLayer
+        );
+
+        if (hits.Length > 0)
+            player = hits[0].transform;
     }
 
     private void DetectPlayer()
@@ -166,4 +182,10 @@ public class Elevator : MonoBehaviour
     private void PlayIdleClosed() => Play(IDLE_CLOSED);
     private void PlayClosing() => Play(CLOSE);
     private void PlayDoors(string anim) => Play(anim);
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, playerDetectDistance);
+    }
 }
