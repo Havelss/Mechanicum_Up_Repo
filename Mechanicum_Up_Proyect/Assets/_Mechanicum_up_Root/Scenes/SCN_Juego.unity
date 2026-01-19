@@ -2999,7 +2999,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 195734643}
-  - {fileID: 1787765663}
   m_Father: {fileID: 1325747350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &92596444
@@ -7675,6 +7674,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     m_Bits: 4294967295
@@ -8255,7 +8256,7 @@ Transform:
   m_GameObject: {fileID: 195734642}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23959,6 +23960,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     serializedVersion: 2
@@ -25626,6 +25629,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     serializedVersion: 2
@@ -34376,6 +34381,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     m_Bits: 4294967295
@@ -42610,6 +42617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     serializedVersion: 2
@@ -44428,6 +44437,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     serializedVersion: 2
@@ -52081,6 +52092,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     m_Bits: 4294967295
@@ -52609,7 +52622,7 @@ Transform:
   m_GameObject: {fileID: 1325747349}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 79, y: 35, z: 0}
+  m_LocalPosition: {x: 75, y: 35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68114,6 +68127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     m_Bits: 4294967295
@@ -69204,6 +69219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     serializedVersion: 2
@@ -69831,37 +69848,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2750407333908947528, guid: 0a758ee717f1fdd47a3b2c17fc645f5c, type: 3}
   m_PrefabInstance: {fileID: 1787633686}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1787765662
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1787765663}
-  m_Layer: 0
-  m_Name: spawnPoint  (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1787765663
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787765662}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 92596443}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1793073820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81618,6 +81604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
+  validTags:
+  - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
     m_Bits: 4294967295
@@ -85976,7 +85964,7 @@ Transform:
   m_GameObject: {fileID: 1574869080759454140}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000057601163, y: 0.7071068, z: 0.7071068, w: 0.000000057601163}
-  m_LocalPosition: {x: 95.231125, y: 33.7209, z: 0.828088}
+  m_LocalPosition: {x: 99.24352, y: 33.7209, z: 0.828088}
   m_LocalScale: {x: 414.38507, y: 148.6817, z: 184.62506}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97392,7 +97380,7 @@ Transform:
   m_GameObject: {fileID: 7592764489468444814}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.49999997, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: 82.54672, y: 30, z: 0.21377939}
+  m_LocalPosition: {x: 87.02, y: 30.19, z: 0.21377939}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97617,7 +97605,7 @@ Transform:
   m_GameObject: {fileID: 9100077517407049221}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000057601163, y: 0.7071067, z: 0.7071068, w: 0.000000057601156}
-  m_LocalPosition: {x: 107.8876, y: 31.31017, z: 0.831414}
+  m_LocalPosition: {x: 111.9, y: 31.31017, z: 0.831414}
   m_LocalScale: {x: 100, y: 128.18678, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100265,7 +100253,7 @@ Transform:
   m_GameObject: {fileID: 6926841059916999902}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000057601163, y: 0.7071067, z: 0.7071068, w: 0.000000057601156}
-  m_LocalPosition: {x: 133.68251, y: 17.199356, z: 0.831414}
+  m_LocalPosition: {x: 82.68251, y: 17.199356, z: 0.831414}
   m_LocalScale: {x: 30.801508, y: 128.18678, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111829,8 +111817,8 @@ Transform:
   m_GameObject: {fileID: 1687657756574304622}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000057601163, y: 0.7071067, z: 0.7071068, w: 0.000000057601156}
-  m_LocalPosition: {x: 90.27643, y: 31.44688, z: 0.831414}
-  m_LocalScale: {x: 100, y: 128.18678, z: 100}
+  m_LocalPosition: {x: 98.7848, y: 31.44688, z: 0.831414}
+  m_LocalScale: {x: 148.62462, y: 128.18678, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 843107876}
@@ -118108,7 +118096,7 @@ Transform:
   m_GameObject: {fileID: 6233876425753870769}
   serializedVersion: 2
   m_LocalRotation: {x: -0.49824685, y: 0.50176, z: 0.50174713, w: -0.4982338}
-  m_LocalPosition: {x: 81.95799, y: 30.000092, z: 0.37196195}
+  m_LocalPosition: {x: 86.39, y: 30.11, z: 0.5}
   m_LocalScale: {x: 99.999985, y: 100, z: 99.999985}
   m_ConstrainProportionsScale: 0
   m_Children: []

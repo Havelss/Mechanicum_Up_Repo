@@ -9,10 +9,10 @@ public class CartSpeedSettings
 public class MinecartController : MonoBehaviour
 {
     [Header("Referencias")]
-    public Transform playerSeat;                      // Empty dentro de la vagoneta
+    public Transform playerSeat;
     public MinecartTerminalUI cartTerminalUI;
     public MinecartTerminalAnimator terminalAnimator;
-    public Rigidbody rb;                              // Rigidbody de la vagoneta
+    public Rigidbody rb;
 
     [Header("Movimiento")]
     public float lateralSpeed = 8f;
@@ -25,7 +25,7 @@ public class MinecartController : MonoBehaviour
 
     private float lateralDirection = 0f;
     private float currentLateralSpeed = 0f;
-    public float seatHeightOffset = 1f; // altura del player respecto al Rigidbody
+    public float seatHeightOffset = 1f;
 
     private void Awake()
     {
@@ -36,10 +36,15 @@ public class MinecartController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Mover la vagoneta lateralmente
-        MoveCartLateral();
+        // Movimiento lateral progresivo
+        float targetSpeed = lateralDirection * lateralSpeed;
+        currentLateralSpeed = Mathf.MoveTowards(currentLateralSpeed, targetSpeed, lateralAcceleration * Time.fixedDeltaTime);
 
-        // Mantener el playerSeat en la vagoneta
+        Vector3 vel = rb.linearVelocity;
+        vel.x = currentLateralSpeed;
+        rb.linearVelocity = vel;
+
+        // Mantener playerSeat en la vagoneta
         if (playerSeat != null)
         {
             playerSeat.position = rb.position + Vector3.up * seatHeightOffset;
@@ -54,20 +59,10 @@ public class MinecartController : MonoBehaviour
         }
     }
 
-    private void MoveCartLateral()
-    {
-        float targetSpeed = lateralDirection * lateralSpeed;
-        currentLateralSpeed = Mathf.MoveTowards(currentLateralSpeed, targetSpeed, lateralAcceleration * Time.fixedDeltaTime);
-
-        Vector3 vel = rb.linearVelocity;
-        vel.x = currentLateralSpeed;
-        rb.linearVelocity = vel;
-    }
-
-    #region Métodos de movimiento lateral
-    public void MoveLeft() => lateralDirection = -1f;
-    public void MoveRight() => lateralDirection = 1f;
-    public void StopLateral() => lateralDirection = 0f;
+    #region Métodos de movimiento lateral (compatibilidad UI)
+    public void MoveLeft() => lateralDirection = -1;
+    public void MoveRight() => lateralDirection = 1;
+    public void StopLateral() => lateralDirection = 0;
     #endregion
 
     #region Player Enter/Exit
@@ -85,7 +80,7 @@ public class MinecartController : MonoBehaviour
         if (pcol != null) pcol.enabled = false;
 
         // Posicionar en el seat
-        player.localPosition = Vector3.zero; // local respecto al seat
+        player.localPosition = Vector3.zero;
         player.localRotation = Quaternion.identity;
 
         isPlayerInside = true;
@@ -131,7 +126,6 @@ public class MinecartController : MonoBehaviour
         {
             Debug.Log("[MinecartController] Vagoneta destruida con el player dentro. Liberando player.");
 
-            // Reactivar control del player
             if (playerController != null)
                 playerController.enabled = true;
 
@@ -142,14 +136,11 @@ public class MinecartController : MonoBehaviour
             if (pcol != null) pcol.enabled = true;
 
             player.SetParent(null);
-
-            // Pequeño offset de seguridad
             player.position += Vector3.up * 1f;
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
-
     #endregion
 }
