@@ -1,4 +1,5 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
+using System.Collections.Generic;
 
 public class InstantKillZone : MonoBehaviour
 {
@@ -6,17 +7,20 @@ public class InstantKillZone : MonoBehaviour
     [Tooltip("Si quieres que esta zona se mueva junto a otro objeto, por ejemplo un elevador o gato.")]
     public Transform movingParent;
 
-    [Header("ConfiguraciÛn b·sica")]
-    public string playerTag = "Player";
+    [Header("Configuraci√≥n b√°sica")]
+    public string playerTag = "Player"; // compatibilidad antigua
 
-    [Header("Zona de DetecciÛn")]
-    [Tooltip("TamaÒo del Box donde el jugador muere instant·neamente")]
+    [Tooltip("Tags v√°lidos que pueden morir en esta zona")]
+    public List<string> validTags = new List<string>() { "Player" };
+
+    [Header("Zona de Detecci√≥n")]
+    [Tooltip("Tama√±o del Box donde el jugador muere instant√°neamente")]
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
 
-    [Tooltip("Capas que se detectar·n dentro del box")]
-    public LayerMask crushLayers = ~0; // Detecta todo por defecto
+    [Tooltip("Capas que se detectar√°n dentro del box")]
+    public LayerMask crushLayers = ~0;
 
-    [Header("AnimaciÛn al Activarse (opcional)")]
+    [Header("Animaci√≥n al Activarse (opcional)")]
     public Animator optionalAnimator;
     public string triggerAnimationName;
 
@@ -28,45 +32,64 @@ public class InstantKillZone : MonoBehaviour
 
     private void Start()
     {
-        // Si quieres que la zona siga un objeto en movimiento (ej. elevador)
         if (movingParent != null)
             transform.SetParent(movingParent);
     }
 
-    private void FixedUpdate()
+    // üî• SISTEMA POR TRIGGER
+    private void OnTriggerEnter(Collider other)
     {
-        // Detecta dentro del Box
-        Collider[] hits = Physics.OverlapBox(transform.position, boxSize * 0.5f, Quaternion.identity, crushLayers);
+        Debug.Log($"[InstantKillZone] Trigger enter con: {other.name}");
 
-        foreach (var hit in hits)
+        if (!IsValidTag(other.tag))
         {
-            if (!hit.CompareTag(playerTag))
-                continue;
-
-            PlayerController pc = hit.GetComponent<PlayerController>();
-
-            if (pc != null && !pc.IsDead())
-            {
-                TriggerEffects();   // animaciÛn + sonido (sin retrasar la muerte)
-                pc.Die("crush");
-            }
+            Debug.Log($"[InstantKillZone] Tag '{other.tag}' no v√°lido.");
+            return;
         }
+
+        PlayerController pc = other.GetComponent<PlayerController>();
+
+        if (pc == null)
+        {
+            Debug.LogWarning("[InstantKillZone] Objeto v√°lido pero sin PlayerController.");
+            return;
+        }
+
+        if (pc.IsDead())
+        {
+            Debug.Log("[InstantKillZone] Player ya estaba muerto.");
+            return;
+        }
+
+        Debug.Log("[InstantKillZone] Player muere por zona instant√°nea.");
+        TriggerEffects();
+        pc.Die("crush");
+    }
+
+    // ‚úÖ NUEVO M√âTODO
+    private bool IsValidTag(string tag)
+    {
+        if (tag == playerTag) return true;
+
+        for (int i = 0; i < validTags.Count; i++)
+        {
+            if (tag == validTags[i])
+                return true;
+        }
+
+        return false;
     }
 
     private void TriggerEffects()
     {
-        if (effectTriggered) return; // Para evitar repetir
+        if (effectTriggered) return;
         effectTriggered = true;
 
-        // AnimaciÛn opcional
         if (optionalAnimator != null && !string.IsNullOrEmpty(triggerAnimationName))
             optionalAnimator.Play(triggerAnimationName);
 
-        // Sonido opcional
         if (optionalAudioSource != null && activationSFX != null)
-        {
             optionalAudioSource.PlayOneShot(activationSFX);
-        }
     }
 
     private void OnDrawGizmosSelected()

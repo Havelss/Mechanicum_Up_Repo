@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MinecartTerminalAnimator : MonoBehaviour
 {
@@ -6,7 +6,7 @@ public class MinecartTerminalAnimator : MonoBehaviour
     public RectTransform terminalPanel;
     public CanvasGroup canvasGroup;
 
-    [Header("Animaci�n")]
+    [Header("Animación")]
     public float animationTime = 0.5f;
     public float hiddenY = -500f;
     public float shownY = 0f;
@@ -31,6 +31,12 @@ public class MinecartTerminalAnimator : MonoBehaviour
 
     private void Update()
     {
+        // 🟥 NUEVO: si no hay player activo, cerrar el terminal
+        if (PlayerManager.Instance != null && PlayerManager.Instance.currentPlayer == null)
+        {
+            isVisible = false;
+        }
+
         if (terminalPanel == null || canvasGroup == null) return;
 
         float dir = isVisible ? 1f : -1f;
@@ -49,4 +55,3 @@ public class MinecartTerminalAnimator : MonoBehaviour
     public void ShowTerminal() => isVisible = true;
     public void HideTerminal() => isVisible = false;
 }
-

@@ -1,16 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 public class Ai_ElevatorCaller : MonoBehaviour
 {
     [Header("Referencia a la llamada del ascensor")]
-    [SerializeField] private ElevatorCall elevatorCall; // GameObject con ElevatorCall
+    [SerializeField] private ElevatorCall elevatorCall;
 
     [Header("Opciones de llamada")]
-    [SerializeField] private bool callUp = true;         // true = subir, false = bajar
-    [SerializeField] private float callDelay = 1f;       // Tiempo entre llamadas
-    [SerializeField] private float detectionRange = 3f;  // Distancia para “detectar al jugador”
-    [SerializeField] private Transform playerTransform;  // Transform del jugador
+    [SerializeField] private bool callUp = true;
+    [SerializeField] private float callDelay = 1f;
+    [SerializeField] private float detectionRange = 3f;
+
+    [Header("Player")]
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private string playerTag = "Player"; // ðŸ”¹ NUEVO
 
     private bool isCalling = true;
 
@@ -23,13 +26,6 @@ public class Ai_ElevatorCaller : MonoBehaviour
             return;
         }
 
-        if (playerTransform == null)
-        {
-            Debug.LogWarning("[Ai_ElevatorCaller] No hay jugador asignado para la detección.");
-            enabled = false;
-            return;
-        }
-
         StartCoroutine(CallLoop());
     }
 
@@ -37,20 +33,40 @@ public class Ai_ElevatorCaller : MonoBehaviour
     {
         while (isCalling)
         {
-            // Llama al ascensor
-            elevatorCall.callUp = callUp;
-            elevatorCall.Interact(null);
+            // ðŸ”Ž Buscar player si no existe (respawn-safe)
+            TryAssignPlayer();
 
-            // Espera el tiempo configurado
-            yield return new WaitForSeconds(callDelay);
-
-            // Comprueba si el jugador está dentro del rango
-            float distance = Vector3.Distance(playerTransform.position, transform.position);
-            if (distance <= detectionRange)
+            if (playerTransform != null)
             {
-                isCalling = false;
-                Destroy(gameObject); // Se elimina el objeto que hace la llamada
+                // Llamar al ascensor
+                elevatorCall.callUp = callUp;
+                elevatorCall.Interact(null);
+
+                float distance = Vector3.Distance(playerTransform.position, transform.position);
+
+                if (distance <= detectionRange)
+                {
+                    Debug.Log("[Ai_ElevatorCaller] Player detectado. Deteniendo llamadas.");
+                    isCalling = false;
+                    Destroy(gameObject);
+                    yield break;
+                }
             }
+
+            yield return new WaitForSeconds(callDelay);
+        }
+    }
+
+    private void TryAssignPlayer()
+    {
+        if (playerTransform != null) return;
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag(playerTag);
+
+        if (playerObj != null)
+        {
+            playerTransform = playerObj.transform;
+            Debug.Log("[Ai_ElevatorCaller] Player asignado automÃ¡ticamente.");
         }
     }
 }

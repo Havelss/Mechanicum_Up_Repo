@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2274330568730562266}
   m_Layer: 7
   m_Name: Vagoneta
-  m_TagString: Untagged
+  m_TagString: Vagoneta
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,8 +60,8 @@ Transform:
   m_GameObject: {fileID: 3676305756911907625}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0041882}
+  m_LocalScale: {x: 1, y: 1, z: 0.42538}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8109172859229481149}
@@ -96,7 +96,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 120
+  m_Constraints: 122
   m_CollisionDetection: 1
 --- !u!65 &2602456226249553503
 BoxCollider:
@@ -138,6 +138,7 @@ MonoBehaviour:
   lateralSpeed: 3
   lateralAcceleration: 4
   isPlayerInside: 0
+  seatHeightOffset: 1
 --- !u!114 &2274330568730562266
 MonoBehaviour:
   m_ObjectHideFlags: 0
