@@ -85,12 +85,17 @@ public class MinecartController : MonoBehaviour
         if (prb != null) prb.isKinematic = true;
         if (pcol != null) pcol.enabled = false;
 
-        // Posicionar en el seat SIN CAMBIAR ESCALA
+        // Guardar escala global
+        Vector3 originalScale = player.localScale;
+
+        // Poner como hijo del seat para que siga la vagoneta
         if (playerSeat != null)
-        {
-            player.position = playerSeat.position;
-            player.rotation = playerSeat.rotation;
-        }
+            player.SetParent(playerSeat);
+
+        // Posicionar y rotar sin cambiar escala
+        player.localPosition = Vector3.zero;
+        player.localRotation = Quaternion.identity;
+        player.localScale = originalScale; // restaurar escala original
 
         isPlayerInside = true;
 
@@ -100,6 +105,7 @@ public class MinecartController : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+
 
 
     public void ExitCart()
