@@ -4,20 +4,14 @@ using System.Collections.Generic;
 public class InstantKillZone : MonoBehaviour
 {
     [Header("Opciones de movimiento (opcional)")]
-    [Tooltip("Si quieres que esta zona se mueva junto a otro objeto, por ejemplo un elevador o gato.")]
     public Transform movingParent;
 
     [Header("Configuración básica")]
-    public string playerTag = "Player"; // compatibilidad antigua
-
-    [Tooltip("Tags válidos que pueden morir en esta zona")]
+    public string playerTag = "Player";
     public List<string> validTags = new List<string>() { "Player" };
 
     [Header("Zona de Detección")]
-    [Tooltip("Tamaño del Box donde el jugador muere instantáneamente")]
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
-
-    [Tooltip("Capas que se detectarán dentro del box")]
     public LayerMask crushLayers = ~0;
 
     [Header("Animación al Activarse (opcional)")]
@@ -36,47 +30,40 @@ public class InstantKillZone : MonoBehaviour
             transform.SetParent(movingParent);
     }
 
-    // 🔥 SISTEMA POR TRIGGER
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"[InstantKillZone] Trigger enter con: {other.name}");
 
-        if (!IsValidTag(other.tag))
+        // 1️⃣ Primero chequea si es player normal
+        if (IsValidTag(other.tag))
         {
-            Debug.Log($"[InstantKillZone] Tag '{other.tag}' no válido.");
-            return;
+            PlayerController pc = other.GetComponent<PlayerController>();
+            if (pc != null && !pc.IsDead())
+            {
+                TriggerEffects();
+                pc.Die("crush");
+                return;
+            }
         }
 
-        PlayerController pc = other.GetComponent<PlayerController>();
-
-        if (pc == null)
+        // 2️⃣ Si es una vagoneta con player dentro
+        MinecartController cart = other.GetComponent<MinecartController>();
+        if (cart != null && cart.isPlayerInside && cart.player != null)
         {
-            Debug.LogWarning("[InstantKillZone] Objeto válido pero sin PlayerController.");
-            return;
+            PlayerController pcInside = cart.player.GetComponent<PlayerController>();
+            if (pcInside != null && !pcInside.IsDead())
+            {
+                TriggerEffects();
+                pcInside.Die("crush");
+            }
         }
-
-        if (pc.IsDead())
-        {
-            Debug.Log("[InstantKillZone] Player ya estaba muerto.");
-            return;
-        }
-
-        Debug.Log("[InstantKillZone] Player muere por zona instantánea.");
-        TriggerEffects();
-        pc.Die("crush");
     }
 
-    // ✅ NUEVO MÉTODO
     private bool IsValidTag(string tag)
     {
         if (tag == playerTag) return true;
-
         for (int i = 0; i < validTags.Count; i++)
-        {
-            if (tag == validTags[i])
-                return true;
-        }
-
+            if (tag == validTags[i]) return true;
         return false;
     }
 

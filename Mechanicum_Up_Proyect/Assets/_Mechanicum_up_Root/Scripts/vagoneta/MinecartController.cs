@@ -20,7 +20,7 @@ public class MinecartController : MonoBehaviour
 
     [Header("Player")]
     public bool isPlayerInside = false;
-    private Transform player;
+    public Transform player;
     private PlayerController playerController;
 
     private float lateralDirection = 0f;
@@ -57,6 +57,12 @@ public class MinecartController : MonoBehaviour
             player.position = playerSeat.position;
             player.rotation = playerSeat.rotation;
         }
+
+        // 🔥 Ocultar terminal si el player ya no es hijo
+        if (terminalAnimator != null && (player == null || player.parent != playerSeat))
+        {
+            terminalAnimator.HideTerminal();
+        }
     }
 
     #region Métodos de movimiento lateral (compatibilidad UI)
@@ -79,9 +85,12 @@ public class MinecartController : MonoBehaviour
         if (prb != null) prb.isKinematic = true;
         if (pcol != null) pcol.enabled = false;
 
-        // Posicionar en el seat
-        player.localPosition = Vector3.zero;
-        player.localRotation = Quaternion.identity;
+        // Posicionar en el seat SIN CAMBIAR ESCALA
+        if (playerSeat != null)
+        {
+            player.position = playerSeat.position;
+            player.rotation = playerSeat.rotation;
+        }
 
         isPlayerInside = true;
 
@@ -91,6 +100,7 @@ public class MinecartController : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+
 
     public void ExitCart()
     {
@@ -140,7 +150,19 @@ public class MinecartController : MonoBehaviour
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+
+            // 🔥 Ocultar el canvas del terminal si existe
+            if (terminalAnimator != null)
+            {
+                Debug.Log("[MinecartController] Ocultando terminal al destruir la vagoneta.");
+                terminalAnimator.HideTerminal();
+            }
+            else if (cartTerminalUI != null)
+            {
+                cartTerminalUI.gameObject.SetActive(false);
+            }
         }
     }
+
     #endregion
 }

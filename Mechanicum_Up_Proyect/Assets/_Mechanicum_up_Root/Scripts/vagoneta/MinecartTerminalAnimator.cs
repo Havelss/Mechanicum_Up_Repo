@@ -20,9 +20,9 @@ public class MinecartTerminalAnimator : MonoBehaviour
     {
         if (terminalPanel != null)
         {
-            Vector2 pos = terminalPanel.anchoredPosition;
-            pos.y = hiddenY;
-            terminalPanel.anchoredPosition = pos;
+            Vector2 startPos = terminalPanel.anchoredPosition;
+            startPos.y = hiddenY;
+            terminalPanel.anchoredPosition = startPos;
         }
 
         if (canvasGroup != null)
@@ -31,23 +31,18 @@ public class MinecartTerminalAnimator : MonoBehaviour
 
     private void Update()
     {
-        // 🟥 NUEVO: si no hay player activo, cerrar el terminal
-        if (PlayerManager.Instance != null && PlayerManager.Instance.currentPlayer == null)
-        {
-            isVisible = false;
-        }
-
         if (terminalPanel == null || canvasGroup == null) return;
 
+        // Animación de abrir/cerrar
         float dir = isVisible ? 1f : -1f;
         animTimer += dir * Time.deltaTime;
         animTimer = Mathf.Clamp(animTimer, 0f, animationTime);
 
         float t = Mathf.SmoothStep(0f, 1f, animTimer / animationTime);
 
-        Vector2 pos = terminalPanel.anchoredPosition;
-        pos.y = Mathf.Lerp(hiddenY, shownY, t);
-        terminalPanel.anchoredPosition = pos;
+        Vector2 currentPos = terminalPanel.anchoredPosition;
+        currentPos.y = Mathf.Lerp(hiddenY, shownY, t);
+        terminalPanel.anchoredPosition = currentPos;
 
         canvasGroup.alpha = t;
     }
