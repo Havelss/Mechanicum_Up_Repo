@@ -2,30 +2,31 @@ using UnityEngine;
 
 public class PuertaUp : MonoBehaviour
 {
+    public Transform puerta;
+
     [Header("Movimiento")]
-    public float alturaSubida = 3f;   // Altura que sube la puerta
+    public float alturaSubida = 3f;
     public float velocidad = 2f;
 
     [Header("Detección")]
     public string playerTag = "Player";
-    public LayerMask playerLayer;
 
     private Vector3 posicionInicial;
     private Vector3 posicionFinal;
-    private bool subir = false;
+    private bool playerDentro = false;
 
     void Start()
     {
-        posicionInicial = transform.position;
+        posicionInicial = puerta.position;
         posicionFinal = posicionInicial + Vector3.up * alturaSubida;
     }
 
     void Update()
     {
-        Vector3 objetivo = subir ? posicionFinal : posicionInicial;
+        Vector3 objetivo = playerDentro ? posicionFinal : posicionInicial;
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
+        puerta.position = Vector3.MoveTowards(
+            puerta.position,
             objetivo,
             velocidad * Time.deltaTime
         );
@@ -33,30 +34,17 @@ public class PuertaUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (EsPlayer(other))
+        if (other.CompareTag(playerTag))
         {
-            subir = true;
+            playerDentro = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (EsPlayer(other))
-        {
-            subir = false;
-        }
-    }
-
-    private bool EsPlayer(Collider other)
-    {
-        // Por TAG
         if (other.CompareTag(playerTag))
-            return true;
-
-        // Por LAYER
-        if (((1 << other.gameObject.layer) & playerLayer) != 0)
-            return true;
-
-        return false;
+        {
+            playerDentro = false;
+        }
     }
 }

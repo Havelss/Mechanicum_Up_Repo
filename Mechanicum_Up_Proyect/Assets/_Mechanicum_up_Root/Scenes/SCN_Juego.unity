@@ -6971,6 +6971,7 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -26481,12 +26482,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6f0cfdc4e3d0548a0103f7e68dec29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuertaUp
+  puerta: {fileID: 703647705}
   alturaSubida: 2
   velocidad: 4
   playerTag: Player
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &703647707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26506,8 +26505,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0139999995, y: 0.0024554117, z: 0.019999996}
-  m_Center: {x: 0, y: 0.000000007450581, z: 0}
+  m_Size: {x: 0.0139999995, y: 0.0058216224, z: 0.019999994}
+  m_Center: {x: 0, y: 0.0016831141, z: 0}
 --- !u!23 &703647708
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -31392,6 +31391,7 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -47599,6 +47599,7 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -61584,6 +61585,7 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -74060,6 +74062,7 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
+    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -87000,12 +87003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6f0cfdc4e3d0548a0103f7e68dec29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuertaUp
+  puerta: {fileID: 0}
   alturaSubida: 3
   velocidad: 2
   playerTag: Player
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &3469287837848872976
 BoxCollider:
   m_ObjectHideFlags: 0
