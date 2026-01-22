@@ -13,7 +13,7 @@ public class PuertaUp : MonoBehaviour
 
     private Vector3 posicionInicial;
     private Vector3 posicionFinal;
-    private bool playerDentro = false;
+    private bool subir = false;
 
     void Start()
     {
@@ -23,28 +23,21 @@ public class PuertaUp : MonoBehaviour
 
     void Update()
     {
-        Vector3 objetivo = playerDentro ? posicionFinal : posicionInicial;
-
-        puerta.position = Vector3.MoveTowards(
-            puerta.position,
-            objetivo,
-            velocidad * Time.deltaTime
-        );
+        if (subir)
+        {
+            puerta.position = Vector3.MoveTowards(
+                puerta.position,
+                posicionFinal,
+                velocidad * Time.deltaTime
+            );
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
         {
-            playerDentro = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(playerTag))
-        {
-            playerDentro = false;
+            subir = true;
         }
     }
 }
