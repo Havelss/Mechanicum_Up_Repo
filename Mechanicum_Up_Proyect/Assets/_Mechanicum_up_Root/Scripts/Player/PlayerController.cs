@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] float rotationSpeed = 720f;
     Vector2 moveInput;
+    bool inputEnabled = true;
     #endregion
 
     #region Salto Cargado  
@@ -46,10 +47,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float fallMultiplier = 2.5f;
     #endregion
 
-    #region Muerte y Respawn  
-    [Header("Muerte y Respawn")]
-    public Transform currentCheckpoint;
-    public float respawnDelay = 1.5f;
+    #region Muerte  
+    [Header("Muerte")]
     bool isDead = false;
     #endregion
 
@@ -94,19 +93,17 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 camForward = camTransform.forward;
         Vector3 camRight = camTransform.right;
-        camForward.y = 0; camRight.y = 0;
-        camForward.Normalize(); camRight.Normalize();
+        camForward.y = 0;
+        camRight.y = 0;
+        camForward.Normalize();
+        camRight.Normalize();
 
         Vector3 moveDir = (camForward * moveInput.y + camRight * moveInput.x).normalized;
 
         if (!isChargingJump)
-        {
             rb.linearVelocity = new Vector3(moveDir.x * speed, rb.linearVelocity.y, moveDir.z * speed);
-        }
         else
-        {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-        }
     }
 
     void HandleRotation()
@@ -114,16 +111,13 @@ public class PlayerController : MonoBehaviour
         if (moveInput == Vector2.zero) return;
 
         Vector3 lookDir = new Vector3(moveInput.x, 0, moveInput.y);
-        if (lookDir != Vector3.zero)
-        {
-            float angle = Mathf.Atan2(lookDir.x, lookDir.z) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, angle, 0);
-        }
+        float angle = Mathf.Atan2(lookDir.x, lookDir.z) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, angle, 0);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (isDead) return;
+        if (isDead || !inputEnabled) return;
 
         if (context.performed) StartChargingJump();
         else if (context.canceled) ReleaseJump();
@@ -135,7 +129,12 @@ public class PlayerController : MonoBehaviour
 
         isChargingJump = true;
         chargeTimer = 0f;
-        targetScale = new Vector3(originalScale.x, originalScale.y - chargeDownAmount, originalScale.z);
+        targetScale = new Vector3(
+            originalScale.x,
+            originalScale.y - chargeDownAmount,
+            originalScale.z
+        );
+
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
         if (playerAnimator)
@@ -149,7 +148,12 @@ public class PlayerController : MonoBehaviour
         isChargingJump = false;
         transform.localScale = originalScale;
 
-        float jumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, Mathf.Clamp01(chargeTimer / maxChargeTime));
+        float jumpForce = Mathf.Lerp(
+            minJumpForce,
+            maxJumpForce,
+            Mathf.Clamp01(chargeTimer / maxChargeTime)
+        );
+
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
         if (playerAnimator)
@@ -164,7 +168,11 @@ public class PlayerController : MonoBehaviour
     void CheckIfGrounded()
     {
         wasGrounded = isGrounded;
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics.CheckSphere(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        );
 
         if (!wasGrounded && isGrounded && playerAnimator != null)
             playerAnimator.SetTrigger("JumpEnd");
@@ -186,20 +194,17 @@ public class PlayerController : MonoBehaviour
 
     void HandleFootsteps()
     {
-        if (playerAnimator == null || footstepSource == null || footstepClip == null) return;
+        if (!playerAnimator || !footstepSource || !footstepClip) return;
 
         bool walking = playerAnimator.GetFloat("Speed") > 0.1f && isGrounded;
 
-        if (walking)
+        if (walking && !footstepSource.isPlaying)
         {
-            if (!footstepSource.isPlaying)
-            {
-                footstepSource.clip = footstepClip;
-                footstepSource.loop = true;
-                footstepSource.Play();
-            }
+            footstepSource.clip = footstepClip;
+            footstepSource.loop = true;
+            footstepSource.Play();
         }
-        else if (footstepSource.isPlaying)
+        else if (!walking && footstepSource.isPlaying)
         {
             footstepSource.Stop();
         }
@@ -207,46 +212,36 @@ public class PlayerController : MonoBehaviour
 
     public bool IsDead() => isDead;
 
-    public void DieInstant(string cause)
-    {
-        if (isDead) return;
-        isDead = true;
-        RespawnAtCheckpoint();
-    }
-
     public void Die(string cause = "")
     {
         if (isDead) return;
-
         isDead = true;
-        rb.linearVelocity = Vector3.zero;
 
-        if (playerAnimator)
+        // 🔥 SI ESTÁ EN UNA VAGONETA, DESTRUIRLA
+        MinecartController cart = GetComponentInParent<MinecartController>();
+        if (cart != null)
         {
-            if (cause == "crush") playerAnimator.Play("DeathCrushed");
-            else playerAnimator.Play("Death");
+            Debug.Log("[PlayerController] Player muere dentro de vagoneta → destruyéndola.");
+            Destroy(cart.gameObject);
         }
 
-        StartCoroutine(RespawnAfterDeath());
-    }
+        // Limpieza por seguridad
+        transform.SetParent(null);
 
-    IEnumerator RespawnAfterDeath()
-    {
-        yield return new WaitForSeconds(respawnDelay);
-        RespawnAtCheckpoint();
-    }
+        // Respawn vía manager
+        PlayerManager.Instance.OnPlayerDeath();
 
-    void RespawnAtCheckpoint()
-    {
-        if (currentCheckpoint != null)
-            transform.position = currentCheckpoint.position;
-
-        isDead = false;
-        if (playerAnimator) playerAnimator.Play("Idle");
+        Destroy(gameObject);
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (!isDead) moveInput = ctx.ReadValue<Vector2>();
+        if (!isDead && inputEnabled)
+            moveInput = ctx.ReadValue<Vector2>();
+    }
+
+    public void SetInputEnabled(bool value)
+    {
+        inputEnabled = value;
     }
 }
