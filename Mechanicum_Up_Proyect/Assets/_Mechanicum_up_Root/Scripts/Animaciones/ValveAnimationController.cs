@@ -7,10 +7,10 @@ public class ValveAnimationController : MonoBehaviour
     public Animator valveAnimator;
 
     [Header("Nombres de animaciones")]
-    public string idleStart = "Valvula_Idle_0G";
-    public string rotateRight = "Valvula_Rotacion_Derecha";
-    public string idleEnd = "Valvula_Idle_360G";
-    public string rotateLeft = "Valvula_Rotacion_Izquierda";
+    public string idleStart = "Palanca_Arriba_Idle";
+    public string rotateRight = "Palanca_Down";
+    public string idleEnd = "Palanca_Down_Idle";
+    public string rotateLeft = "Palanca_Arriba";
 
     private Coroutine returnCoroutine;
     private bool lastRotationWasRight = false; // 👉 Controla la dirección anterior

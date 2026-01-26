@@ -16,9 +16,8 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -67,6 +66,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_0815296b6abc4ec8b0816b94e2e0d97c_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: f4d09cfee4fe34445b03d9e111f37e99, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -126,16 +129,17 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Altura: {r: -1, g: 1, b: 0, a: 0}
-    - _Altura_2: {r: -1, g: 1, b: 0, a: 0}
+    - _Alfa: {r: 0, g: 0, b: 0, a: 0}
+    - _Altura: {r: -2.71, g: 0.49, b: 0, a: 0}
+    - _Altura_2: {r: -2.04, g: 1.92, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorPolvo: {r: 0.5589622, g: 0.6692671, b: 0.745283, a: 1}
+    - _ColorPolvo: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0.4117647}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ScrollSpeed2: {r: 0, g: 0.2, b: 0, a: 0}
-    - _Scrollspeed: {r: 0, g: 0.3, b: 0, a: 0}
+    - _ScrollSpeed2: {r: 0, g: 0.15, b: 0, a: 0}
+    - _Scrollspeed: {r: 0, g: 0.15, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tilling: {r: 1, g: 1, b: 0, a: 0}
+    - _Tilling: {r: 8, g: 8, b: 0, a: 0}
     - _Velocidad: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
