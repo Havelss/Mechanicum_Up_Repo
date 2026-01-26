@@ -79399,7 +79399,7 @@ PrefabInstance:
     - target: {fileID: 4546672176454750832, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
       propertyPath: terminalCanvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1631899141}
     - target: {fileID: 4546672176454750832, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
       propertyPath: startsElectrified
       value: 1
@@ -79509,6 +79509,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+--- !u!1 &1631899141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 701592376481427835, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+  m_PrefabInstance: {fileID: 1631899140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1632063881
 PrefabInstance:
   m_ObjectHideFlags: 0
