@@ -79312,6 +79312,10 @@ PrefabInstance:
       propertyPath: playerLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 425547358058303378, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+      propertyPath: playerDetectDistance
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 586871064794676074, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -4.0711098e-13
