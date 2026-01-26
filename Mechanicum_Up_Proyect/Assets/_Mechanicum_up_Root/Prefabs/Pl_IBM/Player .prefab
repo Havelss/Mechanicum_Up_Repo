@@ -177,10 +177,10 @@ MonoBehaviour:
   footstepClip: {fileID: 0}
   speed: 6
   rotationSpeed: 720
-  minJumpForce: 4
-  maxJumpForce: 8
-  maxChargeTime: 2
-  chargeDownAmount: 0.48
+  minJumpForce: 5
+  maxJumpForce: 6
+  maxChargeTime: 1
+  chargeDownAmount: 0.5
   squashSpeed: 5
   groundCheck: {fileID: 4289508068473975400}
   groundCheckRadius: 0.2
