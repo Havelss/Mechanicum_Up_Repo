@@ -6,13 +6,25 @@ public class Interactor : MonoBehaviour
     [Header("Detección")]
     [SerializeField] private Transform interactionPoint;
     [SerializeField] private float interactionRadius = 2f;
-    [SerializeField] private LayerMask interactableLayers; // Terminal y mesas de símbolos
+    [SerializeField] private LayerMask interactableLayers;
 
     [Header("UI")]
     [SerializeField] private InteractionPromptUI promptUI;
 
+    [Header("Animación")]
+    [Tooltip("Arrastra aquí el Animator del Player (o se buscará solo si está en el mismo objeto)")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private string diskAnimationName = "Anim_Ibm_Link_001";
+
     private readonly Collider[] results = new Collider[6];
     private IInteractable currentInteractable;
+
+    private void Awake()
+    {
+        // Si no asignaste el animator en el inspector, lo buscamos en el objeto o sus hijos
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
+    }
 
     private void Update()
     {
@@ -38,7 +50,7 @@ public class Interactor : MonoBehaviour
             TerminalBox box = col.GetComponent<TerminalBox>();
             if (box != null)
             {
-                currentInteractable = null; // Terminal no es IInteractable
+                currentInteractable = null;
                 if (promptUI != null && !promptUI.IsDisplayed)
                     promptUI.SetUp(box.GetPrompt());
                 return;
@@ -73,16 +85,26 @@ public class Interactor : MonoBehaviour
         {
             Collider col = results[i];
 
+            // 1. Caso: Terminal
             TerminalBox box = col.GetComponent<TerminalBox>();
             if (box != null)
             {
-                box.Interact(); // abre la terminal correspondiente con el objeto controlado
+                box.Interact();
                 return;
             }
 
+            // 2. Caso: Objetos Interactuables (Discos, etc.)
             IInteractable interactable = col.GetComponent<IInteractable>();
             if (interactable != null)
             {
+                // --- CAMBIO AQUÍ: Detección de Disk para Animación ---
+                if (col.CompareTag("Disk") && animator != null)
+                {
+                    // Reproducimos la animación directamente por nombre
+                    animator.Play(diskAnimationName);
+                    Debug.Log("Animación de recolección de disco activada");
+                }
+
                 interactable.Interact(this);
                 return;
             }

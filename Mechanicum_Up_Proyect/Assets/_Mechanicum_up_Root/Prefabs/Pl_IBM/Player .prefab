@@ -348,6 +348,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 320
   promptUI: {fileID: 9088694835418614404}
+  animator: {fileID: 4691617795403022980}
+  diskAnimationName: Anim_Ibm_Link_001
 --- !u!114 &7667539808897127514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +367,7 @@ MonoBehaviour:
   currentEnergy: 100
   baseConsumption: 1
   activeConsumption: 2
-  absorbRate: 5
+  absorbRate: 20
   electricityAura: {fileID: 3353584280797540177}
   auraGrowth:
     serializedVersion: 2
@@ -380,8 +382,17 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.6416626
-      value: 1.1785698
+      time: 0.54126906
+      value: 0.48447943
+      inSlope: 2.0162797
+      outSlope: 2.0162797
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33924684
+    - serializedVersion: 3
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -394,7 +405,7 @@ MonoBehaviour:
   auraRadius: {x: 3, y: 2, z: 3}
   usePowerKey: 31
   absorbKey: 20
-  radius: 0.8
+  radius: 1
 --- !u!81 &1616171568150985168
 AudioListener:
   m_ObjectHideFlags: 0
