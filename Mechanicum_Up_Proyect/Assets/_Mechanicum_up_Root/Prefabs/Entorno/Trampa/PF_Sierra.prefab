@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3193220572083096876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2949390154207737628}
+  - component: {fileID: 6437604920624373595}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2949390154207737628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193220572083096876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00107, y: 0.00531, z: 0.01032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3081865612438407195}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6437604920624373595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193220572083096876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9056dce5446387f4db715b9bb983dc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 0.01, y: 0.01, z: 0.01}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!1001 &3264622711898337264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f8b0dc09450e9f648b10f4cf8492bdfb, type: 2}
     - target: {fileID: 919132149155446097, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
       propertyPath: m_Name
-      value: SK_Sierra
+      value: PF_Sierra
       objectReference: {fileID: 0}
     - target: {fileID: 3196138216412401344, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -86,11 +142,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2949390154207737628}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8383400004052907061}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 406171366448492042}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 173981169230013884}
   m_SourcePrefab: {fileID: 100100000, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
 --- !u!1 &2418200859739574945 stripped
 GameObject:
@@ -119,3 +184,46 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &406171366448492042
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418200859739574945}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.008396909, y: 0.018496329, z: 0.012488601}
+  m_Center: {x: 0.00080154266, y: 0.004248167, z: 0.010412335}
+--- !u!114 &173981169230013884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418200859739574945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6812863405849044fa8612e2d660fc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SierraAnimador
+  animator: {fileID: 8383400004052907061}
+  animacion1: Down
+  animacion2: Up
+  tiempoAnimacion1: 2
+  tiempoAnimacion2: 3
+--- !u!4 &3081865612438407195 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
+  m_PrefabInstance: {fileID: 3264622711898337264}
+  m_PrefabAsset: {fileID: 0}
