@@ -2609,7 +2609,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2713,10 +2713,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
   movingParent: {fileID: 0}
   playerTag: Player
-  boxSize: {x: 3.78, y: 0.82, z: 3.82}
+  validTags:
+  - Player
+  boxSize: {x: 4.1, y: 1.29, z: 3.82}
   crushLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
   optionalAudioSource: {fileID: 0}
