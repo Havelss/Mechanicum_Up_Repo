@@ -15,15 +15,17 @@ public class Elevator : MonoBehaviour
 
     [Header("Detección del jugador")]
     [SerializeField] private float playerDetectDistance = 3f;
-    [SerializeField] private LayerMask playerLayer; // ← asignable en Inspector
+    [SerializeField] private LayerMask playerLayer;
 
     [Header("Audio del Ascensor")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip ascensorClip;
 
+    // Constantes de Animación
     private const string IDLE_OPEN = "Armature_Ascensor_Idle_Abierto";
     private const string IDLE_CLOSED = "Armature_Ascensor_Idle_Cerrado";
     private const string CLOSE = "Armature_Ascensor_Cierre";
+    private const string OPEN = "Armature_Ascensor_Apertura"; // ← Nueva animación
 
     private const string MOVE_UP = "Ascensor_Subir";
     private const string MOVE_DOWN = "Ascensor_Bajar";
@@ -92,7 +94,7 @@ public class Elevator : MonoBehaviour
             if (!playerNearby)
             {
                 playerNearby = true;
-                PlayIdleOpen();
+                PlayOpening(); // ← Cambiado: Ahora inicia la animación de abrir
             }
         }
         else
@@ -100,7 +102,7 @@ public class Elevator : MonoBehaviour
             if (playerNearby)
             {
                 playerNearby = false;
-                PlayIdleClosed();
+                PlayClosing(); // ← Cambiado: Mejor cerrar que saltar al Idle cerrado
             }
         }
     }
@@ -144,7 +146,7 @@ public class Elevator : MonoBehaviour
             movingDown = false;
 
             if (playerNearby)
-                PlayIdleOpen();
+                PlayOpening(); // ← Cambiado: Al llegar, si hay alguien, se abre
             else
                 PlayIdleClosed();
         }
@@ -153,20 +155,16 @@ public class Elevator : MonoBehaviour
     public void MoveUp()
     {
         if (upperPoint == null) return;
-
         movingDown = false;
         movingUp = true;
-
         PlayClosing();
     }
 
     public void MoveDown()
     {
         if (lowerPoint == null) return;
-
         movingUp = false;
         movingDown = true;
-
         PlayClosing();
     }
 
@@ -178,6 +176,8 @@ public class Elevator : MonoBehaviour
             doorAnimator.Play(anim);
     }
 
+    // Métodos de ayuda
+    private void PlayOpening() => Play(OPEN);
     private void PlayIdleOpen() => Play(IDLE_OPEN);
     private void PlayIdleClosed() => Play(IDLE_CLOSED);
     private void PlayClosing() => Play(CLOSE);
@@ -185,6 +185,7 @@ public class Elevator : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // Eliminamos la referencia a interactionPoint porque el ascensor usa su propia posición
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, playerDetectDistance);
     }
