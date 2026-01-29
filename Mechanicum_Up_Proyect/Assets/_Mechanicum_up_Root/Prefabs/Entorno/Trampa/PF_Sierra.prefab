@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2949390154207737628}
-  - component: {fileID: 6437604920624373595}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -32,30 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3081865612438407195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6437604920624373595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3193220572083096876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9056dce5446387f4db715b9bb983dc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
-  movingParent: {fileID: 0}
-  playerTag: Player
-  validTags:
-  - Player
-  boxSize: {x: 0.01, y: 0.01, z: 0.01}
-  crushLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  optionalAnimator: {fileID: 0}
-  triggerAnimationName: 
-  optionalAudioSource: {fileID: 0}
-  activationSFX: {fileID: 0}
 --- !u!1001 &3264622711898337264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,10 +127,13 @@ PrefabInstance:
       addedObject: {fileID: 8383400004052907061}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 406171366448492042}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 173981169230013884}
+    - targetCorrespondingSourceObject: {fileID: 4723813479408397065, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1387506641416498279}
+    - targetCorrespondingSourceObject: {fileID: 4723813479408397065, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 967138371401745239}
   m_SourcePrefab: {fileID: 100100000, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
 --- !u!1 &2418200859739574945 stripped
 GameObject:
@@ -184,27 +162,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &406171366448492042
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2418200859739574945}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.008396909, y: 0.018496329, z: 0.012488601}
-  m_Center: {x: 0.00080154266, y: 0.004248167, z: 0.010412335}
 --- !u!114 &173981169230013884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,8 +175,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SierraAnimador
   animator: {fileID: 8383400004052907061}
-  animacion1: Down
-  animacion2: Up
+  animacion1: Armature_Corte_Down 0
+  animacion2: Armature_Corte_Idle
+  animacion3: Armature_Corte_Up
   tiempoAnimacion1: 2
   tiempoAnimacion2: 3
 --- !u!4 &3081865612438407195 stripped
@@ -227,3 +185,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
   m_PrefabInstance: {fileID: 3264622711898337264}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7836296730584384761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4723813479408397065, guid: b19bc4d48b39f7c4c8f78c680889e249, type: 3}
+  m_PrefabInstance: {fileID: 3264622711898337264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1387506641416498279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836296730584384761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9056dce5446387f4db715b9bb983dc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 0.015, y: 0.01, z: 0.02}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
+--- !u!65 &967138371401745239
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836296730584384761}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.017891344, y: 0.01, z: 0.016769666}
+  m_Center: {x: 0.0010028416, y: 2.3308866e-10, z: -0.00009919399}
