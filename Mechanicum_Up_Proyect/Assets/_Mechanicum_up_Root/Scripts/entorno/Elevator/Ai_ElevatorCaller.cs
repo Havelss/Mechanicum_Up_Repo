@@ -69,4 +69,14 @@ public class Ai_ElevatorCaller : MonoBehaviour
             Debug.Log("[Ai_ElevatorCaller] Player asignado automáticamente.");
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Verifica si el objeto que entra tiene el layer del jugador
+        if (other.gameObject.CompareTag(playerTag))
+        {
+            Debug.Log("[Ai_ElevatorCaller] Player detectado por layer. Destruyendo objeto.");
+            Destroy(gameObject);
+        }
+    }
 }

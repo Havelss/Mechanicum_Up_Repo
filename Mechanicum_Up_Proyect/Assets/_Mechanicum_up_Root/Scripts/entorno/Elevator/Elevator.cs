@@ -25,10 +25,14 @@ public class Elevator : MonoBehaviour
     private const string IDLE_OPEN = "Armature_Ascensor_Idle_Abierto";
     private const string IDLE_CLOSED = "Armature_Ascensor_Idle_Cerrado";
     private const string CLOSE = "Armature_Ascensor_Cierre";
-    private const string OPEN = "Armature_Ascensor_Apertura"; // ← Nueva animación
+    private const string OPEN = "Armature_Ascensor_Apertura";
 
-    private const string MOVE_UP = "Ascensor_Subir";
-    private const string MOVE_DOWN = "Ascensor_Bajar";
+    private const string MOVE_UP = "Armature_Ascensor_Idle_Subida";
+    private const string MOVE_DOWN = "Armature_Ascensor_Idle_Bajada";
+
+    // Nuevas constantes de animación
+    private const string STOP_UP = "Armature_Ascensor_Parada_Arriba";
+    private const string STOP_DOWN = "Armature_Ascensor_Parada_Abajo";
 
     private bool movingUp = false;
     private bool movingDown = false;
@@ -64,9 +68,9 @@ public class Elevator : MonoBehaviour
     private void FixedUpdate()
     {
         if (movingUp)
-            MoveTowardsPhysics(upperPoint, MOVE_UP);
+            MoveTowardsPhysics(upperPoint, MOVE_UP, STOP_UP);
         else if (movingDown)
-            MoveTowardsPhysics(lowerPoint, MOVE_DOWN);
+            MoveTowardsPhysics(lowerPoint, MOVE_DOWN, STOP_DOWN);
     }
 
     private void FindPlayer()
@@ -94,7 +98,7 @@ public class Elevator : MonoBehaviour
             if (!playerNearby)
             {
                 playerNearby = true;
-                PlayOpening(); // ← Cambiado: Ahora inicia la animación de abrir
+                PlayOpening();
             }
         }
         else
@@ -102,7 +106,7 @@ public class Elevator : MonoBehaviour
             if (playerNearby)
             {
                 playerNearby = false;
-                PlayClosing(); // ← Cambiado: Mejor cerrar que saltar al Idle cerrado
+                PlayClosing();
             }
         }
     }
@@ -133,7 +137,7 @@ public class Elevator : MonoBehaviour
         }
     }
 
-    private void MoveTowardsPhysics(Transform target, string moveAnim)
+    private void MoveTowardsPhysics(Transform target, string moveAnim, string stopAnim)
     {
         Vector3 newPos = Vector3.MoveTowards(rb.position, target.position, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
@@ -145,8 +149,10 @@ public class Elevator : MonoBehaviour
             movingUp = false;
             movingDown = false;
 
+            Play(stopAnim); // Ejecuta la animación de parada
+
             if (playerNearby)
-                PlayOpening(); // ← Cambiado: Al llegar, si hay alguien, se abre
+                PlayOpening();
             else
                 PlayIdleClosed();
         }
@@ -185,7 +191,6 @@ public class Elevator : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Eliminamos la referencia a interactionPoint porque el ascensor usa su propia posición
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, playerDetectDistance);
     }
