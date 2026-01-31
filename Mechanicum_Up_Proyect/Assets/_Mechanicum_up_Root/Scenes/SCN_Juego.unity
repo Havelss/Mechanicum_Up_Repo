@@ -49994,8 +49994,12 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6947548676242373571, guid: 0f4dd69c3f8a3b74eb9b84a4909f99ac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.21276262
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947548676242373571, guid: 0f4dd69c3f8a3b74eb9b84a4909f99ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.7
+      value: 33.6
       objectReference: {fileID: 0}
     - target: {fileID: 6947548676242373571, guid: 0f4dd69c3f8a3b74eb9b84a4909f99ac, type: 3}
       propertyPath: m_LocalPosition.y
@@ -50322,6 +50326,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f96af96fea764814ca6db94bea942e6a, type: 3}
       propertyPath: m_Name
       value: SK_Palanca_V2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f96af96fea764814ca6db94bea942e6a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2073095165402204290, guid: f96af96fea764814ca6db94bea942e6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
