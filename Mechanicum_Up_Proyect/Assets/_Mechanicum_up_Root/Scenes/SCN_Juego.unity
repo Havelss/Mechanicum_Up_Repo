@@ -38698,6 +38698,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2567918821563721017, guid: 4525a44b36c3f194d8a4b6e64b92b028, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5507450389046770883, guid: 4525a44b36c3f194d8a4b6e64b92b028, type: 3}
       propertyPath: m_Name
       value: Terminal
@@ -52379,7 +52383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1169731202729607722, guid: 4525a44b36c3f194d8a4b6e64b92b028, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.72
+      value: 1.373
       objectReference: {fileID: 0}
     - target: {fileID: 1169731202729607722, guid: 4525a44b36c3f194d8a4b6e64b92b028, type: 3}
       propertyPath: m_LocalRotation.w
@@ -52417,6 +52421,10 @@ PrefabInstance:
       propertyPath: controlledObject
       value: 
       objectReference: {fileID: 716089025}
+    - target: {fileID: 2567918821563721017, guid: 4525a44b36c3f194d8a4b6e64b92b028, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5507450389046770883, guid: 4525a44b36c3f194d8a4b6e64b92b028, type: 3}
       propertyPath: m_Name
       value: PF_Terminal
@@ -78028,6 +78036,10 @@ PrefabInstance:
     - target: {fileID: 586871064794676074, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 103.64098
+      objectReference: {fileID: 0}
+    - target: {fileID: 701592376481427835, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 725611526101276273, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
