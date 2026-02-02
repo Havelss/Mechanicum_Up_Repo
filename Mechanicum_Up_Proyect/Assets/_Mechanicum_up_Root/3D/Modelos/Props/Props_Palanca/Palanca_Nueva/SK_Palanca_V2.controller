@@ -1,13 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-6538926584655860763
+--- !u!1102 &-3704248849059220717
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Idle_Up
+  m_Name: Armature_Palanca_UP
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7306857256332353114, guid: f96af96fea764814ca6db94bea942e6a, type: 3}
+  m_Motion: {fileID: 7400000, guid: 5d16e926d98f20b4ab82cba323661c00, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -48,32 +48,6 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &681378632647808740
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Palanca_Down
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -6287549645817777160, guid: f96af96fea764814ca6db94bea942e6a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1107 &1151364885648701709
 AnimatorStateMachine:
   serializedVersion: 6
@@ -84,17 +58,17 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: -6538926584655860763}
-    m_Position: {x: 410, y: 20, z: 0}
+    m_State: {fileID: 8197651084440048881}
+    m_Position: {x: 450, y: 240, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 681378632647808740}
-    m_Position: {x: 260, y: 110, z: 0}
+    m_State: {fileID: 2215258601440612492}
+    m_Position: {x: 380, y: 30, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 3555394624062048621}
-    m_Position: {x: 410, y: 200, z: 0}
+    m_State: {fileID: 5175051456561500939}
+    m_Position: {x: 240, y: 160, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 5247228133589729047}
-    m_Position: {x: 550, y: 120, z: 0}
+    m_State: {fileID: -3704248849059220717}
+    m_Position: {x: 590, y: 140, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -104,15 +78,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -6538926584655860763}
---- !u!1102 &3555394624062048621
+  m_DefaultState: {fileID: 2215258601440612492}
+--- !u!1102 &2215258601440612492
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Idle_Down
+  m_Name: Armature_Idle_Up
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -125,20 +99,20 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7861541349778862212, guid: f96af96fea764814ca6db94bea942e6a, type: 3}
+  m_Motion: {fileID: 7400000, guid: 7c574d1a3808ef944b9686d675847a75, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &5247228133589729047
+--- !u!1102 &5175051456561500939
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Palanca_UP
+  m_Name: Armature_Palanca_Down
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -151,7 +125,33 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7397726231822615600, guid: f96af96fea764814ca6db94bea942e6a, type: 3}
+  m_Motion: {fileID: 7400000, guid: cc7d770b4f91c5847ba8c750895e2102, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &8197651084440048881
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Armature_Idle_Down
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 9ab25a2573af656469e3e4fcd72bf172, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

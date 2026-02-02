@@ -26,10 +26,9 @@ public class ElevatorCall : MonoBehaviour, IInteractable
 
         isTurning = true;
 
-        // 🔹 Activa animación de giro
+        // 🔹 Activa animación de palanca
         if (valveAnim != null)
-            valveAnim.PlayValveRotation();
-
+            valveAnim.PlayValveAnimationForElevator(controlledElevator);
 
         // 🔹 Mueve el ascensor
         if (callUp)
@@ -45,8 +44,6 @@ public class ElevatorCall : MonoBehaviour, IInteractable
     {
         while (elevator.IsMoving())
             yield return null;
-
-        
 
         isTurning = false;
     }

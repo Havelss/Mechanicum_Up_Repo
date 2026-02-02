@@ -7,54 +7,50 @@ public class ValveAnimationController : MonoBehaviour
     public Animator valveAnimator;
 
     [Header("Nombres de animaciones")]
-    public string idleStart = "Palanca_Arriba_Idle";
-    public string rotateRight = "Palanca_Down";
-    public string idleEnd = "Palanca_Down_Idle";
-    public string rotateLeft = "Palanca_Arriba";
+    public string idleStart = "Palanca_Arriba_Idle"; // idle arriba
+    public string downAnimation = "Palanca_Down";      // bajar palanca
+    public string idleEnd = "Palanca_Down_Idle";     // idle abajo
+    public string upAnimation = "Palanca_Arriba";     // subir palanca
 
     private Coroutine returnCoroutine;
-    private bool lastRotationWasRight = false; // 👉 Controla la dirección anterior
+    private bool lastRotationWasRight = false; // controla dirección anterior
 
-    public void PlayValveRotation()
+    // Llamar cuando se interactúa con la palanca para mover el ascensor
+    public void PlayValveAnimationForElevator(Elevator elevator)
     {
-        if (valveAnimator == null)
+        if (valveAnimator == null || elevator == null)
         {
-            Debug.LogWarning("[ValveAnimationController] No hay Animator asignado.");
+            Debug.LogWarning("[ValveAnimationController] Animator o Elevator no asignados");
             return;
         }
 
-        // Alternar la dirección
+        // Alternar dirección: sube o baja
         lastRotationWasRight = !lastRotationWasRight;
 
-        string playAnim = lastRotationWasRight ? rotateRight : rotateLeft;
-        string idleToPlay = lastRotationWasRight ? idleEnd : idleStart;
+        string moveAnim = lastRotationWasRight ? upAnimation : downAnimation;
+        string idleAnim = lastRotationWasRight ? idleEnd : idleStart;
 
-        // Buscar duración del clip
-        float clipLength = GetClipLengthByName(playAnim);
-        if (clipLength <= 0f)
-        {
-            clipLength = 1f;
-            Debug.LogWarning("[ValveAnimationController] No se encontró duración del clip: " + playAnim);
-        }
+        // Reproducir animación de mover palanca
+        valveAnimator.Play(moveAnim, 0, 0);
 
-        // Reproducir animación
-        valveAnimator.Play(playAnim, 0, 0);
-
-        // Cancelar coroutine anterior si existía
+        // Cancelar coroutine anterior si existe
         if (returnCoroutine != null)
             StopCoroutine(returnCoroutine);
 
-        // Esperar hasta que termine para volver al idle
-        returnCoroutine = StartCoroutine(ReturnToIdle(idleToPlay, clipLength + 0.05f));
+        // Esperar a que el ascensor termine para poner idle
+        returnCoroutine = StartCoroutine(WaitForElevatorAndSetIdle(elevator, idleAnim));
     }
 
-    private IEnumerator ReturnToIdle(string idleAnim, float delay)
+    private IEnumerator WaitForElevatorAndSetIdle(Elevator elevator, string idleAnim)
     {
-        yield return new WaitForSeconds(delay);
-        valveAnimator.Play(idleAnim);
+        while (elevator.IsMoving())
+            yield return null;
+
+        valveAnimator.Play(idleAnim, 0, 0);
         returnCoroutine = null;
     }
 
+    // Función auxiliar para obtener duración de clips (opcional, si quieres medir tiempos)
     private float GetClipLengthByName(string clipName)
     {
         if (valveAnimator == null || valveAnimator.runtimeAnimatorController == null)
