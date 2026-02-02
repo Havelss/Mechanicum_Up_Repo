@@ -26,11 +26,8 @@
 //    [SerializeField] float minJumpForce = 8f;
 //    [SerializeField] float maxJumpForce = 16f;
 //    [SerializeField] float maxChargeTime = 1.5f;
-//    [SerializeField] float chargeDownAmount = 0.4f;
-//    [SerializeField] float squashSpeed = 5f;
 //    bool isChargingJump = false;
 //    float chargeTimer = 0f;
-//    Vector3 targetScale;
 //    #endregion
 
 //    #region GroundCheck  
@@ -52,14 +49,14 @@
 //    bool isDead = false;
 //    #endregion
 
+
 //    Rigidbody rb;
-//    Vector3 originalScale;
+
 
 //    private void Awake()
 //    {
 //        rb = GetComponent<Rigidbody>();
 //        rb.freezeRotation = true;
-//        originalScale = transform.localScale;
 
 //        if (camTransform == null)
 //            camTransform = Camera.main.transform;
@@ -73,10 +70,10 @@
 //        UpdateAnimator();
 //        HandleFootsteps();
 
+//        // Carga de salto
 //        if (isChargingJump)
 //        {
 //            chargeTimer += Time.deltaTime;
-//            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * squashSpeed);
 //        }
 //    }
 
@@ -129,12 +126,8 @@
 
 //        isChargingJump = true;
 //        chargeTimer = 0f;
-//        targetScale = new Vector3(
-//            originalScale.x,
-//            originalScale.y - chargeDownAmount,
-//            originalScale.z
-//        );
 
+//        // Cancelar velocidad vertical para que la carga sea limpia
 //        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
 //        if (playerAnimator)
@@ -146,7 +139,6 @@
 //        if (!isChargingJump) return;
 
 //        isChargingJump = false;
-//        transform.localScale = originalScale;
 
 //        float jumpForce = Mathf.Lerp(
 //            minJumpForce,
@@ -244,6 +236,8 @@
 //    {
 //        inputEnabled = value;
 //    }
+
+
 //}
 
 using UnityEngine;
@@ -256,6 +250,7 @@ public class PlayerController : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] Transform camTransform;
     [SerializeField] Animator playerAnimator;
+
     [Header("Audio de pasos")]
     [SerializeField] AudioSource footstepSource;
     [SerializeField] AudioClip footstepClip;
@@ -297,6 +292,12 @@ public class PlayerController : MonoBehaviour
     bool isDead = false;
     #endregion
 
+    #region PowerUp Visual (AÑADIDO)
+    [Header("PowerUp Visual")]
+    [SerializeField] private GameObject electricPowerVisualPrefab; // SM_Pila IBM
+    [SerializeField] private string powerAnchorName = "PowerUpHolder";
+    #endregion
+
     Rigidbody rb;
 
     private void Awake()
@@ -308,6 +309,14 @@ public class PlayerController : MonoBehaviour
             camTransform = Camera.main.transform;
     }
 
+    // =========================
+    // START (AÑADIDO)
+    // =========================
+    private void Start()
+    {
+        ApplyPowerUpVisuals();
+    }
+
     private void Update()
     {
         if (isDead) return;
@@ -316,7 +325,6 @@ public class PlayerController : MonoBehaviour
         UpdateAnimator();
         HandleFootsteps();
 
-        // Carga de salto
         if (isChargingJump)
         {
             chargeTimer += Time.deltaTime;
@@ -372,8 +380,6 @@ public class PlayerController : MonoBehaviour
 
         isChargingJump = true;
         chargeTimer = 0f;
-
-        // Cancelar velocidad vertical para que la carga sea limpia
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
         if (playerAnimator)
@@ -455,7 +461,6 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        // 🔥 SI ESTÁ EN UNA VAGONETA, DESTRUIRLA
         MinecartController cart = GetComponentInParent<MinecartController>();
         if (cart != null)
         {
@@ -463,12 +468,8 @@ public class PlayerController : MonoBehaviour
             Destroy(cart.gameObject);
         }
 
-        // Limpieza por seguridad
         transform.SetParent(null);
-
-        // Respawn vía manager
         PlayerManager.Instance.OnPlayerDeath();
-
         Destroy(gameObject);
     }
 
@@ -481,5 +482,51 @@ public class PlayerController : MonoBehaviour
     public void SetInputEnabled(bool value)
     {
         inputEnabled = value;
+    }
+
+    // =========================
+    // POWERUP VISUAL (AÑADIDO)
+    // =========================
+    private void ApplyPowerUpVisuals()
+    {
+        if (PlayerInventory.Instance == null)
+            return;
+
+        if (!PlayerInventory.Instance.hasElectricPower)
+            return;
+
+        Transform anchor = FindChildRecursive(transform, powerAnchorName);
+        if (anchor == null || electricPowerVisualPrefab == null)
+            return;
+
+        if (anchor.childCount > 0)
+            return;
+
+        GameObject visual = Instantiate(
+            electricPowerVisualPrefab,
+            anchor.position,
+            anchor.rotation,
+            anchor
+        );
+
+        visual.name = electricPowerVisualPrefab.name;
+    }
+
+    // =========================
+    // FIND CHILD RECURSIVE (AÑADIDO)
+    // =========================
+    private Transform FindChildRecursive(Transform parent, string name)
+    {
+        if (parent.name == name)
+            return parent;
+
+        foreach (Transform child in parent)
+        {
+            Transform result = FindChildRecursive(child, name);
+            if (result != null)
+                return result;
+        }
+
+        return null;
     }
 }

@@ -4,18 +4,15 @@ using UnityEngine.InputSystem;
 public class P_ElectricityArea : MonoBehaviour
 {
     [Header("Power Up")]
-    [SerializeField] private bool hasElectricPower = false;
+    private bool hasElectricPower = false; // 🔴 NO serializado
 
     [Header("Configuración de energía")]
     public float maxEnergy = 10f;
     public float currentEnergy = 10f;
-    public float baseConsumption = 0.5f;    // gasto pasivo
-    public float activeConsumption = 1f;    // gasto mientras usa electricidad
+    public float baseConsumption = 0.5f;
+    public float activeConsumption = 1f;
 
-    
-
-    [Header("Absorción de energía (editable)")]
-    [Tooltip("Velocidad a la que se recarga energía de terminales (por segundo)")]
+    [Header("Absorción de energía")]
     public float absorbRate = 3f;
 
     [Header("Aura visual")]
@@ -23,40 +20,48 @@ public class P_ElectricityArea : MonoBehaviour
     public AnimationCurve auraGrowth;
     private float auraTime;
 
-    [Header("Radio del aura (por ejes)")]
-    public Vector3 auraRadius = new Vector3(3f, 3f, 3f); // editable desde Inspector
+    [Header("Radio del aura")]
+    public Vector3 auraRadius = new Vector3(3f, 3f, 3f);
 
     [Header("Controles")]
-    public Key usePowerKey = Key.Q;   // activar electricidad ofensiva
-    public Key absorbKey = Key.F;     // recargar energía de terminales
+    public Key usePowerKey = Key.Q;
+    public Key absorbKey = Key.F;
 
-    public float radius = 3f; // radio para detección de electrificables
+    public float radius = 3f;
 
     private bool isActive = false;
 
     private void Start()
     {
+        // 🔄 RESET SEGURO AL SPAWN
+        hasElectricPower = false;
+        isActive = false;
+        currentEnergy = maxEnergy;
+
         if (electricityAura != null)
         {
             electricityAura.SetActive(false);
             electricityAura.transform.localScale = Vector3.zero;
         }
+
+        // 🔁 REAPLICAR DESDE INVENTARIO
+        if (PlayerInventory.Instance != null && PlayerInventory.Instance.hasElectricPower)
+        {
+            ActivatePower();
+        }
     }
 
     private void Update()
     {
-        // 🔒 No puede usar electricidad si no tiene el poder
         if (!hasElectricPower)
             return;
 
-        // --- ACTIVAR EL PODER (Q) ---
         if (Keyboard.current[usePowerKey].wasPressedThisFrame)
             StartElectricity();
 
         if (Keyboard.current[usePowerKey].wasReleasedThisFrame)
             StopElectricity();
 
-        // --- USO ACTIVO DE ELECTRICIDAD ---
         if (isActive)
         {
             float consumption = baseConsumption + activeConsumption;
@@ -66,7 +71,6 @@ public class P_ElectricityArea : MonoBehaviour
             {
                 currentEnergy = 0f;
                 StopElectricity();
-                Debug.Log("⚡ Energía agotada!");
                 return;
             }
 
@@ -75,13 +79,11 @@ public class P_ElectricityArea : MonoBehaviour
         }
         else
         {
-            // Consumo pasivo
             currentEnergy -= baseConsumption * Time.deltaTime;
             if (currentEnergy < 0f)
                 currentEnergy = 0f;
         }
 
-        // --- ABSORBER ENERGÍA DE TERMINALES (F) ---
         if (Keyboard.current[absorbKey].isPressed && !isActive)
         {
             AbsorbEnergyFromTerminal();
@@ -91,22 +93,17 @@ public class P_ElectricityArea : MonoBehaviour
     // =========================
     // POWER UP
     // =========================
-
     public void ActivatePower()
     {
         hasElectricPower = true;
-        Debug.Log("⚡ Poder eléctrico desbloqueado");
+        Debug.Log("⚡ Poder eléctrico activado");
     }
 
-    public bool HasPower()
-    {
-        return hasElectricPower;
-    }
+    public bool HasPower() => hasElectricPower;
 
     // =========================
     // ELECTRICIDAD ACTIVA
     // =========================
-
     private void StartElectricity()
     {
         if (currentEnergy <= 0f || isActive)
@@ -120,8 +117,6 @@ public class P_ElectricityArea : MonoBehaviour
             electricityAura.SetActive(true);
             electricityAura.transform.localScale = Vector3.zero;
         }
-
-        Debug.Log("⚡ Electricidad activada");
     }
 
     private void StopElectricity()
@@ -136,49 +131,29 @@ public class P_ElectricityArea : MonoBehaviour
             electricityAura.SetActive(false);
             electricityAura.transform.localScale = Vector3.zero;
         }
-
-        Debug.Log("💤 Electricidad desactivada");
     }
 
-    // =========================
-    // ACTUALIZAR AURA VISUAL
-    // =========================
     private void UpdateAuraVisual()
     {
         if (electricityAura == null || auraGrowth == null || auraGrowth.length == 0)
         {
-            if (electricityAura != null) electricityAura.transform.localScale = auraRadius;
+            if (electricityAura != null)
+                electricityAura.transform.localScale = auraRadius;
             return;
         }
 
-        // 1. CLAMP DEL TIEMPO: Evitamos que el tiempo siga creciendo y se salga de la curva
         auraTime += Time.deltaTime;
-        float duration = auraGrowth[auraGrowth.length - 1].time; // Duración total de tu curva
-        float evaluationTime = Mathf.Clamp(auraTime, 0, duration);
+        float duration = auraGrowth[auraGrowth.length - 1].time;
+        float t = Mathf.Clamp(auraTime, 0, duration);
+        float scaleFactor = auraGrowth.Evaluate(t);
 
-        float scaleFactor = auraGrowth.Evaluate(evaluationTime);
-
-        // 2. APLICAR ESCALA
         electricityAura.transform.localScale = new Vector3(
             auraRadius.x * scaleFactor,
             auraRadius.y * scaleFactor,
             auraRadius.z * scaleFactor
         );
-
-        // 3. LA SOLUCIÓN AL "PARPADEO": Forzar a Unity a ver el objeto
-        // Si es un Mesh (Esfera/Cubo), actualizamos sus límites
-        var renderer = electricityAura.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            // Esto le dice a Unity: "No me ocultes por optimización, mi tamaño ha cambiado"
-            renderer.enabled = false;
-            renderer.enabled = true;
-        }
     }
 
-    // =========================
-    // APLICAR ELECTRICIDAD A OBJETOS
-    // =========================
     private void ApplyElectricity()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, radius);
@@ -186,16 +161,13 @@ public class P_ElectricityArea : MonoBehaviour
         {
             if (hit.CompareTag("Electrifiable"))
             {
-                I_Electrifiable electrifiable = hit.GetComponent<I_Electrifiable>();
-                if (electrifiable != null)
-                    electrifiable.PowerOn();
+                I_Electrifiable e = hit.GetComponent<I_Electrifiable>();
+                if (e != null)
+                    e.PowerOn();
             }
         }
     }
 
-    // =========================
-    // ABSORCIÓN DE ENERGÍA
-    // =========================
     private void AbsorbEnergyFromTerminal()
     {
         if (currentEnergy >= maxEnergy)
@@ -210,14 +182,18 @@ public class P_ElectricityArea : MonoBehaviour
             T_Electrifiable terminal = hit.GetComponent<T_Electrifiable>();
             if (terminal != null && terminal.IsPowered())
             {
-                currentEnergy += absorbRate * Time.deltaTime; // valor editable por Inspector
+                currentEnergy += absorbRate * Time.deltaTime;
                 if (currentEnergy > maxEnergy)
                     currentEnergy = maxEnergy;
-
-                Debug.Log("🔌 Absorbiendo energía de terminal");
-                return; // solo una terminal a la vez
+                return;
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 
     // =========================
@@ -225,19 +201,14 @@ public class P_ElectricityArea : MonoBehaviour
     // =========================
     public void RechargeEnergy(float amount)
     {
+        if (!hasElectricPower)
+            return;
+
         currentEnergy += amount;
+
         if (currentEnergy > maxEnergy)
             currentEnergy = maxEnergy;
 
         Debug.Log($"🔋 Energía recargada a {currentEnergy}/{maxEnergy}");
-    }
-
-    // =========================
-    // DEBUG
-    // =========================
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
