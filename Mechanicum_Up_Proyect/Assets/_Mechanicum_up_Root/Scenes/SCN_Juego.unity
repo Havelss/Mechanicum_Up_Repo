@@ -12972,6 +12972,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
   m_PrefabInstance: {fileID: 250835367}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &253108994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 253108997}
+  - component: {fileID: 253108996}
+  - component: {fileID: 253108995}
+  m_Layer: 0
+  m_Name: TriggerFadeOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &253108995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253108994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70313f33b6607734487eba1913315273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerFadeOut
+--- !u!65 &253108996
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253108994}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &253108997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253108994}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 53, y: 20, z: 0.3300001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &253236441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15422,7 +15488,7 @@ GameObject:
   - component: {fileID: 301199523}
   - component: {fileID: 301199524}
   m_Layer: 7
-  m_Name: Fuego
+  m_Name: Fuego 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15458,6 +15524,8 @@ MonoBehaviour:
   lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
   spawnPoint: {fileID: 301199523}
   fireInterval: 2
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
 --- !u!1001 &301724823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19270,6 +19338,8 @@ MonoBehaviour:
   lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
   spawnPoint: {fileID: 376933033}
   fireInterval: 2
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
 --- !u!1 &377027319
 GameObject:
   m_ObjectHideFlags: 0
@@ -22606,7 +22676,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4920611207662604016, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+    - {fileID: 5561368708392543709, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+    - {fileID: 5026114117123537447, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
+    - {fileID: 7357377956031009653, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abc9ff2666b5dd3408183a6cf0022f80, type: 3}
@@ -40623,6 +40697,8 @@ MonoBehaviour:
   lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
   spawnPoint: {fileID: 786465113}
   fireInterval: 2
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
 --- !u!1001 &791962461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46482,6 +46558,8 @@ MonoBehaviour:
   lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
   spawnPoint: {fileID: 904695923}
   fireInterval: 2
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
 --- !u!1 &907450428
 GameObject:
   m_ObjectHideFlags: 0
@@ -52025,7 +52103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ai_ElevatorCaller
   elevatorCall: {fileID: 1296440429}
   callUp: 1
-  callDelay: 3
+  callDelay: 5
   detectionRange: 0.055
   playerTransform: {fileID: 7232385314218074165, guid: f1be6e0aef7e22947bea5de40d0a6c2c, type: 3}
   playerTag: Player
@@ -59013,6 +59091,8 @@ MonoBehaviour:
   lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
   spawnPoint: {fileID: 1204414229}
   fireInterval: 2
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
 --- !u!1001 &1208567861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60929,6 +61009,8 @@ MonoBehaviour:
   lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
   spawnPoint: {fileID: 1249142412}
   fireInterval: 2
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
 --- !u!1001 &1250800028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62513,7 +62595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.1
+      value: 31.05
       objectReference: {fileID: 0}
     - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -74641,53 +74723,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b704abcbc508104f9571aa2a821b984, type: 3}
---- !u!1 &1557804520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1557804521}
-  - component: {fileID: 1557804522}
-  m_Layer: 7
-  m_Name: Fuego (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1557804521
+--- !u!4 &1557804521 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+  m_PrefabInstance: {fileID: 1021571798786795149}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557804520}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.01839375, y: 1.0963513e-16, z: -0.0000000019645638}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6738450968456657216}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1557804522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557804520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1aca2f5e3b8cb44ea8751961b6af5e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChimeneaLanzallamas
-  lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
-  spawnPoint: {fileID: 1557804521}
-  fireInterval: 2
 --- !u!1001 &1558327360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76259,6 +76299,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2168897621993177550, guid: 28919da01b596c544a357f922e6f4eb2, type: 3}
   m_PrefabInstance: {fileID: 1591931149}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1596761009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1596761012}
+  - component: {fileID: 1596761011}
+  - component: {fileID: 1596761010}
+  m_Layer: 0
+  m_Name: TriggerFadeIn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1596761010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596761009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ca5930a4ff5b5488f14a656088e08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerFadeIn
+--- !u!65 &1596761011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596761009}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1596761012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596761009}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52, y: 25, z: 0.3300001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1597380810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87942,6 +88048,8 @@ MonoBehaviour:
   lanzallamasPrefab: {fileID: 4170616073579179564, guid: c69d9820e29a25b4ba07e2d5ba496db6, type: 3}
   spawnPoint: {fileID: 1891647750}
   fireInterval: 2
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
 --- !u!65 &1892897805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92201,13 +92309,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 25c47c5747e0ea642aa52b2b2e0823d9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.036
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 228
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -101411,6 +101519,67 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 0
+--- !u!1001 &1021571798786795149
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6738450968456657216}
+    m_Modifications:
+    - target: {fileID: 1231941598543352495, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_Name
+      value: Fuego
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01839375
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0963513e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0000000019645638
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543389973273556174, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316146819566468017, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 2000405295}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b16131b7bead7a47969b9d207345bc9, type: 3}
 --- !u!23 &1036621302212452792
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -115580,3 +115749,5 @@ SceneRoots:
   - {fileID: 1591145738}
   - {fileID: 814258949}
   - {fileID: 1741065044}
+  - {fileID: 1596761012}
+  - {fileID: 253108997}
