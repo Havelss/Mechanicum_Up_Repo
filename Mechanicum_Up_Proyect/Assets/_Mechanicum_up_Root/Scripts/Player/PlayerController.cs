@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxJumpForce = 16f;
     [SerializeField] float maxChargeTime = 1.5f;
     [SerializeField] float chargeDownAmount = 0.4f;
-    [SerializeField] float squashSpeed = 5f;
+    //[SerializeField] float squashSpeed = 5f;
     bool isChargingJump = false;
     float chargeTimer = 0f;
     Vector3 targetScale;
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         if (isChargingJump)
         {
             chargeTimer += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * squashSpeed);
+            //transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * squashSpeed);
         }
     }
 
@@ -101,11 +101,15 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = (camForward * moveInput.y + camRight * moveInput.x).normalized;
 
         if (!isChargingJump)
+        {
             rb.linearVelocity = new Vector3(moveDir.x * speed, rb.linearVelocity.y, moveDir.z * speed);
+        }
         else
+        {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+            playerAnimator.SetBool("Walking", false);
+        }
     }
-
     void HandleRotation()
     {
         if (moveInput == Vector2.zero) return;
@@ -189,6 +193,7 @@ public class PlayerController : MonoBehaviour
         if (!playerAnimator) return;
 
         playerAnimator.SetFloat("Speed", moveInput.magnitude);
+        playerAnimator.SetBool("Walking", true);
         playerAnimator.SetBool("IsGrounded", isGrounded);
     }
 
@@ -196,7 +201,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerAnimator || !footstepSource || !footstepClip) return;
 
-        bool walking = playerAnimator.GetFloat("Speed") > 0.1f && isGrounded;
+        bool walking = playerAnimator.GetBool("Walking") == true && isGrounded;
 
         if (walking && !footstepSource.isPlaying)
         {
