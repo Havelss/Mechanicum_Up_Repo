@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerManager : MonoBehaviour
     [Header("Estado")]
     public Transform currentCheckpoint;
 
+    [Header("Respawn")]
+    public float respawnDelay = 3f; // Tiempo configurable antes de reaparecer
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,23 +25,12 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        SpawnPlayer();
+        SpawnPlayerInstant();
     }
 
-    public void SpawnPlayer()
+    // 🔹 Spawn inicial sin delay
+    private void SpawnPlayerInstant()
     {
-        // Destruye el player antiguo si existe
-        if (currentPlayer != null)
-        {
-            Destroy(currentPlayer);
-            Debug.Log("[PlayerManager] Player anterior destruido");
-        }
-
-        if (currentCheckpoint == null)
-        {
-            Debug.LogWarning("[PlayerManager] Spawn sin checkpoint, usando Vector3.zero");
-        }
-
         Vector3 spawnPos = currentCheckpoint != null ? currentCheckpoint.position : Vector3.zero;
         currentPlayer = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
         Debug.Log($"[PlayerManager] Player instanciado en: {spawnPos} | Checkpoint: {(currentCheckpoint != null ? currentCheckpoint.name : "Ninguno")}");
@@ -48,6 +41,43 @@ public class PlayerManager : MonoBehaviour
         {
             camFollow.SetTarget(currentPlayer.transform);
             Debug.Log("[PlayerManager] Cámara reasignada al nuevo player");
+        }
+    }
+
+    // 🔹 Spawn con delay (desde PlayerRespawn)
+    public void RespawnPlayer()
+    {
+        StartCoroutine(RespawnCoroutine());
+    }
+
+    private IEnumerator RespawnCoroutine()
+    {
+        if (currentPlayer != null)
+        {
+            Destroy(currentPlayer);
+            Debug.Log("[PlayerManager] Player destruido antes de respawn");
+        }
+
+        Debug.Log($"[PlayerManager] Respawn en {respawnDelay} segundos...");
+        yield return new WaitForSeconds(respawnDelay);
+
+        Vector3 spawnPos = currentCheckpoint != null ? currentCheckpoint.position : Vector3.zero;
+        currentPlayer = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+        Debug.Log($"[PlayerManager] Player respawneado en: {spawnPos}");
+
+        // Reasignar cámara si existe
+        CameraFollow camFollow = Camera.main?.GetComponent<CameraFollow>();
+        if (camFollow != null)
+            camFollow.SetTarget(currentPlayer.transform);
+
+        // Activar visuales y VFX si el prefab tiene PlayerController
+        PlayerController pc = currentPlayer.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            pc.isRespawning = true;
+            pc.ApplyPowerUpVisuals();
+            pc.PlayRespawnVFX();
+            pc.isRespawning = false;
         }
     }
 
@@ -65,7 +95,7 @@ public class PlayerManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        Debug.Log("[PlayerManager] Player ha muerto, respawneando...");
-        SpawnPlayer();
+        Debug.Log("[PlayerManager] Player ha muerto, iniciando respawn...");
+        RespawnPlayer();
     }
 }

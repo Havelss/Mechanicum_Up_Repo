@@ -140,11 +140,12 @@ GameObject:
   - component: {fileID: 8771280765632385044}
   - component: {fileID: 4914241915933990279}
   - component: {fileID: 7805069512450620528}
-  - component: {fileID: 801542410941786834}
+  - component: {fileID: 2772599650698239413}
   - component: {fileID: 1280854915990259382}
   - component: {fileID: 8229347100543789560}
   - component: {fileID: 7667539808897127514}
   - component: {fileID: 1616171568150985168}
+  - component: {fileID: 9009723621325065310}
   m_Layer: 3
   m_Name: 'Player '
   m_TagString: Player
@@ -252,7 +253,8 @@ MonoBehaviour:
   fallMultiplier: 2.8
   electricPowerVisualPrefab: {fileID: 350966050747551649, guid: cd76409e8281eae47bc8b58aef1732a6, type: 3}
   powerAnchorName: PowerUpHolder
---- !u!114 &801542410941786834
+  respawnVfxPrefab: {fileID: 4940490768123752400, guid: dcf24d92682624647afbd2a6e57eee18, type: 3}
+--- !u!114 &2772599650698239413
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,7 +265,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3757d1b091f805243a655cbffa402bd6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
   respawnPoint: {fileID: 0}
   respawnFallLimit: -10
 --- !u!114 &1280854915990259382
@@ -415,6 +417,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752121666832799407}
   m_Enabled: 1
+--- !u!114 &9009723621325065310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3752121666832799407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c210d79b99e314a836cff75fc977d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeathHandler
+  deathVfxPrefab: {fileID: 7345505659289291402, guid: d790cf72c9eca1848be023006103fddf, type: 3}
+  cartAnimator: {fileID: 4691617795403022980}
+  deathTriggerName: Death
 --- !u!1 &4305348657156131415
 GameObject:
   m_ObjectHideFlags: 0
