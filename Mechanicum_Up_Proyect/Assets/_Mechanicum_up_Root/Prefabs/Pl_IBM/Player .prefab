@@ -242,15 +242,15 @@ MonoBehaviour:
   footstepClip: {fileID: 0}
   speed: 6
   rotationSpeed: 720
-  minJumpForce: 5
-  maxJumpForce: 6
-  maxChargeTime: 1
+  minJumpForce: 4
+  maxJumpForce: 7
+  maxChargeTime: 3
   groundCheck: {fileID: 4289508068473975400}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  fallMultiplier: 2.8
+  fallMultiplier: 5
   isRespawning: 0
   electricPowerVisualPrefab: {fileID: 350966050747551649, guid: cd76409e8281eae47bc8b58aef1732a6, type: 3}
   powerAnchorName: PowerUpHolder
@@ -1947,27 +1947,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 175d6e8b07a15da468a9f3b1ab952ab1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2431.1
+      value: 1184.7966
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 175d6e8b07a15da468a9f3b1ab952ab1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1000.0002
+      value: 487.35007
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 175d6e8b07a15da468a9f3b1ab952ab1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2095.2002
+      value: 1021.09576
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 175d6e8b07a15da468a9f3b1ab952ab1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13
+      value: 6.3357
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 175d6e8b07a15da468a9f3b1ab952ab1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.799698
+      value: 3.4177
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 175d6e8b07a15da468a9f3b1ab952ab1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -77
+      value: -67.282
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 175d6e8b07a15da468a9f3b1ab952ab1, type: 3}
       propertyPath: m_LocalRotation.w

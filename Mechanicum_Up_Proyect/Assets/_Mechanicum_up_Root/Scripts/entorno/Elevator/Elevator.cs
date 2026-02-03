@@ -194,4 +194,19 @@ public class Elevator : MonoBehaviour
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, playerDetectDistance);
     }
+
+    // Añade esto al final de tu script Elevator.cs
+    public bool IsAtUpperPoint()
+    {
+        if (upperPoint == null) return false;
+        // Comprobamos si la distancia al punto de arriba es muy pequeña
+        return Vector3.Distance(transform.position, upperPoint.position) < 0.1f;
+    }
+
+    public bool IsAtLowerPoint()
+    {
+        if (lowerPoint == null) return false;
+        // Comprobamos si la distancia al punto de abajo es muy pequeña
+        return Vector3.Distance(transform.position, lowerPoint.position) < 0.1f;
+    }
 }

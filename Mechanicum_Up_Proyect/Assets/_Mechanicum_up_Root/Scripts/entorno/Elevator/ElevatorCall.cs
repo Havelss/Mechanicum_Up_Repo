@@ -22,11 +22,27 @@ public class ElevatorCall : MonoBehaviour, IInteractable
             return;
         }
 
+        // --- BLOQUEO POR UBICACIÓN ---
+        // Si la válvula llama hacia ARRIBA y el ascensor YA está ARRIBA, salimos.
+        if (callUp && controlledElevator.IsAtUpperPoint())
+        {
+            Debug.Log("El ascensor ya está arriba.");
+            return;
+        }
+
+        // Si la válvula llama hacia ABAJO y el ascensor YA está ABAJO, salimos.
+        if (!callUp && controlledElevator.IsAtLowerPoint())
+        {
+            Debug.Log("El ascensor ya está abajo.");
+            return;
+        }
+        // ----------------------------
+
         if (isTurning || controlledElevator.IsMoving()) return;
 
         isTurning = true;
 
-        // 🔹 Activa animación de palanca
+        // 🔹 Activa animación de palanca (Solo llegará aquí si el ascensor debe moverse)
         if (valveAnim != null)
             valveAnim.PlayValveAnimationForElevator(controlledElevator);
 
@@ -36,7 +52,6 @@ public class ElevatorCall : MonoBehaviour, IInteractable
         else
             controlledElevator.MoveDown();
 
-        // 🔹 Espera a que termine
         StartCoroutine(WaitForElevatorToStop(controlledElevator));
     }
 
