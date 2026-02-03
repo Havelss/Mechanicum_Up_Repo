@@ -62,6 +62,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject respawnVfxPrefab; // Prefab "Respawn System"
     #endregion
 
+    #region
+    [Header ("Partiulas")]
+    [SerializeField] ParticleSystem runParticles;
+    [SerializeField] float minMoveVelocity = 0.1f;
+    #endregion
+
     Rigidbody rb;
 
     private void Awake()
@@ -300,5 +306,29 @@ public class PlayerController : MonoBehaviour
         }
 
         return null;
+    }
+
+    void HandleRunParticles()
+    {
+        if (!runParticles) return;
+
+        // Velocidad horizontal (X/Z)
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        bool isMoving = horizontalVelocity.magnitude > minMoveVelocity;
+
+        bool shouldPlay =
+            isGrounded &&
+            isMoving &&
+            !isChargingJump &&
+            !isDead;
+
+        if (shouldPlay && !runParticles.isPlaying)
+        {
+            runParticles.Play();
+        }
+        else if (!shouldPlay && runParticles.isPlaying)
+        {
+            runParticles.Stop();
+        }
     }
 }

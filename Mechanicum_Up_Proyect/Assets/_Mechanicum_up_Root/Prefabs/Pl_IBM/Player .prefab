@@ -251,9 +251,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   fallMultiplier: 2.8
+  isRespawning: 0
   electricPowerVisualPrefab: {fileID: 350966050747551649, guid: cd76409e8281eae47bc8b58aef1732a6, type: 3}
   powerAnchorName: PowerUpHolder
   respawnVfxPrefab: {fileID: 4940490768123752400, guid: dcf24d92682624647afbd2a6e57eee18, type: 3}
+  runParticles: {fileID: 5584551378052005389}
+  minMoveVelocity: 0.1
 --- !u!114 &2772599650698239413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
   respawnPoint: {fileID: 0}
   respawnFallLimit: -10
+  respawnDelay: 3
 --- !u!114 &1280854915990259382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,6 +1927,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
+--- !u!198 &5584551378052005389 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8172812237229986910, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
+  m_PrefabInstance: {fileID: 4389855761354336851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5821862890369669098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7791385661155147193, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
