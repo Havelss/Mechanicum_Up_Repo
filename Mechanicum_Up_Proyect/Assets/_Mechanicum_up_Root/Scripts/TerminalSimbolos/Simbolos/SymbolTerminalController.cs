@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SymbolTerminalController : MonoBehaviour
 {
@@ -40,11 +41,56 @@ public class SymbolTerminalController : MonoBehaviour
 
     private void Update()
     {
-        // Detectar si se presiona la tecla E
-        if (Input.GetKeyDown(KeyCode.E))
+        // Evitar que las teclas afecten mientras se escribe en un InputField / TMP_InputField
+        if (IsTypingInInput()) return;
+
+        // Cerrar terminal con E (legacy) o Esc
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
         {
             CloseTerminal();
         }
+
+        // Ejecutar con Enter (Return) o Enter del keypad — solo si hay algo que ejecutar o el botón está activo
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) && CanExecuteFromKeyboard())
+        {
+            ExecuteSequence(ControlledObject);
+        }
+    }
+
+    private bool IsTypingInInput()
+    {
+        if (EventSystem.current == null) return false;
+        var selected = EventSystem.current.currentSelectedGameObject;
+        if (selected == null) return false;
+
+        // Comprueba InputField estándar
+        if (selected.GetComponent<InputField>() != null) return true;
+        // Comprueba TMP_InputField sin añadir dependencia directa a TMPro (usa GetComponent por nombre)
+        if (selected.GetComponent("TMP_InputField") != null) return true;
+
+        return false;
+    }
+
+    private bool CanExecuteFromKeyboard()
+    {
+        // Si existe executeButton y está desactivado o no interactuable, no permitir
+        if (executeButton != null && !executeButton.interactable) return false;
+
+        // Si hay símbolos en slots
+        if (symbolSlots != null && symbolSlots.Count > 0)
+        {
+            foreach (var slot in symbolSlots)
+            {
+                if (slot != null && !string.IsNullOrEmpty(slot.currentSymbol))
+                    return true;
+            }
+        }
+
+        // Si hay símbolos en la secuencia textual
+        if (currentSequence != null && currentSequence.Count > 0)
+            return true;
+
+        return false;
     }
 
     private void CloseTerminal()
