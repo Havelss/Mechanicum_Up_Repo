@@ -297,6 +297,12 @@ public class PlayerController : MonoBehaviour
     bool isDead = false;
     #endregion
 
+    #region Particulas
+    [Header ("Particulas")]
+    [SerializeField] ParticleSystem runParticles;
+    [SerializeField] float minMoveVelocity = 0.1f;
+    #endregion
+
     Rigidbody rb;
 
     private void Awake()
@@ -315,6 +321,7 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
         UpdateAnimator();
         HandleFootsteps();
+        HandleRunParticles();
 
         // Carga de salto
         if (isChargingJump)
@@ -426,15 +433,28 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerAnimator) return;
 
-        playerAnimator.SetFloat("Speed", moveInput.magnitude);
+        Vector3 horizontalVelocity = new Vector3(
+            rb.linearVelocity.x,
+            0,
+            rb.linearVelocity.z
+        );
+
+        bool isWalking =
+            horizontalVelocity.magnitude > 0.1f &&
+            isGrounded &&
+            !isChargingJump &&
+            !isDead;
+
+        playerAnimator.SetBool("IsWalking", isWalking);
         playerAnimator.SetBool("IsGrounded", isGrounded);
     }
+
 
     void HandleFootsteps()
     {
         if (!playerAnimator || !footstepSource || !footstepClip) return;
 
-        bool walking = playerAnimator.GetFloat("Speed") > 0.1f && isGrounded;
+        bool walking = playerAnimator.GetBool("IsWalking");
 
         if (walking && !footstepSource.isPlaying)
         {
@@ -447,6 +467,7 @@ public class PlayerController : MonoBehaviour
             footstepSource.Stop();
         }
     }
+
 
     public bool IsDead() => isDead;
 
@@ -461,6 +482,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("[PlayerController] Player muere dentro de vagoneta → destruyéndola.");
             Destroy(cart.gameObject);
+        }
+        if (playerAnimator)
+        {
+            playerAnimator.SetBool("IsWalking", false);
+            playerAnimator.SetBool("IsGrounded", false);
         }
 
         // Limpieza por seguridad
@@ -482,4 +508,29 @@ public class PlayerController : MonoBehaviour
     {
         inputEnabled = value;
     }
+
+    void HandleRunParticles()
+    {
+        if (!runParticles) return;
+
+        // Velocidad horizontal (X/Z)
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        bool isMoving = horizontalVelocity.magnitude > minMoveVelocity;
+
+        bool shouldPlay =
+            isGrounded &&
+            isMoving &&
+            !isChargingJump &&
+            !isDead;
+
+        if (shouldPlay && !runParticles.isPlaying)
+        {
+            runParticles.Play();
+        }
+        else if (!shouldPlay && runParticles.isPlaying)
+        {
+            runParticles.Stop();
+        }
+    }
+
 }

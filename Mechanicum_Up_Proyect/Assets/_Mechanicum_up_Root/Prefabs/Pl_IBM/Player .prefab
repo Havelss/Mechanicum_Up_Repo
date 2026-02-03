@@ -242,7 +242,7 @@ MonoBehaviour:
   speed: 6
   rotationSpeed: 720
   minJumpForce: 5
-  maxJumpForce: 6
+  maxJumpForce: 8
   maxChargeTime: 1
   groundCheck: {fileID: 4289508068473975400}
   groundCheckRadius: 0.2
@@ -250,6 +250,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   fallMultiplier: 2.8
+  runParticles: {fileID: 5584551378052005389}
+  minMoveVelocity: 0.1
 --- !u!114 &801542410941786834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1900,11 +1902,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8172812237229986910, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172812237229986910, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
+--- !u!198 &5584551378052005389 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8172812237229986910, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
+  m_PrefabInstance: {fileID: 4389855761354336851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5821862890369669098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7791385661155147193, guid: 1b76a1041645c944d8c6861ba7b792ee, type: 3}
