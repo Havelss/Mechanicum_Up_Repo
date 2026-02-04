@@ -11815,7 +11815,7 @@ Transform:
   m_GameObject: {fileID: 197688675}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -102.523, y: -13.9, z: 2.7500002}
+  m_LocalPosition: {x: -102.641, y: -13.9, z: 2.7500002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19101,6 +19101,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 374911696}
     m_Modifications:
+    - target: {fileID: 3020598649000625476, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4859407610476714756, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
       propertyPath: m_LocalScale.x
       value: 281.41858
@@ -26745,13 +26749,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 259811931}
     m_Modifications:
+    - target: {fileID: 3020598649000625476, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4859407610476714756, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.341
       objectReference: {fileID: 0}
     - target: {fileID: 4859407610476714756, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.191
+      value: 8.27
       objectReference: {fileID: 0}
     - target: {fileID: 4859407610476714756, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39592,7 +39600,7 @@ GameObject:
   - component: {fileID: 703837097}
   m_Layer: 7
   m_Name: Cube (7)
-  m_TagString: Wall
+  m_TagString: techo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -41748,7 +41756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRoom
   xLimits: {x: -36, y: 6.5}
-  yLimits: {x: -4.8744793, y: 14}
+  yLimits: {x: -4.8744793, y: 12.75}
   useCustomOffset: 0
   customOffset: {x: 0, y: 0, z: 0}
   useCustomSmooth: 0
@@ -47747,7 +47755,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -69030,7 +69037,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -85045,7 +85051,7 @@ GameObject:
   - component: {fileID: 1661286225}
   m_Layer: 7
   m_Name: Cube (3)
-  m_TagString: Wall
+  m_TagString: techo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -89192,7 +89198,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -98708,8 +98713,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 0}
-  offset: {x: 0, y: 5, z: -10}
+  defaultOffset: {x: 0, y: 5, z: -10}
   smoothSpeed: 0.1
+  ceilingTag: techo
+  ceilingCheckDistance: 3
+  maxZoomIntensity: 0.2
+  zoomSmoothTime: 0.3
   xLimits: {x: -9999, y: 9999}
   yLimits: {x: -9999, y: 9999}
 --- !u!82 &2000405295
@@ -104289,7 +104298,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -109543,13 +109551,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 374911696}
     m_Modifications:
+    - target: {fileID: 3020598649000625476, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4859407610476714756, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.237211
       objectReference: {fileID: 0}
     - target: {fileID: 4859407610476714756, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.635869
+      value: -2.5568686
       objectReference: {fileID: 0}
     - target: {fileID: 4859407610476714756, guid: ac8e3ccfab273ee49a2481ddf4e6628a, type: 3}
       propertyPath: m_LocalPosition.z
