@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
     public Vector2 xLimits = new Vector2(-9999, 9999);
     public Vector2 yLimits = new Vector2(-9999, 9999);
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (target == null) return;
 

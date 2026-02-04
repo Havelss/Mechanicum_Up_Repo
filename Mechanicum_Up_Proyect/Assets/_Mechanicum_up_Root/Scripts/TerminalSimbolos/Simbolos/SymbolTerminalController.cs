@@ -164,6 +164,60 @@ public class SymbolTerminalController : MonoBehaviour
             displayText.text = string.Join(",", currentSequence);
     }
 
+    //public void ExecuteSequence(MonoBehaviour target)
+    //{
+    //    if (target == null)
+    //    {
+    //        Debug.LogWarning("No hay objeto controlado asignado a esta terminal.");
+    //        return;
+    //    }
+
+    //    List<string> sequence = new List<string>();
+
+    //    if (symbolSlots != null && symbolSlots.Count > 0)
+    //    {
+    //        foreach (var slot in symbolSlots)
+    //        {
+    //            if (slot != null && !string.IsNullOrEmpty(slot.currentSymbol))
+    //                sequence.Add(slot.currentSymbol.ToLower());
+    //        }
+    //    }
+    //    else
+    //    {
+    //        sequence.AddRange(currentSequence.ConvertAll(s => s.ToLower()));
+    //    }
+
+    //    string command = string.Join(",", sequence);
+    //    Debug.Log($"[Terminal] Ejecutando comando: {command}");
+
+    //    // 🟢 NUEVO → soporte para invocar bagoneta
+    //    if (target is TerminalCallCart cartCaller)
+    //    {
+    //        Debug.Log("[Terminal] Enviando comando a TerminalCallCart...");
+    //        cartCaller.ExecuteCommand(command);
+    //    }
+    //    else if (target is GatoAnimationController gato)
+    //    {
+    //        gato.ExecuteTerminalCommand(command);
+    //    }
+    //    else if (target is Elevator elevator)
+    //    {
+    //        if (command == "up")
+    //            elevator.MoveUp();
+    //        else if (command == "no,up")
+    //            elevator.MoveDown();
+    //        else
+    //            Debug.LogWarning($"Comando desconocido: {command}");
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning($"El objeto {target.name} no tiene ningún handler de comandos.");
+    //    }
+
+    //    ClearSequence();
+    //    CloseTerminal();
+    //}
+
     public void ExecuteSequence(MonoBehaviour target)
     {
         if (target == null)
@@ -190,7 +244,7 @@ public class SymbolTerminalController : MonoBehaviour
         string command = string.Join(",", sequence);
         Debug.Log($"[Terminal] Ejecutando comando: {command}");
 
-        // 🟢 NUEVO → soporte para invocar bagoneta
+        // 🟢 Soporte para distintos tipos de objetos controlados
         if (target is TerminalCallCart cartCaller)
         {
             Debug.Log("[Terminal] Enviando comando a TerminalCallCart...");
@@ -199,6 +253,10 @@ public class SymbolTerminalController : MonoBehaviour
         else if (target is GatoAnimationController gato)
         {
             gato.ExecuteTerminalCommand(command);
+        }
+        else if (target is BigBossAnimationController boss)
+        {
+            boss.ExecuteTerminalCommand(command);
         }
         else if (target is Elevator elevator)
         {
@@ -217,5 +275,4 @@ public class SymbolTerminalController : MonoBehaviour
         ClearSequence();
         CloseTerminal();
     }
-
 }
