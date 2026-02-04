@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-// Plataforma progresiva que mueve al player mientras recibe electricidad
 public class ElectricProgressPlatformWithPlayer : MonoBehaviour, I_Electrifiable
 {
     [Header("Puntos de movimiento")]
@@ -8,31 +7,34 @@ public class ElectricProgressPlatformWithPlayer : MonoBehaviour, I_Electrifiable
     [SerializeField] private Transform endPoint;
 
     [Header("Progresión")]
-    [SerializeField] private float progressSpeed = 0.5f; // velocidad de avance/reversa
+    [SerializeField] private float progressSpeed = 0.5f;
+    [SerializeField] private float powerOffDelay = 1.5f; // Tiempo de espera antes de retroceder
 
     private Rigidbody rb;
-    private float progress = 0f; // 0 = inicio | 1 = final
+    private float progress = 0f;
     private bool receivingElectricity = false;
+    private float lastPowerTime; // Registra el último momento con energía
 
     // Para mover al player con la plataforma
     private Rigidbody playerRB;
-    private Vector3 lastPosition;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            rb = gameObject.AddComponent<Rigidbody>();
-        }
+        if (rb == null) rb = gameObject.AddComponent<Rigidbody>();
+
         rb.isKinematic = true;
-        lastPosition = rb.position;
+        lastPowerTime = -powerOffDelay; // Empezar sin energía
     }
 
     private void FixedUpdate()
     {
+        // Lógica de Retardo: 
+        // Si estamos recibiendo energía O si el tiempo actual es menor al último contacto + el delay...
+        bool stayPowered = receivingElectricity || (Time.time <= lastPowerTime + powerOffDelay);
+
         // Progresión de la plataforma
-        if (receivingElectricity)
+        if (stayPowered)
             progress += progressSpeed * Time.fixedDeltaTime;
         else
             progress -= progressSpeed * Time.fixedDeltaTime;
@@ -51,11 +53,9 @@ public class ElectricProgressPlatformWithPlayer : MonoBehaviour, I_Electrifiable
             {
                 playerRB.MovePosition(playerRB.position + delta);
             }
-
-            lastPosition = rb.position;
         }
 
-        // Resetear electricidad cada frame
+        // Resetear la señal cada frame (el aura debe llamar a PowerOn constantemente)
         receivingElectricity = false;
     }
 
@@ -65,17 +65,15 @@ public class ElectricProgressPlatformWithPlayer : MonoBehaviour, I_Electrifiable
     public void PowerOn()
     {
         receivingElectricity = true;
+        lastPowerTime = Time.time; // Actualizamos el cronómetro mientras haya contacto
     }
 
     public void PowerOff()
     {
-        // No se usa, pero mantiene la interfaz
+        // Opcional: Podrías forzar el apagado inmediato aquí si quisieras
     }
 
-    public bool IsPowered()
-    {
-        return receivingElectricity;
-    }
+    public bool IsPowered() => receivingElectricity || (Time.time <= lastPowerTime + powerOffDelay);
 
     // =========================
     // Detectar player sobre la plataforma
