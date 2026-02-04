@@ -1,57 +1,93 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ValveAnimationController : MonoBehaviour
 {
-    [Header("Animator de la válvula")]
+    [Header("Referencias")]
     public Animator valveAnimator;
+    public Elevator controlledElevator;
+
+    [Header("Configuración de Luces (Renderers)")]
+    public Renderer luzRojaPalanca;
+    public Renderer luzVerdePalanca;
+    [ColorUsage(true, true)] public Color colorRojoEmisivo = Color.red;
+    [ColorUsage(true, true)] public Color colorVerdeEmisivo = Color.green;
 
     [Header("Nombres de animaciones")]
-    public string idleStart = "Palanca_Arriba_Idle"; // idle arriba
-    public string downAnimation = "Palanca_Down";      // bajar palanca
-    public string idleEnd = "Palanca_Down_Idle";     // idle abajo
-    public string upAnimation = "Palanca_Arriba";     // subir palanca
+    public string idleStart = "Palanca_Arriba_Idle";
+    public string downAnimation = "Palanca_Down";
+    public string idleEnd = "Palanca_Down_Idle";
+    public string upAnimation = "Palanca_Arriba";
 
-    private Coroutine returnCoroutine;
-    private bool lastRotationWasRight = false; // controla dirección anterior
+    private bool lastRotationWasRight = false;
+    private bool wasMovingLastFrame = false;
 
-    // Llamar cuando se interactúa con la palanca para mover el ascensor
-    public void PlayValveAnimationForElevator(Elevator elevator)
+    private void Start()
     {
-        if (valveAnimator == null || elevator == null)
+        // Estado inicial forzado
+        ActualizarVisualesLuces(false);
+    }
+
+    private void Update()
+    {
+        if (controlledElevator == null) return;
+
+        bool isMovingNow = controlledElevator.IsMoving();
+
+        // Si el estado de movimiento ha cambiado desde el último frame...
+        if (isMovingNow != wasMovingLastFrame)
         {
-            Debug.LogWarning("[ValveAnimationController] Animator o Elevator no asignados");
-            return;
+            ActualizarVisualesLuces(isMovingNow);
+
+            // Si se acaba de detener, ponemos la animación de IDLE correspondiente
+            if (!isMovingNow)
+            {
+                string idleAnim = lastRotationWasRight ? idleEnd : idleStart;
+                if (valveAnimator != null) valveAnimator.Play(idleAnim, 0, 0);
+            }
+
+            wasMovingLastFrame = isMovingNow;
         }
-
-        // Alternar dirección: sube o baja
-        lastRotationWasRight = !lastRotationWasRight;
-
-        string moveAnim = lastRotationWasRight ? upAnimation : downAnimation;
-        string idleAnim = lastRotationWasRight ? idleEnd : idleStart;
-
-        // Reproducir animación de mover palanca
-        valveAnimator.Play(moveAnim, 0, 0);
-
-        // Cancelar coroutine anterior si existe
-        if (returnCoroutine != null)
-            StopCoroutine(returnCoroutine);
-
-        // Esperar a que el ascensor termine para poner idle
-        returnCoroutine = StartCoroutine(WaitForElevatorAndSetIdle(elevator, idleAnim));
     }
 
-    private IEnumerator WaitForElevatorAndSetIdle(Elevator elevator, string idleAnim)
+    // Se llama desde ElevatorCall
+    public void PlayValveAnimationForElevator()
     {
-        while (elevator.IsMoving())
-            yield return null;
+        if (valveAnimator == null) return;
 
-        valveAnimator.Play(idleAnim, 0, 0);
-        returnCoroutine = null;
+        lastRotationWasRight = !lastRotationWasRight;
+        string moveAnim = lastRotationWasRight ? upAnimation : downAnimation;
+
+        valveAnimator.Play(moveAnim, 0, 0);
     }
 
-    // Función auxiliar para obtener duración de clips (opcional, si quieres medir tiempos)
-    private float GetClipLengthByName(string clipName)
+    private void ActualizarVisualesLuces(bool estaMoviendose)
+    {
+        // Si se mueve: Rojo ON (true), Verde OFF (false)
+        // Si está quieto: Rojo OFF (false), Verde ON (true)
+        SetEmission(luzRojaPalanca, colorRojoEmisivo, estaMoviendose);
+        SetEmission(luzVerdePalanca, colorVerdeEmisivo, !estaMoviendose);
+    }
+
+    private void SetEmission(Renderer targetRenderer, Color color, bool state)
+    {
+        if (targetRenderer == null) return;
+
+        // .material crea una instancia única para que no cambien todas las palancas del juego a la vez
+        Material mat = targetRenderer.material;
+
+        if (state)
+        {
+            mat.EnableKeyword("_EMISSION");
+            mat.SetColor("_EmissionColor", color);
+        }
+        else
+        {
+            mat.SetColor("_EmissionColor", Color.black);
+            mat.DisableKeyword("_EMISSION");
+        }
+    }
+
+    public float GetClipLengthByName(string clipName)
     {
         if (valveAnimator == null || valveAnimator.runtimeAnimatorController == null)
             return 0f;
@@ -61,7 +97,6 @@ public class ValveAnimationController : MonoBehaviour
             if (clip.name == clipName)
                 return clip.length / valveAnimator.speed;
         }
-
         return 0f;
     }
 }
