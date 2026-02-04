@@ -99,7 +99,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4606438217763928809}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 69cf3c70903697946aa1575e2f4b589c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -111,8 +111,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.032357693, y: 0.031422228, z: 0.030512119}
-  m_Center: {x: -0.0000005245209, y: -0.000107242166, z: 0.0015273929}
+  m_Size: {x: 0.024826918, y: 0.023590392, z: 0.02457015}
+  m_Center: {x: -0.0005203769, y: 0.00016680919, z: 0.0010185264}
 --- !u!54 &8191970136980612200
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4606438217763928809}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 20
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -137,6 +137,6 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
