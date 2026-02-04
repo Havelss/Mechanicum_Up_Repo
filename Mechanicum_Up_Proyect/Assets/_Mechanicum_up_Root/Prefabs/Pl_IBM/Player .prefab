@@ -244,6 +244,8 @@ MonoBehaviour:
   minJumpForce: 4
   maxJumpForce: 7
   maxChargeTime: 0.5
+  minChargeTimeToJump: 0.2
+  forceChargeToJump: 1
   groundCheck: {fileID: 4289508068473975400}
   groundCheckRadius: 0.2
   groundLayer:
@@ -374,6 +376,9 @@ MonoBehaviour:
   baseConsumption: 1
   activeConsumption: 2
   absorbRate: 20
+  visualObjectName: SM_Pila IBM_Energia
+  energyColor: {r: 0, g: 1, b: 1, a: 1}
+  maxEmissionIntensity: 2
   electricityAura: {fileID: 3353584280797540177}
   auraGrowth:
     serializedVersion: 2
@@ -409,8 +414,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   auraRadius: {x: 3, y: 2, z: 3}
-  usePowerKey: 31
-  absorbKey: 20
+  usePowerKey: 20
+  absorbKey: 31
   radius: 1
 --- !u!114 &9009723621325065310
 MonoBehaviour:
