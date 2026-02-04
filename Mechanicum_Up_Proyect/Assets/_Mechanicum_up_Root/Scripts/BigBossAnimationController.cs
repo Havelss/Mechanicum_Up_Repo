@@ -1,120 +1,126 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BigBossAnimationController : MonoBehaviour
+public class BigBossAnimationController : MonoBehaviour, I_Electrifiable
 {
-    [Header("Animator del BigBoss")]
+    [Header("Animator")]
     public Animator bossAnimator;
 
-    [Header("Comandos de la terminal")]
-    public string commandUp = "up";
-    public string commandDown = "down";
+    [Header("Configuración")]
+    public float crossFadeDuration = 0.25f;
 
-    [Header("Nombres de animaciones")]
-    public string upAnimation = "Bigboss_subir_sala";
-    public string downAnimation = "Bigboss_bajar_sala"; // Animación de bajar
-    public string idleUpAnimation = "Bigboss_Idle_UP";
-    public string idleDownAnimation = "Bigboss_Idle_Down";
-    public string idleDefault = "Bigboss_idle";
+    [Header("Estados de Animación")]
+    public string idleInitial = "Bigboss_idle";      // El estado al empezar el juego
+    public string idleBase = "Bigboss_Idle_Down";    // El estado base tras activarse
+    public string idlePowered = "Bigboss_Idle_UP";   // El estado con energía
+
+    [Header("Acciones")]
+    public string upAction = "Bigboss_subir_sala";
+    public string downAction = "Bigboss_bajar_sala";
 
     private Coroutine currentRoutine;
+    private bool isCurrentlyPowered = false;
+    private bool hasMovedOnce = false; // Controla si ya cambió su estado base
 
-    // 🔌 Electricidad
-    private bool receivingElectricity = false;
+    private float lastPowerTime = 0f;
+    private float powerTimeout = 0.2f;
 
-    private void Awake()
+    private void Start()
     {
-        if (bossAnimator == null)
+        if (bossAnimator != null)
         {
-            bossAnimator = GetComponent<Animator>();
-            if (bossAnimator == null)
-                Debug.LogWarning("[BigBossAnimationController] No se encontró Animator.");
+            // Empezamos en el idle de reposo absoluto
+            bossAnimator.Play(idleInitial);
         }
     }
 
     private void Update()
     {
-        // Si recibe electricidad, mostrar animación idle correspondiente
-        if (receivingElectricity)
+        if (isCurrentlyPowered && Time.time > lastPowerTime + powerTimeout)
         {
-            PlayInstant(idleUpAnimation); // puedes cambiar a idleDownAnimation según tu lógica
-            receivingElectricity = false; // se resetea cada frame para evitar repetición
+            PowerOff();
         }
     }
 
-    public void ExecuteTerminalCommand(string command)
+    // ==========================================
+    // INTERFAZ I_Electrifiable
+    // ==========================================
+    public void PowerOn()
     {
-        if (bossAnimator == null) return;
-        if (string.IsNullOrEmpty(command)) return;
-
-        command = command.Trim().ToLower();
-        Debug.Log($"[BigBoss] Comando recibido: {command}");
-
-        if (command == commandUp.ToLower())
+        lastPowerTime = Time.time;
+        if (!isCurrentlyPowered)
         {
-            PlayWithReturn(upAnimation, idleUpAnimation);
+            isCurrentlyPowered = true;
+            PlaySmooth(idlePowered);
         }
-        else if (command == commandDown.ToLower())
-        {
-            PlayWithReturn(downAnimation, idleDownAnimation);
-        }
-        else
-        {
-            Debug.LogWarning($"[BigBoss] Comando desconocido: {command}");
-        }
-    }
-
-    private void PlayWithReturn(string anim, string idle)
-    {
-        if (currentRoutine != null)
-            StopCoroutine(currentRoutine);
-
-        bossAnimator.Play(anim);
-
-        float clipLength = GetClipLength(anim);
-        currentRoutine = StartCoroutine(ReturnToIdle(idle, clipLength));
-    }
-
-    private float GetClipLength(string clipName)
-    {
-        foreach (var clip in bossAnimator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == clipName)
-                return clip.length;
-        }
-
-        Debug.LogWarning($"[BigBoss] No se encontró el clip {clipName}");
-        return 0.1f;
-    }
-
-    private IEnumerator ReturnToIdle(string idleAnim, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        bossAnimator.Play(idleAnim);
-    }
-
-    public void PlayInstant(string anim)
-    {
-        if (bossAnimator == null) return;
-
-        if (currentRoutine != null)
-            StopCoroutine(currentRoutine);
-
-        bossAnimator.Play(anim);
-    }
-
-    // =========================
-    // NUEVO: sistema de electricidad
-    // =========================
-    public void PowerOn(bool upIdle = true)
-    {
-        receivingElectricity = true;
-        PlayInstant(upIdle ? idleUpAnimation : idleDownAnimation);
     }
 
     public void PowerOff()
     {
-        // Opcional: podrías poner idleDefault al apagar
-        PlayInstant(idleDefault);
+        if (!isCurrentlyPowered) return;
+        isCurrentlyPowered = false;
+
+        // Si ya se ha movido alguna vez, vuelve a Idle_Down. 
+        // Si no, vuelve al inicial (aunque lo lógico es que ya se haya movido)
+        PlaySmooth(hasMovedOnce ? idleBase : idleInitial);
+    }
+
+    // ==========================================
+    // COMANDOS DE TERMINAL
+    // ==========================================
+    public void ExecuteTerminalCommand(string command)
+    {
+        if (isCurrentlyPowered) return;
+
+        command = command.Trim().ToLower();
+
+        if (command == "up")
+        {
+            hasMovedOnce = true; // A partir de aquí, su "casa" es Idle_Down
+            PlayActionThenReturn(upAction, idleBase);
+        }
+        else if (command == "down")
+        {
+            PlayActionThenReturn(downAction, idleBase);
+        }
+    }
+
+    // ==========================================
+    // MOTORES DE ANIMACIÓN
+    // ==========================================
+
+    public void PlaySmooth(string animName)
+    {
+        if (bossAnimator == null) return;
+        if (currentRoutine != null) StopCoroutine(currentRoutine);
+        bossAnimator.CrossFadeInFixedTime(animName, crossFadeDuration);
+    }
+
+    private void PlayActionThenReturn(string actionAnim, string returnIdle)
+    {
+        if (currentRoutine != null) StopCoroutine(currentRoutine);
+        bossAnimator.CrossFadeInFixedTime(actionAnim, crossFadeDuration);
+
+        float length = GetClipLength(actionAnim);
+        currentRoutine = StartCoroutine(WaitAndTransition(returnIdle, length));
+    }
+
+    private float GetClipLength(string clipName)
+    {
+        if (bossAnimator.runtimeAnimatorController == null) return 1f;
+        foreach (var clip in bossAnimator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName) return clip.length;
+        }
+        return 1.0f;
+    }
+
+    private IEnumerator WaitAndTransition(string targetAnim, float delay)
+    {
+        yield return new WaitForSeconds(delay - crossFadeDuration);
+        if (!isCurrentlyPowered)
+        {
+            bossAnimator.CrossFadeInFixedTime(targetAnim, crossFadeDuration);
+        }
     }
 }
