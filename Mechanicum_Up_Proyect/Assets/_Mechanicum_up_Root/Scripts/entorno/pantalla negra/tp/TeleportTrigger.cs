@@ -42,8 +42,11 @@ public class TeleportTrigger : MonoBehaviour
             player.rotation = destinoTP.rotation;
         }
 
-        // Breve pausa para que la cámara y las físicas se estabilicen en la nueva posición
-        yield return new WaitForSeconds(0f);
+        // Esperar un par de frames y un pequeño tiempo real para garantizar que la cámara
+        // y las físicas se estabilicen SIN mostrar nada (el overlay negro debe seguir activo).
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSecondsRealtime(0.05f);
 
         // 4. ACLARAR PANTALLA
         yield return StartCoroutine(ScreenFader.Instance.FadeIn(duracionFade));
