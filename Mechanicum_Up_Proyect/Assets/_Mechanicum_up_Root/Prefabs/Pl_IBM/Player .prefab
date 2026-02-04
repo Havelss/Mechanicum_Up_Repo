@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 1280854915990259382}
   - component: {fileID: 8229347100543789560}
   - component: {fileID: 7667539808897127514}
-  - component: {fileID: 1616171568150985168}
   - component: {fileID: 9009723621325065310}
   m_Layer: 3
   m_Name: 'Player '
@@ -413,14 +412,6 @@ MonoBehaviour:
   usePowerKey: 31
   absorbKey: 20
   radius: 1
---- !u!81 &1616171568150985168
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3752121666832799407}
-  m_Enabled: 1
 --- !u!114 &9009723621325065310
 MonoBehaviour:
   m_ObjectHideFlags: 0
