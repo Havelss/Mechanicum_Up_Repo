@@ -6,39 +6,44 @@ public class BigBossAnimationController : MonoBehaviour, I_Electrifiable
     [Header("Animator")]
     public Animator bossAnimator;
 
-    [Header("Configuración")]
+    [Header("Configuración de Tiempos")]
     public float crossFadeDuration = 0.25f;
+    [Tooltip("Segundos que permanece en Idle_UP tras dejar de recibir electricidad")]
+    public float powerOffDelay = 2.0f;
 
     [Header("Estados de Animación")]
-    public string idleInitial = "Bigboss_idle";      // El estado al empezar el juego
-    public string idleBase = "Bigboss_Idle_Down";    // El estado base tras activarse
-    public string idlePowered = "Bigboss_Idle_UP";   // El estado con energía
+    public string idleInitial = "Bigboss_idle";
+    public string idleBase = "Bigboss_Idle_Down";
+    public string idlePowered = "Bigboss_Idle_UP";
 
     [Header("Acciones")]
     public string upAction = "Bigboss_subir_sala";
     public string downAction = "Bigboss_bajar_sala";
 
     private Coroutine currentRoutine;
+    private Coroutine powerOffRoutine; // Nueva rutina para el retardo
+
     private bool isCurrentlyPowered = false;
-    private bool hasMovedOnce = false; // Controla si ya cambió su estado base
+    private bool hasMovedOnce = false;
 
     private float lastPowerTime = 0f;
-    private float powerTimeout = 0.2f;
+    private float powerCheckThreshold = 0.2f; // Margen para el PowerOn continuo
 
     private void Start()
     {
-        if (bossAnimator != null)
-        {
-            // Empezamos en el idle de reposo absoluto
-            bossAnimator.Play(idleInitial);
-        }
+        if (bossAnimator != null) bossAnimator.Play(idleInitial);
     }
 
     private void Update()
     {
-        if (isCurrentlyPowered && Time.time > lastPowerTime + powerTimeout)
+        // Detectamos si el aura ha dejado de tocar al Boss
+        if (isCurrentlyPowered && Time.time > lastPowerTime + powerCheckThreshold)
         {
-            PowerOff();
+            // En lugar de apagar de golpe, iniciamos la cuenta atrás si no hay una ya
+            if (powerOffRoutine == null)
+            {
+                powerOffRoutine = StartCoroutine(DelayedPowerOff());
+            }
         }
     }
 
@@ -48,6 +53,14 @@ public class BigBossAnimationController : MonoBehaviour, I_Electrifiable
     public void PowerOn()
     {
         lastPowerTime = Time.time;
+
+        // Si recibimos energía, cancelamos cualquier intento de apagado previo
+        if (powerOffRoutine != null)
+        {
+            StopCoroutine(powerOffRoutine);
+            powerOffRoutine = null;
+        }
+
         if (!isCurrentlyPowered)
         {
             isCurrentlyPowered = true;
@@ -57,12 +70,19 @@ public class BigBossAnimationController : MonoBehaviour, I_Electrifiable
 
     public void PowerOff()
     {
+        // Este método ahora lo llamamos internamente o por interfaz si fuera necesario
         if (!isCurrentlyPowered) return;
-        isCurrentlyPowered = false;
 
-        // Si ya se ha movido alguna vez, vuelve a Idle_Down. 
-        // Si no, vuelve al inicial (aunque lo lógico es que ya se haya movido)
+        isCurrentlyPowered = false;
         PlaySmooth(hasMovedOnce ? idleBase : idleInitial);
+    }
+
+    // Corrutina para el tiempo de espera extra
+    private IEnumerator DelayedPowerOff()
+    {
+        yield return new WaitForSeconds(powerOffDelay);
+        PowerOff();
+        powerOffRoutine = null;
     }
 
     // ==========================================
@@ -76,7 +96,7 @@ public class BigBossAnimationController : MonoBehaviour, I_Electrifiable
 
         if (command == "up")
         {
-            hasMovedOnce = true; // A partir de aquí, su "casa" es Idle_Down
+            hasMovedOnce = true;
             PlayActionThenReturn(upAction, idleBase);
         }
         else if (command == "down")
