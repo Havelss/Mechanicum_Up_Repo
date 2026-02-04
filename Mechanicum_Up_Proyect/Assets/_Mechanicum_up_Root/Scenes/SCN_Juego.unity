@@ -1414,6 +1414,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big_Boss_Rig (3) 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4f594c3f0333b24da5e733975933005, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4f594c3f0333b24da5e733975933005, type: 3}
+      propertyPath: m_TagString
+      value: Electrifiable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1424,6 +1432,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a4f594c3f0333b24da5e733975933005, type: 3}
       insertIndex: -1
       addedObject: {fileID: 24322112}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a4f594c3f0333b24da5e733975933005, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 24322116}
     - targetCorrespondingSourceObject: {fileID: -1847513699796955119, guid: a4f594c3f0333b24da5e733975933005, type: 3}
       insertIndex: -1
       addedObject: {fileID: 24322115}
@@ -1474,7 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72435dbf93af82642926fd89949f5e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BigBossAnimationController
-  bossAnimator: {fileID: 0}
+  bossAnimator: {fileID: 24322116}
   commandUp: up
   commandDown: down
   upAnimation: Bigboss_subir_sala
@@ -1517,6 +1528,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpPickup
   prefabToPlace: {fileID: 350966050747551649, guid: cd76409e8281eae47bc8b58aef1732a6, type: 3}
   anchorPointName: PowerUpHolder
+--- !u!95 &24322116
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24322110}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6dc99b4f28a9f0b40a4c0450f424855a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &24561112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79140,7 +79173,7 @@ Transform:
   m_GameObject: {fileID: 1596761009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -57.294273, y: -0.015579224, z: 2.7500002}
+  m_LocalPosition: {x: -57.294273, y: -0.412, z: 2.7500002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86095,72 +86128,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
   m_PrefabInstance: {fileID: 1757880780}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1758641598
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2006570352}
-    m_Modifications:
-    - target: {fileID: 603608976815739882, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: prefabToPlace
-      value: 
-      objectReference: {fileID: 350966050747551649, guid: cd76409e8281eae47bc8b58aef1732a6, type: 3}
-    - target: {fileID: 4689424236698839294, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_Name
-      value: SM_Pila_Objeto
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 67.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 25.56317
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.8540728
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7e2853629d152e140876da460f032bc9, type: 3}
---- !u!4 &1758641599 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5359282268067787332, guid: 7e2853629d152e140876da460f032bc9, type: 3}
-  m_PrefabInstance: {fileID: 1758641598}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1760146058
 GameObject:
@@ -95448,7 +95415,6 @@ Transform:
   - {fileID: 1420256873}
   - {fileID: 1538114609}
   - {fileID: 1659935374}
-  - {fileID: 1758641599}
   - {fileID: 1107374675}
   - {fileID: 1491911345}
   - {fileID: 547661110}
