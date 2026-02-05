@@ -5,6 +5,7 @@ public class TriggerAnimRespawn : MonoBehaviour
 {
     [Header("Detección")]
     public string playerTag = "Player";
+    public string vagonetaTag = "Vagoneta";
     public bool triggerOnlyOnce = true;
 
     [Header("Animación")]
@@ -30,28 +31,44 @@ public class TriggerAnimRespawn : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (activated && triggerOnlyOnce) return;
-        if (!other.CompareTag(playerTag)) return;
 
+        // Detectar player aunque esté dentro de otro objeto
         PlayerController pc = other.GetComponent<PlayerController>();
-        if (pc == null) return;
+        if (pc == null)
+            pc = other.GetComponentInChildren<PlayerController>();
+        if (pc == null)
+            pc = other.GetComponentInParent<PlayerController>();
+
+        bool isPlayer = pc != null;
+        bool isVagoneta = other.CompareTag(vagonetaTag);
+
+        if (!isPlayer && !isVagoneta)
+            return;
+
+        Transform target = isPlayer ? pc.transform : other.transform;
 
         activated = true;
-        StartCoroutine(PlayAnimationAndRespawn(other.transform, pc));
+        StartCoroutine(PlayAnimationAndHandleTarget(target, pc, isVagoneta));
     }
 
-    private IEnumerator PlayAnimationAndRespawn(Transform player, PlayerController pc)
+    private IEnumerator PlayAnimationAndHandleTarget(Transform target, PlayerController pc, bool isVagoneta)
     {
         Debug.Log("[TriggerAnimRespawn] Trigger activado");
 
-        // 🔒 Bloquear player
-        if (disablePlayerController)
-            pc.enabled = false;
+        // 🔒 Bloquear player si existe
+        Rigidbody rb = null;
 
-        Rigidbody rb = player.GetComponent<Rigidbody>();
-        if (freezePlayerRigidbody && rb != null)
+        if (pc != null)
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.isKinematic = true;
+            if (disablePlayerController)
+                pc.enabled = false;
+
+            rb = pc.GetComponent<Rigidbody>();
+            if (freezePlayerRigidbody && rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.isKinematic = true;
+            }
         }
 
         // 🎬 Ejecutar animación
@@ -68,23 +85,26 @@ public class TriggerAnimRespawn : MonoBehaviour
         // ⏱️ Esperar a que termine
         yield return new WaitForSeconds(animationDuration);
 
-        // 📍 Respawn
-        if (respawnPoint != null)
+        // 📍 Respawn del player si existe
+        if (pc != null && respawnPoint != null)
         {
-            player.position = respawnPoint.position;
-            player.rotation = respawnPoint.rotation;
+            pc.transform.position = respawnPoint.position;
+            pc.transform.rotation = respawnPoint.rotation;
             Debug.Log("[TriggerAnimRespawn] Player respawneado");
         }
-        else
+
+        // 💥 Destruir vagoneta si es vagoneta
+        if (isVagoneta)
         {
-            Debug.LogWarning("[TriggerAnimRespawn] No hay Respawn Point asignado");
+            Debug.Log("[TriggerAnimRespawn] Vagoneta destruida");
+            Destroy(target.gameObject);
         }
 
         // 🔓 Liberar player
         if (rb != null)
             rb.isKinematic = false;
 
-        if (disablePlayerController)
+        if (pc != null && disablePlayerController)
             pc.enabled = true;
     }
 }
