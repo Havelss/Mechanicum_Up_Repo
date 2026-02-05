@@ -85,6 +85,9 @@ PrefabInstance:
       addedObject: {fileID: 3230028054667040816}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53a25a92538a5ed41a5025ece4dad330, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2300547693932634738}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53a25a92538a5ed41a5025ece4dad330, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8191970136980612200}
   m_SourcePrefab: {fileID: 100100000, guid: 53a25a92538a5ed41a5025ece4dad330, type: 3}
 --- !u!1 &4606438217763928809 stripped
@@ -113,6 +116,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.024826918, y: 0.023590392, z: 0.02457015}
   m_Center: {x: -0.0005203769, y: 0.00016680919, z: 0.0010185264}
+--- !u!114 &2300547693932634738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4606438217763928809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223610e84a39f624c989d67af085014c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasuraFantasma
 --- !u!54 &8191970136980612200
 Rigidbody:
   m_ObjectHideFlags: 0
