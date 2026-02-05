@@ -56,18 +56,18 @@ public class MinecartTerminalUI : MonoBehaviour
 
     private void Update()
     {
-        // Cambiar sprite mientras se mantiene pulsado el botón izquierdo
         if (!cursorActive) return;
 
-        if (Input.GetMouseButtonDown(0))
+        // REFUERZO: Si algo externo intenta bloquear el cursor, lo desbloqueamos
+        if (Cursor.lockState != CursorLockMode.None || !Cursor.visible)
         {
-            SetCursorTexture(cursorClick);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            SetCursorTexture(cursorNormal);
-        }
+        // Tu lógica de texturas
+        if (Input.GetMouseButtonDown(0)) SetCursorTexture(cursorClick);
+        if (Input.GetMouseButtonUp(0)) SetCursorTexture(cursorNormal);
     }
 
     private void ActivateCursor()

@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 94.01
+      value: 93.020004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.29
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -257,9 +257,9 @@ MonoBehaviour:
   animIdle: Armature_Piston_Idle
   animDown: Armature_Piston_Down
   animUp: Armature_Piston_Up
-  tiempoIdle: 1
-  tiempoDown: 1
-  tiempoUp: 1
+  tiempoIdle: 3
+  tiempoDown: 3
+  tiempoUp: 3
 --- !u!4 &8475905614467215290 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3196138216412401344, guid: 7dda3698254ae464084801d5c79426a3, type: 3}

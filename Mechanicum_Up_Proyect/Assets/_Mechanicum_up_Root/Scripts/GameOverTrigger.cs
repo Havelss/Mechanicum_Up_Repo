@@ -112,15 +112,18 @@ public class CrashAndGameOver : MonoBehaviour
     {
         if (gameOverCanvas != null)
         {
+            // 1. Buscamos la terminal de la vagoneta y la apagamos para que no controle el cursor
+            MinecartTerminalUI terminal = FindFirstObjectByType<MinecartTerminalUI>();
+            if (terminal != null) terminal.enabled = false;
+
+            // 2. Activamos el Game Over
             gameOverCanvas.SetActive(true);
 
             if (pauseGameAtEnd) Time.timeScale = 0f;
 
-            if (showMouseCursor)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            // 3. Forzamos el cursor para el menú de muerte
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
