@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PistonLoop : MonoBehaviour
+public class PistonLoopSeguro : MonoBehaviour
 {
-    [Header("Animator del Piston")]
     public Animator animator;
 
     [Header("Animaciones")]
@@ -16,29 +15,52 @@ public class PistonLoop : MonoBehaviour
     public float tiempoDown = 1f;
     public float tiempoUp = 1f;
 
+    private bool primerIdle = true; // Solo se reproduce Idle una vez
+    private bool siguienteUp = false; // Alterna Down / Up
+
     private void Start()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
 
-        StartCoroutine(CicloAnimaciones());
+        // Inicia Idle solo una vez
+        if (animator.HasState(0, Animator.StringToHash(animIdle)))
+        {
+            animator.Play(animIdle);
+            StartCoroutine(EsperarIdle());
+        }
+        else
+        {
+            // Si no existe Idle, comienza directamente con Down
+            StartCoroutine(CicloDownUp());
+        }
     }
 
-    private IEnumerator CicloAnimaciones()
+    private IEnumerator EsperarIdle()
+    {
+        yield return new WaitForSeconds(tiempoIdle);
+        primerIdle = false;
+        StartCoroutine(CicloDownUp());
+    }
+
+    private IEnumerator CicloDownUp()
     {
         while (true)
         {
-            // 1️⃣ Idle
-            animator.Play(animIdle);
-            yield return new WaitForSeconds(tiempoIdle);
+            if (siguienteUp)
+            {
+                if (animator.HasState(0, Animator.StringToHash(animUp)))
+                    animator.Play(animUp);
+                yield return new WaitForSeconds(tiempoUp);
+            }
+            else
+            {
+                if (animator.HasState(0, Animator.StringToHash(animDown)))
+                    animator.Play(animDown);
+                yield return new WaitForSeconds(tiempoDown);
+            }
 
-            // 2️⃣ Down
-            animator.Play(animDown);
-            yield return new WaitForSeconds(tiempoDown);
-
-            // 3️⃣ Up
-            animator.Play(animUp);
-            yield return new WaitForSeconds(tiempoUp);
+            siguienteUp = !siguienteUp; // Alterna Down / Up
         }
     }
 }
