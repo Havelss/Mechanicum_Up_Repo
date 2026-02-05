@@ -958,9 +958,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!1001 &5518318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2624,6 +2621,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1807186840977798697, guid: a4f594c3f0333b24da5e733975933005, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1888345524}
+    - targetCorrespondingSourceObject: {fileID: 3307902654073533603, guid: a4f594c3f0333b24da5e733975933005, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1905527013}
+    - targetCorrespondingSourceObject: {fileID: 3307902654073533603, guid: a4f594c3f0333b24da5e733975933005, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 2078571844}
     - targetCorrespondingSourceObject: {fileID: 3307902654073533603, guid: a4f594c3f0333b24da5e733975933005, type: 3}
       insertIndex: -1
       addedObject: {fileID: 20159317}
@@ -5521,9 +5524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &92055454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8340,9 +8340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &135247469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19232,9 +19229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &329669642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20004,9 +19998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &341410534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27249,9 +27240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &474133150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30297,9 +30285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &536668652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31424,9 +31409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &559394517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32025,9 +32007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &566532715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32701,9 +32680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &582368983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33255,9 +33231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &591796252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35075,9 +35048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &631246316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35280,9 +35250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &632424498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35776,9 +35743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &636587437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38710,9 +38674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &679275137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46421,6 +46382,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1087391949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &815557204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815557206}
+  - component: {fileID: 815557205}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &815557205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815557204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 05f5e88c5a2508e46bb7e4a3562f501d, type: 2}
+--- !u!4 &815557206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815557204}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.530077, y: 5.148221, z: 5.2188606}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &816205905
 GameObject:
   m_ObjectHideFlags: 0
@@ -47398,9 +47408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &831899060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47624,6 +47631,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2168897621993177550, guid: 28919da01b596c544a357f922e6f4eb2, type: 3}
   m_PrefabInstance: {fileID: 894018499}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &836119415
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1600702022}
+    m_Modifications:
+    - target: {fileID: 5627696518775099638, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_Name
+      value: VFX_Zap_02_Blue 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.046294145
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.046294138
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.046294145
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0020977857
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.05459835
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9977787
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.03810927
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 4.348
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 179.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -6.282
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
 --- !u!1001 &837481609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48098,17 +48174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
-  movingParent: {fileID: 0}
-  playerTag: Player
-  validTags:
-  - Player
-  boxSize: {x: 1, y: 1, z: 1}
-  crushLayers:
-    m_Bits: 4294967295
-  optionalAnimator: {fileID: 0}
-  triggerAnimationName: 
-  optionalAudioSource: {fileID: 0}
-  activationSFX: {fileID: 0}
 --- !u!4 &840969245
 Transform:
   m_ObjectHideFlags: 0
@@ -60413,9 +60478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1096630461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60757,9 +60819,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1105565657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64127,9 +64186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1195510274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69955,17 +70011,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
-  movingParent: {fileID: 0}
-  playerTag: Player
-  validTags:
-  - Player
-  boxSize: {x: 1, y: 1, z: 1}
-  crushLayers:
-    m_Bits: 4294967295
-  optionalAnimator: {fileID: 0}
-  triggerAnimationName: 
-  optionalAudioSource: {fileID: 0}
-  activationSFX: {fileID: 0}
 --- !u!4 &1313043883
 Transform:
   m_ObjectHideFlags: 0
@@ -72930,9 +72975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1387292039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73356,9 +73398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1393402968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76857,6 +76896,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb17a9f6d301fe948a673f280b8e7424, type: 3}
+--- !u!1001 &1472780522
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1600702022}
+    m_Modifications:
+    - target: {fileID: 3123455092855179651, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_Name
+      value: 'Chispas '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.667
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.108
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6317026
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.21401228
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6700311
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.32589728
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -89.148
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -10.178
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
 --- !u!1001 &1473561437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77984,9 +78080,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1492810423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83353,9 +83446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1598978131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88814,9 +88904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1707837093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90802,17 +90889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
-  movingParent: {fileID: 0}
-  playerTag: Player
-  validTags:
-  - Player
-  boxSize: {x: 1, y: 1, z: 1}
-  crushLayers:
-    m_Bits: 4294967295
-  optionalAnimator: {fileID: 0}
-  triggerAnimationName: 
-  optionalAudioSource: {fileID: 0}
-  activationSFX: {fileID: 0}
 --- !u!4 &1760146062
 Transform:
   m_ObjectHideFlags: 0
@@ -95031,9 +95107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!1001 &1873499421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96322,6 +96395,11 @@ Transform:
   - {fileID: 925772839}
   m_Father: {fileID: 744187016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1905527013 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6687096110978235462, guid: c4e808198b17f4d4b9174d8b9c55afcd, type: 3}
+  m_PrefabInstance: {fileID: 1472780522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1906453337
 GameObject:
   m_ObjectHideFlags: 0
@@ -97312,9 +97390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &1921922548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101183,9 +101258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &2010883997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104020,6 +104092,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
   m_PrefabInstance: {fileID: 2076929379}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2078571844 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8964859838461161948, guid: f5bf28b80a5d7904f94a75e5ea139197, type: 3}
+  m_PrefabInstance: {fileID: 836119415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &2082406602 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7979890147296589247, guid: 990c05463054a3049912014a4e22794d, type: 3}
@@ -106524,17 +106601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
-  movingParent: {fileID: 0}
-  playerTag: Player
-  validTags:
-  - Player
-  boxSize: {x: 1, y: 1, z: 1}
-  crushLayers:
-    m_Bits: 4294967295
-  optionalAnimator: {fileID: 0}
-  triggerAnimationName: 
-  optionalAudioSource: {fileID: 0}
-  activationSFX: {fileID: 0}
 --- !u!4 &2113313571
 Transform:
   m_ObjectHideFlags: 0
@@ -106729,9 +106795,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &2118826782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106944,9 +107007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &2121412579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107088,9 +107148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1
-  radius: 0.2
 --- !u!114 &2121861476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117197,3 +117254,4 @@ SceneRoots:
   - {fileID: 665741519}
   - {fileID: 1740707882}
   - {fileID: 647732038}
+  - {fileID: 815557206}
