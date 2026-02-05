@@ -4,22 +4,15 @@ using System.Collections;
 public class TriggerAnimRespawn : MonoBehaviour
 {
     [Header("Detección")]
-    public string playerTag = "Player";
     public string vagonetaTag = "Vagoneta";
     public bool triggerOnlyOnce = true;
 
     [Header("Animación")]
-    [Tooltip("Animator que ejecutará la animación (puede estar en este objeto o en otro)")]
     public Animator animator;
-
-    [Tooltip("Nombre EXACTO del Trigger en el Animator")]
     public string animationTriggerName = "Activate";
-
-    [Tooltip("Duración real de la animación en segundos")]
     public float animationDuration = 2f;
 
     [Header("Respawn")]
-    [Tooltip("Lugar donde reaparecerá el player tras la animación")]
     public Transform respawnPoint;
 
     [Header("Opciones Player")]
@@ -32,37 +25,41 @@ public class TriggerAnimRespawn : MonoBehaviour
     {
         if (activated && triggerOnlyOnce) return;
 
-        // Detectar player aunque esté dentro de otro objeto
-        PlayerController pc = other.GetComponent<PlayerController>();
-        if (pc == null)
-            pc = other.GetComponentInChildren<PlayerController>();
-        if (pc == null)
-            pc = other.GetComponentInParent<PlayerController>();
+        PlayerController pc = null;
+        MinecartController cart = null;
 
-        bool isPlayer = pc != null;
-        bool isVagoneta = other.CompareTag(vagonetaTag);
+        // 1. ¿Es el Player directamente?
+        pc = other.GetComponentInParent<PlayerController>();
 
-        if (!isPlayer && !isVagoneta)
+        // 2. ¿Es una vagoneta?
+        if (pc == null)
+        {
+            cart = other.GetComponentInParent<MinecartController>();
+            if (cart != null && cart.isPlayerInside)
+            {
+                // Si hay alguien dentro, obtenemos su PlayerController
+                pc = cart.player.GetComponent<PlayerController>();
+            }
+        }
+
+        // Si no encontramos ni player ni vagoneta con tag, salimos
+        if (pc == null && !other.CompareTag(vagonetaTag))
             return;
 
-        Transform target = isPlayer ? pc.transform : other.transform;
-
         activated = true;
-        StartCoroutine(PlayAnimationAndHandleTarget(target, pc, isVagoneta));
+        StartCoroutine(PlayAnimationAndHandleTarget(pc, cart, other.gameObject));
     }
 
-    private IEnumerator PlayAnimationAndHandleTarget(Transform target, PlayerController pc, bool isVagoneta)
+    private IEnumerator PlayAnimationAndHandleTarget(PlayerController pc, MinecartController cart, GameObject originalHit)
     {
-        Debug.Log("[TriggerAnimRespawn] Trigger activado");
+        Debug.Log("[TriggerAnimRespawn] Iniciando secuencia de muerte/respawn");
 
-        // 🔒 Bloquear player si existe
         Rigidbody rb = null;
 
+        // 🔒 Bloquear al Player si lo encontramos
         if (pc != null)
         {
-            if (disablePlayerController)
-                pc.enabled = false;
-
+            if (disablePlayerController) pc.enabled = false;
             rb = pc.GetComponent<Rigidbody>();
             if (freezePlayerRigidbody && rb != null)
             {
@@ -71,40 +68,44 @@ public class TriggerAnimRespawn : MonoBehaviour
             }
         }
 
-        // 🎬 Ejecutar animación
+        // 🎬 Ejecutar animación del pistón/trampa
         if (animator != null && !string.IsNullOrEmpty(animationTriggerName))
         {
-            Debug.Log("[TriggerAnimRespawn] Ejecutando animación: " + animationTriggerName);
             animator.SetTrigger(animationTriggerName);
         }
-        else
-        {
-            Debug.LogWarning("[TriggerAnimRespawn] Animator o Trigger no configurados");
-        }
 
-        // ⏱️ Esperar a que termine
+        // ⏱️ Esperar el impacto de la animación
         yield return new WaitForSeconds(animationDuration);
 
-        // 📍 Respawn del player si existe
+        // 📍 Teletransportar al Player
         if (pc != null && respawnPoint != null)
         {
+            // Si estaba en la vagoneta, primero lo sacamos de ella
+            if (cart != null)
+            {
+                cart.ExitCart();
+            }
+
             pc.transform.position = respawnPoint.position;
             pc.transform.rotation = respawnPoint.rotation;
-            Debug.Log("[TriggerAnimRespawn] Player respawneado");
+            Debug.Log("[TriggerAnimRespawn] Player enviado al punto de respawn");
         }
 
-        // 💥 Destruir vagoneta si es vagoneta
-        if (isVagoneta)
+        // 💥 Destruir la vagoneta
+        if (cart != null)
         {
-            Debug.Log("[TriggerAnimRespawn] Vagoneta destruida");
-            Destroy(target.gameObject);
+            Destroy(cart.gameObject);
+        }
+        else if (originalHit.CompareTag(vagonetaTag))
+        {
+            Destroy(originalHit);
         }
 
-        // 🔓 Liberar player
-        if (rb != null)
-            rb.isKinematic = false;
-
-        if (pc != null && disablePlayerController)
-            pc.enabled = true;
+        // 🔓 Liberar al Player para que pueda moverse de nuevo
+        if (pc != null)
+        {
+            if (rb != null) rb.isKinematic = false;
+            if (disablePlayerController) pc.enabled = true;
+        }
     }
 }
