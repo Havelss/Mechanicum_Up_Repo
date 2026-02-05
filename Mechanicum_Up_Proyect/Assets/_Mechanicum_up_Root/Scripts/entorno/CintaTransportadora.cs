@@ -18,26 +18,15 @@ public class CintaTransportadora : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Rigidbody rb = other.attachedRigidbody;
+        if (rb == null) return;
 
-        // Si no tiene Rigidbody o es cinemático, no podemos aplicar velocidad física
-        if (rb == null || rb.isKinematic) return;
-
-        // Comprobamos si el objeto tiene un tag válido
         if (EsObjetoValido(other))
         {
             float fuerzaAplicar = other.CompareTag(playerTag) ? fuerzaPlayer : fuerzaObjetos;
 
-            // MÉTODO DE VELOCIDAD DIRECTA:
-            // Forzamos la velocidad en el eje X del mundo (Vector3.right * direccionX)
-            // Mantenemos rb.linearVelocity.y para que la gravedad siga funcionando
-            // Mantenemos rb.linearVelocity.z para que no se frene si se mueve de frente/atrás
-
-            float velocidadX = direccionX * fuerzaAplicar;
-
-            rb.linearVelocity = new Vector3(velocidadX, rb.linearVelocity.y, rb.linearVelocity.z);
-
-            // Nota: Si usas una versión de Unity antigua (anterior a 2023), 
-            // cambia 'linearVelocity' por 'velocity'.
+            // Aplicar fuerza adicional en el eje X
+            Vector3 fuerza = new Vector3(direccionX * fuerzaAplicar, 0, 0);
+            rb.AddForce(fuerza, ForceMode.Acceleration);
         }
     }
 
@@ -54,7 +43,6 @@ public class CintaTransportadora : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Esto dibujará una línea amarilla en el editor indicando la dirección real del empuje
         Gizmos.color = Color.yellow;
         Vector3 inicio = transform.position + Vector3.up * 0.5f;
         Gizmos.DrawRay(inicio, Vector3.right * direccionX * 2);
