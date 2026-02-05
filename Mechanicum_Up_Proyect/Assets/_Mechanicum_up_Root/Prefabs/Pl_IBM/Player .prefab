@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 284589543882028567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.656, z: 0.113}
+  m_LocalPosition: {x: 0, y: 0.656, z: -0.034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -239,10 +239,10 @@ MonoBehaviour:
   playerAnimator: {fileID: 4691617795403022980}
   footstepSource: {fileID: 0}
   footstepClip: {fileID: 0}
-  speed: 6
+  speed: 4.5
   rotationSpeed: 720
   minJumpForce: 4
-  maxJumpForce: 7
+  maxJumpForce: 6
   maxChargeTime: 0.5
   minChargeTimeToJump: 0.2
   forceChargeToJump: 1
