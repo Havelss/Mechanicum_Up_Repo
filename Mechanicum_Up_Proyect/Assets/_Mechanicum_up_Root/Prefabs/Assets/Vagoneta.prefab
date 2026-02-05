@@ -4922,7 +4922,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000014603136}
   m_LocalPosition: {x: 0, y: 1.44, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.32, y: 1.32, z: 1.32}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6221608990486958848}
@@ -4940,7 +4940,7 @@ GameObject:
   - component: {fileID: 2602456226249553503}
   - component: {fileID: 6886338106329882953}
   - component: {fileID: 2274330568730562266}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Vagoneta
   m_TagString: Vagoneta
   m_Icon: {fileID: 0}
@@ -24974,6 +24974,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 31e17d81f9ccb944695a198fb64f0823, type: 3}
       propertyPath: m_Name
       value: Vagoneta
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 31e17d81f9ccb944695a198fb64f0823, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 31e17d81f9ccb944695a198fb64f0823, type: 3}
       propertyPath: m_TagString

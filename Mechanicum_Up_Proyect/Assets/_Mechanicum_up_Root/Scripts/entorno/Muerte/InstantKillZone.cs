@@ -30,32 +30,70 @@ public class InstantKillZone : MonoBehaviour
             transform.SetParent(movingParent);
     }
 
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log($"[InstantKillZone] Trigger enter con: {other.name}");
+
+    //    // 1️⃣ Primero chequea si es player normal
+    //    if (IsValidTag(other.tag))
+    //    {
+    //        PlayerController pc = other.GetComponent<PlayerController>();
+    //        if (pc != null && !pc.IsDead())
+    //        {
+    //            TriggerEffects();
+    //            pc.Die("crush");
+    //            return;
+    //        }
+    //    }
+
+    //    // 2️⃣ Si es una vagoneta con player dentro
+    //    MinecartController cart = other.GetComponent<MinecartController>();
+    //    if (cart != null && cart.isPlayerInside && cart.player != null)
+    //    {
+    //        PlayerController pcInside = cart.player.GetComponent<PlayerController>();
+    //        if (pcInside != null && !pcInside.IsDead())
+    //        {
+    //            TriggerEffects();
+    //            pcInside.Die("crush");
+    //        }
+    //    }
+    //}
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"[InstantKillZone] Trigger enter con: {other.name}");
 
-        // 1️⃣ Primero chequea si es player normal
-        if (IsValidTag(other.tag))
+        // 1️⃣ Primero chequeamos si es el player a pie
+        PlayerController pc = other.GetComponentInParent<PlayerController>();
+        if (pc != null && !pc.IsDead())
         {
-            PlayerController pc = other.GetComponent<PlayerController>();
-            if (pc != null && !pc.IsDead())
-            {
-                TriggerEffects();
-                pc.Die("crush");
-                return;
-            }
+            TriggerEffects();
+            pc.Die("crush");
+            return;
         }
 
-        // 2️⃣ Si es una vagoneta con player dentro
-        MinecartController cart = other.GetComponent<MinecartController>();
-        if (cart != null && cart.isPlayerInside && cart.player != null)
+        // 2️⃣ Buscamos la vagoneta (en el objeto que chocó o en sus padres)
+        MinecartController cart = other.GetComponentInParent<MinecartController>();
+
+        if (cart != null)
         {
-            PlayerController pcInside = cart.player.GetComponent<PlayerController>();
-            if (pcInside != null && !pcInside.IsDead())
+            Debug.Log("[InstantKillZone] ¡Vagoneta detectada! Procediendo a destruirla.");
+
+            // Si hay un jugador dentro, lo matamos antes de borrar la vagoneta
+            if (cart.isPlayerInside && cart.player != null)
             {
-                TriggerEffects();
-                pcInside.Die("crush");
+                PlayerController pcInside = cart.player.GetComponent<PlayerController>();
+                if (pcInside != null && !pcInside.IsDead())
+                {
+                    pcInside.Die("crush");
+                }
             }
+
+            // Activamos los efectos visuales/sonoros del pistón
+            TriggerEffects();
+
+            // 🔥 ¡AQUÍ ESTÁ LA MAGIA! Destruimos el objeto de la vagoneta
+            Destroy(cart.gameObject);
         }
     }
 

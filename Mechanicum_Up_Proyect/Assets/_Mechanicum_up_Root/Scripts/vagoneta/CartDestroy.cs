@@ -18,11 +18,7 @@ public class CartDestroy : MonoBehaviour
     private void SafeDestroyCart()
     {
         Destroy(gameObject);
-        Debug.Log("[CartDestroy] La bagoneta destruida de manera segura.");
+        
     }
 
 }
-
-
-
-

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8449612295695687700}
   - component: {fileID: 650999228679365832}
+  - component: {fileID: 5690647014962065193}
   m_Layer: 0
   m_Name: muerte
   m_TagString: Untagged
@@ -48,7 +49,8 @@ MonoBehaviour:
   playerTag: Player
   validTags:
   - Player
-  boxSize: {x: 0.004, y: 0.001, z: 0.007}
+  - Vagoneta
+  boxSize: {x: 0.004, y: 0.001, z: 0.013}
   crushLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -56,6 +58,27 @@ MonoBehaviour:
   triggerAnimationName: 
   optionalAudioSource: {fileID: 0}
   activationSFX: {fileID: 0}
+--- !u!65 &5690647014962065193
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979524553757284054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.004291256, y: 0.0021477926, z: 0.013387436}
+  m_Center: {x: 0.0000560239, y: 0.00042610388, z: 0.0001935696}
 --- !u!1001 &6483637523863134586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,6 +210,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8714049557610778116}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4156861082982645375}
   m_SourcePrefab: {fileID: 100100000, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
 --- !u!1 &6141757775384697899 stripped
 GameObject:
@@ -215,6 +241,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4156861082982645375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141757775384697899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5c5cdf94f8eca468dafa160db721ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PistonAnimador
+  animator: {fileID: 8714049557610778116}
+  animIdle: Armature_Piston_Idle
+  animDown: Armature_Piston_Down
+  animUp: Armature_Piston_Up
+  tiempoIdle: 1
+  tiempoDown: 1
+  tiempoUp: 1
 --- !u!4 &8475905614467215290 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3196138216412401344, guid: 7dda3698254ae464084801d5c79426a3, type: 3}
