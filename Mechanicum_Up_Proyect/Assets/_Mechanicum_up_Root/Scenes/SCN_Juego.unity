@@ -21200,11 +21200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64902480cad148438d386faab126d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerAnimRespawn
-  playerTag: Player
   vagonetaTag: Vagoneta
   triggerOnlyOnce: 0
-  animator: {fileID: 0}
-  animationTriggerName: Activate
+  playerAnimName: rig_IBM_Vagoneta
+  vagonetaAnimName: Vagoneta_Rig_Vagoneta_RigAction
   animationDuration: 2
   respawnPoint: {fileID: 1721008574}
   disablePlayerController: 1
@@ -21218,7 +21217,7 @@ Transform:
   m_GameObject: {fileID: 366765524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 100.03, y: 14, z: 0}
+  m_LocalPosition: {x: 102, y: 14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
