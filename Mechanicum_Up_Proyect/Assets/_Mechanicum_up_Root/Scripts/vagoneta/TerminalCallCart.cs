@@ -101,22 +101,17 @@ public class TerminalCallCart : MonoBehaviour
 
     void TrySpawnCart()
     {
-        if (FindObjectsOfType<MinecartController>().Length > 0)
-        {
-            Debug.Log("[TerminalCallCart] No se puede spawnear la bagoneta ahora.");
-            return;
-        }
+        if (FindObjectsOfType<MinecartController>().Length > 0) return;
 
+        // 1. Instancia en el lugar EXACTO del Empty
         GameObject cartObj = Instantiate(cartPrefab, spawnPoint.position, spawnPoint.rotation);
-
-
         Rigidbody rb = cartObj.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
             rb.useGravity = true;
             rb.isKinematic = false;
-            rb.WakeUp(); // 🔥 CLAVE
+            rb.WakeUp();
         }
 
 

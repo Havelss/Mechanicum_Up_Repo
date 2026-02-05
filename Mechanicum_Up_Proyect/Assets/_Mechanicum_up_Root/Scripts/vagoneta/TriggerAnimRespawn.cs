@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class TriggerAnimRespawn : MonoBehaviour
+public class TriggerFrontalCrash : MonoBehaviour
 {
     [Header("Detección")]
     public string vagonetaTag = "Vagoneta";
     public bool triggerOnlyOnce = true;
 
-    [Header("Configuración de Animación")]
-    [Tooltip("Nombre de la animación del Player")]
-    public string playerAnimName = "rig_IBM_Vagoneta";
+    [Header("Configuración del Choque")]
+    public List<Transform> waypoints; // El último waypoint debería ser el punto del impacto
+    public float moveSpeed = 15f;
 
-    [Tooltip("Nombre de la animación de la Vagoneta")]
-    public string vagonetaAnimName = "Vagoneta_Rig_Vagoneta_RigAction";
+    [Header("Efecto Volcado Frontal")]
+    [Tooltip("Grados de rotación en X (90 = morro clavado, 180 = techo al suelo)")]
+    public float crashTiltX = 180f;
+    public float tiltSpeed = 5f;
 
-    public float animationDuration = 2f;
+    [Header("Efecto Salida Disparada")]
+    [Tooltip("Fuerza de eyección. Al ser impacto frontal, la fuerza suele ir hacia adelante (X) y arriba (Y)")]
+    public Vector3 ejectionForce = new Vector3(10f, 12f, 0f);
 
     [Header("Respawn")]
     public Transform respawnPoint;
-
-    [Header("Opciones de Bloqueo")]
-    public bool disablePlayerController = true;
-    public bool freezePlayerRigidbody = true;
+    public float slowMotionFactor = 0.5f; // Para darle drama
+    public float delayBeforeRespawn = 2f;
 
     private bool activated = false;
 
@@ -29,95 +32,86 @@ public class TriggerAnimRespawn : MonoBehaviour
     {
         if (activated && triggerOnlyOnce) return;
 
-        PlayerController pc = null;
-        MinecartController cart = null;
-
-        // 1. Detectar si es el Player o la Vagoneta
-        pc = other.GetComponentInParent<PlayerController>();
-        cart = other.GetComponentInParent<MinecartController>();
-
-        // 2. Si es vagoneta, buscar al player dentro
-        if (cart != null && pc == null)
-        {
-            if (cart.isPlayerInside && cart.player != null)
-            {
-                pc = cart.player.GetComponent<PlayerController>();
-            }
-        }
-
-        // Si no hay nadie válido, fuera
-        if (pc == null && cart == null) return;
+        MinecartController cart = other.GetComponentInParent<MinecartController>();
+        if (cart == null) return;
 
         activated = true;
-        StartCoroutine(PerformDeathSequence(pc, cart));
+        StartCoroutine(FrontalCrashSequence(cart));
     }
 
-    private IEnumerator PerformDeathSequence(PlayerController pc, MinecartController cart)
+    private IEnumerator FrontalCrashSequence(MinecartController cart)
     {
-        Debug.Log("[TriggerAnimRespawn] 🎬 Iniciando secuencia simultánea");
+        Debug.Log("[Crash] 💥 ¡Impacto frontal detectado!");
 
-        Animator playerAnim = null;
-        Animator cartAnim = null;
-        Rigidbody playerRb = null;
+        PlayerController pc = null;
+        if (cart.isPlayerInside) pc = cart.player.GetComponent<PlayerController>();
 
-        // --- PREPARACIÓN Y BLOQUEO ---
-        if (pc != null)
+        // 1. Bloqueo y preparación
+        if (pc != null) pc.enabled = false;
+        if (cart.rb != null) cart.rb.isKinematic = true;
+        cart.enabled = false;
+
+        // 2. Movimiento hacia el punto de impacto (Waypoints)
+        foreach (Transform point in waypoints)
         {
-            if (disablePlayerController) pc.enabled = false;
-            playerRb = pc.GetComponent<Rigidbody>();
-            if (freezePlayerRigidbody && playerRb != null)
+            while (Vector3.Distance(cart.transform.position, point.position) > 0.2f)
             {
-                playerRb.linearVelocity = Vector3.zero;
-                playerRb.isKinematic = true;
+                cart.transform.position = Vector3.MoveTowards(cart.transform.position, point.position, moveSpeed * Time.deltaTime);
+                yield return null;
             }
-            playerAnim = pc.GetComponentInChildren<Animator>();
         }
 
-        if (cart != null)
+        // --- MOMENTO DEL IMPACTO ---
+        Time.timeScale = slowMotionFactor; // Efecto cámara lenta para el golpe
+        float currentX = 0;
+
+        // 3. Rotación de "pino" (el techo hacia adelante)
+        while (currentX < crashTiltX)
         {
-            cartAnim = cart.GetComponentInChildren<Animator>();
-            // Si la vagoneta tiene RB, la frenamos para que la animación se vea bien
-            if (cart.rb != null) cart.rb.isKinematic = true;
+            currentX += tiltSpeed * Time.unscaledDeltaTime * 100f;
+
+            // Rotamos en X para que la trasera suba
+            cart.transform.localRotation = Quaternion.Euler(currentX, cart.transform.localRotation.eulerAngles.y, 0);
+
+            // 4. A mitad del vuelco, lanzamos al jugador
+            if (currentX > 45f && pc != null && cart.isPlayerInside)
+            {
+                LaunchPlayer(cart, pc);
+            }
+
+            yield return null;
         }
 
-        // --- EJECUCIÓN SIMULTÁNEA ---
-        // Usamos Play() para disparar el nombre exacto del estado en el Animator
-        if (playerAnim != null)
-        {
-            playerAnim.Play(playerAnimName);
-            Debug.Log($"[TriggerAnimRespawn] Animando Player: {playerAnimName}");
-        }
+        Time.timeScale = 1f; // Restaurar tiempo
 
-        if (cartAnim != null)
-        {
-            cartAnim.Play(vagonetaAnimName);
-            Debug.Log($"[TriggerAnimRespawn] Animando Vagoneta: {vagonetaAnimName}");
-        }
+        yield return new WaitForSeconds(delayBeforeRespawn);
 
-        // Esperar a que la "escena" termine
-        yield return new WaitForSeconds(animationDuration);
-
-        // --- RESPAWN Y LIMPIEZA ---
+        // 5. Respawn
         if (pc != null && respawnPoint != null)
         {
-            // Salir de la vagoneta antes de moverlo
-            if (cart != null) cart.ExitCart();
-
             pc.transform.position = respawnPoint.position;
             pc.transform.rotation = respawnPoint.rotation;
+            Rigidbody pRb = pc.GetComponent<Rigidbody>();
+            if (pRb) pRb.linearVelocity = Vector3.zero;
+            pc.enabled = true;
         }
 
-        // Destruir la vagoneta después del respawn
-        if (cart != null)
-        {
-            Destroy(cart.gameObject);
-        }
+        Destroy(cart.gameObject);
+    }
 
-        // Liberar al jugador
-        if (pc != null)
+    private void LaunchPlayer(MinecartController cart, PlayerController pc)
+    {
+        cart.ExitCart(); // Devuelve control físico y libera parentesco
+
+        Rigidbody playerRb = pc.GetComponent<Rigidbody>();
+        if (playerRb != null)
         {
-            if (playerRb != null) playerRb.isKinematic = false;
-            if (disablePlayerController) pc.enabled = true;
+            playerRb.isKinematic = false;
+            // Lanzamos según la dirección del impacto
+            playerRb.AddForce(ejectionForce, ForceMode.Impulse);
+            // Añadimos una rotación loca (ragdoll manual)
+            playerRb.AddTorque(new Vector3(Random.Range(-10, 10), 0, 500f), ForceMode.Impulse);
         }
+        Debug.Log("[Crash] 📢 ¡Pasajero despedido por el parabrisas!");
     }
 }
