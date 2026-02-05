@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class SonidoPorProximidad : MonoBehaviour
 {
-    public AudioSource audioSource;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter(Collider other)
     {

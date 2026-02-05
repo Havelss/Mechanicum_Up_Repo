@@ -411,6 +411,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minMoveVelocity = 0.1f;
     #endregion
 
+    #region
+    [Header("Audio Muerte")]
+    [SerializeField] AudioSource deathAudioSource;
+    [SerializeField] AudioClip deathClip;
+    #endregion
+
     Rigidbody rb;
 
     private void Awake()
@@ -540,13 +546,21 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
+        if (deathClip)
+        {
+            AudioSource.PlayClipAtPoint(deathClip, transform.position);
+        }
+
         MinecartController cart = GetComponentInParent<MinecartController>();
         if (cart != null) Destroy(cart.gameObject);
 
         transform.SetParent(null);
         PlayerManager.Instance.OnPlayerDeath();
+
         Destroy(gameObject);
     }
+
+
 
     public void ApplyPowerUpVisuals()
     {
