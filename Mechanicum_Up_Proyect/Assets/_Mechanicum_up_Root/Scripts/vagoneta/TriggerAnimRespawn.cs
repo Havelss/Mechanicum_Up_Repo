@@ -4,26 +4,25 @@ using System.Collections.Generic;
 
 public class TriggerFrontalCrash : MonoBehaviour
 {
+    // ... (Tus variables se mantienen igual)
     [Header("Detección")]
     public string vagonetaTag = "Vagoneta";
     public bool triggerOnlyOnce = true;
 
     [Header("Configuración del Choque")]
-    public List<Transform> waypoints; // El último waypoint debería ser el punto del impacto
+    public List<Transform> waypoints;
     public float moveSpeed = 15f;
 
     [Header("Efecto Volcado Frontal")]
-    [Tooltip("Grados de rotación en X (90 = morro clavado, 180 = techo al suelo)")]
     public float crashTiltX = 180f;
     public float tiltSpeed = 5f;
 
     [Header("Efecto Salida Disparada")]
-    [Tooltip("Fuerza de eyección. Al ser impacto frontal, la fuerza suele ir hacia adelante (X) y arriba (Y)")]
     public Vector3 ejectionForce = new Vector3(10f, 12f, 0f);
 
     [Header("Respawn")]
     public Transform respawnPoint;
-    public float slowMotionFactor = 0.5f; // Para darle drama
+    public float slowMotionFactor = 0.5f;
     public float delayBeforeRespawn = 2f;
 
     private bool activated = false;
@@ -44,55 +43,85 @@ public class TriggerFrontalCrash : MonoBehaviour
         Debug.Log("[Crash] 💥 ¡Impacto frontal detectado!");
 
         PlayerController pc = null;
-        if (cart.isPlayerInside) pc = cart.player.GetComponent<PlayerController>();
+        Transform playerTransform = null;
 
-        // 1. Bloqueo y preparación
+        if (cart.isPlayerInside)
+        {
+            pc = cart.player.GetComponent<PlayerController>();
+            playerTransform = cart.player;
+        }
+
+        // 1. Bloqueo
         if (pc != null) pc.enabled = false;
         if (cart.rb != null) cart.rb.isKinematic = true;
-        cart.enabled = false;
+        cart.enabled = false; // Aquí se detiene el pegado automático del player
 
-        // 2. Movimiento hacia el punto de impacto (Waypoints)
+        // 2. Movimiento hacia el punto de impacto
         foreach (Transform point in waypoints)
         {
-            while (Vector3.Distance(cart.transform.position, point.position) > 0.2f)
+            while (Vector3.Distance(cart.transform.position, point.position) > 0.1f)
             {
                 cart.transform.position = Vector3.MoveTowards(cart.transform.position, point.position, moveSpeed * Time.deltaTime);
+
+                // 🔥 NOVEDAD: Arrastramos manualmente al player al asiento
+                if (cart.isPlayerInside && playerTransform != null && cart.playerSeat != null)
+                {
+                    playerTransform.position = cart.playerSeat.position;
+                    // Mantenemos escala por si acaso
+                    playerTransform.localScale = Vector3.one;
+                }
+
                 yield return null;
             }
         }
 
         // --- MOMENTO DEL IMPACTO ---
-        Time.timeScale = slowMotionFactor; // Efecto cámara lenta para el golpe
+        Time.timeScale = slowMotionFactor;
         float currentX = 0;
+        bool playerLaunched = false;
 
-        // 3. Rotación de "pino" (el techo hacia adelante)
+        // 3. Rotación de "pino"
         while (currentX < crashTiltX)
         {
             currentX += tiltSpeed * Time.unscaledDeltaTime * 100f;
-
-            // Rotamos en X para que la trasera suba
             cart.transform.localRotation = Quaternion.Euler(currentX, cart.transform.localRotation.eulerAngles.y, 0);
 
-            // 4. A mitad del vuelco, lanzamos al jugador
-            if (currentX > 45f && pc != null && cart.isPlayerInside)
+            // 🔥 NOVEDAD: El player debe rotar y posicionarse con el asiento mientras vuelca
+            if (cart.isPlayerInside && !playerLaunched && playerTransform != null)
             {
+                playerTransform.position = cart.playerSeat.position;
+                playerTransform.rotation = cart.playerSeat.rotation;
+            }
+
+            // 4. Lanzamiento
+            if (currentX > 45f && !playerLaunched && cart.isPlayerInside)
+            {
+                playerLaunched = true;
                 LaunchPlayer(cart, pc);
             }
 
             yield return null;
         }
 
-        Time.timeScale = 1f; // Restaurar tiempo
+        Time.timeScale = 1f;
 
         yield return new WaitForSeconds(delayBeforeRespawn);
 
         // 5. Respawn
         if (pc != null && respawnPoint != null)
         {
+            // Antes de moverlo, nos aseguramos de que no tenga padres
+            pc.transform.SetParent(null);
             pc.transform.position = respawnPoint.position;
             pc.transform.rotation = respawnPoint.rotation;
+            pc.transform.localScale = Vector3.one;
+
             Rigidbody pRb = pc.GetComponent<Rigidbody>();
-            if (pRb) pRb.linearVelocity = Vector3.zero;
+            if (pRb)
+            {
+                pRb.linearVelocity = Vector3.zero;
+                pRb.angularVelocity = Vector3.zero;
+            }
             pc.enabled = true;
         }
 
@@ -101,17 +130,14 @@ public class TriggerFrontalCrash : MonoBehaviour
 
     private void LaunchPlayer(MinecartController cart, PlayerController pc)
     {
-        cart.ExitCart(); // Devuelve control físico y libera parentesco
+        cart.ExitCart();
 
         Rigidbody playerRb = pc.GetComponent<Rigidbody>();
         if (playerRb != null)
         {
             playerRb.isKinematic = false;
-            // Lanzamos según la dirección del impacto
             playerRb.AddForce(ejectionForce, ForceMode.Impulse);
-            // Añadimos una rotación loca (ragdoll manual)
             playerRb.AddTorque(new Vector3(Random.Range(-10, 10), 0, 500f), ForceMode.Impulse);
         }
-        Debug.Log("[Crash] 📢 ¡Pasajero despedido por el parabrisas!");
     }
 }
