@@ -180,11 +180,14 @@ public class CartRiderTrigger : MonoBehaviour
 {
     [Header("Opcional")]
     public float connectDuration = 0.5f; // Delay al subir
+    [SerializeField] private string interactionPrompt = "E";
 
     private MinecartController cart;
     private GameObject player;
     private bool canMount = false;
     private bool isConnecting = false;
+
+    public string InteractionPrompt => interactionPrompt;
 
     private void Start()
     {

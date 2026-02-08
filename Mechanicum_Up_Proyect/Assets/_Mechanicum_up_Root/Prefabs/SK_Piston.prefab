@@ -50,7 +50,7 @@ MonoBehaviour:
   validTags:
   - Player
   - Vagoneta
-  boxSize: {x: 0.004, y: 0.001, z: 0.013}
+  boxSize: {x: 0.0035, y: 0.001, z: 0.013}
   crushLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -77,7 +77,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.004291256, y: 0.0021477926, z: 0.013387436}
+  m_Size: {x: 0.00291256, y: 0.0021477926, z: 0.013387436}
   m_Center: {x: 0.0000560239, y: 0.00042610388, z: 0.0001935696}
 --- !u!1001 &6483637523863134586
 PrefabInstance:
@@ -267,7 +267,7 @@ MonoBehaviour:
   animDown: Armature_Piston_Down
   animUp: Armature_Piston_Up
   tiempoIdle: 3
-  tiempoDown: 3
+  tiempoDown: 1
   tiempoUp: 3
 --- !u!114 &1103614523480796965
 MonoBehaviour:

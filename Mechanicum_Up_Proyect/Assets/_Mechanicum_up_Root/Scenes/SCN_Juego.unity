@@ -958,6 +958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!1001 &5518318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5599,6 +5602,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &92055454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8553,6 +8559,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &135247469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9100,6 +9109,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.310003
@@ -9139,22 +9164,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (23)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11752,6 +11761,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.310003
@@ -11791,22 +11816,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (28)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -27.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16268,6 +16277,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.310005
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.310005
@@ -16307,22 +16332,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (34)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.310005
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19449,6 +19458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &329669642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20218,6 +20230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &341410534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21233,6 +21248,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.689996
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.689996
@@ -21272,22 +21303,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (45)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.689996
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21307,6 +21322,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.3100033
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.3100033
@@ -21346,22 +21377,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (37)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.3100033
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24591,6 +24606,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.3100033
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.3100033
@@ -24630,22 +24661,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (36)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.3100033
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27653,6 +27668,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.3100033
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.3100033
@@ -27692,22 +27723,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (40)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.3100033
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27832,6 +27847,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &474133150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27996,6 +28014,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.3100033
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.3100033
@@ -28035,22 +28069,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (38)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.3100033
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28911,6 +28929,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.310003
@@ -28950,22 +28984,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (25)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -23.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30294,6 +30312,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.689996
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.689996
@@ -30333,22 +30367,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (48)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.689996
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30877,6 +30895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &536668652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31863,6 +31884,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.31
@@ -31902,22 +31939,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (19)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -39.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32001,6 +32022,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &559394517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32599,6 +32623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &566532715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33272,6 +33299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &582368983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33823,6 +33853,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &591796252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34012,6 +34045,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.310003
@@ -34051,22 +34100,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (41)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35640,6 +35673,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &631246316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35842,6 +35878,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &632424498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36335,6 +36374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &636587437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39266,6 +39308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &679275137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40413,6 +40458,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.310003
@@ -40452,22 +40513,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (27)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -27.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -40975,7 +41020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TerminalCallCart
   cartPrefab: {fileID: 3676305756911907625, guid: b6da08d4ed7cb004593fc9b1b54a9874, type: 3}
   spawnPoint: {fileID: 716089024}
-  spawnOnStart: 1
+  spawnOnStart: 0
   spawnDelay: 0
 --- !u!1001 &716306323
 PrefabInstance:
@@ -41397,6 +41442,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.310003
@@ -41436,22 +41497,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (33)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47561,6 +47606,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31.310003
@@ -47600,22 +47661,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (30)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -31.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47999,6 +48044,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &831899060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48299,6 +48347,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.3100033
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.3100033
@@ -48338,22 +48402,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (35)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.3100033
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -50770,6 +50818,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.309999
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.419998
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.310003
@@ -50809,22 +50873,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (21)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15.309999
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.419998
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54808,6 +54856,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.69
@@ -54847,22 +54911,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (49)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -57982,6 +58030,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6899967
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6899967
@@ -58021,22 +58085,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (42)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.6899967
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -60149,6 +60197,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.310003
@@ -60188,22 +60252,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (29)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -27.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -60823,11 +60871,11 @@ Transform:
   - {fileID: 302822471}
   - {fileID: 89326003}
   - {fileID: 2121861474}
-  - {fileID: 870382020}
   - {fileID: 1586683551}
   - {fileID: 672198050}
   - {fileID: 859759545}
   - {fileID: 966908759}
+  - {fileID: 870382020}
   - {fileID: 1338542912}
   - {fileID: 2016717038}
   - {fileID: 1447802000}
@@ -61116,6 +61164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1096630461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61457,6 +61508,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1105565657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64824,6 +64878,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1195510274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68219,6 +68276,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.31
@@ -68258,22 +68331,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (32)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -35.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -69625,6 +69682,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.6899953
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.6899953
@@ -69664,22 +69737,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (46)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.6899953
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -71537,6 +71594,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1087391949}
     m_Modifications:
+    - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
+      propertyPath: tiempoUp
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
+      propertyPath: tiempoDown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
+      propertyPath: tiempoIdle
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6141757775384697899, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
       propertyPath: m_Name
       value: SK_Piston (1)
@@ -71584,40 +71653,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6141757775384697899, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1338542910}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
---- !u!1 &1338542908 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6141757775384697899, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
-  m_PrefabInstance: {fileID: 1338542907}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1338542909 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8714049557610778116, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
-  m_PrefabInstance: {fileID: 1338542907}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1338542910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1338542908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f5c5cdf94f8eca468dafa160db721ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PistonAnimador
-  animator: {fileID: 1338542909}
-  animIdle: Armature_Piston_Idle
-  animDown: Armature_Piston_Down
-  animUp: Armature_Piston_Up
-  tiempoIdle: 1
-  tiempoDown: 1
-  tiempoUp: 1
 --- !u!4 &1338542912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6805001179110311569, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
@@ -73703,6 +73740,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1387292039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74126,6 +74166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1393402968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77900,6 +77943,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.689996
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.689996
@@ -77939,22 +77998,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (47)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.689996
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -78670,6 +78713,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1492810423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84060,6 +84106,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.310003
@@ -84099,22 +84161,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (26)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -23.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -84173,6 +84219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1598978131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84348,7 +84397,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5993847947678605151}
   - {fileID: 532760016}
   - {fileID: 240861315}
   - {fileID: 1878430099}
@@ -86382,6 +86430,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.310003
@@ -86421,22 +86485,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (22)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -89636,6 +89684,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1707837093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94195,6 +94246,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31.310003
@@ -94234,22 +94301,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (31)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -31.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -95850,6 +95901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!1001 &1873499421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98150,6 +98204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &1921922548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98898,6 +98955,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.310003
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.310003
@@ -98937,22 +99010,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (20)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15.310003
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -102156,6 +102213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &2010883997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102379,6 +102439,18 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
+      propertyPath: tiempoUp
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
+      propertyPath: tiempoDown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
+      propertyPath: tiempoIdle
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6141757775384697899, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
       propertyPath: m_Name
       value: SK_Piston (2)
@@ -102426,40 +102498,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6141757775384697899, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2016717036}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
---- !u!1 &2016717034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6141757775384697899, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
-  m_PrefabInstance: {fileID: 2016717033}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2016717035 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8714049557610778116, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
-  m_PrefabInstance: {fileID: 2016717033}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2016717036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016717034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f5c5cdf94f8eca468dafa160db721ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PistonAnimador
-  animator: {fileID: 2016717035}
-  animIdle: Armature_Piston_Idle
-  animDown: Armature_Piston_Down
-  animUp: Armature_Piston_Up
-  tiempoIdle: 1
-  tiempoDown: 1
-  tiempoUp: 1
 --- !u!4 &2016717038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6805001179110311569, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
@@ -103306,6 +103346,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6899967
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6899967
@@ -103345,22 +103401,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (43)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.6899967
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -105644,6 +105684,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.689996
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.689996
@@ -105683,22 +105739,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (44)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.689996
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -107783,6 +107823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &2118826782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107995,6 +108038,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &2121412579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108136,6 +108182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
+  anisotropy: 0.25
+  scattering: 1
+  radius: 0.2
 --- !u!114 &2121861476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115388,21 +115437,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.024437865, y: 0.024437828, z: 0.036656745}
   m_Center: {x: -0.000000038184226, y: 0, z: 0}
---- !u!4 &5993847947678605151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6512510688827081399}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.000000057601163, y: 0.7071068, z: 0.7071068, w: 0.000000057601163}
-  m_LocalPosition: {x: 48.26, y: 35.65, z: 1.13}
-  m_LocalScale: {x: 24.111673, y: 24.11168, z: 100}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1603506264}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &6015293863598722298
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -115729,7 +115763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
       propertyPath: tiempoDown
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4156861082982645375, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
       propertyPath: tiempoIdle
@@ -115931,24 +115965,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eacc5c45a520c5e4ea4faebb55b21c7d, type: 3}
---- !u!1 &6512510688827081399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5993847947678605151}
-  - component: {fileID: 8777296173229966276}
-  - component: {fileID: 8089062573640460962}
-  m_Layer: 0
-  m_Name: Placeholder Electrico
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
 --- !u!1001 &6555146399779702477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117417,54 +117433,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!23 &8089062573640460962
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6512510688827081399}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!23 &8144261807493516090
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -117887,14 +117855,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7337733341726823927, guid: 9c988d7b9c2aaff4a858d03f12fb4973, type: 3}
   m_PrefabInstance: {fileID: 359725381}
   m_PrefabAsset: {fileID: 0}
---- !u!33 &8777296173229966276
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6512510688827081399}
-  m_Mesh: {fileID: 3163171260390484736, guid: a5ad21478beb64747b7e4638d58cf6dc, type: 3}
 --- !u!4 &8796187631248979293
 Transform:
   m_ObjectHideFlags: 0
@@ -118018,6 +117978,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350810496}
     m_Modifications:
+    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_Name
+      value: PF_Tile_Pared_v2 (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.3100033
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.3100033
@@ -118057,22 +118033,6 @@ PrefabInstance:
     - target: {fileID: 6152358625187968366, guid: c2d4e47ea7f64b248aad10f98b3b6ae3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533207398135665952, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_Name
-      value: PF_Tile_Pared_v2 (39)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.3100033
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
