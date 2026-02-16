@@ -242,17 +242,13 @@ MonoBehaviour:
   footstepClip: {fileID: 0}
   speed: 4.5
   rotationSpeed: 720
-  minJumpForce: 4
-  maxJumpForce: 6
-  maxChargeTime: 0.5
-  minChargeTimeToJump: 0.2
-  forceChargeToJump: 1
+  jumpForce: 8
+  fallMultiplier: 2.3
   groundCheck: {fileID: 4289508068473975400}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  fallMultiplier: 2.3
   isRespawning: 0
   electricPowerVisualPrefab: {fileID: 350966050747551649, guid: cd76409e8281eae47bc8b58aef1732a6, type: 3}
   powerAnchorName: PowerUpHolder
@@ -417,7 +413,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   auraRadius: {x: 3, y: 2, z: 3}
-  usePowerKey: 20
+  usePowerKey: 19
   absorbKey: 31
   radius: 1
 --- !u!114 &9009723621325065310
