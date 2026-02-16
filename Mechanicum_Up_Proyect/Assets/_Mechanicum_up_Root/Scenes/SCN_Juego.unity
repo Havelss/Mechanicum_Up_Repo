@@ -21742,9 +21742,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba4eadf81858a4cb48fd6bee0be240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
-  direccionX: 15
-  fuerzaObjetos: 1
-  fuerzaPlayer: 6
+  direccionX: 1
+  velocidadObjetos: 3
+  velocidadPlayer: 2
   tagsObjetos:
   - Vagoneta
   - Chatarra
@@ -23313,11 +23313,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1799072937}
-  - {fileID: 448682741}
   - {fileID: 2139345316}
-  - {fileID: 1630545124}
   - {fileID: 1058865505}
+  - {fileID: 1630545124}
+  - {fileID: 448682741}
+  - {fileID: 1799072937}
   m_Father: {fileID: 1087391949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392894732
@@ -26953,8 +26953,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: 15
-  fuerzaObjetos: 1
-  fuerzaPlayer: 6
+  velocidadObjetos: 3
+  velocidadPlayer: 2
   tagsObjetos:
   - Vagoneta
   - Chatarra
@@ -59795,9 +59795,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba4eadf81858a4cb48fd6bee0be240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
-  direccionX: 14
-  fuerzaObjetos: 1
-  fuerzaPlayer: 6
+  direccionX: 1
+  velocidadObjetos: 1
+  velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
   - Chatarra
@@ -59821,8 +59821,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.37576392, y: 0.04035515, z: 0.0074190726}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.37576386, y: 0.04035515, z: 0.008432261}
+  m_Center: {x: -3.0906106e-25, y: -4.277242e-19, z: 0.00050659326}
 --- !u!1 &1059077473
 GameObject:
   m_ObjectHideFlags: 0
@@ -83393,9 +83393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba4eadf81858a4cb48fd6bee0be240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
-  direccionX: 15
-  fuerzaObjetos: 1
-  fuerzaPlayer: 6
+  direccionX: 1
+  velocidadObjetos: 3
+  velocidadPlayer: 2
   tagsObjetos:
   - Vagoneta
   - Chatarra
@@ -83419,8 +83419,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.37576392, y: 0.04035515, z: 0.0074190726}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.37576395, y: 0.04035515, z: 0.0076400056}
+  m_Center: {x: -1.0896224e-25, y: 6.859382e-19, z: 0.00011046603}
 --- !u!1001 &1586683545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85719,9 +85719,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba4eadf81858a4cb48fd6bee0be240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
-  direccionX: 15
-  fuerzaObjetos: -1
-  fuerzaPlayer: -6
+  direccionX: -1
+  velocidadObjetos: 1
+  velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
   - Chatarra
@@ -93513,9 +93513,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba4eadf81858a4cb48fd6bee0be240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
-  direccionX: -15
-  fuerzaObjetos: 10
-  fuerzaPlayer: 20
+  direccionX: -1
+  velocidadObjetos: 1
+  velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
   - Chatarra
@@ -109398,9 +109398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba4eadf81858a4cb48fd6bee0be240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
-  direccionX: 15
-  fuerzaObjetos: 1
-  fuerzaPlayer: 6
+  direccionX: 1
+  velocidadObjetos: 1
+  velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
   - Chatarra
