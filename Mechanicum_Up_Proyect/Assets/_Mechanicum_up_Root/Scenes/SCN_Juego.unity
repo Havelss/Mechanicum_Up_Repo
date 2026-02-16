@@ -3391,6 +3391,7 @@ Transform:
   - {fileID: 1514805561}
   - {fileID: 1401017265}
   - {fileID: 649777109}
+  - {fileID: 1535603303}
   - {fileID: 1846596542}
   - {fileID: 820664939}
   - {fileID: 212154810}
@@ -51677,8 +51678,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0406aa7d923d1954aaf03e3dfb372113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInteractionTrigger
-  uiElement: {fileID: 1638362933}
-  destroyAfterUse: 1
+  tutorialUI: {fileID: 1340197646}
+  teclaEIndicator: {fileID: 0}
+  promptMessage: E
+  destroyAfterUse: 0
+  cooldownTime: 1
 --- !u!1001 &894018499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52844,8 +52848,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0406aa7d923d1954aaf03e3dfb372113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInteractionTrigger
-  uiElement: {fileID: 1638362933}
-  destroyAfterUse: 1
+  tutorialUI: {fileID: 1984289200}
+  teclaEIndicator: {fileID: 0}
+  promptMessage: E
+  destroyAfterUse: 0
+  cooldownTime: 1
 --- !u!1001 &918634396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64499,6 +64506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: L5CY tutorial movimiento
       objectReference: {fileID: 0}
+    - target: {fileID: 2150924059146566749, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -64508,10 +64519,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2150924059146566749, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1188650594}
+      addedObject: {fileID: 1188650593}
     - targetCorrespondingSourceObject: {fileID: 2150924059146566749, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1188650593}
+      addedObject: {fileID: 1188650594}
   m_SourcePrefab: {fileID: 100100000, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
 --- !u!4 &1188650591 stripped
 Transform:
@@ -64549,8 +64560,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0406aa7d923d1954aaf03e3dfb372113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInteractionTrigger
-  uiElement: {fileID: 1638362933}
-  destroyAfterUse: 1
+  tutorialUI: {fileID: 1638362933}
+  teclaEIndicator: {fileID: 0}
+  promptMessage: E
+  destroyAfterUse: 0
+  cooldownTime: 1
 --- !u!1 &1193675736
 GameObject:
   m_ObjectHideFlags: 0
@@ -80870,6 +80884,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9018416774796595098, guid: 0ae325f64af546c499dc6a09f93635bb, type: 3}
   m_PrefabInstance: {fileID: 1534133155}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1535603302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1535603303}
+  - component: {fileID: 1535603304}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1535603303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535603302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 41696231}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1535603304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535603302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202fef131a62ba24787b7210de0f546d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
 --- !u!1 &1536527295
 GameObject:
   m_ObjectHideFlags: 0
@@ -96505,11 +96563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.010000002
+      value: 0.0100000035
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.01
+      value: 0.009999999
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalScale.z
@@ -96517,19 +96575,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0004
+      value: -0.00039998657
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0037
+      value: 0.0037000016
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0075
+      value: -0.0075000287
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.8430637
+      value: -0.84306365
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -96541,7 +96599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.09925537
+      value: 0.09925533
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -96609,8 +96667,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0406aa7d923d1954aaf03e3dfb372113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInteractionTrigger
-  uiElement: {fileID: 1638362933}
-  destroyAfterUse: 1
+  tutorialUI: {fileID: 1030758044}
+  teclaEIndicator: {fileID: 0}
+  promptMessage: E
+  destroyAfterUse: 0
+  cooldownTime: 1
 --- !u!1 &1888359516
 GameObject:
   m_ObjectHideFlags: 0

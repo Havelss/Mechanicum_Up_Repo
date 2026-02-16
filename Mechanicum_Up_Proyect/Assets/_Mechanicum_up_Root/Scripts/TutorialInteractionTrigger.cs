@@ -1,62 +1,150 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
-public class TutorialInteractionTrigger : MonoBehaviour
+public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
 {
-    [Header("UI a Controlar")]
-    public GameObject uiElement;
+    [Header("Tutorial completo a mostrar")]
+    [SerializeField] private GameObject tutorialUI; // privado, accesible via propiedad
 
-    [Header("ConfiguraciÛn")]
-    public bool destroyAfterUse = true;
+    [Header("Indicador de interacci√≥n (Tecla E)")]
+    [SerializeField] private GameObject teclaEIndicator;
 
+    [Header("Mensaje del Interactor")]
+    [SerializeField] private string promptMessage = "E";
+
+    [Header("Opciones")]
+    [SerializeField] private bool destroyAfterUse = true;
+    [SerializeField] private float cooldownTime = 0.5f;
+
+    private bool hasBeenUsed = false;       // Tutorial ya activado con E
     private bool isPlayerInside = false;
+    private bool cooldownFinished = false;
+    private float timer = 0f;
+    private bool tutorialAlreadyShown = false; // Tutorial mostrado autom√°ticamente al entrar
+
+    // Propiedad p√∫blica para TutorialManager
+    public GameObject TutorialUI => tutorialUI;
+
+    public string InteractionPrompt => promptMessage;
 
     private void Start()
     {
-        if (uiElement != null) uiElement.SetActive(false);
+        if (tutorialUI != null)
+            tutorialUI.SetActive(false);
+
+        if (teclaEIndicator != null)
+            teclaEIndicator.SetActive(false);
     }
 
     private void Update()
     {
-        // IMPORTANTE: Solo chequeamos la tecla si el jugador est· dentro
-        if (isPlayerInside)
+        if (!isPlayerInside || hasBeenUsed)
+            return;
+
+        // Contador de cooldown
+        if (!cooldownFinished)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("°Tecla E detectada correctamente!");
-                HandleInteraction();
-            }
+            timer += Time.deltaTime;
+            if (timer >= cooldownTime)
+                cooldownFinished = true;
+
+            return;
+        }
+
+        // Detectar movimiento del jugador (solo para ocultar la E)
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
+
+        if ((Mathf.Abs(moveX) > 0.1f || Mathf.Abs(moveZ) > 0.1f) && !hasBeenUsed)
+        {
+            HideEIndicator();
+        }
+
+        // Detecta que pulsa E
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ShowTutorial();
         }
     }
 
-    private void HandleInteraction()
+    private void ShowTutorial()
     {
-        if (uiElement != null) uiElement.SetActive(false);
+        if (hasBeenUsed || !cooldownFinished)
+            return;
+
+        hasBeenUsed = true;
+
+        // Oculta la E
+        HideEIndicator();
+
+        // Oculta otros tutoriales
+        if (TutorialManager.instance != null)
+            TutorialManager.instance.HideAllTutorials();
+
+        // Muestra el tutorial completo
+        if (tutorialUI != null)
+            tutorialUI.SetActive(true);
+
+        Debug.Log("Tutorial mostrado");
 
         if (destroyAfterUse)
-        {
-            Debug.Log("Destruyendo Trigger de Tutorial.");
             Destroy(gameObject);
-        }
+    }
+
+    private void ShowTutorialOnceOnEnter()
+    {
+        if (tutorialAlreadyShown)
+            return;
+
+        tutorialAlreadyShown = true;
+
+        if (TutorialManager.instance != null)
+            TutorialManager.instance.HideAllTutorials();
+
+        if (tutorialUI != null)
+            tutorialUI.SetActive(true);
+    }
+
+    private void HideEIndicator()
+    {
+        if (teclaEIndicator != null)
+            teclaEIndicator.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Detectar si es el player o si es la vagoneta donde va el player
-        bool isPlayer = other.CompareTag("Player") || other.GetComponentInParent<PlayerController>() != null;
-        bool isVagoneta = other.CompareTag("Vagoneta") || other.GetComponentInParent<MinecartController>() != null;
+        bool isPlayer = other.CompareTag("Player") ||
+                        other.GetComponentInParent<PlayerController>() != null;
 
-        if (isPlayer || isVagoneta)
+        if (isPlayer && !hasBeenUsed)
         {
-            Debug.Log("Entidad entrÛ en el Trigger del Tutorial");
             isPlayerInside = true;
-            if (uiElement != null) uiElement.SetActive(true);
+            timer = 0f;
+            cooldownFinished = false;
+
+            // Aparece la tecla E
+            if (teclaEIndicator != null)
+                teclaEIndicator.SetActive(true);
+
+            // Muestra el tutorial autom√°ticamente solo la primera vez
+            ShowTutorialOnceOnEnter();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Al salir, desactivamos la posibilidad de pulsar E
-        isPlayerInside = false;
-        if (uiElement != null) uiElement.SetActive(false);
+        bool isPlayer = other.CompareTag("Player") ||
+                        other.GetComponentInParent<PlayerController>() != null;
+
+        if (isPlayer)
+        {
+            isPlayerInside = false;
+            HideEIndicator();
+        }
+    }
+
+    // Permite que Interactor tambi√©n active el tutorial
+    public void Interact(Interactor interactor)
+    {
+        ShowTutorial();
     }
 }
