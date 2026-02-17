@@ -48814,6 +48814,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &840969245
 Transform:
   m_ObjectHideFlags: 0
@@ -70519,6 +70530,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &1313043883
 Transform:
   m_ObjectHideFlags: 0
@@ -76626,7 +76648,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0a4e539172802f648a4dc8b37ac28c0a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 102.618996
+      value: 103.979996
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0a4e539172802f648a4dc8b37ac28c0a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -82883,7 +82905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3380072283196122795, guid: 69dbdc155d60cbd4f966723b058cca30, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100.270004
+      value: 101.53
       objectReference: {fileID: 0}
     - target: {fileID: 3380072283196122795, guid: 69dbdc155d60cbd4f966723b058cca30, type: 3}
       propertyPath: m_LocalPosition.y
@@ -91718,6 +91740,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &1760146062
 Transform:
   m_ObjectHideFlags: 0
@@ -102562,7 +102595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6805001179110311569, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 103.289
+      value: 104.65
       objectReference: {fileID: 0}
     - target: {fileID: 6805001179110311569, guid: 56e2567a539961f43a1b20f661c8148e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -107648,6 +107681,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &2113313571
 Transform:
   m_ObjectHideFlags: 0
