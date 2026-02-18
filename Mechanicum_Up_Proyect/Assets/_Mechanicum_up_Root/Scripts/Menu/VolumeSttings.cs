@@ -1,37 +1,37 @@
-using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
+//using UnityEngine;
+//using UnityEngine.Audio;
+//using UnityEngine.Rendering;
+//using UnityEngine.UI;
 
-public class VolumeSttings : MonoBehaviour
-{
-    [SerializeField] private AudioMixer myMixer; 
-    [SerializeField] private Slider musicSlider;
+//public class VolumeSttings : MonoBehaviour
+//{
+//    [SerializeField] private AudioMixer myMixer;
+//    [SerializeField] private Slider musicSlider;
 
-    private void Start()
-    {
-        if(PlayerPrefs.HasKey("musicVolume"))
-        {
-            LoadVolume();
-        }
-        else
-        {
-            
-            SetMusicVolume();
-        }
-    }
+//    private void Start()
+//    {
+//        if (PlayerPrefs.HasKey("musicVolume"))
+//        {
+//            LoadVolume();
+//        }
+//        else
+//        {
 
-    public void SetMusicVolume()
-    {
-        float Volume = musicSlider.value;
-        myMixer.SetFloat("music", Mathf.Log10(Volume)*20);
-        PlayerPrefs.SetFloat("musicVolume", Volume);
-    }
+//            SetMusicVolume();
+//        }
+//    }
 
-    private void LoadVolume()
-    {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+//    public void SetMusicVolume()
+//    {
+//        float Volume = musicSlider.value;
+//        myMixer.SetFloat("music", Mathf.Log10(Volume) * 20);
+//        PlayerPrefs.SetFloat("musicVolume", Volume);
+//    }
 
-        SetMusicVolume();
-    }
-}
+//    private void LoadVolume()
+//    {
+//        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+
+//        SetMusicVolume();
+//    }
+//}
