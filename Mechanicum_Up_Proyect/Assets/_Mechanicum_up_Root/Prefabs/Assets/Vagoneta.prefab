@@ -4985,7 +4985,6 @@ Transform:
   - {fileID: 8348267065611820192}
   - {fileID: 2020820191793252941}
   - {fileID: 2131662886292676182}
-  - {fileID: 6018184313415886105}
   - {fileID: 972001996878180176}
   - {fileID: 3885532339406295104}
   m_Father: {fileID: 0}
@@ -14861,74 +14860,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1 &5600511500911422961
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6018184313415886105}
-  - component: {fileID: 6078594939886604731}
-  - component: {fileID: 2956632616458091046}
-  m_Layer: 6
-  m_Name: RideTriggerLEFT
-  m_TagString: CartRideTrigger
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6018184313415886105
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600511500911422961}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8389211, y: 0.7367499, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6221608990486958848}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6078594939886604731
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600511500911422961}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2015563, y: 1, z: 2.2828076}
-  m_Center: {x: 0.100778304, y: 0, z: 0.021865964}
---- !u!114 &2956632616458091046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600511500911422961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d74ddcde747bd2f46b858ba4ddea30c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CartRiderTrigger
-  connectDuration: 0
-  interactionPrompt: E
 --- !u!1 &6224883390307519254
 GameObject:
   m_ObjectHideFlags: 0
@@ -14956,8 +14887,8 @@ Transform:
   m_GameObject: {fileID: 6224883390307519254}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.638, y: 0.7367499, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.5, y: 1.66, z: 0}
+  m_LocalScale: {x: 2.4699, y: 1, z: 1.4124}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6221608990486958848}
@@ -14996,7 +14927,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartRiderTrigger
   connectDuration: 0
-  interactionPrompt: E
 --- !u!1 &6228454305489430662
 GameObject:
   m_ObjectHideFlags: 0
