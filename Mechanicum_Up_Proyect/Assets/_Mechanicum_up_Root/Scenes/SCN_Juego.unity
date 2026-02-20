@@ -21580,7 +21580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: 1
-  velocidadObjetos: 3
+  fuerzaCinta: 5
   velocidadPlayer: 2
   tagsObjetos:
   - Vagoneta
@@ -26790,7 +26790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: 15
-  velocidadObjetos: 3
+  fuerzaCinta: 100
   velocidadPlayer: 2
   tagsObjetos:
   - Vagoneta
@@ -40997,7 +40997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TerminalCallCart
   cartPrefab: {fileID: 3676305756911907625, guid: b6da08d4ed7cb004593fc9b1b54a9874, type: 3}
   spawnPoint: {fileID: 716089024}
-  spawnOnStart: 1
+  spawnOnStart: 0
   spawnDelay: 0
 --- !u!1001 &716306323
 PrefabInstance:
@@ -59796,7 +59796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: 1
-  velocidadObjetos: 1
+  fuerzaCinta: 100
   velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
@@ -83399,7 +83399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: 1
-  velocidadObjetos: 3
+  fuerzaCinta: 5
   velocidadPlayer: 2
   tagsObjetos:
   - Vagoneta
@@ -85725,7 +85725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: -1
-  velocidadObjetos: 1
+  fuerzaCinta: 100
   velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
@@ -92123,8 +92123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc92c0b924c505c4c8648171a049e806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMixer: {fileID: 24100000, guid: 9562cc09664b2964e906d39601efa533, type: 2}
-  musicSlider: {fileID: 0}
 --- !u!114 &1765493256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93524,7 +93522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: -1
-  velocidadObjetos: 1
+  fuerzaCinta: 100
   velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
@@ -109471,7 +109469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CintaTransportadora
   direccionX: 1
-  velocidadObjetos: 1
+  fuerzaCinta: 5
   velocidadPlayer: 1
   tagsObjetos:
   - Vagoneta
