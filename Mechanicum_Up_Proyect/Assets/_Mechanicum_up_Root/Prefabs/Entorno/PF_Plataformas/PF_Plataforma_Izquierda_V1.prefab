@@ -106,13 +106,40 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b28d4b2f3a8c90b43a47b97c4307c417, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 9020691446754709191}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b28d4b2f3a8c90b43a47b97c4307c417, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8133906986411976650}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b28d4b2f3a8c90b43a47b97c4307c417, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6020803107871993673}
   m_SourcePrefab: {fileID: 100100000, guid: b28d4b2f3a8c90b43a47b97c4307c417, type: 3}
 --- !u!1 &1274712545211120765 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b28d4b2f3a8c90b43a47b97c4307c417, type: 3}
   m_PrefabInstance: {fileID: 2121716178606342444}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &9020691446754709191
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274712545211120765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.021324134, y: 0.01, z: 0.00610624}
+  m_Center: {x: 0.000529716, y: -3.7617924e-18, z: 0.0019468816}
 --- !u!65 &8133906986411976650
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -134,3 +161,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.021237707, y: 0.01, z: 0.005316732}
   m_Center: {x: 0.0005090952, y: 5.2987536e-19, z: 0.0015522727}
+--- !u!114 &6020803107871993673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274712545211120765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416ca0950da002342a5243d2f743d86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EmissionMultiSwitcher
+  emissionA: {fileID: 2800000, guid: 480b68239b848c04492d4e00053e5bb7, type: 3}
+  emissionB: {fileID: 2800000, guid: 1f98ca21f9cba044ca1e4fb2ddc0c2a1, type: 3}
+  emissionColor: {r: 1, g: 1, b: 1, a: 1}
