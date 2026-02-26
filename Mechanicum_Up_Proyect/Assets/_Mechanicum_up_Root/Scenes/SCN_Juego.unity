@@ -48836,6 +48836,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &840969245
 Transform:
   m_ObjectHideFlags: 0
@@ -51694,6 +51706,7 @@ MonoBehaviour:
   promptMessage: E
   destroyAfterUse: 0
   cooldownTime: 1
+  hideTutorialOnMove: 1
 --- !u!1001 &894018499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52864,6 +52877,7 @@ MonoBehaviour:
   promptMessage: E
   destroyAfterUse: 0
   cooldownTime: 1
+  hideTutorialOnMove: 1
 --- !u!1 &917781083 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1274712545211120765, guid: 7e1b291c2d72f3146b01f9731dd38216, type: 3}
@@ -64577,6 +64591,7 @@ MonoBehaviour:
   promptMessage: E
   destroyAfterUse: 0
   cooldownTime: 1
+  hideTutorialOnMove: 1
 --- !u!1 &1193675736
 GameObject:
   m_ObjectHideFlags: 0
@@ -70599,6 +70614,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &1313043883
 Transform:
   m_ObjectHideFlags: 0
@@ -89720,7 +89747,7 @@ RectTransform:
   m_GameObject: {fileID: 1705692286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 914}
-  m_LocalScale: {x: 0.45006922, y: 0.45006922, z: 0.45006922}
+  m_LocalScale: {x: 0.5614613, y: 0.5614613, z: 0.5614613}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1030758048}
@@ -89750,7 +89777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43642e996fcbdbc46b46387b2fc74c53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a862f7f8d6929974e8975fcdecb952ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91897,6 +91924,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &1760146062
 Transform:
   m_ObjectHideFlags: 0
@@ -96888,6 +96927,7 @@ MonoBehaviour:
   promptMessage: E
   destroyAfterUse: 0
   cooldownTime: 1
+  hideTutorialOnMove: 0
 --- !u!1 &1888359516
 GameObject:
   m_ObjectHideFlags: 0
@@ -107825,6 +107865,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c01dad61ff24b42816bc54730758f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantKillZone
+  movingParent: {fileID: 0}
+  playerTag: Player
+  validTags:
+  - Player
+  boxSize: {x: 1, y: 1, z: 1}
+  crushLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  optionalAnimator: {fileID: 0}
+  triggerAnimationName: 
+  optionalAudioSource: {fileID: 0}
+  activationSFX: {fileID: 0}
 --- !u!4 &2113313571
 Transform:
   m_ObjectHideFlags: 0
@@ -111587,7 +111639,7 @@ MonoBehaviour:
   commandDown: no,up
   upAnimation: 
   downAnimation: Gato_bajada
-  idleUpAnimation: Gato_idle_arriba
+  idleUpAnimation: 
   idleDownAnimation: Gato_Idle_Abajo
 --- !u!95 &1236547885078572179 stripped
 Animator:

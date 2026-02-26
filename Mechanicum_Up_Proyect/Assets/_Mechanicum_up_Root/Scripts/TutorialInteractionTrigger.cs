@@ -3,7 +3,7 @@
 public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
 {
     [Header("Tutorial completo a mostrar")]
-    [SerializeField] private GameObject tutorialUI; // privado, accesible via propiedad
+    [SerializeField] private GameObject tutorialUI;
 
     [Header("Indicador de interacción (Tecla E)")]
     [SerializeField] private GameObject teclaEIndicator;
@@ -15,15 +15,16 @@ public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
     [SerializeField] private bool destroyAfterUse = true;
     [SerializeField] private float cooldownTime = 0.5f;
 
-    private bool hasBeenUsed = false;       // Tutorial ya activado con E
+    [Header("Comportamiento Extra")]
+    [SerializeField] private bool hideTutorialOnMove = true; // NUEVA OPCIÓN
+
+    private bool hasBeenUsed = false;
     private bool isPlayerInside = false;
     private bool cooldownFinished = false;
     private float timer = 0f;
-    private bool tutorialAlreadyShown = false; // Tutorial mostrado automáticamente al entrar
+    private bool tutorialAlreadyShown = false;
 
-    // Propiedad pública para TutorialManager
     public GameObject TutorialUI => tutorialUI;
-
     public string InteractionPrompt => promptMessage;
 
     private void Start()
@@ -40,7 +41,7 @@ public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
         if (!isPlayerInside || hasBeenUsed)
             return;
 
-        // Contador de cooldown
+        // Cooldown
         if (!cooldownFinished)
         {
             timer += Time.deltaTime;
@@ -50,16 +51,23 @@ public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
             return;
         }
 
-        // Detectar movimiento del jugador (solo para ocultar la E)
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
+        bool isMoving = Mathf.Abs(moveX) > 0.1f || Mathf.Abs(moveZ) > 0.1f;
 
-        if ((Mathf.Abs(moveX) > 0.1f || Mathf.Abs(moveZ) > 0.1f) && !hasBeenUsed)
+        // Si se mueve
+        if (isMoving)
         {
             HideEIndicator();
+
+            // NUEVO: ocultar tutorial si está activado y la opción lo permite
+            if (hideTutorialOnMove && tutorialUI != null && tutorialUI.activeSelf)
+            {
+                tutorialUI.SetActive(false);
+            }
         }
 
-        // Detecta que pulsa E
+        // Pulsar E
         if (Input.GetKeyDown(KeyCode.E))
         {
             ShowTutorial();
@@ -73,14 +81,11 @@ public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
 
         hasBeenUsed = true;
 
-        // Oculta la E
         HideEIndicator();
 
-        // Oculta otros tutoriales
         if (TutorialManager.instance != null)
             TutorialManager.instance.HideAllTutorials();
 
-        // Muestra el tutorial completo
         if (tutorialUI != null)
             tutorialUI.SetActive(true);
 
@@ -121,11 +126,9 @@ public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
             timer = 0f;
             cooldownFinished = false;
 
-            // Aparece la tecla E
             if (teclaEIndicator != null)
                 teclaEIndicator.SetActive(true);
 
-            // Muestra el tutorial automáticamente solo la primera vez
             ShowTutorialOnceOnEnter();
         }
     }
@@ -142,7 +145,6 @@ public class TutorialInteractionTrigger : MonoBehaviour, IInteractable
         }
     }
 
-    // Permite que Interactor también active el tutorial
     public void Interact(Interactor interactor)
     {
         ShowTutorial();
