@@ -216,12 +216,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SierraAnimador
   animator: {fileID: 8383400004052907061}
-  animacion1: Armature_Corte_Down 0
-  animacion2: Armature_Corte_Idle
-  animacion3: Armature_Corte_Up
+  animacion1: Armature|Corte_Down
+  animacion2: Armature|Corte_Idle
+  animacion3: Armature|Corte_Up
   tiempoAnimacion1: 2
   tiempoAnimacion2: 3
   tiempoAnimacion3: 3
+  boxCollider: {fileID: 0}
 --- !u!114 &8893486320017759509
 MonoBehaviour:
   m_ObjectHideFlags: 0

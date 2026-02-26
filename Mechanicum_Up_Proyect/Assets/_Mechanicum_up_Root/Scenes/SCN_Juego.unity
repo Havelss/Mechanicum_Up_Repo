@@ -35484,6 +35484,11 @@ Transform:
   - {fileID: 113817898}
   m_Father: {fileID: 608475264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &629456502 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 967138371401745239, guid: 01bbd9c1b04a97b48a0c10d0153a6c56, type: 3}
+  m_PrefabInstance: {fileID: 7149057358538147281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &631246313
 GameObject:
   m_ObjectHideFlags: 0
@@ -41014,7 +41019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TerminalCallCart
   cartPrefab: {fileID: 3676305756911907625, guid: b6da08d4ed7cb004593fc9b1b54a9874, type: 3}
   spawnPoint: {fileID: 716089024}
-  spawnOnStart: 0
+  spawnOnStart: 1
   spawnDelay: 0
 --- !u!1001 &716306323
 PrefabInstance:
@@ -48731,7 +48736,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -51498,7 +51502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.3645287
+      value: -9.13
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -51506,7 +51510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.92281246
+      value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 1626448889214527207, guid: 6f0a824f7f9f6c84585cfe200e685cc2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -70617,7 +70621,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -91927,7 +91930,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -107940,7 +107942,6 @@ MonoBehaviour:
   - Player
   boxSize: {x: 1, y: 1, z: 1}
   crushLayers:
-    serializedVersion: 2
     m_Bits: 4294967295
   optionalAnimator: {fileID: 0}
   triggerAnimationName: 
@@ -116970,6 +116971,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 3.4761867e-16
       objectReference: {fileID: 0}
+    - target: {fileID: 173981169230013884, guid: 01bbd9c1b04a97b48a0c10d0153a6c56, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 629456502}
     - target: {fileID: 2418200859739574945, guid: 01bbd9c1b04a97b48a0c10d0153a6c56, type: 3}
       propertyPath: m_Name
       value: SK_Sierra
